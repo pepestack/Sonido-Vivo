@@ -2,11 +2,13 @@
 
 <h1 align="center">Sonido Vivo</h1>
 
-![Course](https://img.shields.io/badge/Curso-DSY1104%20Desarrollo%20FullStack%20II-blue)
-![HTML](https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white)
-![CSS](https://img.shields.io/badge/CSS-639?logo=css&logoColor=fff)
-![Bootstrap](https://img.shields.io/badge/Bootstrap-7952B3?logo=bootstrap&logoColor=fff)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000)
+<p align="center">
+  <img src="https://img.shields.io/badge/Curso-DSY1104%20Desarrollo%20FullStack%20II-blue" alt="Curso">
+  <img src="https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white" alt="HTML">
+  <img src="https://img.shields.io/badge/CSS-639?logo=css&logoColor=fff" alt="CSS">
+  <img src="https://img.shields.io/badge/Bootstrap-7952B3?logo=bootstrap&logoColor=fff" alt="Bootstrap">
+  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000" alt="JavaScript">
+</p>
 
 
 <p align="center">Proyecto semestral para Desarrollo Fullstack II</p>
