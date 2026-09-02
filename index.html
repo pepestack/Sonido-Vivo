@@ -1,35 +1,56 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sonido Vivo</title>
     <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/custom.css">
     <link rel="icon" type="image/png" href="img/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <script src="js/funciones.js" defer></script>
 </head>
+
 <body>
-    <header>
-        <div>
-            <a href="index.html"><img src="img/logo-transparent.png" alt="Sonido Vivo"><h1>Sonido Vivo</h1></a>
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#">Categoria 1</a></li>
-                <li><a href="#">Pagar</a></li>
+    <header class="fixed-top">
+        <nav class="navbar navbar-expand-md container-fluid navbar-custom">
+            <a href="index.html" class="navbar-brand d-flex align-items-center text-decoration-none">
+                <img src="img/logo-transparent.png" id="logo" alt="Sonido Vivo">
+                <h1><span class="sonido">Sonido </span><span class="vivo">Vivo</span></h1>
+            </a>
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="#">Categoria 1</a></li>
+                <li class="nav-item"><a class="nav-link" href="#">Pagar</a></li>
             </ul>
         </nav>
     </header>
     <main>
-        <section>
-            <img src="img/hero-banner.jpg" alt="Banner promocional de Sonido Vivo con ofertas en Guitarra Acústica Yamaha C40 y Pop Filter Sennheiser, destacando envíos a todo Chile y 6 cuotas sin interés.">
+        <section class="container-fluid">
+            <img src="img/hero-banner.jpg"
+                alt="Banner promocional de Sonido Vivo con ofertas en Guitarra Acústica Yamaha C40 y Pop Filter Sennheiser, destacando envíos a todo Chile y 6 cuotas sin interés.">
         </section>
         <section>
             <h2>Categorías</h2>
             <div>
-                <div></div>
-                <div></div>
-                <div></div>
+                <div>
+                    <a href="#">
+                        <img src="img/guitarras-acusticas-categoria.jpg">
+                        <h3>Guitarras Acústicas</h3>
+                    </a>
+                </div>
+                <div>
+                    <a href="#">
+                        <img src="img/accesorios-categoria.jpg">
+                        <h3>Accesorios</h3>
+                    </a>
+                </div>
+                <div>
+                    <a href="#">
+                        <img src="img/estudio-grabacion-categoria.jpg">
+                        <h3>Estudio y Grabación</h3>
+                    </a>
+                </div>
             </div>
         </section>
     </main>
@@ -37,4 +58,5 @@
         <p>© 2026 Sonido Vivo</p>
     </footer>
 </body>
+
 </html>
