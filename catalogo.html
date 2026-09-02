@@ -1,11 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sonido Vivo</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <script src="js/catalogo.js" defer></script>
+  </head>
+  <body>
+    <main class="container my-5">
+      <header class="row mb-4">
+        <div class="col-12 col-md-6">
+          <h1>Catálogo de Sonido Vivo</h1>
+        </div>
+        <div
+          class="col-12 col-md-6 d-flex align-items-center justify-content-md-end"
+        >
+          <label for="filtro-categoria" class="form-label me-2 mb-0"
+            >Filtrar:</label
+          >
+          <select
+            name="filtro"
+            id="filtro-categoria"
+            class="form-select w-auto"
+          >
+            <option value="todos">Todas las categorias</option>
+            <option value="guitarras-acusticas">Guitarras Acústicas</option>
+            <option value="guitarras-electricas">Guitarras Eléctricas</option>
+            <option value="bajos-electricos">Bajos Eléctricos</option>
+            <option value="baterias">Baterías</option>
+            <option value="teclados-y-pianos">Teclados y Pianos</option>
+            <option value="amplificadores">Amplificadores</option>
+            <option value="microfonos">Micrófonos</option>
+            <option value="pedales-de-efectos">Pedales de Efectos</option>
+            <option value="accesorios">Accesorios</option>
+            <option value="estudio-y-grabacion">Estudio y Grabación</option>
+          </select>
+        </div>
+      </header>
+      <section id="grilla" class="row g-4"></section>
+    </main>
+  </body>
 </html>
