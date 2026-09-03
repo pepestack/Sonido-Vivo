@@ -7,19 +7,29 @@
   width: 60px;
 }
 
+.sv-logo-title{
+  font-family: "Poppins", Arial;
+  font-size: xx-large;
+}
+
 h1,h2,h3{
   font-family: "Poppins", Arial;
 }
 
-h1 .sonido{
+.sonido{
   color:rgb(18, 77, 116);
 }
-h1 .vivo{
+.vivo{
   color:rgb(216, 135, 36);
 }
 
+
 .main-custom-margin{
   margin-top: 100px;
+}
+
+.custom-lb-container{
+  background-color: rgb(225, 227, 255);
 }
 
 
