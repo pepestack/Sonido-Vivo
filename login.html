@@ -15,6 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+    <script src="js/login.js" defer></script>
   </head>
   <body>
     <header class="fixed-top">
@@ -63,31 +64,54 @@
       </nav>
     </header>
     <main class="container my-5 pt-5 mt-5">
-        <section class="row justify-content-center">
-            <article class = "col-12 col-md-6 col-lg-4">
-                <div class="card shadow-sm mt-4">
-                    <div class="card-body p-4">
-                        <h2 class="text-center">Iniciar sesión</h2>
-                        <form id="form-login">
-                            <div class="mb-3">
-                                <label for="email" class="form-label">Correo Electrónico</label>
-                                <input type="email" class="form-control" id="email" placeholder="Sebastian@ejemplo.com" required>
-                            </div>
-
-                            <div>
-                                <label for="contraseña" class="form-label">Contraseña</label>
-                                <input type="text" class="form-control" id="contraseña" placeholder="*******" required>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary w-100 mt-3">Ingresar</button>
-                        </form>
-                        <div class="text-center mt-3">
-                            <p class = "mb-0">¿No tienes cuenta? <a href="registro.html" class="text-decoration-none">Registrate</a></p>
-                        </div>
-                    </div>
+      <section class="row justify-content-center">
+        <article class="col-12 col-md-6 col-lg-4">
+          <div class="card shadow-sm mt-4">
+            <div class="card-body p-4">
+              <h2 class="text-center">Iniciar sesión</h2>
+              <form id="form-login" novalidate>
+                <div class="mb-3">
+                  <label for="email" class="form-label"
+                    >Correo Electrónico</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="Sebastian@ejemplo.com"
+                    required
+                  />
                 </div>
-            </article>
-        </section>
+
+                <div>
+                  <label for="contraseña" class="form-label">Contraseña</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="contraseña"
+                    placeholder="*******"
+                    required
+                  />
+                </div>
+                <div class="text-center mt-1">
+                  <button type="submit" class="btn btn-primary w-100 mt-3">
+                    Ingresar
+                  </button>
+                  <p class="mb-0" id="logeado"></p>
+                </div>
+              </form>
+              <div class="text-center mt-3">
+                <p class="mb-0">
+                  ¿No tienes cuenta?
+                  <a href="registro.html" class="text-decoration-none"
+                    >Registrate</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
     </main>
     <footer class="footer pt-5">
       <div class="container">
