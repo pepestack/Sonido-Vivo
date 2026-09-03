@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sonido Vivo - login</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/custom.css" />
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script src="js/register.js" defer></script>
+  </head>
+  <body>
+    <header class="fixed-top">
+      <nav class="navbar navbar-expand-md navbar-custom">
+        <div class="container-fluid px-4">
+          <a
+            href="index.html"
+            class="navbar-brand d-flex align-items-center text-decoration-none"
+          >
+            <img src="img/logo-transparent.png" id="logo" alt="Sonido Vivo" />
+            <h1>
+              <span class="sonido">Sonido </span><span class="vivo">Vivo</span>
+            </h1>
+          </a>
+          <button
+            class="navbar-toggler orange-btn"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="home.html"
+                  >Home</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="catalogo.html">Productos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Nosotros</a>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="#">Blogs</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contacto</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="container my-5 pt-5 mt-5">
+      <section class="row justify-content-center">
+        <article class="col-12 col-md-6 col-lg-4">
+          <div class="card shadow-sm mt-4">
+            <div class="card-body p-4">
+              <h2 class="text-center">Registrate</h2>
+              <form id="form-register" novalidate>
+                <div class="mb-3">
+                  <label for="email" class="form-label"
+                    >Correo Electrónico</label
+                  >
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    placeholder="Sebastian@ejemplo.com"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label for="username" class="form-label"
+                    >Nombre de usuario</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="username"
+                    placeholder="*******"
+                    required
+                  />
+                </div>
+
+                <div>
+                  <label for="contraseña" class="form-label">Contraseña</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="contraseña"
+                    placeholder="*******"
+                    required
+                  />
+                </div>
+
+                <div class="text-center mt-1">
+                  <button type="submit" class="btn btn-primary w-100 mt-3">
+                    Ingresar
+                  </button>
+                  <p class="mb-0" id="register"></p>
+                </div>
+              </form>
+              <div class="text-center mt-3">
+                <p class="mb-0">
+                  ¿Ya tienes una cuenta?
+                  <a href="login.html" class="text-decoration-none"
+                    >Iniciar sesion</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+    </main>
+    <footer class="footer pt-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6">
+            <h3 class="text-white">Sonido Vivo</h3>
+            <div class="mb-4">
+              <i class="fa-brands fa-cc-visa fa-2x text-white"></i>
+              <i class="fa-brands fa-cc-mastercard fa-2x text-white"></i>
+            </div>
+          </div>
+
+          <nav class="col-lg-2 col-md-6 text-white">
+            <h3>Información</h3>
+            <ul>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">Términos y Condiciones</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">Política de Privacidad</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">Políticas de Garantía</a>
+              </li>
+            </ul>
+          </nav>
+
+          <nav class="col-lg-3 col-md-6 text-white">
+            <h3>Mi Cuenta</h3>
+            <ul>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Iniciar sesión</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Registrarse</a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="col-lg-4 col-md-6 text-white">
+            <h3 class="footer-title">Newsletter</h3>
+            <p class="mb-4">
+              ¡Suscríbete al Newsletter y entérate primero de nuestras ofertas!
+            </p>
+            <form class="mb-4">
+              <div class="input-group">
+                <input
+                  type="email"
+                  class="form-control newsletter-input"
+                  placeholder="Escribe tu mail"
+                />
+                <button class="btn orange-btn" type="submit">
+                  Suscribirme
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-dark mt-5">
+        <div class="container">
+          <div class="row py-3">
+            <div class="col-md-6 text-center text-md-start text-white">
+              <p class="mb-0">&copy; 2026 Sonido Vivo</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end text-white">
+              <p class="mb-0">DSY1104</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

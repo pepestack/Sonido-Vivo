@@ -46,3 +46,8 @@ h1,h2,h3{
 .btn.orange-btn:active{
   background-color: rgb(207, 245, 248);
 }
+
+.campo-error{
+    border: 2px solid #a3242f;
+    background-color:#fbe9ea;
+}
