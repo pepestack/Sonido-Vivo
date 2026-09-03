@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito - Sonido Vivo</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="js/funciones.js" defer></script>
+</head>
+
+<body>
+    <header class="fixed-top">
+        <nav class="navbar navbar-expand-md container-fluid navbar-custom">
+            <a href="index.html" class="navbar-brand d-flex align-items-center text-decoration-none">
+                <img src="img/logo-transparent.png" id="logo" alt="Sonido Vivo">
+                <h1><span class="sonido">Sonido </span><span class="vivo">Vivo</span></h1>
+            </a>
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Inicio</a></li>
+                <li class="nav-item"><a class="nav-link" href="catalogo.html">Catálogo</a></li>
+                <li class="nav-item"><a class="nav-link active" href="carrito.html">Carrito</a></li>
+                <li class="nav-item"><a class="nav-link" href="pago.html">Pagar</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main class="container my-5 pt-5">
+        <section class="row mt-4">
+            <div class="col-12">
+                <h2 class="mb-4">Carritowea</h2>
+            </div>
+            <div class="col-12 col-lg-8 mb-4">
+                <div class="card shadow p-4">
+                    <div class="table-responsive">
+                        <table class="table align-middle">
+                            <thead>
+                                <tr>
+                                    <th>Producto</th>
+                                    <th>Precio</th>
+                                    <th>Cantidad</th>
+                                    <th>Subtotal</th>
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                            <span class="fw-bold">Guitarra Acústica homero chino</span>
+                                        </div>
+                                    </td>
+                                    <td>$67.676</td>
+                                    <td>
+                                        <input type="number" class="form-control form-control-sm w-50" value="1" min="1">
+                                    </td>
+                                    <td>$67.676</td>
+                                    <td>
+                                        <button class="btn btn-danger btn-sm">Eliminar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-lg-4">
+                <div class="card shadow p-4">
+                    <h3 class="mb-3">Orden</h3>
+                    <div class="d-flex justify-content-between mb-2">
+                        <span>Subtotal:</span>
+                        <span>$67.676</span>
+                    </div>
+                    <div class="d-flex justify-content-between mb-3">
+                        <span>Despacho:</span>
+                        <span>$6.767</span>
+                    </div>
+                    <hr>
+                    <div class="d-flex justify-content-between mb-4 fw-bold fs-5">
+                        <span>Total:</span>
+                        <span class="text-success">$676.767</span>
+                    </div>
+                    <a href="login-pago.html" class="btn btn-dark w-100">Continuar con la compra</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="text-center py-4">
+        <p>© 2026 Sonido Vivo</p>
+    </footer>
+</body>
+
+</html>
