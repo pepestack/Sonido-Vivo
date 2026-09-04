@@ -434,7 +434,7 @@ function mostrar(listaProductos) {
     /* aca trabaja bootstrap y inserta los datos que estan en {} */
     articulo.innerHTML = `
             <div class="card h-100 shadow-sm">
-                <img src="${producto.img}" class="card-img-top" alt="${producto.nombre}" style="height: 200px; object-fit: cover; background-color: #eee;">
+                <img src="${producto.img}" class="card-img-top producto-img" alt="${producto.nombre}" >
                 <div class="card-body d-flex flex-column">
                     <h2 class="card-title h5">${producto.nombre}</h2>
                     <p class="card-text text-muted mb-2">${producto.descripcion}</p>
