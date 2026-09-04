@@ -18,53 +18,119 @@
 
 <body>
     <header class="fixed-top">
-        <nav class="navbar navbar-expand-md navbar-custom">
+        <nav class="navbar navbar-expand-lg navbar-custom">
             <div class="container-fluid px-4">
+
                 <a href="home.html" class="navbar-brand d-flex align-items-center text-decoration-none">
+
                     <img src="img/logo-transparent.png" id="logo" alt="Sonido Vivo">
+
                     <span class="sv-logo-title">
-                        <span class="sonido">Sonido </span><span class="vivo">Vivo</span>
+                        <span class="sonido">Sonido </span>
+                        <span class="vivo">Vivo</span>
                     </span>
+
                 </a>
+
                 <button class="navbar-toggler orange-btn" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation"><span
-                        class="navbar-toggler-icon"></span></button>
+                    aria-expanded="false" aria-label="Toggle navigation">
+
+                    <span class="navbar-toggler-icon"></span>
+
+                </button>
+
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 fw-bold fs-5">
-                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="catalogo.html">Productos</a></li>
-                        <li class="nav-item"><a class="nav-link" href="nosotros.html">Nosotros</a></li>
-                        <li class="nav-item"><a class="nav-link" href="blog.html">Blogs</a></li>
-                        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
-                    </ul>
 
-                    <div class="btn p-2 rounded-circle orange-btn nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user"></i></a>
-                        <ul class="dropdown-menu custom-lb-container" aria-labelledby="navbarDropdowns">
-                            <li><a class="dropdown-item" href="#!">Mi Cuenta</a></li>
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="#">
+                                Home
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="catalogo.html">
+                                Productos
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="nosotros.html">
+                                Nosotros
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="blog.html">
+                                Blogs
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="contacto.html">
+                                Contacto
+                            </a>
+                        </li>
+
+
+
+                    </ul>
+                    <div class="nav-item dropdown my-2">
+
+                        <a class="btn dropdown-toggle orange-btn align-items-center justify-content-center"
+                            id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+
+                            <i class="fa-solid fa-user"></i>
+
+                        </a>
+
+                        <ul class="dropdown-menu custom-lb-container" aria-labelledby="navbarDropdown">
+
                             <li>
-                                <hr class="dropdown-divider" />
+                                <a class="dropdown-item" href="#!">
+                                    Mi Cuenta
+                                </a>
                             </li>
-                            <li><a class="dropdown-item" href="login.html">Iniciar sesión</a></li>
-                            <li><a class="dropdown-item" href="registro.html">Registrarse</a></li>
+
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="login.html">
+                                    Iniciar sesión
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="dropdown-item" href="registro.html">
+                                    Registrarse
+                                </a>
+                            </li>
                         </ul>
                     </div>
+                    <form class="d-flex ms-lg-2 mb-2 mb-lg-0">
 
-                    <form class="d-flex ms-2">
                         <button class="btn orange-btn" type="submit">
+
                             <i class="bi-cart-fill me-1"></i>
+
                             Carrito
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">
+                                0
+                            </span>
+
                         </button>
+
                     </form>
 
                 </div>
             </div>
         </nav>
     </header>
-
     <main class="main-custom-margin container my-5">
         <div class="mb-4">
             <a href="blog.html" class="btn btn-outline-secondary btn-sm">&larr; Volver a Noticias</a>

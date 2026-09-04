@@ -86,6 +86,12 @@ h3 {
   color: #fff;
 }
 
+.btn.orange-btn:focus {
+  background-color: rgb(196, 118, 10);
+  border-color: rgb(196, 118, 10);
+  color: #fff;
+}
+
 .campo-error {
   border: 2px solid #a3242f;
   background-color: #fbe9ea;
@@ -113,4 +119,5 @@ h3 {
   color: rgb(18, 77, 116);
   font-weight: 600;
 }
+
 
