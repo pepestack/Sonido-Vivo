@@ -1,53 +1,64 @@
-.navbar-custom{
+.navbar-custom {
   background-color: rgba(58, 162, 192);
-  background: linear-gradient(90deg,rgba(234, 239, 243, 1) 0%, rgba(58, 162, 192, 1) 100%);
+  background: linear-gradient(90deg, rgba(234, 239, 243, 1) 0%, rgba(58, 162, 192, 1) 100%);
 }
 
 #logo {
   width: 60px;
 }
 
-.sv-logo-title{
+.sv-logo-title {
   font-family: "Poppins", Arial;
   font-size: xx-large;
 }
 
-h1,h2,h3{
+h1,
+h2,
+h3 {
   font-family: "Poppins", Arial;
 }
 
-.sonido{
-  color:rgb(18, 77, 116);
+.sonido {
+  color: rgb(18, 77, 116);
 }
-.vivo{
-  color:rgb(216, 135, 36);
+
+.vivo {
+  color: rgb(216, 135, 36);
 }
 
 
-.main-custom-margin{
+.main-custom-margin {
   margin-top: 100px;
 }
 
-.custom-lb-container{
-  background-color: rgb(225, 227, 255);
+.custom-lb-container {
+  background-color: rgb(242, 242, 255);
+}
+
+.producto-img {
+  height: 200px;
+  object-fit: cover;
+  background-color: #eee;
 }
 
 
-.footer{
+.footer {
   background-color: rgb(32, 108, 157);
 }
 
-.orange-btn{
+.orange-btn {
   background-color: rgb(250, 159, 45);
 }
-.orange-btn:hover{
+
+.orange-btn:hover {
   background-color: rgb(243, 34, 27);
 }
-.btn.orange-btn:active{
+
+.btn.orange-btn:active {
   background-color: rgb(207, 245, 248);
 }
 
-.campo-error{
-    border: 2px solid #a3242f;
-    background-color:#fbe9ea;
+.campo-error {
+  border: 2px solid #a3242f;
+  background-color: #fbe9ea;
 }

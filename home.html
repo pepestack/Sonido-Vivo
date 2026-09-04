@@ -40,13 +40,16 @@
                     </ul>
 
                     <div class="btn p-2 rounded-circle orange-btn nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user"></i></a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">Mi Cuenta</a></li>
-                                <li><hr class="dropdown-divider" /></li>
-                                <li><a class="dropdown-item" href="login.html">Iniciar sesión</a></li>
-                                <li><a class="dropdown-item" href="registro.html">Registrarse</a></li>
-                            </ul>
+                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user"></i></a>
+                        <ul class="dropdown-menu custom-lb-container" aria-labelledby="navbarDropdowns">
+                            <li><a class="dropdown-item" href="#!">Mi Cuenta</a></li>
+                            <li>
+                                <hr class="dropdown-divider" />
+                            </li>
+                            <li><a class="dropdown-item" href="login.html">Iniciar sesión</a></li>
+                            <li><a class="dropdown-item" href="registro.html">Registrarse</a></li>
+                        </ul>
                     </div>
 
                     <form class="d-flex ms-2">
@@ -61,7 +64,7 @@
             </div>
         </nav>
     </header>
-    <main class="main-custom-margin container">
+    <main class="main-custom-margin container mb-5">
         <section>
             <img class="img-fluid w-100 rounded-3" src="img/hero-banner.jpg"
                 alt="Banner promocional de Sonido Vivo con ofertas en Guitarra Acústica Yamaha C40 y Pop Filter Sennheiser, destacando envíos a todo Chile y 6 cuotas sin interés.">
@@ -83,9 +86,46 @@
 
             </div>
         </section>
-        
-        <section>
-            <h2>Productos destacados</h2>
+
+        <section class="my-5 py-5">
+            <div class="col-12 col-md-6 mb-3">
+                <h2>Productos destacados</h2>
+            </div>
+            <div class="row g-4">
+                <article class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="img/guitarra-ac-f310.jpg" class="card-img-top producto-img"
+                            alt="Guitarra Acústica Folk Yamaha F310">
+                        <div class="card-body d-flex flex-column">
+                            <h2 class="card-title h5">Guitarra Acústica Folk Yamaha F310</h2>
+                            <p class="card-text fs-4 fw-bold text-primary mt-auto">$129.990</p>
+                            <button class="btn btn-primary w-100 mt-2">Añadir al carrito</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="img/bajo-squier-af-pj.jpg" class="card-img-top producto-img"
+                            alt="Bajo Eléctrico 4 Cuerdas Squier Affinity PJ">
+                        <div class="card-body d-flex flex-column">
+                            <h2 class="card-title h5">Bajo Eléctrico 4 Cuerdas Squier Affinity PJ</h2>
+                            <p class="card-text fs-4 fw-bold text-primary mt-auto">$299.990</p>
+                            <button class="btn btn-primary w-100 mt-2">Añadir al carrito</button>
+                        </div>
+                    </div>
+                </article>
+                <article class="col-12 col-md-6 col-lg-4">
+                    <div class="card h-100 shadow-sm">
+                        <img src="img/mic-d-sm58.jpg" class="card-img-top producto-img"
+                            alt="Micrófono Dinámico Cardioide Shure SM58">
+                        <div class="card-body d-flex flex-column">
+                            <h2 class="card-title h5">Micrófono Dinámico Cardioide Shure SM58</h2>
+                            <p class="card-text fs-4 fw-bold text-primary mt-auto">$149.990</p>
+                            <button class="btn btn-primary w-100 mt-2">Añadir al carrito</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
         </section>
     </main>
     <footer class="footer pt-5">
