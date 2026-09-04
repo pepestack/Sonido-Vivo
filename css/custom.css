@@ -4,12 +4,12 @@
 }
 
 .btn-primary {
-  --bs-btn-bg: #FA9F2D;
-  --bs-btn-border-color: #FA9F2D;
-  --bs-btn-color: #0A0F0A;
-  --bs-btn-hover-bg: #206C9D;
-  --bs-btn-hover-border-color: #206C9D;
-  --bs-btn-hover-color: #fff;
+  --bs-btn-bg: #206C9D;
+  --bs-btn-border-color: #206C9D;
+  --bs-btn-color: #fff;
+  --bs-btn-hover-bg: #FA9F2D;
+  --bs-btn-hover-border-color: #FA9F2D;
+  --bs-btn-hover-color: #0A0F0A;
 }
 
 .navbar-custom {
