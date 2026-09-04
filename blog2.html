@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caso Curioso #2 - Sonido Vivo</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="js/funciones.js" defer></script>
+</head>
+
+<body>
+    <header class="fixed-top">
+        <nav class="navbar navbar-expand-md navbar-custom">
+            <div class="container-fluid px-4">
+                <a href="home.html" class="navbar-brand d-flex align-items-center text-decoration-none">
+                    <img src="img/logo-transparent.png" id="logo" alt="Sonido Vivo">
+                    <h1><span class="sonido">Sonido </span><span class="vivo">Vivo</span></h1>
+                </a>
+                <button class="navbar-toggler orange-btn" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"><span
+                        class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="catalogo.html">Productos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Nosotros</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="blog.html">Blogs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    </ul>
+
+                    <div class="btn p-2 rounded-circle orange-btn nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user"></i></a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">Mi Cuenta</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="login.html">Iniciar sesión</a></li>
+                                <li><a class="dropdown-item" href="registro.html">Registrarse</a></li>
+                            </ul>
+                    </div>
+
+                    <form class="d-flex ms-2" action="carrito.html">
+                        <button class="btn orange-btn" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            Carrito
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-custom-margin container my-5">
+        <div class="mb-4">
+            <a href="blog.html" class="btn btn-outline-secondary btn-sm">&larr; Volver a Noticias</a>
+        </div>
+
+        <article class="card shadow-sm border-0 bg-light p-4 mb-5">
+            <div class="text-center mb-4">
+                <img src="img/necoarcchaosblog2.jpg" class="img-fluid rounded border w-100 shadow-sm" style="max-height: 400px; object-fit: cover; object-position: center 30%;" alt="Necoarc Chaos tocando metal">
+            </div>
+
+            <h2 class="fw-bold mb-3">Caso Curioso #2: Necoarc-chaos y el estrepitoso fracaso del concierto de metal</h2>
+
+            <div class="text-muted lh-lg">
+                <p>
+                    El mundo de la música pesada aún no sale del asombro tras el último intento de Necoarc-Chaos por incursionar en la escena del heavy metal. Equipado con una guitarra eléctrica desproporcionada y amplificadores al máximo volumen, el caótico felino prometía un espectáculo inolvidable que marcaría un antes y un después en el género.
+                </p>
+                <p>
+                    Sin embargo, la realidad superó a la ficción de la peor manera posible. Críticos musicales y los escasos curiosos que pasaban por el lugar coinciden en algo categórico: tocaba verdaderamente mal. Notas desafinadas, una ejecución atroz y solos totalmente caóticos convirtieron el recinto en una experiencia auditiva insoportable. Lo que debió ser un lleno total terminó rompiendo el récord histórico de asistencia con exactamente <strong>cero espectadores</strong> en la arena.
+                </p>
+                <p>
+                    Lejos de hacer una autocrítica sobre sus nulas habilidades musicales, Necoarc-Chaos culpó rotundamente a <strong>Necoarc</strong> por el boicot masivo. Según sus furiosas declaraciones tras bastidores, ella se encargó de esparcir rumores falsos entre el público y bloquear las entradas para sabotear su debut estelar. Mientras los fanáticos debaten de quién es la culpa, una cosa es segura: el metal alternativo tendrá que esperar un buen tiempo antes de volver a ver a Necoarc-Chaos sobre un escenario.
+                </p>
+            </div>
+        </article>
+
+        <section class="card shadow-sm border-0 p-4 bg-white">
+            <h3 class="fw-bold mb-4 fs-4 border-bottom pb-2">Comentarios (3)</h3>
+
+            <div class="alert alert-warning d-flex align-items-center justify-content-between mb-4" role="alert">
+                <div>
+                    <i class="fa-solid fa-lock me-2"></i> Debes iniciar sesión para dejar un comentario.
+                </div>
+                <div>
+                    <a href="login.html" class="btn btn-sm btn-outline-dark me-1 fw-bold">Iniciar sesión</a>
+                    <a href="registro.html" class="btn btn-sm orange-btn text-white fw-bold">Registrarse</a>
+                </div>
+            </div>
+
+            <div class="mb-4 bg-light p-3 rounded border">
+                <form>
+                    <div class="mb-3">
+                        <label for="nuevo-comentario" class="form-label small fw-bold text-muted">Escribe tu comentario...</label>
+                        <textarea class="form-control" id="nuevo-comentario" rows="3" placeholder="Inicia sesión para escribir en la comunidad..." disabled></textarea>
+                    </div>
+                    <button type="button" class="btn btn-secondary fw-bold" disabled>Publicar Comentario</button>
+                </form>
+            </div>
+
+            <div class="d-flex mb-4 border-bottom pb-3">
+                <div class="flex-shrink-0 me-3">
+                    <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 45px; height: 45px;">
+                        <span>RM</span>
+                    </div>
+                </div>
+                <div class="flex-grow-1">
+                    <h5 class="fw-bold mb-1 fs-6">RockerMetalero</h5>
+                    <p class="text-muted small mb-2">Hace 1 hora</p>
+                    <p class="mb-0 text-dark">Estuve afuera del recinto esperando entrar por curiosidad y les juro que eso ni siquiera era música, parecía un gato metido en una juguera. ¡Cero sorpresas que no haya ido nadie!</p>
+                </div>
+            </div>
+
+            <div class="d-flex mb-4 border-bottom pb-3">
+                            <div class="flex-shrink-0 me-3">
+                                <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 45px; height: 45px;">
+                                    <span>TF</span>
+                                </div>
+                            </div>
+                            <div class="flex-grow-1">
+                                <h5 class="fw-bold mb-1 fs-6">TrueFan_Neco</h5>
+                                <p class="text-muted small mb-2">Hace 3 horas</p>
+                                <pre class="mb-0 text-dark">
+                                     ⢀⡔⣻⠁⠀⢀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⢀⣾⠳⢶⣦⠤⣀⠀⠀⠀⠀⠀⠀⠀⣾⢀⡇⡴⠋⣀⠴⣊⣩⣤⠶⠞⢹⣄⠀⠀⠀
+            ⠀⠀⠀⠀⢸⠀⠀⢠⠈⠙⠢⣙⠲⢤⠤⠤⠀⠒⠳⡄⣿⢀⠾⠓⢋⠅⠛⠉⠉⠝⠀⠼⠀⠀⠀
+            ⠀⠀⠀⠀⢸⠀⢰⡀⠁⠀⠀⠈⠑⠦⡀⠀⠀⠀⠀⠈⠺⢿⣂⠀⠉⠐⠲⡤⣄⢉⠝⢸⠀⠀⠀
+            ⠀⠀⠀⠀⢸⠀⢀⡹⠆⠀⠀⠀⠀⡠⠃⠀⠀⠀⠀⠀⠀⠀⠉⠙⠲⣄⠀⠀⠙⣷⡄⢸⠀⠀⠀
+            ⠀⠀⠀⠀⢸⡀⠙⠂⢠⠀⠀⡠⠊⠀⠀⠀⠀⢠⠀⠀⠀⠀⠘⠄⠀⠀⠑⢦⣔⠀⢡⡸⠀⠀⠀
+            ⠀⠀⠀⠀⢀⣧⠀⢀⡧⣴⠯⡀⠀⠀⠀⠀⠀⡎⠀⠀⠀⠀⠀⢸⡠⠔⠈⠁⠙⡗⡤⣷⡀⠀⠀
+            ⠀⠀⠀⠀⡜⠈⠚⠁⣬⠓⠒⢼⠅⠀⠀⠀⣠⡇⠀⠀⠀⠀⠀⠀⣧⠀⠀⠀⡀⢹⠀⠸⡄⠀⠀
+            ⠀⠀⠀⡸⠀⠀⠀⠘⢸⢀⠐⢃⠀⠀⠀⡰⠋⡇⠀⠀⠀⠠⠀⠀⡿⣆⠀⠀⣧⡈⡇⠆⢻⠀⠀
+            ⠀⠀⢰⠃⠀⠀⢀⡇⠼⠉⠀⢸⡤⠤⣶⡖⠒⠺⢄⡀⢀⠎⡆⣸⣥⠬⠧⢴⣿⠉⠁⠸⡀⣇⠀
+            ⠀⠀⠇⠀⠀⠀⢸⠀⠀⠀⣰⠋⠀⢸⣿⣿⠀⠀⠀⠙⢧⡴⢹⣿⣿⠀⠀⠀⠈⣆⠀⠀⢧⢹⡄
+            ⠀⣸⠀⢠⠀⠀⢸⡀⠀⠀⢻⡀⠀⢸⣿⣿⠀⠀⠀⠀⡼⣇⢸⣿⣿⠀⠀⠀⢀⠏⠀⠀⢸⠀⠇
+            ⠀⠓⠈⢃⠀⠀⠀⡇⠀⠀⠀⣗⠦⣀⣿⡇⠀⣀⠤⠊⠀⠈⠺⢿⣃⣀⠤⠔⢸⠀⠀⠀⣼⠑⢼
+            ⠀⠀⠀⢸⡀⣀⣾⣷⡀⠀⢸⣯⣦⡀⠀⠀⠀⢇⣀⣀⠐⠦⣀⠘⠀⠀⢀⣰⣿⣄⠀⠀⡟⠀⠀
+            ⠀⠀⠀⠀⠛⠁⣿⣿⣧⠀⣿⣿⣿⣿⣦⣀⠀⠀⠀⠀⠀⠀⠀⣀⣠⣴⣿⣿⡿⠈⠢⣼⡇⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠈⠁⠈⠻⠈⢻⡿⠉⣿⠿⠛⡇⠒⠒⢲⠺⢿⣿⣿⠉⠻⡿⠁⠀⠀⠈⠁⠀⠀
+            ⢀⠤⠒⠦⡀⠀⠀⠀⠀⠀⠀⠀⢀⠞⠉⠆⠀⠀⠉⠉⠉⠀⠀⡝⣍⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⡎⠀⠀⠀⡇⠀⠀⠀⠀⠀⠀⡰⠋⠀⠀⢸⠀⠀⠀⠀⠀⠀⠀⢡⠈⢦⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⡇⠀⠀⠸⠁⠀⠀⠀⠀⢀⠜⠁⠀⠀⠀⡸⠀⠀⠀⠀⠀⠀⠀⠘⡄⠈⢳⡀⠀⠀⠀⠀⠀⠀⠀
+            ⡇⠀⠀⢠⠀⠀⠀⠀⠠⣯⣀⠀⠀⠀⡰⡇⠀⠀⠀⠀⠀⠀⠀⠀⢣⠀⢀⡦⠤⢄⡀⠀⠀⠀⠀
+            ⢱⡀⠀⠈⠳⢤⣠⠖⠋⠛⠛⢷⣄⢠⣷⠁⠀⠀⠀⠀⠀⠀⠀⠀⠘⡾⢳⠃⠀⠀⠘⢇⠀⠀⠀
+            ⠀⠙⢦⡀⠀⢠⠁⠀⠀⠀⠀⠀⠙⣿⣏⣀⠀⠀⠀⠀⠀⠀⠀⣀⣴⣧⡃⠀⠀⠀⠀⣸⠀⠀⠀
+            ⠀⠀⠀⠈⠉⢺⣄⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣗⣤⣀⣠⡾⠃⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠣⢅⡤⣀⣀⣠⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⠉⠉⠉⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠉⠉⠉⠁⠀⠉⣿⣿⣿⣿⣿⡿⠻⣿⣿⣿⣿⠛⠉⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⣿⣿⣿⠀⠀⠀⠀⣿⣿⣿⡿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣴⣿⣿⣿⣟⠀⠀⢠⣿⣿⣿⣿⣧⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢰⣿⣿⣿⣿⣿⠀⠀⢸⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⣿⣿⣿⣿⡏⠀⠀⢸⣿⣿⣿⣿⣿⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⣿⣿⣿⣿⠀⠀⠀⢺⣿⣿⣿⣿⣿⣿⣷⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠈⠉⠻⣿⣿⣿⠟⠀⠀⠀⠀⠀⠀⠀⠀
+            ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠘⢿⣿⣿⣿⠏ Dori dori
+                                </pre>
+                            </div>
+                        </div>
+
+            <div class="d-flex">
+                <div class="flex-shrink-0 me-3">
+                    <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 45px; height: 45px;">
+                        <span>CR</span>
+                    </div>
+                </div>
+                <div class="flex-grow-1">
+                    <h5 class="fw-bold mb-1 fs-6">CríticoDeSillon</h5>
+                    <p class="text-muted small mb-2">Hace 6 horas</p>
+                    <p class="mb-0 text-dark">Para ser honesto, culpar a los demás cuando tocas peor que una alarma de incendios rota es elPeak de la comedia. Igual admiro el nivel de autoestima.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer pt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white h5">Sonido Vivo</h3>
+                    <div class="mb-4">
+                         <i class="fa-brands fa-cc-visa fa-2x text-white"></i>
+                         <i class="fa-brands fa-cc-mastercard fa-2x text-white"></i>
+                    </div>
+                </div>
+
+                <nav class="col-lg-2 col-md-6 text-white">
+                    <h3 class="h5">Información</h3>
+                    <ul>
+                        <li class="nav-item"><a class="nav-link disabled" href="#">Términos y Condiciones</a></li>
+                        <li class="nav-item"><a class="nav-link disabled" href="#">Política de Privacidad</a></li>
+                        <li class="nav-item"><a class="nav-link disabled" href="#">Políticas de Garantía</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="col-lg-3 col-md-6 text-white">
+                    <h3 class="h5">Mi Cuenta</h3>
+                    <ul>
+                        <li class="nav-item"><a class="nav-link" href="#">Iniciar sesión</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Registrarse</a></li>
+                    </ul>
+                </nav>
+
+                <div class="col-lg-4 col-md-6 text-white">
+                    <h3 class="footer-title h5">Newsletter</h3>
+                    <p class="mb-4">¡Suscríbete al Newsletter y entérate primero de nuestras ofertas!</p>
+                    <form class="mb-4">
+                        <div class="input-group">
+                            <input type="email" class="form-control newsletter-input" placeholder="Escribe tu mail">
+                            <button class="btn orange-btn" type="submit">Suscribirme</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-dark mt-5">
+            <div class="container">
+                <div class="row py-3">
+                    <div class="col-md-6 text-center text-md-start text-white">
+                        <p class="mb-0">&copy; 2026 Sonido Vivo</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end text-white">
+                        <p class="mb-0">DSY1104</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caso Curioso #1 - Sonido Vivo</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
+    <script src="js/funciones.js" defer></script>
+</head>
+
+<body>
+    <header class="fixed-top">
+        <nav class="navbar navbar-expand-md navbar-custom">
+            <div class="container-fluid px-4">
+                <a href="home.html" class="navbar-brand d-flex align-items-center text-decoration-none">
+                    <img src="img/logo-transparent.png" id="logo" alt="Sonido Vivo">
+                    <h1><span class="sonido">Sonido </span><span class="vivo">Vivo</span></h1>
+                </a>
+                <button class="navbar-toggler orange-btn" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation"><span
+                        class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                        <li class="nav-item"><a class="nav-link" href="home.html">Home</a></li>
+                        <li class="nav-item"><a class="nav-link" href="catalogo.html">Productos</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Nosotros</a></li>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="blog.html">Blogs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+                    </ul>
+
+                    <div class="btn p-2 rounded-circle orange-btn nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fa-solid fa-user"></i></a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#!">Mi Cuenta</a></li>
+                                <li><hr class="dropdown-divider" /></li>
+                                <li><a class="dropdown-item" href="login.html">Iniciar sesión</a></li>
+                                <li><a class="dropdown-item" href="registro.html">Registrarse</a></li>
+                            </ul>
+                    </div>
+
+                    <form class="d-flex ms-2" action="carrito.html">
+                        <button class="btn orange-btn" type="submit">
+                            <i class="bi-cart-fill me-1"></i>
+                            Carrito
+                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-custom-margin container my-5">
+        <div class="mb-4">
+            <a href="blog.html" class="btn btn-outline-secondary btn-sm">&larr; Volver a Noticias</a>
+        </div>
+
+        <article class="card shadow-sm border-0 bg-light p-4 mb-5">
+            <div class="text-center mb-4">
+                <img src="img/necoarcblog1.jpg" class="img-fluid rounded border w-100 shadow-sm" style="max-height: 400px; object-fit: cover;" alt="Necoarc tocando el erhu">
+            </div>
+
+            <h2 class="fw-bold mb-3">Caso Curioso #1: Necoarc y el misterio milenario del Erhu</h2>
+
+            <div class="text-muted lh-lg">
+                <p>
+                    Recientemente, un hallazgo arqueológico y fotográfico ha desconcertado a historiadores y entusiastas de internet por igual. Necoarc fue fotografiada en lo que parece ser una época remota sosteniendo con destreza un <strong>erhu</strong>, un instrumento musical tradicional de cuerda frotada originario de China, también conocido a veces como el "violín chino".
+                </p>
+                <p>
+                    Para quienes no estén familiarizados con él, el <strong>erhu</strong> es un instrumento milenario con una rica historia en las culturas de Asia oriental, caracterizado por sus dos cuerdas y su sonido expresivo que imita la voz humana. Tradicionalmente ha sido interpretado por maestros de la música clásica oriental durante dinastías imperiales enteras.
+                </p>
+                <p>
+                    Sin embargo, lo verdaderamente perturbador de este registro no es solo el dominio técnico de Necoarc sobre el instrumento, sino la imposibilidad cronológica y física del evento. Históricamente hablando, es completamente imposible que le tomaran una fotografía de este tipo en esa época, ¡y mucho menos que una criatura de su naturaleza caótica estuviera presente allí alterando el flujo del tiempo y el espacio! Los expertos siguen sin dar crédito a la autenticidad de la imagen, mientras que los fanáticos aseguran que Necoarc simplemente trascendió las líneas temporales.
+                </p>
+            </div>
+        </article>
+
+        <section class="card shadow-sm border-0 p-4 bg-white">
+            <h3 class="fw-bold mb-4 fs-4 border-bottom pb-2">Comentarios (3)</h3>
+
+            <div class="alert alert-warning d-flex align-items-center justify-content-between mb-4" role="alert">
+                <div>
+                    <i class="fa-solid fa-lock me-2"></i> Debes iniciar sesión para dejar un comentario.
+                </div>
+                <div>
+                    <a href="login.html" class="btn btn-sm btn-outline-dark me-1 fw-bold">Iniciar sesión</a>
+                    <a href="registro.html" class="btn btn-sm orange-btn text-white fw-bold">Registrarse</a>
+                </div>
+            </div>
+
+            <div class="mb-4 bg-light p-3 rounded border">
+                <form>
+                    <div class="mb-3">
+                        <label for="nuevo-comentario" class="form-label small fw-bold text-muted">Escribe tu comentario...</label>
+                        <textarea class="form-control" id="nuevo-comentario" rows="3" placeholder="Inicia sesión para escribir en la comunidad..." disabled></textarea>
+                    </div>
+                    <button type="button" class="btn btn-secondary fw-bold" disabled>Publicar Comentario</button>
+                </form>
+            </div>
+
+            <div class="d-flex mb-4 border-bottom pb-3">
+                <div class="flex-shrink-0 me-3">
+                    <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 45px; height: 45px;">
+                        <span>JS</span>
+                    </div>
+                </div>
+                <div class="flex-grow-1">
+                    <h5 class="fw-bold mb-1 fs-6">Juan Sonido</h5>
+                    <p class="text-muted small mb-2">Hace 2 horas</p>
+                    <p class="mb-0 text-dark">Yo estudié historia oriental por cinco años y te juro que el erhu no suena así ni aunque le pagues el doble. ¡Esto tiene que estar editado con inteligencia artificial o viajes en el tiempo!</p>
+                </div>
+            </div>
+
+            <div class="d-flex mb-4 border-bottom pb-3">
+                <div class="flex-shrink-0 me-3">
+                    <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 45px; height: 45px;">
+                        <span>MC</span>
+                    </div>
+                </div>
+                <div class="flex-grow-1">
+                    <h5 class="fw-bold mb-1 fs-6">Melómano Clandestino</h5>
+                    <p class="text-muted small mb-2">Hace 5 horas</p>
+                    <p class="mb-0 text-dark">¿Fotografía en esa época? Por favor, la cámara ni se había inventado cuando supuestamente ocurrió esto. Aunque admito que la estética con el instrumento quedó increíble para un póster.</p>
+                </div>
+            </div>
+
+            <div class="d-flex">
+                <div class="flex-shrink-0 me-3">
+                    <div class="bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 45px; height: 45px;">
+                        <span>AN</span>
+                    </div>
+                </div>
+                <div class="flex-grow-1">
+                    <h5 class="fw-bold mb-1 fs-6">Anonimo_99</h5>
+                    <p class="text-muted small mb-2">Ayer</p>
+                    <p class="mb-0 text-dark">A estas alturas ya nada me sorprende de Necoarc. Si te pones cerca de un callejón oscuro a medianoche, dicen que todavía se escucha el eco de ese erhu desafinado.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer pt-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3 col-md-6">
+                    <h3 class="text-white h5">Sonido Vivo</h3>
+                    <div class="mb-4">
+                         <i class="fa-brands fa-cc-visa fa-2x text-white"></i>
+                         <i class="fa-brands fa-cc-mastercard fa-2x text-white"></i>
+                    </div>
+                </div>
+
+                <nav class="col-lg-2 col-md-6 text-white">
+                    <h3 class="h5">Información</h3>
+                    <ul>
+                        <li class="nav-item"><a class="nav-link disabled" href="#">Términos y Condiciones</a></li>
+                        <li class="nav-item"><a class="nav-link disabled" href="#">Política de Privacidad</a></li>
+                        <li class="nav-item"><a class="nav-link disabled" href="#">Políticas de Garantía</a></li>
+                    </ul>
+                </nav>
+
+                <nav class="col-lg-3 col-md-6 text-white">
+                    <h3 class="h5">Mi Cuenta</h3>
+                    <ul>
+                        <li class="nav-item"><a class="nav-link" href="#">Iniciar sesión</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Registrarse</a></li>
+                    </ul>
+                </nav>
+
+                <div class="col-lg-4 col-md-6 text-white">
+                    <h3 class="footer-title h5">Newsletter</h3>
+                    <p class="mb-4">¡Suscríbete al Newsletter y entérate primero de nuestras ofertas!</p>
+                    <form class="mb-4">
+                        <div class="input-group">
+                            <input type="email" class="form-control newsletter-input" placeholder="Escribe tu mail">
+                            <button class="btn orange-btn" type="submit">Suscribirme</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-dark mt-5">
+            <div class="container">
+                <div class="row py-3">
+                    <div class="col-md-6 text-center text-md-start text-white">
+                        <p class="mb-0">&copy; 2026 Sonido Vivo</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end text-white">
+                        <p class="mb-0">DSY1104</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
