@@ -1,3 +1,4 @@
+/* cambios de paleta de bootstrap a paleta del sitio */
 :root {
   --bs-primary: #ac6100;
   --bs-primary-rgb: 172, 97, 0;
@@ -12,6 +13,8 @@
   --bs-btn-hover-color: #0A0F0A;
 }
 
+/* navbar y header*/
+
 .navbar-custom {
   background-color: rgba(58, 162, 192);
   background: linear-gradient(90deg, rgba(234, 239, 243, 1) 0%, rgba(58, 162, 192, 1) 100%);
@@ -19,6 +22,10 @@
 
 #logo {
   width: 60px;
+}
+
+#logo-sm{
+  width: 40px;
 }
 
 .sv-logo-title {
@@ -40,6 +47,7 @@ h3 {
   color: rgb(216, 135, 36);
 }
 
+/* cuerpo */
 
 .main-custom-margin {
   margin-top: 100px;
@@ -56,9 +64,13 @@ h3 {
 }
 
 
+/* pie de pag */
+
 .footer {
   background-color: rgb(32, 108, 157);
 }
+
+/* botones custom */
 
 .orange-btn {
   background-color: rgb(250, 159, 45);
@@ -74,7 +86,38 @@ h3 {
   color: #fff;
 }
 
+.btn.orange-btn:focus {
+  background-color: rgb(196, 118, 10);
+  border-color: rgb(196, 118, 10);
+  color: #fff;
+}
+
 .campo-error {
   border: 2px solid #a3242f;
   background-color: #fbe9ea;
 }
+
+/* sidebar panel admin */
+
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, rgb(142, 169, 190) 0%, rgb(228, 242, 247) 100%);;
+}
+
+.sidebar .nav-link {
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: rgb(18, 77, 116);
+}
+
+.sidebar .nav-link.active {
+  background-color: rgba(255, 255, 255, 0.7);
+  color: rgb(18, 77, 116);
+  font-weight: 600;
+}
+
+
