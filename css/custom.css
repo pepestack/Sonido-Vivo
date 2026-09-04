@@ -1,3 +1,17 @@
+:root {
+  --bs-primary: #ac6100;
+  --bs-primary-rgb: 172, 97, 0;
+}
+
+.btn-primary {
+  --bs-btn-bg: #FA9F2D;
+  --bs-btn-border-color: #FA9F2D;
+  --bs-btn-color: #0A0F0A;
+  --bs-btn-hover-bg: #206C9D;
+  --bs-btn-hover-border-color: #206C9D;
+  --bs-btn-hover-color: #fff;
+}
+
 .navbar-custom {
   background-color: rgba(58, 162, 192);
   background: linear-gradient(90deg, rgba(234, 239, 243, 1) 0%, rgba(58, 162, 192, 1) 100%);
@@ -51,11 +65,13 @@ h3 {
 }
 
 .orange-btn:hover {
-  background-color: rgb(243, 34, 27);
+  background-color: rgb(224, 138, 21);
 }
 
 .btn.orange-btn:active {
-  background-color: rgb(207, 245, 248);
+  background-color: rgb(196, 118, 10);
+  border-color: rgb(196, 118, 10);
+  color: #fff;
 }
 
 .campo-error {
