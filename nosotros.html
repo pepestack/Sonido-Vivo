@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sonido Vivo</title>
+    <link rel="stylesheet" href="css/bootstrap.css" />
+    <link rel="stylesheet" href="css/custom.css" />
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      defer
+    ></script>
+    <script src="js/funciones.js" defer></script>
+  </head>
+  <body>
+    <header class="fixed-top">
+      <nav class="navbar navbar-expand-md navbar-custom">
+        <div class="container-fluid px-4">
+          <a
+            href="home.html"
+            class="navbar-brand d-flex align-items-center text-decoration-none"
+          >
+            <img src="img/logo-transparent.png" id="logo" alt="Sonido Vivo" />
+            <span class="sv-logo-title">
+              <span class="sonido">Sonido </span><span class="vivo">Vivo</span>
+            </span>
+          </a>
+          <button
+            class="navbar-toggler orange-btn"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="home.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="catalogo.html">Productos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="nosotros.html">Nosotros</a>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="#">Blogs</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Contacto</a>
+              </li>
+            </ul>
+
+            <div class="btn p-2 rounded-circle orange-btn nav-item dropdown">
+              <a
+                class="nav-link dropdown-toggle"
+                id="navbarDropdown"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                ><i class="fa-solid fa-user"></i
+              ></a>
+              <ul
+                class="dropdown-menu custom-lb-container"
+                aria-labelledby="navbarDropdowns"
+              >
+                <li><a class="dropdown-item" href="#!">Mi Cuenta</a></li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li>
+                  <a class="dropdown-item" href="login.html">Iniciar sesión</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="registro.html">Registrarse</a>
+                </li>
+              </ul>
+            </div>
+
+            <form class="d-flex ms-2">
+              <button class="btn orange-btn" type="submit">
+                <i class="bi-cart-fill me-1"></i>
+                Carrito
+                <span class="badge bg-dark text-white ms-1 rounded-pill"
+                  >0</span
+                >
+              </button>
+            </form>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+        <main class = "container my-5 pt-5 mt-5">
+            <section class = "row align-items-center mb-5">
+                <article class="col-12 col-lg-6 mb-4 mb-lg-0">
+                    <h1 class="display-5 fw-bold mb-3">Nuestra Historia</h1>
+                    <p class="lead text-muted">Pasión por la música desde el corazón de Viña del mar.</p>
+                    <p>
+                        <strong>Sonido Vivo</strong> es una tienda especializada en instrumentos musicales, 
+                        equipos de sonido y accesorios. Ubicados en la Region de Valparaíso, llevamos 
+                        <strong>11 años</strong> acompañando a los músicos en cada etapa de su carrera
+                    </p>
+                    <p>
+                        Nuestro local es atentido personalmente 
+                        por su dueño y dos vendedores expertos, quienes se encargar de guiar 
+                        y reparar instrumentos.
+                    </p>
+                    <p>
+                        Historicamente hemos vendido de forma presencial, pero gracias a ustedes, en los ultimos 3 años comenzamos
+                        a recibir pedidos por WhatsApp e Instagram desde otras regiones. Nuestra pagina web nace para darles un catalogo rapido,
+                        claro y un mejor servicio para todo Chile.
+                    </p>
+                </article>
+
+                <aside class="col-12 col-lg-6 text-center">
+                    <img src="img/tienda-fisica.jpg" alt="Local Sonido Vivo en Viña del mar" class="img-fluid rounded shadow-lg">
+                </aside>
+
+            </section>
+
+            <section class="row text-center g-4 mt-2">
+                <div class ="col-12 col-md-4">
+                    <div class="card h-100 border-0 shadow-sm bg-light">
+                        <div class="card-body p-4">
+                            <h3 class="h4 text-primary">+11 Años</h3>
+                            <p class="mb-0">De trayectoria y confianza en la Region de Valparaíso.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class ="col-12 col-md-4">
+                    <div class="card h-100 border-0 shadow-sm bg-light">
+                        <div class="card-body p-4">
+                            <h3 class="h4 text-primary">+300 Productos</h3>
+                            <p class="mb-0">El catálogo mas completo de cuerdas, teclas, accesorios y mas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class ="col-12 col-md-4">
+                    <div class="card h-100 border-0 shadow-sm bg-light">
+                        <div class="card-body p-4">
+                            <h3 class="h4 text-primary">Experta Atencion</h3>
+                            <p class="mb-0">Atendido por gente especializada en musica y su creacion.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+
+    <footer class="footer pt-5">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-lg-3 col-md-6">
+            <h3 class="text-white">Sonido Vivo</h3>
+            <div class="mb-4">
+              <i class="fa-brands fa-cc-visa fa-2x text-white"></i>
+              <i class="fa-brands fa-cc-mastercard fa-2x text-white"></i>
+            </div>
+          </div>
+
+          <nav class="col-lg-2 col-md-6 text-white">
+            <h3>Información</h3>
+            <ul>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">Términos y Condiciones</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">Política de Privacidad</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link disabled" href="#">Políticas de Garantía</a>
+              </li>
+            </ul>
+          </nav>
+
+          <nav class="col-lg-3 col-md-6 text-white">
+            <h3>Mi Cuenta</h3>
+            <ul>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Iniciar sesión</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Registrarse</a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="col-lg-4 col-md-6 text-white">
+            <h3 class="footer-title">Newsletter</h3>
+            <p class="mb-4">
+              ¡Suscríbete al Newsletter y entérate primero de nuestras ofertas!
+            </p>
+            <form class="mb-4">
+              <div class="input-group">
+                <input
+                  type="email"
+                  class="form-control newsletter-input"
+                  placeholder="Escribe tu mail"
+                />
+                <button class="btn orange-btn" type="submit">
+                  Suscribirme
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-dark mt-5">
+        <div class="container">
+          <div class="row py-3">
+            <div class="col-md-6 text-center text-md-start text-white">
+              <p class="mb-0">&copy; 2026 Sonido Vivo</p>
+            </div>
+            <div class="col-md-6 text-center text-md-end text-white">
+              <p class="mb-0">DSY1104</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
