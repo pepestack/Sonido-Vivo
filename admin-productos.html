@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Inventario - Sonido Vivo</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="icon" type="image/png" href="img/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" defer></script>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <header>
+        <nav class="navbar navbar-dark bg-dark shadow-sm">
+            <div class="container-fluid px-4">
+                <button class="navbar-toggler orange-btn d-lg-none my-1 me-2" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#sidebar" aria-controls="sidebar" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <i class="navbar-toggler-icon"></i> <span class="d-none d-sm-inline">Menu</span>
+                </button>
+                <a href="admin-home.html" class="navbar-brand d-flex align-items-center text-decoration-none">
+                    <img src="img/logo-transparent-white.png" id="logo-sm" alt="Sonido Vivo">
+                    <span class="ms-2 fw-bold text-white">Sonido Vivo <span class="d-none d-md-inline">| <span
+                                class="text-warning">Panel
+                                Administrador</span></span></span>
+                </a>
+                <div class="d-flex ms-auto">
+                    <a href="home.html" class="btn btn-outline-light btn-sm"> <span class="d-sm-inline">Cerrar
+                            Sesión</span></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="d-flex flex-grow-1">
+
+        <aside id="sidebar" class="sidebar collapse d-lg-flex flex-column p-3 border-end">
+            <nav class="d-flex flex-column flex-grow-1 justify-content-between">
+                <ul class="nav nav-pills flex-column gap-1 mb-auto">
+                    <li class="nav-item">
+                        <a href="admin-home.html" class="nav-link text-body d-flex align-items-center gap-2">
+                            <i class="bi bi-grid-fill"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="disabled nav-link text-body d-flex align-items-center gap-2">
+                            <i class="bi bi-receipt"></i>
+                            <span>Pedidos</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="admin-productos.html"
+                            class="nav-link active text-body d-flex align-items-center gap-2">
+                            <i class="bi bi-box-seam"></i>
+                            <span>Inventario</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="disabled nav-link text-body d-flex align-items-center gap-2">
+                            <i class="bi bi-bar-chart"></i>
+                            <span>Reportes</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="admin-usuario.html" class="nav-link text-body d-flex align-items-center gap-2">
+                            <i class="bi bi-people"></i>
+                            <span>Usuarios</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="nav nav-pills flex-column gap-1 my-3">
+                    <li class="nav-item">
+                        <a href="#" class="disabled nav-link text-body d-flex align-items-center gap-2">
+                            <i class="bi bi-gear"></i>
+                            <span>Configuración</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="disabled nav-link text-body d-flex align-items-center gap-2">
+                            <i class="bi bi-person-plus"></i>
+                            <span>Perfil</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="disabled nav-link text-body d-flex align-items-center gap-2">
+                            <i class="bi bi-search"></i>
+                            <span>Buscar</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="disabled nav-link text-body d-flex align-items-center gap-2">
+                            <i class="bi bi-question-circle"></i>
+                            <span>Ayuda</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="container mt-5 pt-5 my-5">
+            <header class="row mb-4 align-items-center">
+                <div class="col-12 col-md-6">
+                    <h1 class="h2 fw-bold mb-0">Gestion de Inventario</h1>
+                    <p class="text-muted mb-0">Listado de productos</p>
+                </div>
+
+                <div class="col-12 col-md-6 text-md-end mt-3 mt-md-0">
+                    <a href="nuevo-producto.html" class="btn btn-success ">Añadir Producto</a>
+                </div>
+            </header>
+
+            <section class="card shadow-sm border-0">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-striped text-nowrap mb-0">
+                            <thead class="table-dark">
+                                <tr>
+                                    <th scope="col" class="ps-4">Código producto (SKU)</th>
+                                    <th scope="col">Nombre</th>
+                                    <th scope="col">Precio</th>
+                                    <th scope="col">Stock</th>
+                                    <th scope="col">Categoría</th>
+                                    <th scope="col" class="text-end pe-4">Acciones</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td class="ps-4 fw-bold">GA001</td>
+                                    <td>Guitarra Acústica Folk</td>
+                                    <td>$ 129.990</td>
+                                    <td>5</td>
+                                    <td>Guitarras Acústicas</td>
+                                    <td class="text-end pe-4">
+                                        <a href="ver-producto.html" class="btn btn-sm btn-outline-primary">Ver
+                                            detalle</a>
+                                        <a href="editar-producto.html" class="btn btn-sm btn-outline-primary">Editar</a>
+                                        <button class="btn btn-sm btn-outline-danger ms-1">Eliminar</button>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td class="ps-4 fw-bold">MI004</td>
+                                    <td>Micrófono USB de Condensador</td>
+                                    <td>$ 299.990</td>
+                                    <td>5</td>
+                                    <td>Micrófonos</td>
+                                    <td class="text-end pe-4">
+                                        <a href="ver-producto.html" class="btn btn-sm btn-outline-primary">Ver
+                                            detalle</a>
+                                        <a href="editar-producto.html" class="btn btn-sm btn-outline-primary">Editar</a>
+                                        <button class="btn btn-sm btn-outline-danger ms-1">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-4 fw-bold">AC006</td>
+                                    <td>Afinador de Clip</td>
+                                    <td>$ 8.990</td>
+                                    <td>20</td>
+                                    <td>Accesorios</td>
+                                    <td class="text-end pe-4">
+                                        <a href="ver-producto.html" class="btn btn-sm btn-outline-primary">Ver
+                                            detalle</a>
+                                        <a href="editar-producto.html" class="btn btn-sm btn-outline-primary">Editar</a>
+                                        <button class="btn btn-sm btn-outline-danger ms-1">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-4 fw-bold">MI002</td>
+                                    <td>Micrófono Dinámico Instrumento</td>
+                                    <td>$ 139.990</td>
+                                    <td>6</td>
+                                    <td>Micrófonos</td>
+                                    <td class="text-end pe-4">
+                                        <a href="ver-producto.html" class="btn btn-sm btn-outline-primary">Ver
+                                            detalle</a>
+                                        <a href="editar-producto.html" class="btn btn-sm btn-outline-primary">Editar</a>
+                                        <button class="btn btn-sm btn-outline-danger ms-1">Eliminar</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-4 fw-bold">AC007</td>
+                                    <td>Cable Instrumento 3m</td>
+                                    <td>$ 12.990</td>
+                                    <td>15</td>
+                                    <td>Accesorios</td>
+                                    <td class="text-end pe-4">
+                                        <a href="ver-producto.html" class="btn btn-sm btn-outline-primary">Ver
+                                            detalle</a>
+                                        <a href="editar-producto.html" class="btn btn-sm btn-outline-primary">Editar</a>
+                                        <button class="btn btn-sm btn-outline-danger ms-1">Eliminar</button>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+</body>
+
+</html>
