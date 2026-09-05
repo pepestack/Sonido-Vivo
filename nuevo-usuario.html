@@ -6,6 +6,7 @@
     <title>Crear nuevo usuario - Sonido Vivo</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/custom.css">
+    <script src="js/crear-usuario.js" defer></script>
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
     <link
@@ -106,7 +107,7 @@
                 <div class="card shadow-sm border-0">
                     <div class="card-body p-4 p-md-5">
                         <h2 class="h3 fw-bold mb-4 text-primary">Registrar nuevo usuario</h2>
-                        <form novalidate>
+                        <form id="form-crearusuario" novalidate>
                             <div class="mb-3">
                               <label for="nombre" class="form-label fw-semibold">Nombre Completo</label>
                               <input type="text" class="form-control" id="nombre" placeholder="Ej: Jose calderon" required>
@@ -119,7 +120,7 @@
                             
                             <div class="mb-3">
                               <label for="rol" class="form-label fw-semibold">Rol en el sistema</label>
-                              <select class="form-select" id="cargo">
+                              <select class="form-select" id="cargo" required>
                                 <option value="" selected disabled>Selecciona el tipo de cargo</option>
                                 <option value="vendedor">Vendedor</option>
                                 <option value="cajero">Cajero</option>
