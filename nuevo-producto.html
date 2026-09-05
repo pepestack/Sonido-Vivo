@@ -4,10 +4,10 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Crear nuevo usuario - Sonido Vivo</title>
+    <title>Crear nuevo producto - Sonido Vivo</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/custom.css">
-    <script src="js/crear-usuario.js" defer></script>
+    <script src="js/validar-producto.js" defer></script>
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
     <link
@@ -58,7 +58,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="admin-productos.html" class="nav-link text-body d-flex align-items-center gap-2">
+                        <a href="admin-productos.html"
+                            class="nav-link active text-body d-flex align-items-center gap-2">
                             <i class="bi bi-box-seam"></i>
                             <span>Inventario</span>
                         </a>
@@ -70,7 +71,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="admin-usuario.html" class="nav-link active text-body d-flex align-items-center gap-2">
+                        <a href="admin-usuario.html" class="nav-link text-body d-flex align-items-center gap-2">
                             <i class="bi bi-people"></i>
                             <span>Usuarios</span>
                         </a>
@@ -110,40 +111,96 @@
                 <div class="col-12 col-md-8 col-lg-6">
                     <div class="card shadow-sm border-0">
                         <div class="card-body p-4 p-md-5">
-                            <h2 class="h3 fw-bold mb-4 text-primary">Registrar nuevo usuario</h2>
-                            <form id="form-crearusuario" novalidate>
+                            <h2 class="h3 fw-bold mb-4 text-primary">Registrar nuevo producto</h2>
+                            <form id="form-crearproducto" novalidate>
                                 <div class="mb-3">
-                                    <label for="nombre" class="form-label fw-semibold">Nombre Completo</label>
-                                    <input type="text" class="form-control" id="nombre" placeholder="Ej: Jose calderon"
+                                    <label for="sku" class="form-label fw-semibold">Código de producto (SKU)<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="sku" placeholder="Formato: AB000"
                                         required>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="correo" class="form-label fw-semibold">Correo Electronico</label>
-                                    <input type="email" class="form-control" id="correo"
-                                        placeholder="Ej: Jose.c@sonidovivo.cl" required>
+                                    <label for="nombre" class="form-label fw-semibold">Nombre de Producto<span
+                                            class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" id="nombre" placeholder="Ej: Micrófono tipo"
+                                        required>
                                 </div>
 
                                 <div class="mb-3">
-                                    <label for="rol" class="form-label fw-semibold">Rol en el sistema</label>
-                                    <select class="form-select" id="cargo" required>
-                                        <option value="" selected disabled>Selecciona el tipo de cargo</option>
-                                        <option value="vendedor">Vendedor</option>
-                                        <option value="cajero">Cajero</option>
+                                    <label for="marca" class="form-label fw-semibold">Marca</label>
+                                    <input type="text" class="form-control" id="marca" placeholder="Ej: Squier">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="modelo" class="form-label fw-semibold">Modelo</label>
+                                    <input type="text" class="form-control" id="modelo" placeholder="Ej: Affinity PJ">
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="descripcion" class="form-label fw-semibold">Descripción de
+                                        Producto</label>
+                                    <textarea class="form-control" id="descripcion" rows="2" required
+                                        placeholder="Escriba la descripción aquí"></textarea>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="precio" class="form-label fw-semibold">Precio (Cifra)<span
+                                            class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="precio"
+                                        placeholder="Escriba cifra sin puntos ni signo $" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="stock" class="form-label fw-semibold">Stock<span
+                                            class="text-danger">*</span></label>
+                                    <input type="number" class="form-control" id="stock"
+                                        placeholder="Mínimo 0, sin máximo" required>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="stock-crit" class="form-label fw-semibold">Stock Crítico</label>
+                                    <input type="number" class="form-control" id="stock-crit"
+                                        placeholder="Mínimo 0, sin máximo">
+                                    <p id="stock-crit-error" class="text-center fw-bold text-danger"></p>
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="categoria" class="form-label fw-semibold">Categoría<span
+                                            class="text-danger">*</span></label>
+                                    <select class="form-select" id="categoria" required>
+                                        <option value="" selected disabled>Selecciona la categoria</option>
+                                        <option value="guitarras-acusticas">Guitarras Acústicas</option>
+                                        <option value="guitarras-electricas">Guitarras Eléctricas</option>
+                                        <option value="bajos-electricos">Bajos Eléctricos</option>
+                                        <option value="baterias">Baterías</option>
+                                        <option value="teclados-y-pianos">Teclados y Pianos</option>
+                                        <option value="amplificadores">Amplificadores</option>
+                                        <option value="microfonos">Micrófonos</option>
+                                        <option value="pedales-de-efectos">Pedales de Efectos</option>
+                                        <option value="accesorios">Accesorios</option>
+                                        <option value="estudio-y-grabacion">Estudio y Grabación</option>
                                     </select>
                                 </div>
 
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <a href="admin-usuario.html" class="btn btn-outline-secondary">Cancelar registro</a>
-                                    <button type="submit" class="btn btn-success px-4">Guardar usuario</button>
+                                <div class="mb-3">
+                                    <label for="imagen-producto" class="form-label fw-semibold">Subir Imagen del
+                                        Producto</label>
+                                    <input class="form-control" type="file" id="imagen-producto" accept="image/*">
                                 </div>
+
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <a href="admin-productos.html" class="btn btn-outline-secondary">Cancelar
+                                        registro</a>
+                                    <button type="submit" class="btn btn-success px-4">Guardar Producto</button>
+                                </div>
+                                <p id="mensaje-exito" class="mt-3 text-center fw-bold text-success"></p>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
-    </div>
 </body>
 
 </html>
