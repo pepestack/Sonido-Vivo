@@ -101,41 +101,56 @@
                 </ul>
             </nav>
         </aside>
-    <main class="container mt-5 pt-5 my-5">
-        <div class = "row justify-content-center">
-            <div class="col-12 col-md-8 col-lg-6">
-                <div class="card shadow-sm border-0">
-                    <div class="card-body p-4 p-md-5">
-                        <h2 class="h3 fw-bold mb-4 text-primary">Registrar nuevo usuario</h2>
-                        <form id="form-crearusuario" novalidate>
-                            <div class="mb-3">
-                              <label for="nombre" class="form-label fw-semibold">Nombre Completo</label>
-                              <input type="text" class="form-control" id="nombre" placeholder="Ej: Jose calderon" required>
-                            </div>
+    <main class="container my-5 pt-5 mt-5">
+        <section class="row justify-content-center">
+        <article class="col-12 col-md-8 col-lg-6 card shadow-sm border-0 p-0" >
+            <header class="card-header bg-dark text-white text-center py-4">
+                <h2 class="h4 mb-0">Perfil de usuario</h2>
+            </header>
 
-                            <div class="mb-3">
-                              <label for="correo" class="form-label fw-semibold">Correo Electronico</label>
-                              <input type="email" class="form-control" id="correo" placeholder="Ej: Jose.c@sonidovivo.cl" required>
-                            </div>
-                            
-                            <div class="mb-3">
-                              <label for="rol" class="form-label fw-semibold">Rol en el sistema</label>
-                              <select class="form-select" id="cargo" required>
-                                <option value="" selected disabled>Selecciona el tipo de cargo</option>
-                                <option value="vendedor">Vendedor</option>
-                                <option value="cajero">Cajero</option>
-                              </select>
-                            </div>
+            <section class="card-body p-4 p-md-5 ">
 
-                            <div class="d-flex justify-content-between align-items-center">
-                              <a href="admin-usuario.html" class="btn btn-outline-secondary">Cancelar registro</a>
-                              <button type="submit" class="btn btn-success px-4">Guardar usuario</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <figure class="text-center mb-4">
+              <span class="bg-secondary text-white rounded-circle d-inline-flex align-items-center justify-content-center fw-bold perfil" ">
+                SN
+              </span>
+              <figcaption>
+                <h3 class="h5 mt-3 mb-0">Sebastian Navarro</h3>
+                <p class="text-muted">Vendedor</p>
+              </figcaption>
+            </figure>
+
+            <ul class="list-group list-group-flush mb-5">
+              <li class="list-group-item d-flex justify-content-between px-0 py-3">
+                <b class="text-muted">ID de empleado</b> 
+                <span>2</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between px-0 py-3">
+                <b class="text-muted">Correo electrónico</b> 
+                <span>seba@sonidovivo.cl</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center px-0 py-3">
+                <b class="text-muted">Rol</b> 
+                <span class="badge bg-dark px-3 py-2">Vendedor</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between px-0 py-3">
+                <b class="text-muted">Estado de la cuenta</b> 
+                <span class="text-success fw-bold">Activo</span>
+              </li>
+            </ul>
+
+            <nav class="d-flex justify-content-between">
+              <a href="admin-usuario.html" class="btn btn-outline-secondary">Volver</a>
+              
+              <span class="btn-group">
+                <a href="editar-usuario.html" class="btn btn-primary">Editar</a>
+                <button type="button" class="btn btn-danger">Eliminar</button>
+              </span>
+            </nav>
+
+          </section>
+          </section>
+        </article>
     </main>
-  </body>
+</body>
 </html>

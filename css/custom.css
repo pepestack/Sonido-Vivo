@@ -5,26 +5,30 @@
 }
 
 .btn-primary {
-  --bs-btn-bg: #206C9D;
-  --bs-btn-border-color: #206C9D;
+  --bs-btn-bg: #206c9d;
+  --bs-btn-border-color: #206c9d;
   --bs-btn-color: #fff;
-  --bs-btn-hover-bg: #FA9F2D;
-  --bs-btn-hover-border-color: #FA9F2D;
-  --bs-btn-hover-color: #0A0F0A;
+  --bs-btn-hover-bg: #fa9f2d;
+  --bs-btn-hover-border-color: #fa9f2d;
+  --bs-btn-hover-color: #0a0f0a;
 }
 
 /* navbar y header*/
 
 .navbar-custom {
   background-color: rgba(58, 162, 192);
-  background: linear-gradient(90deg, rgba(234, 239, 243, 1) 0%, rgba(58, 162, 192, 1) 100%);
+  background: linear-gradient(
+    90deg,
+    rgba(234, 239, 243, 1) 0%,
+    rgba(58, 162, 192, 1) 100%
+  );
 }
 
 #logo {
   width: 60px;
 }
 
-#logo-sm{
+#logo-sm {
   width: 40px;
 }
 
@@ -63,7 +67,6 @@ h3 {
   background-color: #eee;
 }
 
-
 /* pie de pag */
 
 .footer {
@@ -101,12 +104,18 @@ h3 {
 
 .sidebar {
   width: 260px;
-  background: linear-gradient(180deg, rgb(142, 169, 190) 0%, rgb(228, 242, 247) 100%);;
+  background: linear-gradient(
+    180deg,
+    rgb(142, 169, 190) 0%,
+    rgb(228, 242, 247) 100%
+  );
 }
 
 .sidebar .nav-link {
   font-weight: 500;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .sidebar .nav-link:hover {
@@ -120,4 +129,8 @@ h3 {
   font-weight: 600;
 }
 
-
+.perfil {
+  width: 80px;
+  height: 80px;
+  font-size: 2rem;
+}
