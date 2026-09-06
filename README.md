@@ -65,5 +65,4 @@ La lógica interactiva y las validaciones del proyecto están organizadas por m�
 | **`catalogo.js`** | Maneja la interactividad y la visualización de los productos en la sección de tienda. |
 | **`contacto.js`** | Aplica validaciones estrictas en el formulario. |
 | **`login.js` / `register.js` / `crear-usuario.js`** | Gestionan la validación de formularios para la autenticación y el registro de nuevos usuarios. |
-| **`detalle-producto.js`** | **FALTA AÑADIR OWO**. |
 | **`validar-producto.js`** | Administra las validaciones y restricciones necesarias para la sección de administrar productos. |
