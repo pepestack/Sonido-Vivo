@@ -439,7 +439,7 @@ function mostrar(listaProductos) {
                     <h2 class="card-title h5">${producto.nombre}</h2>
                     <p class="card-text text-muted mb-2">${producto.descripcion}</p>
                     <p class="card-text fs-4 fw-bold text-primary mt-auto">$${producto.precio.toLocaleString("es-CL")}</p>
-                    <button class="btn btn-primary w-100 mt-2">Añadir al carrito</button>
+                    <button class="btn btn-primary w-100 mt-2" onclick="agregarAlCarrito('${producto.id}', '${producto.nombre.replace(/'/g, "\\'")}', ${producto.precio})">Añadir al carrito</button>
                 </div>
             </div>
         `;
