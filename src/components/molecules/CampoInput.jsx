@@ -5,8 +5,13 @@ function CampoInput({ texto, id, type, placeholder, value, onChange }) {
   return (
     <Form.Group className="mb-3">
       <Etiqueta texto={texto} htmlFor={id} />
-      <Form.Control />
-    </Form.Group >
+      <Form.Control
+        type={type}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+      />
+    </Form.Group>
   );
 }
 
