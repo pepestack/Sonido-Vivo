@@ -14,7 +14,7 @@
 
 <hr>
 
-# (Nombre de Equipo)
+# (Insertar Nombre de Equipo)
 
 ## Descripción
 
