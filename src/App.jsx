@@ -1,10 +1,8 @@
-import Login from "./components/organisms/Login";
-
-
+import LoginPage from "./pages/LoginPage";
 function App(){
 
     return (
-        <Login />
+        <LoginPage />
     )
 }
 
