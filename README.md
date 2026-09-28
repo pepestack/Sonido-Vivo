@@ -41,7 +41,11 @@ src/
 │   ├── molecules/
 │   ├── organisms/
 │   └── templates/
-└── pages/
+├── pages/
+├── data/
+├── services/
+├── context/
+└── utils/
 ```
 
 ## Ejecución
