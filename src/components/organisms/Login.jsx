@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CampoInput from "../molecules/CampoInput";
-import { Container, Form } from "react-bootstrap";
+import { Container, Form, Row,Col } from "react-bootstrap";
 import Boton from "../atoms/Boton";
 function Login() {
   const [email, setEmail] = useState("");
@@ -15,7 +15,6 @@ function Login() {
   }
 
   return (
-    <Container>
       <Form onSubmit={manejarEnvio} noValidate>
         <CampoInput
           id="email"
@@ -34,10 +33,8 @@ function Login() {
           value={contraseña}
           onChange={(e) => setContraseña(e.target.value)}
         />
-
         <Boton texto={"Ingresar"} />
       </Form>
-    </Container>
   );
 }
 
