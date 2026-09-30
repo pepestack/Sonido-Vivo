@@ -1,5 +1,6 @@
 import { Card, Col, Container, Row } from "react-bootstrap";
 import Register from "../components/organisms/Register";
+import { Link } from "react-router-dom";
 
 
 function RegisterPage(){
@@ -13,8 +14,8 @@ function RegisterPage(){
                         <h2 className="text-center">Registrate</h2>
                         <Register />
                         <div className="text-center mt-3">
-                            <p className="mb-0">¿Ya tienes una cuenta?</p>
-                            {/* Aca poner el viaje a la page de login aun no se como hacerlo kekw*/}
+                            <p className="mb-0">¿Ya tienes una cuenta? </p>
+                            <Link to="/login">Iniciar sesión</Link>
                         </div>
                     </Card.Body>
                 </Card>
