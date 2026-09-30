@@ -12,6 +12,10 @@ function LoginPage(){
                     <CardBody className="p-4">
                         <h2 className="text-center">Iniciar Sesión</h2>
                         <Login />
+                        <div className="text-center mt-3">
+                            <p className="mb-0">¿No tienes cuenta?</p>
+                            /* Aca poner el viaje a la page de registrar aun no se como hacerlo kekw*/
+                        </div>
                     </CardBody>
                 </Card>
                 </Col>
