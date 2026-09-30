@@ -14,7 +14,7 @@ function LoginPage(){
                         <Login />
                         <div className="text-center mt-3">
                             <p className="mb-0">¿No tienes cuenta?</p>
-                            /* Aca poner el viaje a la page de registrar aun no se como hacerlo kekw*/
+                            {/* Aca poner el viaje a la page de registrar aun no se como hacerlo kekw*/}
                         </div>
                     </Card.Body>
                 </Card>
