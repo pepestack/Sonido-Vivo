@@ -1,13 +1,17 @@
 import { useState } from "react";
 import CampoInput from "../molecules/CampoInput";
-import {Form} from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import Boton from "../atoms/Boton";
 
-function Login() {
+function Register() {
   const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("")
   const [contraseña, setContraseña] = useState("");
+  const [contraseñaRepetida, setContraseñaRepetida] = useState("");
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
+  
+  const [errorUsername, setErrorUsername] = useState(false);
   const patronCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   const [exito, setExito] = useState(false);
 
@@ -17,8 +21,11 @@ function Login() {
     const correoValido = patronCorreo.test(email.trim());
     setErrorEmail(!correoValido);
 
-    const passwordValid = contraseña.trim() !== "";
+    const passwordValid = contraseña.trim() !== "" && contraseñaRepetida == contraseña;
     setErrorPassword(!passwordValid);
+
+    const usernameValid = username.trim() !== "";
+    setErrorUsername(!usernameValid);
 
     setExito(correoValido && passwordValid);
   }
@@ -35,6 +42,16 @@ function Login() {
         validar={errorEmail}
         required
       />
+      <CampoInput
+        id="username"
+        texto="Ingrese su nombre de usuario"
+        type="text"
+        placeholder="flamingo_star67"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        validar={errorUsername}
+        required
+      />
 
       <CampoInput
         id="password"
@@ -46,8 +63,19 @@ function Login() {
         validar={errorPassword}
         required
       />
+
+      <CampoInput
+        id="passwordrepeat"
+        texto="Ingrese su contraseña nuevamente"
+        type="password"
+        placeholder="*********"
+        value={contraseñaRepetida}
+        onChange={(e) => setContraseñaRepetida(e.target.value)}
+        validar={errorPassword}
+        required
+      />
       <div className="text-center mt-1">
-        <Boton texto={"Ingresar"} />
+        <Boton texto={"Crear Cuenta"} />
       </div>
       <div className="text-center mt-3">
         {exito ? (
@@ -55,8 +83,8 @@ function Login() {
         ) : (
           ""
         )}
-        {errorEmail || errorPassword ? (
-          <strong>Correo o contraseña inválida..</strong>
+        {errorEmail || errorPassword || errorUsername ? (
+          <strong>Datos invalidos..</strong>
         ) : (
           ""
         )}
@@ -65,4 +93,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;
