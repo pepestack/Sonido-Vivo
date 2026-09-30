@@ -1,6 +1,6 @@
 import { useState } from "react";
 import CampoInput from "../molecules/CampoInput";
-import { Container, Form, Row, Col } from "react-bootstrap";
+import {Form} from "react-bootstrap";
 import Boton from "../atoms/Boton";
 
 function Login() {
