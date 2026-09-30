@@ -75,7 +75,7 @@ function Register() {
         required
       />
       <div className="text-center mt-1">
-        <Boton texto={"Ingresar"} />
+        <Boton texto={"Crear Cuenta"} />
       </div>
       <div className="text-center mt-3">
         {exito ? (
