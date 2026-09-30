@@ -83,8 +83,8 @@ function Register() {
         ) : (
           ""
         )}
-        {errorEmail || errorPassword ? (
-          <strong>Correo o contraseña inválida..</strong>
+        {errorEmail || errorPassword || errorUsername ? (
+          <strong>Datos invalidos..</strong>
         ) : (
           ""
         )}
