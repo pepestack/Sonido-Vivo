@@ -14,7 +14,7 @@
 
 <hr>
 
-# (Insertar Nombre de Equipo)
+# Equipo Vio Coders
 
 ## Descripción
 
@@ -41,7 +41,11 @@ src/
 │   ├── molecules/
 │   ├── organisms/
 │   └── templates/
-└── pages/
+├── pages/
+├── data/
+├── services/
+├── context/
+└── utils/
 ```
 
 ## Ejecución
