@@ -7,3 +7,5 @@ function NavItem({to, texto}){
         </li>
     )
 }
+
+export default NavItem;
