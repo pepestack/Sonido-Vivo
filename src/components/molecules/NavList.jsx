@@ -13,8 +13,8 @@ function NavList() {
 
   return (
     <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4 fw-bold fs-5">
-        {links.map((link, index) => (
-            <NavItem key={index} to={link.to} texto={link.texto} />
+        {links.map((link) => (
+            <NavItem key={link.texto} to={link.to} texto={link.texto} />
         ))}
     </ul>
   )
