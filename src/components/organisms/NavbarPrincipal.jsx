@@ -1,5 +1,5 @@
 import { Navbar, Container } from "react-bootstrap";
-import Logo from "../atoms/Logo";
+import Logo from "../molecules/Logo";
 import NavList from "../molecules/NavList";
 import BotonCarrito from "../molecules/BotonCarrito";
 import DropdownUsuario from "./DropdownUsuario";

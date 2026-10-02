@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import logo from '../../assets/images/logo-transparent.png';
+import logo from "../../assets/images/logo.png";
 import { Image } from "react-bootstrap";
-import '../../pages/App.css';
+import '../../App.css';
 
 function Logo() {
     return(
