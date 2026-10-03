@@ -10,7 +10,7 @@ export default function ListaEnlaces({ titulo, enlaces }) {
             <ul className="list-unstyled">
                 {enlaces.map((enlace) => (
                     <li key={enlace.texto} className="nav-item">
-                        {enlace.deshabilitado ? (
+                        {enlace.disabled ? (
                             <Nav.Link disabled className="px-0">
                                 {enlace.texto}
                             </Nav.Link>

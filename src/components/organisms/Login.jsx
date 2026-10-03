@@ -47,7 +47,7 @@ function Login() {
         required
       />
       <div className="text-center mt-1">
-        <Boton texto={"Ingresar"} />
+        <Boton>Ingresar</Boton>
       </div>
       <div className="text-center mt-3">
         {exito ? (
