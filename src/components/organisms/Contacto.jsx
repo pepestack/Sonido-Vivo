@@ -5,27 +5,46 @@ import Boton from "../atoms/Boton";
 
 export default function Contacto() {
   const [mensaje, setMensaje] = useState("");
+  const [errorMensaje, setErrorMensaje] = useState(false);
+  const [exito, setExito] = useState(false);
 
   function validarMensaje(e) {
     e.preventDefault();
 
-    const mensajeValido = mensaje.trim() == "";
-    setMensaje(!mensajeValido);
+    const mensajeValido = mensaje.trim() !== "";
+    setErrorMensaje(!mensajeValido);
+
+    setExito(mensajeValido);
   }
 
   return (
     <Form onSubmit={validarMensaje} noValidate>
       <Etiqueta htmlFor={"contenido"} texto={"Envianos tu comentario"} />
-      <textarea
+      <Form.Control
+        as={"textarea"}
         name="comentario"
         id="contenido"
         className="form-control"
         placeholder="Escribe aqui tu mensaje.."
+        value={mensaje}
+        onChange={(a) => setMensaje(a.target.value)}
+        isInvalid={errorMensaje}
         required
-
-      ></textarea>
+      ></Form.Control>
       <div className="text-center mt-3">
-        <Boton texto={"Ingresar"} />
+        <Boton texto={"Enviar"} />
+      </div>
+      <div className="text-center mt-3">
+        {exito ? (
+          <strong className="text-center">¡Enviado!</strong>
+        ) : (
+          ""
+        )}
+        {errorMensaje ? (
+          <strong>Enviar un mensaje valido</strong>
+        ) : (
+          ""
+        )}
       </div>
     </Form>
   );

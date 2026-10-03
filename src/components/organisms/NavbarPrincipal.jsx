@@ -2,7 +2,7 @@ import { Navbar, Container } from "react-bootstrap";
 import Logo from "../molecules/Logo";
 import NavList from "../molecules/NavList";
 import BotonCarrito from "../molecules/BotonCarrito";
-import DropdownUsuario from "./DropdownUsuario";
+import DropdownUsuario from "../molecules/DropdownUsuario";
 
 function NavbarPrincipal() {
   return (
