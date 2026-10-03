@@ -1,9 +1,9 @@
 import { Card, Col, Container, Row } from "react-bootstrap";
-import Login from "../components/organisms/Login";
 import { Link } from "react-router-dom";
 import PlantillaPublica from "../components/templates/PlantillaPublica";
+import Contacto from "../components/organisms/Contacto";
 
-function LoginPage() {
+function ContactoPage() {
   return (
     <PlantillaPublica>
       <Container className="my-5 pt-5">
@@ -11,12 +11,13 @@ function LoginPage() {
           <Col xs={12} md={6} lg={4}>
             <Card className="shadow-sm">
               <Card.Body className="p-4">
-                <h2 className="text-center">Iniciar Sesión</h2>
-                <Login />
-                <div className="text-center mt-3">
-                  <p className="mb-0">¿No tienes cuenta?</p>
-                  <Link to="/registro">Registrarse</Link>
-                </div>
+                <h2 className="text-center">Contacto</h2>
+                <p className="text-center text-muted">
+                  Queremos conocer tu opinión. Escríbenos tus comentarios, dudas
+                  o sugerencias y estaremos encantados de leerte.
+                </p>
+                <Contacto />
+                
               </Card.Body>
             </Card>
           </Col>
@@ -26,4 +27,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default ContactoPage;
