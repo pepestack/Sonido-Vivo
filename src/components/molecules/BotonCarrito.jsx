@@ -1,14 +1,16 @@
 
-import { Link } from "react-router-dom";
+
 import CartBadge from "../atoms/CartBadge";
-function BotonCarrito(){
+import BotonLink from "../atoms/BotonLink";
+import Icono from "../atoms/Icono";
+function BotonCarrito({cantidad}){
 
     return(
-        <Link className="btn btn-primary" to={"/carrito"}>
-            Carrito
-            <i className="bi-cart-fill me-1"></i>
-            <CartBadge count={1}></CartBadge>
-        </Link>
+        <BotonLink  className="orange-btn"to={"/carrito"} texto={"Carrito"}>
+            <Icono clase={"bi-cart-fill"} className="me-1" />
+            <CartBadge color="dark" redondeada className="text-white ms-1">
+                {cantidad}</CartBadge>
+        </BotonLink>
     )
 }
 
