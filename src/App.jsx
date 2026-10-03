@@ -1,6 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import ContactoPage from "./pages/ContactoPage";
+
 function App() {
   return (
     <BrowserRouter>
@@ -8,6 +10,7 @@ function App() {
         <Route path="/" element={<RegisterPage />} /> {/* aca tiene que ir el page del home*/}
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registro" element={<RegisterPage />} />
+        <Route path="/contacto" element={<ContactoPage />} />
       </Routes>
     </BrowserRouter>
   );
