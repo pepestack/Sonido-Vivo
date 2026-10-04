@@ -75,7 +75,7 @@ function Register() {
         required
       />
       <div className="text-center mt-1">
-        <Boton>Crear Cuenta</Boton>
+        <Boton tipo="submit">Crear Cuenta</Boton>
       </div>
       <div className="text-center mt-3">
         {exito ? (
