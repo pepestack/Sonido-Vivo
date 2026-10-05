@@ -19,7 +19,7 @@ function App() {
       </Route>
 
       <Route>
-        <Route path="admin" element={<AdminHome />} />
+        <Route path="/admin" element={<AdminHome />} />
       </Route>
     </Routes>
     

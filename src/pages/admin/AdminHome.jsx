@@ -16,7 +16,7 @@ const accesos = [
   },
 ]
 
-export default function AdminHome() {
+export default function Admin() {
   return (
     <>
       <Encabezado titulo="Bienvenido" subtitulo="¿Qué deseas gestionar hoy?" claseTitulo="display-6 fw-bold" />
