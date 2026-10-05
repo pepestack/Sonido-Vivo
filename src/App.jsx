@@ -10,7 +10,7 @@ function App() {
   return (
     <Routes>
       <Route element={<PlantillaPublica />}>
-        <Route path="/" element={<RegisterPage />} />{" "}
+        <Route path="/" element={<RegisterPage />} />
         {/* aca tiene que ir el page del home*/}
         <Route path="/catalogo" element={<Catalogo />} />
         <Route path="/login" element={<LoginPage />} />
