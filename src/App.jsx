@@ -4,6 +4,7 @@ import RegisterPage from "./pages/RegisterPage";
 import ContactoPage from "./pages/ContactoPage";
 import PlantillaPublica from "./components/templates/PlantillaPublica";
 import Catalogo from "./pages/Catalogo";
+import AdminHome from "./pages/admin/AdminHome";
 
 function App() {
   return (
@@ -16,7 +17,12 @@ function App() {
         <Route path="/registro" element={<RegisterPage />} />
         <Route path="/contacto" element={<ContactoPage />} />
       </Route>
+
+      <Route>
+        <Route path="admin" element={<AdminHome />} />
+      </Route>
     </Routes>
+    
   );
 }
 
