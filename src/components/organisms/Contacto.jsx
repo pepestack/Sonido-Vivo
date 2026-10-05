@@ -32,7 +32,7 @@ export default function Contacto() {
         required
       ></Form.Control>
       <div className="text-center mt-3">
-        <Boton>Enviar</Boton>
+        <Boton tipo="submit">Enviar</Boton>
       </div>
       <div className="text-center mt-3">
         {exito ? (
