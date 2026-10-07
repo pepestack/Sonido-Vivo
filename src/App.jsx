@@ -5,13 +5,15 @@ import ContactoPage from "./pages/ContactoPage";
 import PlantillaPublica from "./components/templates/PlantillaPublica";
 import Catalogo from "./pages/Catalogo";
 import BlogPage from "./pages/BlogPage";
+import Home from "./pages/Home";
 
 function App() {
   return (
     <Routes>
       <Route element={<PlantillaPublica />}>
-        <Route path="/" element={<RegisterPage />} />{" "}
+        <Route path="/" element={<Home />} />
         {/* aca tiene que ir el page del home*/}
+        <Route path="/home" element={<Home />} />
         <Route path="/catalogo" element={<Catalogo />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/registro" element={<RegisterPage />} />
