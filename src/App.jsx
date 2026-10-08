@@ -9,6 +9,8 @@ import BlogPage from "./pages/BlogPage";
 import Home from "./pages/Home";
 import Blog1Page from "./pages/Blog1Page";
 import Blog2Page from "./pages/Blog2Page";
+import PlantillaAdmin from "./components/templates/PlatillaPrivada";
+import PlantillaAdmin from "./components/templates/PlatillaPrivada";
 
 function App() {
   return (
@@ -28,7 +30,11 @@ function App() {
       </Route>
 
       <Route>
-        <Route path="/admin" element={<AdminHome />} />
+        <Route element={<PlantillaAdmin />}>
+          <Route path="/admin" element={<AdminHome />} />
+
+        </Route>
+        
       </Route>
     </Routes>
     

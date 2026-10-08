@@ -2,8 +2,14 @@ import CarruselHero from "../components/organisms/CarruselHero";
 import SeccionPresentacion from "../components/organisms/SeccionPresentacion";
 import { imagenesCarrusel } from "../data/carrusel";
 import imgTienda from "../assets/images/tienda-fisica.jpg"
+import { idsDestacados } from "../data/listaProductos";
+import { useCarrito, useProducto} from '../context/useContexto'
+import GrillaProductos from '../components/organisms/GrillaProductos'
 
 export default function Home(){
+    const {obtenerProducto} = useProducto()
+    const {agregarAlCarrito} = useCarrito()
+    const destacados = idsDestacados.map(obtenerProducto).filter(Boolean)
     return(
         <>
             <CarruselHero imagenes={imagenesCarrusel}/>
@@ -15,6 +21,12 @@ export default function Home(){
                 alt="Interior de tienda física Sonido Vivo"
                 textoBoton="Ver más"
                 rutaBoton="/catalogo"
+            />
+            <GrillaProductos
+                titulo="Productos destacados"
+                productos={destacados}
+                onAgregar={agregarAlCarrito}
+                className="my-5 py-5"
             />
         </>
     )
