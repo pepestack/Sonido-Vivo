@@ -7,6 +7,8 @@ import Catalogo from "./pages/Catalogo";
 import AdminHome from "./pages/admin/AdminHome";
 import BlogPage from "./pages/BlogPage";
 import Home from "./pages/Home";
+import Blog1Page from "./pages/Blog1Page";
+import Blog2Page from "./pages/Blog2Page";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
         <Route path="/registro" element={<RegisterPage />} />
         <Route path="/contacto" element={<ContactoPage />} />
         <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog1" element={<Blog1Page />} />
+        <Route path="/blog2" element={<Blog2Page />} />
         
       </Route>
 
