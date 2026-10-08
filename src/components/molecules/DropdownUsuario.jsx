@@ -9,7 +9,7 @@ function DropdownUsuario() {
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="custom-lb-container">
-        <Dropdown.Item as={Link} to="/cuenta">Mi Cuenta</Dropdown.Item>
+        <Dropdown.Item as={Link} to="/admin">Mi Cuenta</Dropdown.Item>
         <Dropdown.Divider />
         <Dropdown.Item as={Link} to="/login">Iniciar sesión</Dropdown.Item>
         <Dropdown.Item as={Link} to="/registro">Registrarse</Dropdown.Item>

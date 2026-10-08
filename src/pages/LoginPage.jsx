@@ -9,7 +9,7 @@ function LoginPage() {
       <Row className="justify-content-center">
         <Col xs={12} md={6} lg={4}>
           <Card className="shadow-sm">
-            <Card.Body className="p-4">
+            <Card.Body className="p-4 custom-lb-container">
               <h2 className="text-center">Iniciar Sesión</h2>
               <Login />
               <div className="text-center mt-3">

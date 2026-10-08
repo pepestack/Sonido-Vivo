@@ -4,6 +4,7 @@ import RegisterPage from "./pages/RegisterPage";
 import ContactoPage from "./pages/ContactoPage";
 import PlantillaPublica from "./components/templates/PlantillaPublica";
 import Catalogo from "./pages/Catalogo";
+import AdminHome from "./pages/admin/AdminHome";
 import BlogPage from "./pages/BlogPage";
 import Home from "./pages/Home";
 
@@ -21,7 +22,12 @@ function App() {
         <Route path="/blog" element={<BlogPage />} />
         
       </Route>
+
+      <Route>
+        <Route path="/admin" element={<AdminHome />} />
+      </Route>
     </Routes>
+    
   );
 }
 
