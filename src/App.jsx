@@ -10,7 +10,7 @@ import Home from "./pages/Home";
 import Blog1Page from "./pages/Blog1Page";
 import Blog2Page from "./pages/Blog2Page";
 import PlantillaAdmin from "./components/templates/PlantillaPrivada";
-
+import NosotrosPage from "./pages/NosotrosPage";
 
 function App() {
   return (
@@ -27,6 +27,9 @@ function App() {
         <Route path="/blog1" element={<Blog1Page />} />
         <Route path="/blog2" element={<Blog2Page />} />
         
+
+        <Route path="/nosotros" element={<NosotrosPage />} />
+
       </Route>
 
       <Route>
