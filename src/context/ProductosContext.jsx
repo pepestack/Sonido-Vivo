@@ -12,7 +12,7 @@ export default function ProductosProvider({children}){
     },[productos])
 
 
-    const obtenerProducto = (id) => productos.filter((producto) => producto.id === id)
+    const obtenerProducto = (id) => productos.find((producto) => producto.id === id)
 
 
     const agregarProducto = (nuevo) => {
