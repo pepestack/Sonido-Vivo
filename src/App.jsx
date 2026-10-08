@@ -7,7 +7,7 @@ import Catalogo from "./pages/Catalogo";
 import AdminHome from "./pages/admin/AdminHome";
 import BlogPage from "./pages/BlogPage";
 import Home from "./pages/Home";
-import PlantillaAdmin from "./components/templates/PlatillaPrivada";
+import PlantillaAdmin from "./components/templates/PlantillaPrivada";
 
 function App() {
   return (
