@@ -9,7 +9,7 @@ function ContactoPage() {
       <Row className="justify-content-center">
         <Col xs={12} md={6} lg={4}>
           <Card className="shadow-sm">
-            <Card.Body className="p-4">
+            <Card.Body className="p-4 custom-lb-container">
               <h2 className="text-center">Contacto</h2>
               <p className="text-center text-muted">
                 Queremos conocer tu opinión. Escríbenos tus comentarios, dudas o

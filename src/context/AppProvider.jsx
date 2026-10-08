@@ -5,7 +5,7 @@ export default function AppProvider({ children }) {
 
   return(
     <ProductosProvider>
-      <CarritoProvider>{children}</CarritoProvider>;
+      <CarritoProvider>{children}</CarritoProvider>
     </ProductosProvider>
     
 
