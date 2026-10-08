@@ -9,8 +9,8 @@ import BlogPage from "./pages/BlogPage";
 import Home from "./pages/Home";
 import Blog1Page from "./pages/Blog1Page";
 import Blog2Page from "./pages/Blog2Page";
-import PlantillaAdmin from "./components/templates/PlatillaPrivada";
-import PlantillaAdmin from "./components/templates/PlatillaPrivada";
+import PlantillaAdmin from "./components/templates/PlantillaPrivada";
+
 
 function App() {
   return (
