@@ -1,6 +1,6 @@
 import { Card, Col, Row } from "react-bootstrap";
-import Boton from "../atoms/Boton";
-import Enlace from "../atoms/Enlace";
+import { Boton } from "../atoms/Boton/Boton";
+import { Enlace } from "../atoms/Enlace/Enlace";
 import Imagen from "../atoms/Imagen";
 import Texto from "../atoms/Texto";
 import Titulo from "../atoms/Titulo";

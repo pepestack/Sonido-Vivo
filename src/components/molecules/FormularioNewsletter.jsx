@@ -1,6 +1,6 @@
 import { Form, InputGroup } from "react-bootstrap"
 import Entrada from "../atoms/Entrada"
-import Boton from "../atoms/Boton"
+import { Boton } from "../atoms/Boton/Boton"
 import MensajeEstado from "../atoms/MensajeEstado"
 import { useState } from "react"
 

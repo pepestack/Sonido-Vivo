@@ -2,7 +2,7 @@ import { Col, Row } from "react-bootstrap";
 import Imagen from "../atoms/Imagen";
 import Titulo from "../atoms/Titulo";
 import Texto from "../atoms/Texto";
-import Boton from "../atoms/Boton";
+import { Boton } from "../atoms/Boton/Boton";
 
 export default function SeccionPresentacion({ titulo, texto, imagen, alt, textoBoton, rutaBoton }) {
     return (

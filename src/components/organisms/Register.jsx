@@ -1,7 +1,7 @@
 import { useState } from "react";
 import CampoInput from "../molecules/CampoInput";
 import { Form } from "react-bootstrap";
-import Boton from "../atoms/Boton";
+import { Boton } from "../atoms/Boton/Boton";
 
 function Register() {
   const [email, setEmail] = useState("");

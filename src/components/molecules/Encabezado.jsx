@@ -1,5 +1,5 @@
 import { Col, Row } from "react-bootstrap";
-import Boton from "../atoms/Boton";
+import { Boton } from "../atoms/Boton/Boton";
 import Texto from "../atoms/Texto";
 import Titulo from "../atoms/Titulo";
 

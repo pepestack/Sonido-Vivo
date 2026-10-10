@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Form } from "react-bootstrap";
 import Etiqueta from "../atoms/Etiqueta";
-import Boton from "../atoms/Boton";
+import { Boton } from "../atoms/Boton/Boton";
 
 export default function Contacto() {
   const [mensaje, setMensaje] = useState("");

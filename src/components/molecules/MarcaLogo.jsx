@@ -1,4 +1,4 @@
-import Enlace from "../atoms/Enlace";
+import { Enlace } from "../atoms/Enlace/Enlace";
 import Imagen from "../atoms/Imagen";
 import Texto from "../atoms/Texto";
 import logo from "../../assets/images/logo.png";

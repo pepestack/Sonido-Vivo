@@ -1,7 +1,7 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import Logo from "../molecules/Logo";
 import ItemNav from "../molecules/NavItem";
-import BotonCarrito from "../molecules/BotonCarrito";
+import { Boton }Carrito from "../molecules/BotonCarrito";
 import DropdownUsuario from "../molecules/DropdownUsuario";
 import { useCarrito } from "../../context/useContexto";
 import { menuCuenta, navTienda } from "../../data/navegacion";

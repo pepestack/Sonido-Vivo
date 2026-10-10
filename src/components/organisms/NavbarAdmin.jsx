@@ -1,5 +1,5 @@
 import { Container, Navbar } from "react-bootstrap";
-import Boton from "../atoms/Boton";
+import { Boton } from "../atoms/Boton/Boton";
 import Texto from "../atoms/Texto";
 import MarcaLogo from "../molecules/MarcaLogo";
 
