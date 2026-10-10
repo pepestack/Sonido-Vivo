@@ -1,0 +1,157 @@
+name: Daily summary
+
+on:
+  schedule:
+    # 23:59 America/Santiago es 02:59 UTC (horario de verano) o 03:59 UTC (invierno).
+    # Ambos crons corren; el paso "Guard" descarta el que no corresponde.
+    - cron: "59 2 * * *"
+    - cron: "59 3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-summary
+  cancel-in-progress: false
+
+jobs:
+  summary:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Guard (hora de Chile)
+        id: guard
+        run: |
+          H=$(TZ=America/Santiago date +%H)
+          M=$(TZ=America/Santiago date +%M)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "date=$(TZ=America/Santiago date +%F)" >> "$GITHUB_OUTPUT"
+          elif [ "$H" = "23" ]; then
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "date=$(TZ=America/Santiago date +%F)" >> "$GITHUB_OUTPUT"
+          elif [ "$H" = "00" ] && [ "$((10#$M))" -lt 30 ]; then
+            # El cron se retrasó pasada la medianoche: pertenece al día anterior.
+            echo "run=true" >> "$GITHUB_OUTPUT"
+            echo "date=$(TZ=America/Santiago date -d 'yesterday' +%F)" >> "$GITHUB_OUTPUT"
+          else
+            echo "Hora en Chile: $H:$M, no corresponde a las 23:59. Nada que hacer."
+            echo "run=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - uses: actions/checkout@v4
+        if: steps.guard.outputs.run == 'true'
+        with:
+          fetch-depth: 0
+
+      - name: Generar resumen y actualizar README
+        if: steps.guard.outputs.run == 'true'
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ENTRY_DATE: ${{ steps.guard.outputs.date }}
+        run: |
+          python3 - <<'PY'
+          import json, os, re, subprocess, sys, time, urllib.request, urllib.error
+          from collections import OrderedDict
+
+          DATE = os.environ["ENTRY_DATE"]
+          START, END = "<!-- SUMMARY:START -->", "<!-- SUMMARY:END -->"
+          MODEL = "gemini-2.5-flash"
+          BODY_MAX = 300
+
+          # --- 1. Commits de las últimas 24h (todas las ramas remotas), agrupados por autor
+          raw = subprocess.run(
+              ["git", "log", "--remotes", "--since=24 hours ago", "--no-merges",
+               "--format=%an%x1f%s%x1f%b%x1e"],
+              check=True, capture_output=True, text=True).stdout
+
+          by_author = OrderedDict()
+          for rec in raw.split("\x1e"):
+              rec = rec.strip("\n")
+              if not rec.strip():
+                  continue
+              author, subject, body = (rec.split("\x1f") + ["", ""])[:3]
+              author, subject = author.strip(), subject.strip()
+              # Fuera trailers (Co-Authored-By, Signed-off-by) y espacios sobrantes
+              body = "\n".join(l for l in body.splitlines()
+                               if not re.match(r"^\s*(co-authored-by|signed-off-by):", l, re.I))
+              body = " ".join(body.split())
+              if len(body) > BODY_MAX:
+                  body = body[:BODY_MAX - 1].rstrip() + "…"
+              by_author.setdefault(author, []).append((subject, body))
+
+          # --- 2. Resumen con Gemini (una oración por autor)
+          if not by_author:
+              summary = "Sin actividad en las últimas 24 horas."
+          else:
+              lines = []
+              for author, commits in by_author.items():
+                  lines.append(f"Autor: {author}")
+                  for subject, body in commits:
+                      lines.append(f"- {subject}" + (f" — {body}" if body else ""))
+                  lines.append("")
+              prompt = (
+                  "Eres un asistente que resume la actividad de un repositorio de software. "
+                  "Por cada autor, escribe exactamente UNA oración breve en prosa (español) "
+                  "que resuma su trabajo, sin listar commits uno a uno. "
+                  "Formato exacto, una línea por autor: `- **Autor**: oración.` "
+                  "Sin texto adicional.\n\n" + "\n".join(lines))
+              key = os.environ.get("GEMINI_API_KEY", "")
+              if not key:
+                  sys.exit("Falta el secreto GEMINI_API_KEY")
+              req = urllib.request.Request(
+                  f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL}:generateContent",
+                  data=json.dumps({
+                      "contents": [{"parts": [{"text": prompt}]}],
+                      "generationConfig": {"temperature": 0.2},
+                  }).encode(),
+                  headers={"Content-Type": "application/json", "x-goog-api-key": key})
+              text = ""
+              for attempt in range(3):
+                  try:
+                      with urllib.request.urlopen(req, timeout=60) as r:
+                          data = json.load(r)
+                      text = data["candidates"][0]["content"]["parts"][0]["text"].strip()
+                      if text:
+                          break
+                  except (urllib.error.URLError, KeyError, IndexError, json.JSONDecodeError) as e:
+                      print(f"Intento {attempt + 1} falló: {type(e).__name__}", file=sys.stderr)
+                  time.sleep(5 * (attempt + 1))
+              if not text:
+                  sys.exit("Gemini no devolvió un resumen")
+              summary = text
+
+          entry = f"### {DATE}\n\n{summary}"
+
+          # --- 3. Insertar en README (bitácora: más reciente primero, sin borrar anteriores)
+          with open("README.md", encoding="utf-8") as f:
+              readme = f.read()
+
+          if START not in readme or END not in readme:
+              readme = readme.rstrip("\n") + f"\n\n## Resumen diario\n\n{START}\n{END}\n"
+
+          pre, rest = readme.split(START, 1)
+          old, post = rest.split(END, 1)
+          old = old.strip("\n")
+          # Re-ejecución el mismo día: reemplazar solo la entrada de esa fecha
+          old = re.sub(rf"### {re.escape(DATE)}\n.*?(?=\n### |\Z)", "", old, flags=re.S).strip("\n")
+          block = entry + ("\n\n" + old if old else "")
+          readme = f"{pre}{START}\n{block}\n{END}{post}"
+
+          with open("README.md", "w", encoding="utf-8", newline="\n") as f:
+              f.write(readme)
+          PY
+
+      - name: Commit si hay cambios
+        if: steps.guard.outputs.run == 'true'
+        run: |
+          if git diff --quiet README.md; then
+            echo "Sin cambios en README.md"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "docs: update daily summary"
+          git pull --rebase
+          git push
