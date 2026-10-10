@@ -1,5 +1,5 @@
 import { formatoDinero } from '../../../utils/formato'
 
-export function Precio({ monto, className = '' }) {
-  return <span className={className}>{formatoDinero(monto)}</span>
+export function Precio(props){
+  return <span className={props.className ?? ''}>{formatoDinero(props.monto)}</span>
 }
