@@ -1,5 +1,5 @@
-import Encabezado from '../../components/molecules/Encabezado'
-import PanelAdmin from '../../components/organisms/PanelAdmin'
+import { Encabezado } from '../../components/molecules/Encabezado/Encabezado'
+import { PanelAdmin } from '../../components/organisms/PanelAdmin/PanelAdmin'
 
 const accesos = [
   {

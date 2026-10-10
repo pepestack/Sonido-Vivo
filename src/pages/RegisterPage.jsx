@@ -1,7 +1,7 @@
 import { Card, Col, Container, Row } from "react-bootstrap";
-import Register from "../components/organisms/Register";
+import { Register } from "../components/organisms/Register/Register";
 import { Link } from "react-router-dom";
-import PlantillaPublica from "../components/templates/PlantillaPublica";
+import { PlantillaPublica } from "../components/templates/PlantillaPublica/PlantillaPublica";
 
 function RegisterPage() {
   return (

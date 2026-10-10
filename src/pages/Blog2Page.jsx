@@ -1,8 +1,8 @@
 import { Card } from "react-bootstrap";
-import Imagen from "../components/atoms/Imagen";
-import Texto from "../components/atoms/Texto";
-import Titulo from "../components/atoms/Titulo";
-import SeccionComentarios from "../components/organisms/SeccionComentarios";
+import { Imagen } from "../components/atoms/Imagen/Imagen";
+import { Texto } from "../components/atoms/Texto/Texto";
+import { Titulo } from "../components/atoms/Titulo/Titulo";
+import { SeccionComentarios } from "../components/organisms/SeccionComentarios/SeccionComentarios";
 import { blog2 } from "../data/blog2";
 
 export default function Blog2Page() {

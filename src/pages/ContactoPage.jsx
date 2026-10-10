@@ -1,7 +1,7 @@
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import PlantillaPublica from "../components/templates/PlantillaPublica";
-import Contacto from "../components/organisms/Contacto";
+import { PlantillaPublica } from "../components/templates/PlantillaPublica/PlantillaPublica";
+import { Contacto } from "../components/organisms/Contacto/Contacto";
 
 function ContactoPage() {
   return (

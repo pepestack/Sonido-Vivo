@@ -1,10 +1,10 @@
-import CarruselHero from "../components/organisms/CarruselHero";
-import SeccionPresentacion from "../components/organisms/SeccionPresentacion";
+import { CarruselHero } from "../components/organisms/CarruselHero/CarruselHero";
+import { SeccionPresentacion } from "../components/organisms/SeccionPresentacion/SeccionPresentacion";
 import { imagenesCarrusel } from "../data/carrusel";
 import imgTienda from "../assets/images/tienda-fisica.jpg"
 import { idsDestacados } from "../data/listaProductos";
 import { useCarrito, useProducto} from '../context/useContexto'
-import GrillaProductos from '../components/organisms/GrillaProductos'
+import { GrillaProductos } from '../components/organisms/GrillaProductos/GrillaProductos'
 
 export default function Home(){
     const {obtenerProducto} = useProducto()
