@@ -73,3 +73,11 @@ Para detener el servidor de desarrollo, presione:
 ## Material Complementario
 
 [Carpeta de Google Drive con documentación (ERS y otros)](https://drive.google.com/drive/folders/1EJjJFc3k6ODmLO0U0dgBItvyFLxsx0sy?usp=sharing)
+
+## Resumen diario
+
+<!-- SUMMARY:START -->
+### 2026-10-09
+
+- **José Calderón**: Implementó la automatización de la bitácora en el README mediante GitHub Actions y actualizó el modelo de Gemini utilizado en el script.
+<!-- SUMMARY:END -->
