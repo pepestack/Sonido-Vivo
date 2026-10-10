@@ -1,7 +1,7 @@
 import { Row, Col, Card } from "react-bootstrap";
-import Imagen from "../components/atoms/Imagen";
-import Texto from "../components/atoms/Texto";
-import Titulo from "../components/atoms/Titulo";
+import { Imagen } from "../components/atoms/Imagen/Imagen";
+import { Texto } from "../components/atoms/Texto/Texto";
+import { Titulo } from "../components/atoms/Titulo/Titulo";
 import { nosotros } from "../data/nosotros";
 
 export default function NosotrosPage() {

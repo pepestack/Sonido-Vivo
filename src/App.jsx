@@ -2,14 +2,14 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import ContactoPage from "./pages/ContactoPage";
-import PlantillaPublica from "./components/templates/PlantillaPublica";
+import { PlantillaPublica } from "./components/templates/PlantillaPublica/PlantillaPublica";
 import Catalogo from "./pages/Catalogo";
 import AdminHome from "./pages/admin/AdminHome";
 import BlogPage from "./pages/BlogPage";
 import Home from "./pages/Home";
 import Blog1Page from "./pages/Blog1Page";
 import Blog2Page from "./pages/Blog2Page";
-import PlantillaAdmin from "./components/templates/PlantillaPrivada";
+import { PlantillaPrivada } from "./components/templates/PlantillaPrivada/PlantillaPrivada";
 import NosotrosPage from "./pages/NosotrosPage";
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
       </Route>
 
       <Route>
-        <Route element={<PlantillaAdmin />}>
+        <Route element={<PlantillaPrivada />}>
           <Route path="/admin" element={<AdminHome />} />
 
         </Route>

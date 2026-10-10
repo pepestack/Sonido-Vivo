@@ -1,7 +1,7 @@
 import { Card, Col, Container, Row } from "react-bootstrap";
-import Login from "../components/organisms/Login";
+import { Login } from "../components/organisms/Login/Login";
 import { Link } from "react-router-dom";
-import PlantillaPublica from "../components/templates/PlantillaPublica";
+import { PlantillaPublica } from "../components/templates/PlantillaPublica/PlantillaPublica";
 
 function LoginPage() {
   return (

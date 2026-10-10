@@ -1,6 +1,6 @@
 import { useState } from "react";
-import BarraCatalogo from "../components/organisms/BarraCatalogo";
-import GrillaProductos from "../components/organisms/GrillaProductos";
+import { BarraCatalogo } from "../components/organisms/BarraCatalogo/BarraCatalogo";
+import { GrillaProductos } from "../components/organisms/GrillaProductos/GrillaProductos";
 import { useCarrito, useProducto} from "../context/useContexto";
 import { categorias } from "../data/categorias";
 

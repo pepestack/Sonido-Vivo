@@ -1,5 +1,5 @@
-import Titulo from "../components/atoms/Titulo";
-import ListaBlogs from "../components/organisms/ListaBlogs";
+import { Titulo } from "../components/atoms/Titulo/Titulo";
+import { ListaBlogs } from "../components/organisms/ListaBlogs/ListaBlogs";
 import { blogs } from "../data/blogs";
 
 export default function BlogPage() {
