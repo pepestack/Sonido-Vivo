@@ -1,30 +1,21 @@
 import { Form } from "react-bootstrap";
 
-// opciones: [{ valor, texto }]. placeholder: primera opción deshabilitada (opcional)
-export function Selector({
-  id,
-  nombre,
-  valor,
-  onChange,
-  opciones = [],
-  placeholder,
-  invalido = false,
-  deshabilitado = false,
-  className = "",
-}) {
-  return (
+export function Selector(props){
+  const opciones = props.opciones ?? []
+
+  return(
     <Form.Select
-      id={id}
-      name={nombre ?? id}
-      value={valor ?? ""}
-      onChange={onChange}
-      isInvalid={invalido}
-      disabled={deshabilitado}
-      className={className}
+      id={props.id}
+      name={props.nombre ?? props.id}
+      value={props.valor ?? ''}
+      onChange={props.onChange}
+      isInvalid={props.invalido ?? false}
+      disabled={props.deshabilitado ?? false}
+      className={props.className ?? ''}
     >
-      {placeholder && (
+      {props.placeholder && (
         <option value="" disabled>
-          {placeholder}
+          {props.placeholder}
         </option>
       )}
       {opciones.map((opcion) => (
@@ -33,5 +24,5 @@ export function Selector({
         </option>
       ))}
     </Form.Select>
-  );
+  )
 }

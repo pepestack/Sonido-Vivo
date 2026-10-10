@@ -1,4 +1,4 @@
-export function Titulo({ nivel = 2, children, className = ''}){
-    const Etiqueta = `h${nivel}`
-    return <Etiqueta className={className}>{children}</Etiqueta>
+export function Titulo(props){
+    const Etiqueta = `h${props.nivel == 2}`
+    return <Etiqueta className={props.className ?? ''}>{props.children}</Etiqueta>
 }

@@ -1,4 +1,4 @@
-export function Texto({ children, como = 'p', className = ''}){
-    const Etiqueta = como
-    return <Etiqueta className={className}>{children}</Etiqueta>
+export function Texto(props){
+    const Etiqueta = props.como ?? 'p'
+    return <Etiqueta className={props.className ?? ''}>{props.children}</Etiqueta>
 }
