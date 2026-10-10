@@ -74,7 +74,7 @@ Para detener el servidor de desarrollo, presione:
 
 [Carpeta de Google Drive con documentación (ERS y otros)](https://drive.google.com/drive/folders/1EJjJFc3k6ODmLO0U0dgBItvyFLxsx0sy?usp=sharing)
 
-## Resumen diario
+## Bitácora
 
 <!-- SUMMARY:START -->
 ### 2026-10-09
