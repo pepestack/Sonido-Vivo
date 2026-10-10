@@ -1,9 +1,11 @@
 import {Form} from "react-bootstrap";
 
-export function Etiqueta({ texto, htmlFor,requerido = false, className = 'fw-semibold' }) {
-  return <Form.Label htmlFor={htmlFor} className={className}>
-    {texto}
-    {requerido && <span className="text-danger">*</span>}
-  </Form.Label>;
+export function Etiqueta(props){
+  return (
+    <Form.Label htmlFor={props.htmlFor} className={props.className ?? 'fw-semibold'}>
+      {props.children}
+      {props.requerido && <span className="text-danger">*</span>}
+    </Form.Label>
+  )
 }
 

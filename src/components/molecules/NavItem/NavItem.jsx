@@ -5,7 +5,7 @@ import { Icono } from '../../atoms/Icono/Icono'
 export function NavItem({ texto, ruta, icono, deshabilitado = false, exacto = false, className = '', onClick }) {
   const contenido = (
     <>
-      {icono && <Icono clase={icono} />}
+      {icono && <Icono icono={icono} />}
       <span>{texto}</span>
     </>
   )

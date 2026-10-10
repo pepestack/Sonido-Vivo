@@ -14,8 +14,8 @@ export function Footer(){
                     <Col xs={12} md={6} lg={3}>
                         <Titulo nivel={3}>Sonido Vivo</Titulo>
                         <div className="mb-4">
-                            <Icono clase="fa-brands fa-cc-visa fa-2x" className="me-2"/>
-                            <Icono clase="fa-brands fa-cc-mastercard fa-2x"/>
+                            <Icono icono="fa-brands fa-cc-visa fa-2x" className="me-2"/>
+                            <Icono icono="fa-brands fa-cc-mastercard fa-2x"/>
                         </div>
                     </Col>
 

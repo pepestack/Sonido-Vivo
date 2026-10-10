@@ -5,7 +5,7 @@ export function DropdownUsuario({opciones}) {
   return (
     <Dropdown className="nav-item my-2">
       <Dropdown.Toggle className="btn orange-btn" id="dropdown-usuario">
-        <Icono clase="fa-solid fa-user" />
+        <Icono icono="fa-solid fa-user" />
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="custom-lb-container">

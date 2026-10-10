@@ -1,31 +1,23 @@
-import { Form } from "react-bootstrap";
+import { Form } from "react-bootstrap"
 
-export function Entrada({
-    id,
-    nombre,
-    tipo = 'text',
-    valor,
-    onChange,
-    placeholder,
-    invalido = false,
-    disabled = false,
-    tamano,
-    className = '',
-    ...resto
-}){
+export function Entrada(props){
+    const tipo = props.tipo ?? 'text'
+
     return (
         <Form.Control
-            id={id}
-            name={nombre ?? id}
+            id={props.id}
+            name={props.nombre ?? props.id}
             type={tipo}
-            value={tipo === 'file' ? undefined : valor ?? ''}
-            onChange={onChange}
-            placeholder={placeholder}
-            isInvalid={invalido}
-            disabled={disabled}
-            size={tamano}
-            className={className}
-            {...resto}
+            value={tipo === 'file' ? undefined : (props.valor ?? '')}
+            onChange={props.onChange}
+            maxLength={props.maxLength}
+            min={props.min}
+            accept={props.accept}
+            aria-label={props.etiquetaAccesible}
+            isInvalid={props.invalido ?? false}
+            disabled={props.deshabilitado ?? false}
+            size={props.tamano}
+            className={props.className ?? ''}
         />
     )
 }
