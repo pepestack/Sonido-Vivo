@@ -6,7 +6,7 @@ import { Texto } from "../../atoms/Texto/Texto";
 import { FormularioNewsletter } from "../../molecules/FormularioNewsletter/FormularioNewsletter";
 import { footerCuenta, footerInfo } from "../../../data/navegacion";
 
-export function Footer(){
+export function Footer(props){
     return (
         <footer className="footer pt-5">
             <Container>
@@ -20,11 +20,11 @@ export function Footer(){
                     </Col>
 
                     <Col xs={12} md={6} lg={2}>
-                        <ListaEnlaces titulo="Información" enlaces={footerInfo}/>
+                        <ListaEnlaces titulo="Información" enlaces={footerInfo} onNavegar={props.onNavegar}/>
                     </Col>
 
                     <Col xs={12} md={6} lg={3}>
-                        <ListaEnlaces titulo="Mi Cuenta" enlaces={footerCuenta}/>
+                        <ListaEnlaces titulo="Mi Cuenta" enlaces={footerCuenta} onNavegar={props.onNavegar} />
                     </Col>
 
                     <Col xs={12} md={6} lg={4}>
