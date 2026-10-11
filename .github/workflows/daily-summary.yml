@@ -2,10 +2,11 @@ name: Daily summary
 
 on:
   schedule:
-    # 23:59 America/Santiago es 02:59 UTC (horario de verano) o 03:59 UTC (invierno).
+    # ~23:47 America/Santiago es 02:47 UTC (horario de verano) o 03:47 UTC (invierno).
+    # Minuto "raro" para evitar la congestión de las horas en punto.
     # Ambos crons corren; el paso "Guard" descarta el que no corresponde.
-    - cron: "59 2 * * *"
-    - cron: "59 3 * * *"
+    - cron: "47 2 * * *"
+    - cron: "47 3 * * *"
   workflow_dispatch:
 
 permissions:
@@ -23,19 +24,18 @@ jobs:
         id: guard
         run: |
           H=$(TZ=America/Santiago date +%H)
-          M=$(TZ=America/Santiago date +%M)
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
             echo "date=$(TZ=America/Santiago date +%F)" >> "$GITHUB_OUTPUT"
           elif [ "$H" = "23" ]; then
             echo "run=true" >> "$GITHUB_OUTPUT"
             echo "date=$(TZ=America/Santiago date +%F)" >> "$GITHUB_OUTPUT"
-          elif [ "$H" = "00" ] && [ "$((10#$M))" -lt 30 ]; then
-            # El cron se retrasó pasada la medianoche: pertenece al día anterior.
+          elif [ "$((10#$H))" -lt 8 ]; then
+            # El cron se retrasó pasada la medianoche (hasta las 08:00): pertenece al día anterior.
             echo "run=true" >> "$GITHUB_OUTPUT"
             echo "date=$(TZ=America/Santiago date -d 'yesterday' +%F)" >> "$GITHUB_OUTPUT"
           else
-            echo "Hora en Chile: $H:$M, no corresponde a las 23:59. Nada que hacer."
+            echo "Hora en Chile: $H h, fuera de la ventana 23:00-08:00. Nada que hacer."
             echo "run=false" >> "$GITHUB_OUTPUT"
           fi
 
@@ -49,6 +49,7 @@ jobs:
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ENTRY_DATE: ${{ steps.guard.outputs.date }}
+          EVENT: ${{ github.event_name }}
         run: |
           python3 - <<'PY'
           import json, os, re, subprocess, sys, time, urllib.request, urllib.error
@@ -58,6 +59,13 @@ jobs:
           START, END = "<!-- SUMMARY:START -->", "<!-- SUMMARY:END -->"
           MODEL = "gemini-3.1-flash-lite"
           BODY_MAX = 300
+
+          # Ambos crons pueden pasar el guard en una misma noche: el segundo no repite la entrada.
+          if os.environ.get("EVENT") == "schedule":
+              with open("README.md", encoding="utf-8") as f:
+                  if f"### {DATE}\n" in f.read():
+                      print(f"Ya existe la entrada de {DATE}. Nada que hacer.")
+                      sys.exit(0)
 
           # --- 1. Commits de las últimas 24h (todas las ramas remotas), agrupados por autor
           raw = subprocess.run(
