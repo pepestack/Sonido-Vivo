@@ -77,6 +77,10 @@ Para detener el servidor de desarrollo, presione:
 ## Bitácora
 
 <!-- SUMMARY:START -->
+### 2026-10-10
+
+- **José Calderón**: Refactorizó la estructura de los componentes atómicos para centralizar sus propiedades y organizar los archivos en carpetas independientes.
+
 ### 2026-10-09
 
 - **José Calderón**: Implementó la automatización de la bitácora en el README mediante GitHub Actions y actualizó el modelo de Gemini utilizado en el script.
