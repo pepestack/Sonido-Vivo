@@ -1,21 +1,26 @@
 import { Nav } from "react-bootstrap";
 import { Titulo } from "../../atoms/Titulo/Titulo";
-import { Link } from "react-router-dom";
 
 
-export function ListaEnlaces({ titulo, enlaces }) {
+
+export function ListaEnlaces(props){
+    function ir(evento,ruta){
+        evento.preventDefault()
+        props.onNavegar(ruta)
+    }
+    
     return (
         <nav>
-            <Titulo nivel={3}>{titulo}</Titulo>
+            <Titulo nivel={3}>{props.titulo}</Titulo>
             <ul className="list-unstyled">
-                {enlaces.map((enlace) => (
+                {props.enlaces.map((enlace) => (
                     <li key={enlace.texto} className="nav-item">
-                        {enlace.disabled ? (
+                        {enlace.deshabilitado ? (
                             <Nav.Link disabled className="px-0">
                                 {enlace.texto}
                             </Nav.Link>
                         ) : (
-                            <Nav.Link as={Link} to={enlace.ruta} className="px-0">
+                            <Nav.Link href={enlace.ruta} className="px-0" onClick={(evento) => ir(evento,enlace.ruta)}>
                                 {enlace.texto}
                             </Nav.Link>
                         )}
