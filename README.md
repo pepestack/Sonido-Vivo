@@ -77,6 +77,10 @@ Para detener el servidor de desarrollo, presione:
 ## Bitácora
 
 <!-- SUMMARY:START -->
+### 2026-10-11
+
+- **José Calderón**: Refactorizó el componente ListaEnlaces para centralizar sus propiedades y optimizó la estructura del footer mediante la implementación del atributo onNavegar.
+
 ### 2026-10-10
 
 - **José Calderón**: Refactorizó la estructura de los componentes atómicos para centralizar sus propiedades y organizar los archivos en carpetas independientes.
