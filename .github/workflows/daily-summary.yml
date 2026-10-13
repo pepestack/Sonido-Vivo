@@ -80,6 +80,9 @@ jobs:
                   continue
               author, subject, body = (rec.split("\x1f") + ["", ""])[:3]
               author, subject = author.strip(), subject.strip()
+              # Ignorar commits de bots (p. ej. el propio commit de este workflow)
+              if author.endswith("[bot]"):
+                  continue
               # Fuera trailers (Co-Authored-By, Signed-off-by) y espacios sobrantes
               body = "\n".join(l for l in body.splitlines()
                                if not re.match(r"^\s*(co-authored-by|signed-off-by):", l, re.I))
