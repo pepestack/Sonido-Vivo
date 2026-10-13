@@ -77,9 +77,6 @@ Para detener el servidor de desarrollo, presione:
 ## Bitácora
 
 <!-- SUMMARY:START -->
-### 2026-10-12
-
-- **github-actions[bot]**: Automatiza la actualización diaria de los resúmenes de documentación del repositorio.
 
 ### 2026-10-11
 
