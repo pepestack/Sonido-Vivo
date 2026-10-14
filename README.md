@@ -77,6 +77,9 @@ Para detener el servidor de desarrollo, presione:
 ## Bitácora
 
 <!-- SUMMARY:START -->
+### 2026-10-13
+
+- **José Calderón**: Refactorizó la estructura de los hooks en PlantillaPublica y optimizó el flujo de trabajo de la bitácora para excluir registros automatizados.
 
 ### 2026-10-11
 
