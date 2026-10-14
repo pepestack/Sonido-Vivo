@@ -3,10 +3,8 @@ import { Logo } from "../../molecules/Logo/Logo";
 import { NavItem } from "../../molecules/NavItem/NavItem";
 import { BotonCarrito } from "../../molecules/BotonCarrito/BotonCarrito";
 import { DropdownUsuario } from "../../molecules/DropdownUsuario/DropdownUsuario";
-import { useCarrito } from "../../../context/useContexto";
 import { menuCuenta, navTienda } from "../../../data/navegacion";
 export function NavbarPrincipal() {
-  const { totalItems } = useCarrito();
   return (
     <header className="fixed-top">
       <Navbar expand="lg" fixed="top" className="navbar-custom">
@@ -23,7 +21,7 @@ export function NavbarPrincipal() {
             </Nav>
             <DropdownUsuario opciones={menuCuenta}/>
             <div className="d-flex ms-lg-2 mb-2 mb-lg-0">
-              <BotonCarrito cantidad={totalItems} />
+              <BotonCarrito/>
             </div>
           </Navbar.Collapse>
         </Container>

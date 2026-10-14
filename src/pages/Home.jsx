@@ -3,12 +3,16 @@ import { SeccionPresentacion } from "../components/organisms/SeccionPresentacion
 import { imagenesCarrusel } from "../data/carrusel";
 import imgTienda from "../assets/images/tienda-fisica.jpg"
 import { idsDestacados } from "../data/listaProductos";
-import { useCarrito, useProducto} from '../context/useContexto'
+import { useCarrito } from "../hooks/useCarrito"
+import { useProductos } from "../hooks/useProductos"
 import { GrillaProductos } from '../components/organisms/GrillaProductos/GrillaProductos'
+import { useNavigate } from "react-router-dom";
 
 export default function Home(){
-    const {obtenerProducto} = useProducto()
+    const navigate = useNavigate()
+    const {obtenerProducto} = useProductos()
     const {agregarAlCarrito} = useCarrito()
+
     const destacados = idsDestacados.map(obtenerProducto).filter(Boolean)
     return(
         <>
@@ -20,7 +24,7 @@ export default function Home(){
                 imagen={imgTienda}
                 alt="Interior de tienda física Sonido Vivo"
                 textoBoton="Ver más"
-                rutaBoton="/catalogo"
+                onAccion={()=> navigate('/catalogo')}
             />
             <GrillaProductos
                 titulo="Productos destacados"
