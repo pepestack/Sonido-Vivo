@@ -17,7 +17,6 @@ function App() {
     <Routes>
       <Route element={<PlantillaPublica />}>
         <Route path="/" element={<Home />} />
-        {/* aca tiene que ir el page del home*/}
         <Route path="/home" element={<Home />} />
         <Route path="/catalogo" element={<Catalogo />} />
         <Route path="/login" element={<LoginPage />} />

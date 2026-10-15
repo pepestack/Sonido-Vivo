@@ -1,17 +1,17 @@
-
-
-import { CartBadge } from "../../atoms/CartBadge/CartBadge";
-import { BotonLink } from "../../atoms/BotonLink/BotonLink";
+import { Boton } from "../../atoms/Boton/Boton";
 import { Icono } from "../../atoms/Icono/Icono";
-export function BotonCarrito({cantidad}){
-
-    return(
-        <BotonLink  className="orange-btn"to={"/carrito"}>
-            <Icono icono={"bi-cart-fill"} className="me-1" />
+import { Insignia } from "../../atoms/Insignia/Insignia";
+export function BotonCarrito(props){
+    return (
+        <Boton variante="naranja" onClick={props.onClick}>
+            <Icono icono="bi bi-cart-fill" className="me-1"/>
             Carrito
-            <CartBadge color="dark" redondeada className="text-white ms-1">
-                {cantidad}</CartBadge>
-        </BotonLink>
+            <Insignia color="dark" redondeada className="text-white ms-1">
+                {props.cantidad}
+            </Insignia>
+        </Boton>
     )
+
+    
 }
 

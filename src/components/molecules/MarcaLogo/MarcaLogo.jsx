@@ -27,7 +27,7 @@ export function MarcaLogo(props){
   return(
     <Enlace ruta={ruta} onNavegar={props.onNavegar} className={claseEnlace}>
       <Imagen src={logo} alt="Sonido Vivo" className="logo"/>
-      <Texto como="span" classNamae="sv-logo-title">
+      <Texto como="span" className="sv-logo-title">
         <span className="sonido">Sonido </span>
         <span className="vivo">Vivo</span>
       </Texto>

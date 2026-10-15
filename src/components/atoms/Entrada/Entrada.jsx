@@ -18,6 +18,7 @@ export function Entrada(props){
             disabled={props.deshabilitado ?? false}
             size={props.tamano}
             className={props.className ?? ''}
+            placeholder={props.placeholder}
         />
     )
 }
