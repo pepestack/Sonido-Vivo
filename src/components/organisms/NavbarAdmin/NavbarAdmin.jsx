@@ -4,37 +4,32 @@ import { Texto } from "../../atoms/Texto/Texto";
 import { MarcaLogo } from "../../molecules/MarcaLogo/MarcaLogo";
 
 // onAlternarMenu: abre/cierra el sidebar en pantallas chicas
-export function NavbarAdmin({ onAlternarMenu, menuAbierto }) {
-  return (
+export function NavbarAdmin(props) {
+  return(
     <header>
-      <Navbar
-        bg="dark"
-        variant="dark"
-        data-bs-theme="dark"
-        className="shadow-sm"
-        
-      >
+      <Navbar expand="lg" bg="dark" variant="dark" data-bs-theme="dark" className="shadow-sm">
         <Container fluid className="px-4">
           <Boton
             variante="naranja"
-            className="d-lg-none my-1 me-2"
-            onClick={onAlternarMenu}
-          >
-            <span className="navbar-toggler-icon" aria-hidden="true" />{" "}
-            <Texto como="span" className="d-none d-sm-inline">
-              {menuAbierto ? "Cerrar" : "Menu"}
-            </Texto>
-          </Boton>
-
-          <MarcaLogo variante="admin" to="/admin" />
-
-          <div className="d-flex ms-auto">
-            <Boton variante="outline-light" tamano="sm" to="/">
-              Cerrar Sesión
+            className="navbar-toggler d-lg-none my-1 me-2"
+            onClick={props.onAlternarMenu}
+            controla="sidebar"
+            expandido={props.menuAbierto}>
+              <span className="navbar-toggler-icon" aria-hidden="true"/>{' '}
+              <Texto como="span" className="d-none d-sm-inline">
+                {props.menuAbierto ? 'Cerrar' : 'Menu'}
+              </Texto>
             </Boton>
-          </div>
+
+            <MarcaLogo variante="admin" ruta="/admin" onNavegar={props.onNavegar}/>
+
+            <div className="d-flex ms-auto">
+              <Boton variante="outline-light" tamano="sm" onClick={() => props.onNavegar('/')}>
+                Cerrar Sesión
+              </Boton>
+            </div>
         </Container>
       </Navbar>
     </header>
-  );
+  )
 }
