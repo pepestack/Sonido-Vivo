@@ -1,35 +1,44 @@
-import { useEffect, useState } from 'react'
-import { CarritoContext } from './contextos'
+import { createContext, useContext, useEffect, useState } from 'react'
 import * as carritoService from '../services/carritoService'
 
-export default function CarritoProvider({ children }) {
+const CarritoContext = createContext(null)
+
+export function CarritoProvider(props){
   const [items, setItems] = useState(() => carritoService.obtenerCarrito())
 
-  // cada cambio pasa por el service (hoy no persiste; mañana localStorage)
-  useEffect(() => {
+  useEffect(()=> {
     carritoService.guardarCarrito(items)
-  }, [items])
+  },[items])
 
-  const agregarAlCarrito = (producto, cantidad = 1) => {
-    setItems((actuales) => carritoService.agregar(actuales, producto, cantidad))
+  function agregarAlCarrito(producto, cantidad = 1){
+    setItems((actuales)=> carritoService.agregar(actuales,producto,cantidad))
   }
 
-  const cambiarCantidad = (id, cantidad) => {
-    if (!Number.isInteger(cantidad) || cantidad < 1) return
-    setItems((actuales) => carritoService.cambiarCantidad(actuales, id, cantidad))
+  function cambiarCantidad(id,cantidad){
+    if(!Number.isInteger(cantidad) || cantidad < 1) return
+    setItems((actuales) => carritoService.cambiarCantidad(actuales,id,cantidad))
   }
 
-  const quitarDelCarrito = (id) => {
-    setItems((actuales) => carritoService.quitar(actuales, id))
+  function quitarDelCarrito(id){
+    setItems((actuales)=> carritoService.quitar(actuales,id))
   }
 
-  const valor = {
+  const valor={
     items,
     agregarAlCarrito,
     cambiarCantidad,
     quitarDelCarrito,
-    ...carritoService.calcularTotales(items),
+    ...carritoService.calcularTotales(items)
   }
 
-  return <CarritoContext.Provider value={valor}>{children}</CarritoContext.Provider>
+  return <CarritoContext.Provider value={valor}>{props.children}</CarritoContext.Provider>
+}
+
+// Hook propio: abre la caja del carrito. Uso: const carrito = useCarrito()
+export function useCarrito() {
+  const contexto = useContext(CarritoContext)
+  if (!contexto) {
+    throw new Error('useCarrito debe usarse dentro de un CarritoProvider')
+  }
+  return contexto
 }
