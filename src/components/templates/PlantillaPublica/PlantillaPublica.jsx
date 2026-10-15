@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { NavbarPrincipal } from "../../organisms/NavbarPrincipal/NavbarPrincipal";
 import { Footer } from "../../organisms/Footer/Footer";
-import { useCarrito } from "../../../hooks/useCarrito"
+import { useCarrito } from "../../../context/CarritoContext"
 
 export function PlantillaPublica(props) {
   const navigate = useNavigate()

@@ -3,8 +3,9 @@ import { SeccionPresentacion } from "../components/organisms/SeccionPresentacion
 import { imagenesCarrusel } from "../data/carrusel";
 import imgTienda from "../assets/images/tienda-fisica.jpg"
 import { idsDestacados } from "../data/listaProductos";
-import { useCarrito } from "../hooks/useCarrito"
-import { useProductos } from "../hooks/useProductos"
+import { useCarrito } from "../context/CarritoContext"
+import { useProductos } from "../context/ProductosContext"
+import { useTituloPagina } from "../hooks/useTituloPagina"
 import { GrillaProductos } from '../components/organisms/GrillaProductos/GrillaProductos'
 import { useNavigate } from "react-router-dom";
 import { PlantillaPublica } from "../components/templates/PlantillaPublica/PlantillaPublica";

@@ -1,33 +1,42 @@
-import { useEffect, useState } from "react";
+import { createContext, useEffect, useState, useContext } from "react";
 import * as productoService from '../services/productoService'
-import { ProductoContext } from "./contextos";
+
+const ProductosContext = createContext(null)
 
 
-export default function ProductosProvider({children}){
-
-    const [productos, setProductos] = useState(() => productoService.obtenerProducto())
+export function ProductosProvider(props) {
+    const [productos, setProductos] = useState(() => productoService.obtenerProductos())
 
     useEffect(() => {
-        productoService.obtenerProducto(productos)
-    },[productos])
+        productoService.guardarProductos(productos)
+    }, [productos])
 
+    function obtenerProducto(id) {
+        return productos.find((producto) => producto.id === id)
+    }
 
-    const obtenerProducto = (id) => productos.find((producto) => producto.id === id)
-
-
-    const agregarProducto = (nuevo) => {
+    function agregarProducto(nuevo) {
         setProductos((actuales) => productoService.agregar(actuales, nuevo))
     }
 
-    const actualizarProducto = (id, cambios) =>{
-        setProductos((actuales) => productoService.actualizarProducto(actuales, id, cambios))
+    function actualizarProducto(idOriginal, cambios) {
+        setProductos((actuales) => productoService.actualizar(actuales, idOriginal, cambios))
     }
 
-    const eliminarProducto = (id) => {
-        setProductos((actuales) => productoService.eliminarProducto(actuales !== id)) 
+    function eliminarProducto(id) {
+        setProductos((actuales) => productoService.eliminar(actuales, id))
     }
 
-    const valor = {productos, obtenerProducto, agregarProducto, actualizarProducto, eliminarProducto}
+    const valor = { productos, obtenerProducto, agregarProducto, actualizarProducto, eliminarProducto }
 
-    return <ProductoContext.Provider value={valor}>{children}</ProductoContext.Provider>
+    return <ProductosContext.Provider value={valor}>{props.children}</ProductosContext.Provider>
+}
+
+
+export function useProductos() {
+    const contexto = useContext(ProductosContext)
+    if (!contexto) {
+        throw new Error('useProductos debe usarse dentro de un ProductosProvider')
+    }
+    return contexto
 }

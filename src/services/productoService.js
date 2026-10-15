@@ -1,16 +1,16 @@
 import { productosIniciales } from "../data/listaProductos";
 import { CLAVES, guardar, leer } from "../utils/almacenamiento";
 
-export function obtenerProducto() {
+export function obtenerProductos() {
   return leer(CLAVES.productos, productosIniciales);
 }
 
-export function guardarProducto(productos) {
-  return guardar(CLAVES.productos, productos);
+export function guardarProductos(productos) {
+  guardar(CLAVES.productos, productos);
 }
 
 export function agregar(productos, nuevo) {
-  return guardar(...productos, nuevo);
+  return [...productos, nuevo]
 }
 
 export function actualizarProducto(productos, id, cambios) {
@@ -19,6 +19,6 @@ export function actualizarProducto(productos, id, cambios) {
   );
 }
 
-export function eliminarProducto(productos, id){
+export function eliminar(productos, id){
     return productos.filter((producto) => producto.id !== id)
 }
