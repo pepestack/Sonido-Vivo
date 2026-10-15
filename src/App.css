@@ -69,6 +69,68 @@ h3 {
   background-color: #eee;
 }
 
+/* menú de usuario del navbar */
+
+.search-navbar {
+  width: 100%;
+  max-width: 420px;
+}
+
+@media (min-width: 992px) {
+  .search-navbar {
+    width: auto;
+  }
+}
+
+.menu-usuario {
+  background-color: rgb(242, 242, 255);
+  min-width: 12rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  z-index: 1050;
+}
+
+.menu-usuario .dropdown-item {
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+}
+
+.menu-usuario .dropdown-item:hover,
+.menu-usuario .dropdown-item:focus {
+  background-color: rgba(250, 159, 45, 0.2);
+  color: #0a0f0a;
+}
+
+.menu-usuario .dropdown-item:active {
+  background-color: rgb(250, 159, 45);
+  color: #0a0f0a;
+}
+
+
+@media (max-width: 991.98px) {
+  /* panel del hamburguesa: color plano en vez del degradado estirado */
+  .navbar-custom .navbar-collapse {
+    background-color: rgb(242, 242, 255);
+    margin: 0.5rem -1.5rem 0;
+    padding: 0.75rem 1.5rem;
+  }
+
+  .navbar .dropdown-menu.menu-usuario {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    margin-top: 0.25rem;
+  }
+}
+
+.producto-img {
+  height: 200px;
+  object-fit: cover;
+  background-color: #eee;
+}
+
 /* blog */
 
 .blog-img-resumen {
