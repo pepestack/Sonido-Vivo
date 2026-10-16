@@ -5,7 +5,7 @@ import { Imagen } from "../../atoms/Imagen/Imagen";
 import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
 
-export function TarjetaBlog({ blog }) {
+export function TarjetaBlog({ blog, onNavegar }) {
   return (
     <Card
       as="article"
@@ -22,7 +22,7 @@ export function TarjetaBlog({ blog }) {
           </Texto>
 
           <Boton
-            to={blog.ruta}
+            onClick={() => onNavegar(blog.ruta)}
             variante="naranja"
             className="text-white fw-bold"
           >
@@ -31,7 +31,7 @@ export function TarjetaBlog({ blog }) {
         </Col>
 
         <Col md={6} className="text-center">
-          <Enlace to={blog.ruta}>
+          <Enlace ruta={blog.ruta} onNavegar={onNavegar}>
             <Imagen
               src={blog.imagen}
               alt={blog.alt}

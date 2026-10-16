@@ -4,10 +4,14 @@ import { Texto } from "../components/atoms/Texto/Texto";
 import { Titulo } from "../components/atoms/Titulo/Titulo";
 import { SeccionComentarios } from "../components/organisms/SeccionComentarios/SeccionComentarios";
 import { blog2 } from "../data/blog2";
+import { PlantillaPublica } from "../components/templates/PlantillaPublica/PlantillaPublica";
+import { useTituloPagina } from "../hooks/useTituloPagina";
 
 export default function Blog2Page() {
+  useTituloPagina(blog2.titulo);
+
   return (
-    <>
+    <PlantillaPublica>
       <Card
         as="article"
         className="shadow-sm border-0 bg-light p-4 mb-5"
@@ -34,6 +38,6 @@ export default function Blog2Page() {
       </Card>
 
       <SeccionComentarios comentarios={blog2.comentarios} />
-    </>
+    </PlantillaPublica>
   );
 }

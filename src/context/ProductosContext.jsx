@@ -20,7 +20,7 @@ export function ProductosProvider(props) {
     }
 
     function actualizarProducto(idOriginal, cambios) {
-        setProductos((actuales) => productoService.actualizar(actuales, idOriginal, cambios))
+        setProductos((actuales) => productoService.actualizarProducto(actuales, idOriginal, cambios))
     }
 
     function eliminarProducto(id) {

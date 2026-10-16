@@ -1,13 +1,14 @@
 import { Texto } from "../../atoms/Texto/Texto";
 import { TarjetaBlog } from "../../molecules/TarjetaBlog/TarjetaBlog";
 
-export function ListaBlogs({ blogs, className = "" }) {
+export function ListaBlogs({ blogs, onNavegar, className = "" }) {
   return (
     <section className={className}>
       {blogs.map((blog) => (
         <TarjetaBlog
           key={blog.id}
           blog={blog}
+          onNavegar={onNavegar}
         />
       ))}
 

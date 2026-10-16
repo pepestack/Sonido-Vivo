@@ -34,7 +34,7 @@ export function SidebarAdmin(props){
         <Offcanvas.Title>Menú</Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body className="p-3">
-        <nav className="d-flex flex-columns flex-grow-1 justify-content-between">
+        <nav className="d-flex flex-column flex-grow-1 justify-content-between">
           <Nav as="ul" variant="pills" className="flex-column gap-1 mb-auto">
             {renderizarItems(sidebarPrincipal)}
           </Nav>

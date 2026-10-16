@@ -9,13 +9,14 @@ import { Titulo } from "../../atoms/Titulo/Titulo";
 export function TarjetaProducto({
   producto,
   onAgregar,
+  onNavegar,
   mostrarDescripcion = false,
 }) {
   const rutaDetalle = `/producto/${producto.id}`;
 
   return (
     <Card className="h-100 shadow-sm">
-      <Enlace to={rutaDetalle}>
+      <Enlace ruta={rutaDetalle} onNavegar={onNavegar}>
         <Imagen
           src={producto.imagen}
           alt={producto.nombre}
@@ -24,7 +25,7 @@ export function TarjetaProducto({
       </Enlace>
       <Card.Body className="d-flex flex-column">
         <Titulo nivel={2} className="card-title h5">
-          <Enlace to={rutaDetalle} className="text-reset text-decoration-none">
+          <Enlace ruta={rutaDetalle} onNavegar={onNavegar} className="text-reset text-decoration-none">
             {producto.nombre}
           </Enlace>
         </Titulo>
