@@ -9,7 +9,7 @@ export const blogs = [
       "Sabías que Necoarc fue fotografiado tocando un erhu, un instrumento antiguo muy conocido en asia.",
     imagen: necoarcBlog1,
     alt: "Caso Curioso 1 - NecoArc",
-    ruta: "/blog1",
+    ruta: "/blog/1",
     claseImagen: "",
   },
   {
@@ -19,7 +19,7 @@ export const blogs = [
       "Necoarc-caos rompe record en su concierto con 0 espectadores.",
     imagen: necoarcChaosBlog2,
     alt: "Caso Curioso 2 - Necoarc-chaos",
-    ruta: "/blog2",
+    ruta: "/blog/2",
     claseImagen: "blog-img-centro-30",
   },
 ];
