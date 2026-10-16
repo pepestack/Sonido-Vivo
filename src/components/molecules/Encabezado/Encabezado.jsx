@@ -8,14 +8,14 @@ export function Encabezado({
   titulo,
   subtitulo,
   textoBoton,
-  rutaBoton,
+  onAccion,
   claseTitulo = "h2 fw-bold mb-0",
   children,
 }) {
   const derecha =
     children ??
     (textoBoton && (
-      <Boton variante="success" to={rutaBoton}>
+      <Boton variante="success" onClick={onAccion}>
         {textoBoton}
       </Boton>
     ));

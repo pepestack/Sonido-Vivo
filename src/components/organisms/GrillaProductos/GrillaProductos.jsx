@@ -6,6 +6,7 @@ import { TarjetaProducto } from "../../molecules/TarjetaProducto/TarjetaProducto
 export function GrillaProductos({
   productos,
   onAgregar,
+  onNavegar,
   titulo,
   mostrarDescripcion = false,
   className = "",
@@ -23,6 +24,7 @@ export function GrillaProductos({
             <TarjetaProducto
               producto={producto}
               onAgregar={onAgregar}
+              onNavegar={onNavegar}
               mostrarDescripcion={mostrarDescripcion}
             />
           </Col>

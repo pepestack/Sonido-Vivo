@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import { Encabezado } from "../../components/molecules/Encabezado/Encabezado";
 import { PanelAdmin } from "../../components/organisms/PanelAdmin/PanelAdmin";
 import { PlantillaPrivada } from "../../components/templates/PlantillaPrivada/PlantillaPrivada";
+import { useTituloPagina } from "../../hooks/useTituloPagina";
 
 const accesos = [
   {
@@ -20,16 +22,17 @@ const accesos = [
 ];
 
 export default function Admin() {
+  const navigate = useNavigate();
+  useTituloPagina("Panel de administración");
+
   return (
     <PlantillaPrivada>
-      <>
-        <Encabezado
-          titulo="Bienvenido"
-          subtitulo="¿Qué deseas gestionar hoy?"
-          claseTitulo="display-6 fw-bold"
-        />
-        <PanelAdmin accesos={accesos} />
-      </>
+      <Encabezado
+        titulo="Bienvenido"
+        subtitulo="¿Qué deseas gestionar hoy?"
+        claseTitulo="display-6 fw-bold"
+      />
+      <PanelAdmin accesos={accesos} onNavegar={navigate} />
     </PlantillaPrivada>
   );
 }

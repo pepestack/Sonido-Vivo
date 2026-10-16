@@ -3,7 +3,7 @@ import { Boton } from "../../atoms/Boton/Boton";
 import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
 
-export function TarjetaAccion({ titulo, texto, textoBoton, ruta }) {
+export function TarjetaAccion({ titulo, texto, textoBoton, ruta, onNavegar }) {
   return (
     <Card className="custom-lb-container h-100 shadow-sm border-0">
       <Card.Body className="text-center p-5">
@@ -11,7 +11,7 @@ export function TarjetaAccion({ titulo, texto, textoBoton, ruta }) {
           {titulo}
         </Titulo>
         <Texto className="card-text text-muted mb-4">{texto}</Texto>
-        <Boton tamano="lg" to={ruta} className="w-100">
+        <Boton tamano="lg" onClick={() => onNavegar(ruta)} className="w-100">
           {textoBoton}
         </Boton>
       </Card.Body>
