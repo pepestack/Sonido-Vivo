@@ -6,7 +6,7 @@ const UsuariosContext = createContext(null)
 export function UsuariosProvider(props) {
   const [usuarios, setUsuarios] = useState(() => usuarioService.obtenerUsuarios())
 
-  // cada cambio pasa por el service (hoy no persiste; mañana localStorage)
+  // cada cambio pasa por el service, que lo guarda en localStorage
   useEffect(() => {
     usuarioService.guardarUsuarios(usuarios)
   }, [usuarios])
