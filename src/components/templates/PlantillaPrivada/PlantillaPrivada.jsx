@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { NavbarAdmin } from '../../organisms/NavbarAdmin/NavbarAdmin'
 import { SidebarAdmin } from '../../organisms/SidebarAdmin/SidebarAdmin'
+import { Footer } from '../../organisms/Footer/Footer'
 
 export function PlantillaPrivada(props) {
   const [menuAbierto, setMenuAbierto] = useState(false)
@@ -30,6 +31,7 @@ export function PlantillaPrivada(props) {
         />
         <main className="container my-5 pt-2 pt-lg-4 overflow-hidden">{props.children}</main>
       </div>
+      <Footer compacto />
     </div>
   )
 }
