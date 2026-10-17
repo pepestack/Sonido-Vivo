@@ -14,7 +14,7 @@ export const productosIniciales = [
     stock: 5,
     stockCritico: 2,
     descripcion: "Tapa de abeto, aros y fondo de meranti. Ideal para iniciantes.",
-    imagen: null,
+    imagen: '/images/productos/guitarra-ac-f310.jpg',
     galeria: [],
   },
   {
@@ -144,8 +144,8 @@ export const productosIniciales = [
     stock: 5,
     stockCritico: 2,
     descripcion: "El Squier Affinity PJ combina la versatilidad de sus pastillas P y J con la comodidad de un mástil de arce y cuerpo de álamo. Una opción ideal para bajistas que buscan potencia, flexibilidad tonal y la clásica calidad Fender en un solo instrumento.",
-    imagen: null,
-    galeria: [],
+    imagen: '/images/productos/bajo-squier-af-pj.jpg',
+    galeria: ['/images/productos/bajo-thumb1.jpg', '/images/productos/bajo-thumb2.jpg', '/images/productos/bajo-thumb3.jpg', '/images/productos/bajo-thumb4.jpg'],
     calificacion: 4.5,
     resenas: 128,
   },
@@ -354,7 +354,7 @@ export const productosIniciales = [
     stock: 10,
     stockCritico: 3,
     descripcion: "Estándar industria para voz en vivo.",
-    imagen: null,
+    imagen: '/images/productos/mic-d-sm58.jpg',
     galeria: [],
   },
   {
