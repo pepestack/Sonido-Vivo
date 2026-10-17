@@ -8,16 +8,33 @@ import { useTituloPagina } from "../../hooks/useTituloPagina";
 export default function AdminProductos() {
   const navigate = useNavigate();
   const productosCtx = useProductos();
-  useTituloPagina("Gestión de productos");
+  useTituloPagina("Gestión de Inventario");
+
+  const [pendiente, setPendiente] = useState(null)
+
+  function eliminar() {
+    productosCtx.eliminarProducto(pendiente.id)
+    setPendiente(null)
+  }
 
   return (
     <PlantillaPrivada>
-      <Encabezado titulo="Gestión de Productos" subtitulo="Inventario de la tienda" />
-      <TablaProductos
-        productos={productosCtx.productos}
-        onVer={(id) => navigate(`/producto/${id}`)}
-        onEliminar={productosCtx.eliminarProducto}
+      <Encabezado
+        titulo="Gestión de Inventario"
+        subtitulo="Listado de productos"
+        textoBoton="Añadir Producto"
+        onAccion={() => navigate('/admin/productos/nuevo')}
+      />
+      <TablaProductos productos={productosCtx.productos} onEliminar={setPendiente} onNavegar={navigate} />
+      <ModalConfirmacion
+        visible={pendiente !== null}
+        titulo="Confirmar eliminación"
+        textoConfirmar="Eliminar"
+        variante="danger"
+        mensaje={`¿Eliminar "${pendiente?.nombre}"?`}
+        onConfirmar={eliminar}
+        onCancelar={() => setPendiente(null)}
       />
     </PlantillaPrivada>
-  );
+  )
 }

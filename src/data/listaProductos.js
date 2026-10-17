@@ -1,4 +1,5 @@
 // Datos iniciales (seed) del catálogo. El estado real vive en ProductosContext.
+// imagen: ruta en public/ (ej. '/images/productos/GA001.jpg') o URL externa; null muestra el placeholder
 // Ids que se muestran en "Productos destacados" del Home
 export const idsDestacados = ['GA001', 'BA001', 'MI001']
 
