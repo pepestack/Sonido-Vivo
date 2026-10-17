@@ -1,5 +1,5 @@
 import { Card } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import { Imagen } from "../components/atoms/Imagen/Imagen";
 import { Texto } from "../components/atoms/Texto/Texto";
@@ -8,30 +8,32 @@ import { SeccionComentarios } from "../components/organisms/SeccionComentarios/S
 import { PlantillaPublica } from "../components/templates/PlantillaPublica/PlantillaPublica";
 import { useTituloPagina } from "../hooks/useTituloPagina";
 import { blogs } from "../data/blogs";
+import { AvisoVacio } from "../components/molecules/AvisoVacio/AvisoVacio";
 
 export default function DetalleBlogPage() {
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  const blog = blogs.find(
-    (articulo) => articulo.id === Number(id)
-  );
+  const blog = blogs.find((articulo) => articulo.id === Number(id));
 
   useTituloPagina(blog?.titulo ?? "Artículo no encontrado");
 
   if (!blog) {
     return (
       <PlantillaPublica>
-        <Titulo nivel={2}>Artículo no encontrado</Titulo>
+        <AvisoVacio
+          titulo="Artículo no encontrado"
+          texto={`No existe un artículo con el ID "${id}".`}
+          textoBoton="Volver al blog"
+          onAccion={() => navigate("/blog")}
+        />
       </PlantillaPublica>
     );
   }
 
   return (
     <PlantillaPublica>
-      <Card
-        as="article"
-        className="shadow-sm border-0 bg-light p-4 mb-5"
-      >
+      <Card as="article" className="shadow-sm border-0 bg-light p-4 mb-5">
         <div className="text-center mb-4">
           <Imagen
             src={blog.imagen}
