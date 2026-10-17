@@ -1,14 +1,30 @@
 import { Card } from "react-bootstrap";
+import { useParams } from "react-router-dom";
+
 import { Imagen } from "../components/atoms/Imagen/Imagen";
 import { Texto } from "../components/atoms/Texto/Texto";
 import { Titulo } from "../components/atoms/Titulo/Titulo";
 import { SeccionComentarios } from "../components/organisms/SeccionComentarios/SeccionComentarios";
-import { blog1 } from "../data/blog1";
 import { PlantillaPublica } from "../components/templates/PlantillaPublica/PlantillaPublica";
 import { useTituloPagina } from "../hooks/useTituloPagina";
+import { blogs } from "../data/blogs";
 
-export default function Blog1Page() {
-  useTituloPagina(blog1.titulo);
+export default function DetalleBlogPage() {
+  const { id } = useParams();
+
+  const blog = blogs.find(
+    (articulo) => articulo.id === Number(id)
+  );
+
+  useTituloPagina(blog?.titulo ?? "Artículo no encontrado");
+
+  if (!blog) {
+    return (
+      <PlantillaPublica>
+        <Titulo nivel={2}>Artículo no encontrado</Titulo>
+      </PlantillaPublica>
+    );
+  }
 
   return (
     <PlantillaPublica>
@@ -18,18 +34,18 @@ export default function Blog1Page() {
       >
         <div className="text-center mb-4">
           <Imagen
-            src={blog1.imagen}
-            alt={blog1.alt}
-            className="img-fluid rounded border w-100 shadow-sm blog-img-articulo"
+            src={blog.imagen}
+            alt={blog.alt}
+            className={`img-fluid rounded border w-100 shadow-sm blog-img-articulo ${blog.claseImagen ?? ""}`.trim()}
           />
         </div>
 
         <Titulo nivel={2} className="fw-bold mb-3">
-          {blog1.titulo}
+          {blog.titulo}
         </Titulo>
 
         <div className="text-muted lh-lg">
-          {blog1.contenido.map((parrafo) => (
+          {blog.contenido.map((parrafo) => (
             <Texto key={parrafo.id} className="mb-3">
               {parrafo.texto}
             </Texto>
@@ -37,7 +53,7 @@ export default function Blog1Page() {
         </div>
       </Card>
 
-      <SeccionComentarios comentarios={blog1.comentarios} />
+      <SeccionComentarios comentarios={blog.comentarios} />
     </PlantillaPublica>
   );
 }
