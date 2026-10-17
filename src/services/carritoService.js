@@ -1,6 +1,5 @@
 
-// Servicio simulado del carrito: lectura/escritura vía utils/almacenamiento
-// y operaciones puras (reciben los items y devuelven una lista nueva).
+
 import { CLAVES, guardar, leer } from '../utils/almacenamiento'
 
 export const COSTO_DESPACHO = 6767
