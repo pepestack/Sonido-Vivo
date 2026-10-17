@@ -71,13 +71,10 @@ export function validarStock(valor) {
   return estaVacio(valor) || !Number.isInteger(stock) || stock < 0 ? 'Ingresa un stock entero (0 o más)' : ''
 }
 
-// Es opcional, pero si viene debe ser un entero menor que el stock
-export function validarStockCritico(valor, stock) {
+// Opcional; si viene debe ser un entero (0 o más). Es un umbral de alerta,
+// así que puede ser mayor o igual al stock actual.
+export function validarStockCritico(valor) {
   if (estaVacio(valor)) return ''
   const critico = Number(valor)
-  if (!Number.isInteger(critico) || critico < 0) return 'Ingresa un número entero (0 o más)'
-  if (validarStock(stock) === '' && critico >= Number(stock)) {
-    return 'El stock crítico no puede ser mayor o igual al stock'
-  }
-  return ''
+  return Number.isInteger(critico) && critico >= 0 ? '' : 'Ingresa un número entero (0 o más)'
 }

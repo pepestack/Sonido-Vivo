@@ -63,7 +63,7 @@ export function FormularioProducto(props) {
       descripcion: validarLargoMaximo(valores.descripcion, 500),
       precio: validarPrecio(valores.precio),
       stock: validarStock(valores.stock),
-      stockCritico: validarStockCritico(valores.stockCritico, valores.stock),
+      stockCritico: validarStockCritico(valores.stockCritico),
       categoria: validarObligatorio(valores.categoria, 'Selecciona una categoría'),
     }
     formulario.setErrores(nuevos)
