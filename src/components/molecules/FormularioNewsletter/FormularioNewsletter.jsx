@@ -3,13 +3,25 @@ import { Entrada } from "../../atoms/Entrada/Entrada"
 import { Boton } from "../../atoms/Boton/Boton"
 import { MensajeEstado } from "../../atoms/MensajeEstado/MensajeEstado"
 import { useState } from "react"
+import { validarEmail } from "../../../utils/validaciones"
 
-export function FormularioNewsletter(){
+export function FormularioNewsletter() {
     const [correo, setCorreo] = useState('')
     const [mensaje, setMensaje] = useState('')
 
+    function manejarEnvio(evento) {
+        evento.preventDefault()
+        const error = validarEmail(correo)
+        if (error === '') {
+            setMensaje('¡Gracias por suscribirte!')
+            setCorreo('')
+        } else {
+            setMensaje(error)
+        }
+    }
+
     return (
-        <Form className='mb-4' noValidate>
+        <Form className='mb-4' noValidate onSubmit={manejarEnvio}>
             <InputGroup>
                 <Entrada
                     id="newsletter-correo"
