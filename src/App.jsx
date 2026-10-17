@@ -20,6 +20,8 @@ import NoEncontrado from "./pages/NoEncontrado";
 import AdminVerProducto from "./pages/admin/AdminVerProducto";
 import AdminNuevoProducto from "./pages/admin/AdminNuevoProducto";
 import AdminEditarProducto from "./pages/admin/AdminEditarProducto";
+import AdminNuevoUsuario from "./pages/admin/AdminNuevoUsuario";
+import AdminEditarUsuario from "./pages/admin/AdminEditarUsuario";
 
 export default function App() {
   return (
@@ -50,6 +52,8 @@ export default function App() {
               <Route path="/admin/productos/:id/editar" element={<AdminEditarProducto />} />
               <Route path="/admin/usuarios" element={<AdminUsuarios />} />
               <Route path="/admin/usuarios/:id" element={<VerUsuario />} />
+              <Route path="/admin/usuarios/nuevo" element={<AdminNuevoUsuario />} />
+              <Route path="/admin/usuarios/:id/editar" element={<AdminEditarUsuario />} />
               <Route path="*" element={<NoEncontrado />} />
             </Routes>
           </BrowserRouter>
