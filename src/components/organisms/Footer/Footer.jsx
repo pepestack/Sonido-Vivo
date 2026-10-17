@@ -39,7 +39,7 @@ export function Footer(props) {
           </Col>
 
           <Col xs={12} md={6} lg={2}>
-            <ListaEnlaces titulo="Información" enlaces={footerInformacion} onNavegar={props.onNavegar} />
+            <ListaEnlaces titulo="Información" enlaces={footerInfo} onNavegar={props.onNavegar} />
           </Col>
 
           <Col xs={12} md={6} lg={3}>
