@@ -19,6 +19,7 @@ import { UsuariosProvider } from "./context/UsuariosContext";
 import { CarritoProvider } from "./context/CarritoContext";
 import NoEncontrado from "./pages/NoEncontrado";
 import AdminVerProducto from "./pages/admin/AdminVerProducto";
+import AdminNuevoProducto from "./pages/admin/AdminNuevoProducto";
 
 export default function App() {
   return (
@@ -46,6 +47,7 @@ export default function App() {
               <Route path="/admin" element={<AdminHome />} />
               <Route path="/admin/productos" element={<AdminProductos />} />
               <Route path="/admin/productos/:id" element={<AdminVerProducto />} />
+              <Route path="/admin/productos/nuevo" element={<AdminNuevoProducto />} />
               <Route path="/admin/usuarios" element={<AdminUsuarios />} />
               <Route path="/admin/usuarios/:id" element={<VerUsuario />} />
               <Route path="*" element={<NoEncontrado />} />
