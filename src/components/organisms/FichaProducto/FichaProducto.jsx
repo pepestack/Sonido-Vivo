@@ -1,95 +1,54 @@
-import { useState } from "react";
-import { Card, Col, Row } from "react-bootstrap";
-import { Boton } from "../../atoms/Boton/Boton";
-import { Etiqueta } from "../../atoms/Etiqueta/Etiqueta";
-import { Icono } from "../../atoms/Icono/Icono";
-import { Imagen } from "../../atoms/Imagen/Imagen";
-import { MensajeEstado } from "../../atoms/MensajeEstado/MensajeEstado";
-import { Precio } from "../../atoms/Precio/Precio";
-import { Selector } from "../../atoms/Selector/Selector";
-import { Texto } from "../../atoms/Texto/Texto";
-import { Titulo } from "../../atoms/Titulo/Titulo";
+import { Card, Table } from 'react-bootstrap'
+import { Imagen } from '../../atoms/Imagen/Imagen'
+import { Precio } from '../../atoms/Precio/Precio'
+import { Texto } from '../../atoms/Texto/Texto'
+import { FilaDetalle } from '../../atoms/FilaDetalle/FilaDetalle'
+import { BarraAcciones } from '../../molecules/BarraAcciones/BarraAcciones'
+import { nombreCategoria } from '../../../utils/formato'
+import codigoBarras from '../../../assets/images/dummy-upc.jpg'
 
-const MAXIMO_POR_COMPRA = 5;
+function estadoStock(producto) {
+  if (producto.stock <= 0) return { texto: 'Agotado', clase: 'text-danger' }
+  if (producto.stock <= producto.stockCritico) return { texto: 'Stock crítico', clase: 'text-warning' }
+  return { texto: 'Disponible', clase: 'text-success' }
+}
 
-// Vista completa de un producto. Es dueña de la cantidad elegida y avisa al padre con onAgregar(producto, cantidad)
-export function FichaProducto({ producto, onAgregar }) {
-  const [cantidad, setCantidad] = useState(1);
-  const [mensaje, setMensaje] = useState("");
-
-  const sinStock = producto.stock < 1;
-  const tope = Math.min(MAXIMO_POR_COMPRA, producto.stock);
-  const opciones = Array.from({ length: tope }, (_, i) => ({ valor: i + 1, texto: i + 1 }));
-
-  function agregar() {
-    onAgregar(producto, cantidad);
-    setMensaje(`Se agregaron ${cantidad} unidad(es) al carrito.`);
-  }
+export function FichaProducto(props) {
+  const producto = props.producto
+  const estado = estadoStock(producto)
 
   return (
-    <Row as="section">
-      <Col md={6} className="mb-4">
-        <Card>
-          <Imagen src={producto.imagen} alt={producto.nombre} className="card-img-top" />
-          {producto.galeria.length > 0 && (
-            <Card.Body className="custom-lb-container">
-              <Row className="g-2">
-                {producto.galeria.map((imagen, indice) => (
-                  <Col xs={3} key={imagen}>
-                    <div className="ratio ratio-4x3">
-                      <Imagen
-                        src={imagen}
-                        alt={`Miniatura ${indice + 1} de ${producto.nombre}`}
-                        className="img-thumbnail object-fit-cover"
-                      />
-                    </div>
-                  </Col>
-                ))}
-              </Row>
-            </Card.Body>
-          )}
-        </Card>
-      </Col>
-
-      <Col md={6}>
-        <Titulo nivel={1} className="h2 mb-3">{producto.nombre}</Titulo>
-        <Texto className="h4 mb-3">
-          <Precio monto={producto.precio} />
-        </Texto>
-        <Texto className="mb-4">{producto.descripcion}</Texto>
-
-        {sinStock ? (
-          <MensajeEstado tipo="error" className="mb-4">Producto sin stock</MensajeEstado>
-        ) : (
-          <>
-            <div className="d-flex align-items-center mb-4">
-              <Etiqueta htmlFor="cantidad" className="me-2 mb-0">Cantidad:</Etiqueta>
-              <Selector
-                id="cantidad"
-                valor={cantidad}
-                opciones={opciones}
-                onChange={(evento) => setCantidad(Number(evento.target.value))}
-                className="w-auto"
-              />
-            </div>
-            <Boton className="w-100 py-3" onClick={agregar}>
-              Añadir a carrito
-            </Boton>
-            <MensajeEstado>{mensaje}</MensajeEstado>
-          </>
-        )}
-
-        <div className="mt-4">
-          <Texto className="d-flex align-items-center mb-2">
-            <Icono icono="fas fa-truck" className="text-primary me-2" />
-            Despachos a todo Chile
-          </Texto>
-          <Texto className="d-flex align-items-center">
-            <Icono icono="fas fa-shield-alt" className="text-primary me-2" />
-            Garantía de 6 meses por problemas de fábrica
-          </Texto>
-        </div>
-      </Col>
-    </Row>
-  );
+    <Card className="border-0 shadow-sm p-4">
+      <div className="d-inline-flex border rounded p-2 mb-4 col-6 col-md-4">
+        <Imagen src={codigoBarras} alt="UPC de prueba" className="img-thumbnail w-auto" />
+      </div>
+      <Table responsive bordered className="align-middle mb-0">
+        <tbody>
+          <FilaDetalle etiqueta="Producto">
+            <span className="fw-semibold">{producto.nombre}</span>
+          </FilaDetalle>
+          <FilaDetalle etiqueta="Categoría">{nombreCategoria(producto.categoria)}</FilaDetalle>
+          <FilaDetalle etiqueta="Marca">{producto.marca || '—'}</FilaDetalle>
+          <FilaDetalle etiqueta="Modelo">{producto.modelo || '—'}</FilaDetalle>
+          <FilaDetalle etiqueta="SKU">{producto.id}</FilaDetalle>
+          <FilaDetalle etiqueta="Stock Crítico">{producto.stockCritico}</FilaDetalle>
+          <FilaDetalle etiqueta="Stock">{producto.stock}</FilaDetalle>
+          <FilaDetalle etiqueta="Precio">
+            <Precio monto={producto.precio} />
+          </FilaDetalle>
+          <FilaDetalle etiqueta="Estado">
+            <Texto como="span" className={estado.clase}>
+              {estado.texto}
+            </Texto>
+          </FilaDetalle>
+          <FilaDetalle etiqueta="Descripción">{producto.descripcion || '—'}</FilaDetalle>
+        </tbody>
+      </Table>
+      <BarraAcciones
+        onVolver={() => props.onNavegar('/admin/productos')}
+        onEditar={() => props.onNavegar(`/admin/productos/${producto.id}/editar`)}
+        onEliminar={props.onEliminar}
+      />
+    </Card>
+  )
 }
