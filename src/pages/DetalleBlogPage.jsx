@@ -1,6 +1,7 @@
 import { Card } from "react-bootstrap";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
+import { AvisoVacio } from "../components/molecules/AvisoVacio/AvisoVacio";
 import { Imagen } from "../components/atoms/Imagen/Imagen";
 import { Texto } from "../components/atoms/Texto/Texto";
 import { Titulo } from "../components/atoms/Titulo/Titulo";
@@ -10,6 +11,7 @@ import { useTituloPagina } from "../hooks/useTituloPagina";
 import { blogs } from "../data/blogs";
 
 export default function DetalleBlogPage() {
+  const navigate = useNavigate();
   const { id } = useParams();
 
   const blog = blogs.find(
@@ -21,7 +23,12 @@ export default function DetalleBlogPage() {
   if (!blog) {
     return (
       <PlantillaPublica>
-        <Titulo nivel={2}>Artículo no encontrado</Titulo>
+        <AvisoVacio
+          titulo="Artículo no encontrado"
+          texto={`No existe un artículo con el identificador "${id}".`}
+          textoBoton="Volver al blog"
+          onAccion={() => navigate("/blog")}
+        />
       </PlantillaPublica>
     );
   }
