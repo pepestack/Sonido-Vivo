@@ -29,7 +29,7 @@ export function FormularioNewsletter() {
                     valor={correo}
                     onChange={(evento) => setCorreo(evento.target.value)}
                     placeholder="Escribe tu mail"
-                    aria-label="Correo para el newsletter"
+                    etiquetaAccesible="Correo para el newsletter"
                 />
                 <Boton variante="naranja" tipo="submit">
                     Suscribirme
