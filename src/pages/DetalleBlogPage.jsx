@@ -60,7 +60,10 @@ export default function DetalleBlogPage() {
         </div>
       </Card>
 
-      <SeccionComentarios comentarios={blog.comentarios} />
+      <SeccionComentarios
+        comentarios={blog.comentarios}
+        onNavegar={navigate}
+      />
     </PlantillaPublica>
   );
 }
