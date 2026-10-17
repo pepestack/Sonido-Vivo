@@ -1,95 +1,65 @@
-import { useState } from "react";
-import { CampoInput } from "../../molecules/CampoInput/CampoInput";
-import { Form } from "react-bootstrap";
-import { Boton } from "../../atoms/Boton/Boton";
+import { CampoFormulario } from '../../molecules/CampoFormulario/CampoFormulario'
+import { TarjetaAutenticacion } from '../../molecules/TarjetaAutenticacion/TarjetaAutenticacion'
+import { useFormulario } from '../../../hooks/useFormulario'
+import { sinErrores, validarClave, validarEmail, validarObligatorio } from '../../../utils/validaciones'
 
-export function Register() {
-  const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("")
-  const [contraseña, setContraseña] = useState("");
-  const [contraseñaRepetida, setContraseñaRepetida] = useState("");
-  const [errorEmail, setErrorEmail] = useState(false);
-  const [errorPassword, setErrorPassword] = useState(false);
-  
-  const [errorUsername, setErrorUsername] = useState(false);
-  const patronCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  const [exito, setExito] = useState(false);
+export function Register(props) {
+  const formulario = useFormulario({ email: '', username: '', contrasena: '' })
 
-  function manejarEnvio(e) {
-    e.preventDefault();
-
-    const correoValido = patronCorreo.test(email.trim());
-    setErrorEmail(!correoValido);
-
-    const passwordValid = contraseña.trim() !== "" && contraseñaRepetida == contraseña;
-    setErrorPassword(!passwordValid);
-
-    const usernameValid = username.trim() !== "";
-    setErrorUsername(!usernameValid);
-
-    setExito(correoValido && passwordValid);
+  function manejarEnvio(evento) {
+    evento.preventDefault()
+    const valores = formulario.valores
+    const nuevos = {
+      email: validarEmail(valores.email),
+      username: validarObligatorio(valores.username, 'El nombre de usuario es requerido'),
+      contrasena: validarClave(valores.contrasena),
+    }
+    formulario.setErrores(nuevos)
+    if (sinErrores(nuevos)) {
+      props.onEnviar({ email: valores.email.trim(), username: valores.username.trim() })
+    }
   }
 
   return (
-    <Form onSubmit={manejarEnvio} noValidate>
-      <CampoInput
+    <TarjetaAutenticacion
+      titulo="Regístrate"
+      textoBoton="Registrarse"
+      pregunta="¿Ya tienes una cuenta?"
+      textoEnlace="Iniciar sesión"
+      ruta="/login"
+      onNavegar={props.onNavegar}
+      onEnviar={manejarEnvio}
+    >
+      <CampoFormulario
         id="email"
-        texto="Ingrese su correo electronico"
-        type="email"
-        placeholder="Sebastian@Gmail.com"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        validar={errorEmail}
-        required
+        etiqueta="Correo Electrónico"
+        tipo="email"
+        placeholder="Sebastian@ejemplo.com"
+        valor={formulario.valores.email}
+        onChange={formulario.manejarCambio}
+        error={formulario.errores.email}
+        claseEtiqueta="form-label"
       />
-      <CampoInput
+      <CampoFormulario
         id="username"
-        texto="Ingrese su nombre de usuario"
-        type="text"
-        placeholder="flamingo_star67"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        validar={errorUsername}
-        required
+        etiqueta="Nombre de usuario"
+        placeholder="Ej: seba_music"
+        valor={formulario.valores.username}
+        onChange={formulario.manejarCambio}
+        error={formulario.errores.username}
+        claseEtiqueta="form-label"
       />
-
-      <CampoInput
-        id="password"
-        texto="Ingrese su contraseña"
-        type="password"
-        placeholder="*********"
-        value={contraseña}
-        onChange={(e) => setContraseña(e.target.value)}
-        validar={errorPassword}
-        required
+      <CampoFormulario
+        id="contrasena"
+        etiqueta="Contraseña"
+        tipo="password"
+        placeholder="*******"
+        valor={formulario.valores.contrasena}
+        onChange={formulario.manejarCambio}
+        error={formulario.errores.contrasena}
+        claseEtiqueta="form-label"
+        className=""
       />
-
-      <CampoInput
-        id="passwordrepeat"
-        texto="Ingrese su contraseña nuevamente"
-        type="password"
-        placeholder="*********"
-        value={contraseñaRepetida}
-        onChange={(e) => setContraseñaRepetida(e.target.value)}
-        validar={errorPassword}
-        required
-      />
-      <div className="text-center mt-1">
-        <Boton tipo="submit">Crear Cuenta</Boton>
-      </div>
-      <div className="text-center mt-3">
-        {exito ? (
-          <strong className="text-center">Iniciando sesión...</strong>
-        ) : (
-          ""
-        )}
-        {errorEmail || errorPassword || errorUsername ? (
-          <strong>Datos invalidos..</strong>
-        ) : (
-          ""
-        )}
-      </div>
-    </Form>
-  );
+    </TarjetaAutenticacion>
+  )
 }
-
