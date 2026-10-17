@@ -1,9 +1,8 @@
 import { Card, Table } from "react-bootstrap";
-import { Boton } from "../../atoms/Boton/Boton";
-import { Insignia } from "../../atoms/Insignia/Insignia";
-import { nombreCompleto } from "../../../utils/formato";
+import { FilaUsuarioAdmin } from "../../molecules/FilaUsuarioAdmin/FilaUsuarioAdmin";
 
-export function TablaUsuarios({ usuarios, onVer, onEliminar }) {
+// onVer, onEditar y onEliminar reciben el usuario completo
+export function TablaUsuarios({ usuarios, onVer, onEditar, onEliminar }) {
   return (
     <Card as="section" className="shadow-sm border-0">
       <Card.Body className="p-0">
@@ -18,30 +17,17 @@ export function TablaUsuarios({ usuarios, onVer, onEliminar }) {
             </tr>
           </thead>
           <tbody>
-            {usuarios.map((usuario) => {
-              const esAdmin = usuario.rol === "Administrador";
-              return (
-                <tr key={usuario.id}>
-                  <td className="ps-4 fw-bold">{usuario.id}</td>
-                  <td>{nombreCompleto(usuario)}</td>
-                  <td>{usuario.correo}</td>
-                  <td>
-                    <Insignia color={esAdmin ? "danger" : "dark"}>{usuario.rol}</Insignia>
-                  </td>
-                  <td className="text-end pe-4">
-                    <Boton variante="outline-primary" tamano="sm" onClick={() => onVer(usuario.id)}>
-                      Ver usuario
-                    </Boton>
-                    {/* el administrador no se puede eliminar (igual que en la versión HTML) */}
-                    {!esAdmin && (
-                      <Boton variante="outline-danger" tamano="sm" className="ms-1" onClick={() => onEliminar(usuario.id)}>
-                        Eliminar
-                      </Boton>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
+            {/* el administrador no se puede eliminar (igual que en la versión HTML) */}
+            {usuarios.map((usuario) => (
+              <FilaUsuarioAdmin
+                key={usuario.id}
+                usuario={usuario}
+                puedeEliminar={usuario.rol !== "Administrador"}
+                onVer={onVer}
+                onEditar={onEditar}
+                onEliminar={onEliminar}
+              />
+            ))}
           </tbody>
         </Table>
       </Card.Body>

@@ -33,6 +33,7 @@ export default function VerUsuario() {
               <PerfilUsuario
                 usuario={usuario}
                 onVolver={() => navigate("/admin/usuarios")}
+                onEditar={() => navigate(`/admin/usuarios/${usuario.id}/editar`)}
                 onEliminar={() => setConfirmando(true)}
               />
             </Col>

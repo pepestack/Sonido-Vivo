@@ -23,11 +23,17 @@ export default function AdminUsuarios() {
 
   return (
     <PlantillaPrivada>
-      <Encabezado titulo="Gestión de Usuarios" subtitulo="Listado de vendedores" />
+      <Encabezado
+        titulo="Gestión de Usuarios"
+        subtitulo="Listado de vendedores"
+        textoBoton="Nuevo usuario"
+        onAccion={() => navigate("/admin/usuarios/nuevo")}
+      />
       <TablaUsuarios
         usuarios={usuariosCtx.usuarios}
-        onVer={(id) => navigate(`/admin/usuarios/${id}`)}
-        onEliminar={(id) => setPendiente(usuariosCtx.obtenerUsuario(id))}
+        onVer={(usuario) => navigate(`/admin/usuarios/${usuario.id}`)}
+        onEditar={(usuario) => navigate(`/admin/usuarios/${usuario.id}/editar`)}
+        onEliminar={setPendiente}
       />
       <ModalConfirmacion
         visible={pendiente !== null}
