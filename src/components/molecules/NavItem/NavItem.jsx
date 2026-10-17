@@ -1,16 +1,18 @@
 import { Nav } from 'react-bootstrap'
-import { NavLink } from 'react-router-dom'
 import { Icono } from '../../atoms/Icono/Icono'
 
-export function NavItem({ texto, ruta, icono, deshabilitado = false, exacto = false, className = '', onClick }) {
+// Enlace de navegación con ícono opcional. No conoce el router: es un <a href> real que
+// cancela la recarga y avisa a props.onNavegar. activo lo calcula quien lo usa.
+export function NavItem(props) {
+  const className = props.className ?? ''
   const contenido = (
     <>
-      {icono && <Icono icono={icono} />}
-      <span>{texto}</span>
+      {props.icono && <Icono icono={props.icono} />}
+      <span>{props.texto}</span>
     </>
   )
 
-  if (deshabilitado) {
+  if (props.deshabilitado) {
     return (
       <Nav.Item as="li">
         <Nav.Link disabled className={className}>
@@ -20,11 +22,17 @@ export function NavItem({ texto, ruta, icono, deshabilitado = false, exacto = fa
     )
   }
 
+  function ir(evento) {
+    evento.preventDefault()
+    props.onNavegar(props.ruta)
+  }
+
   return (
     <Nav.Item as="li">
-      <Nav.Link as={NavLink} to={ruta} end={exacto} eventKey={ruta} className={className} onClick={onClick}>
+      <Nav.Link href={props.ruta} active={props.activo ?? false} className={className} onClick={ir}>
         {contenido}
       </Nav.Link>
     </Nav.Item>
   )
 }
+

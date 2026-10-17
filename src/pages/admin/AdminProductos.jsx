@@ -4,6 +4,8 @@ import { TablaProductos } from "../../components/organisms/TablaProductos/TablaP
 import { PlantillaPrivada } from "../../components/templates/PlantillaPrivada/PlantillaPrivada";
 import { useProductos } from "../../context/ProductosContext";
 import { useTituloPagina } from "../../hooks/useTituloPagina";
+import { useState } from "react";
+import { ModalConfirmacion } from "../../components/molecules/ModalConfirmacion/ModalConfirmacion";
 
 export default function AdminProductos() {
   const navigate = useNavigate();
@@ -25,7 +27,12 @@ export default function AdminProductos() {
         textoBoton="Añadir Producto"
         onAccion={() => navigate('/admin/productos/nuevo')}
       />
-      <TablaProductos productos={productosCtx.productos} onEliminar={setPendiente} onNavegar={navigate} />
+      <TablaProductos
+        productos={productosCtx.productos}
+        onVer={(producto) => navigate(`/admin/productos/${producto.id}`)}
+        onEditar={(producto) => navigate(`/admin/productos/${producto.id}/editar`)}
+        onEliminar={setPendiente}
+      />
       <ModalConfirmacion
         visible={pendiente !== null}
         titulo="Confirmar eliminación"
