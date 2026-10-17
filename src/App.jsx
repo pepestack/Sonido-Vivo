@@ -10,8 +10,7 @@ import AdminProductos from "./pages/admin/AdminProductos";
 import AdminUsuarios from "./pages/admin/AdminUsuarios";
 import VerUsuario from "./pages/admin/VerUsuario";
 import BlogPage from "./pages/BlogPage";
-import Blog1Page from "./pages/Blog1Page";
-import Blog2Page from "./pages/Blog2Page";
+import DetalleBlogPage from "./pages/DetalleBlogPage";
 import Home from "./pages/Home";
 import NosotrosPage from "./pages/NosotrosPage";
 import { ProductosProvider } from "./context/ProductosContext";
@@ -37,8 +36,7 @@ export default function App() {
               <Route path="/contacto" element={<ContactoPage />} />
               <Route path="/nosotros" element={<NosotrosPage />} />
               <Route path="/blog" element={<BlogPage />} />
-              <Route path="/blog/1" element={<Blog1Page />} />
-              <Route path="/blog/2" element={<Blog2Page />} />
+              <Route path="/blog/:id" element={<DetalleBlogPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/registro" element={<RegisterPage />} />
 
