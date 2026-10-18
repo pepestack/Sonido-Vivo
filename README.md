@@ -77,6 +77,12 @@ Para detener el servidor de desarrollo, presione:
 ## Bitácora
 
 <!-- SUMMARY:START -->
+### 2026-10-17
+
+- **sebi-nm**: Implementó funcionalidades de gestión de usuarios en el panel administrativo y realizó correcciones de accesibilidad y estructura en diversos componentes.
+- **Sebastiana-pablaza**: Desarrolló la página dinámica de detalle del blog y refactorizó los componentes de visualización para unificar la gestión de artículos.
+- **José Calderón**: Optimizó la estructura de la página de nosotros y amplió las capacidades del panel administrativo para la gestión de productos y validaciones de formularios.
+
 ### 2026-10-16
 
 - **José Calderón**: Implementó nuevas funcionalidades en el panel de administración, optimizó la estructura de los formularios y refactorizó el manejo de imágenes y componentes.
