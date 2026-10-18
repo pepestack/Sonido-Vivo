@@ -9,14 +9,14 @@ import { SeccionComentarios } from "../components/organisms/SeccionComentarios/S
 import { PlantillaPublica } from "../components/templates/PlantillaPublica/PlantillaPublica";
 import { useTituloPagina } from "../hooks/useTituloPagina";
 import { blogs } from "../data/blogs";
+import { AvisoVacio } from "../components/molecules/AvisoVacio/AvisoVacio";
 
 export default function DetalleBlogPage() {
   const navigate = useNavigate();
   const { id } = useParams();
+  const navigate = useNavigate();
 
-  const blog = blogs.find(
-    (articulo) => articulo.id === Number(id)
-  );
+  const blog = blogs.find((articulo) => articulo.id === Number(id));
 
   useTituloPagina(blog?.titulo ?? "Artículo no encontrado");
 
@@ -25,7 +25,7 @@ export default function DetalleBlogPage() {
       <PlantillaPublica>
         <AvisoVacio
           titulo="Artículo no encontrado"
-          texto={`No existe un artículo con el identificador "${id}".`}
+          texto={`No existe un artículo con el ID "${id}".`}
           textoBoton="Volver al blog"
           onAccion={() => navigate("/blog")}
         />
@@ -35,10 +35,7 @@ export default function DetalleBlogPage() {
 
   return (
     <PlantillaPublica>
-      <Card
-        as="article"
-        className="shadow-sm border-0 bg-light p-4 mb-5"
-      >
+      <Card as="article" className="shadow-sm border-0 bg-light p-4 mb-5">
         <div className="text-center mb-4">
           <Imagen
             src={blog.imagen}

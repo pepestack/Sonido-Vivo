@@ -1,11 +1,11 @@
 import { Card, ListGroup } from "react-bootstrap";
-import { Boton } from "../../atoms/Boton/Boton";
 import { Insignia } from "../../atoms/Insignia/Insignia";
 import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
+import { BarraAcciones } from "../../molecules/BarraAcciones/BarraAcciones";
 import { iniciales, nombreCompleto } from "../../../utils/formato";
 
-export function PerfilUsuario({ usuario, onVolver, onEliminar }) {
+export function PerfilUsuario({ usuario, onVolver, onEditar, onEliminar }) {
   const nombre = nombreCompleto(usuario);
   const esAdmin = usuario.rol === "Administrador";
 
@@ -50,12 +50,13 @@ export function PerfilUsuario({ usuario, onVolver, onEliminar }) {
           </ListGroup.Item>
         </ListGroup>
 
-        <nav className="d-flex justify-content-between">
-          <Boton variante="outline-secondary" onClick={onVolver}>Volver</Boton>
-          {!esAdmin && (
-            <Boton variante="danger" onClick={onEliminar}>Eliminar</Boton>
-          )}
-        </nav>
+        {/* sin onEliminar la barra no muestra el botón: el administrador no se puede eliminar */}
+        <BarraAcciones
+          className=""
+          onVolver={onVolver}
+          onEditar={onEditar}
+          onEliminar={esAdmin ? undefined : onEliminar}
+        />
       </Card.Body>
     </Card>
   );

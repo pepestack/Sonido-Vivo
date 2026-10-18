@@ -1,6 +1,6 @@
 import { Boton } from '../../atoms/Boton/Boton'
 import { Insignia } from '../../atoms/Insignia/Insignia'
-import { colorRol } from '../../../data/roles'
+import { colorRol } from '../../../utils/roles'
 import { nombreCompleto } from '../../../utils/formato'
 
 export function FilaUsuarioAdmin(props) {
