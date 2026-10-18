@@ -1,6 +1,7 @@
 import { Card } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 
+import { AvisoVacio } from "../components/molecules/AvisoVacio/AvisoVacio";
 import { Imagen } from "../components/atoms/Imagen/Imagen";
 import { Texto } from "../components/atoms/Texto/Texto";
 import { Titulo } from "../components/atoms/Titulo/Titulo";
@@ -11,6 +12,7 @@ import { blogs } from "../data/blogs";
 import { AvisoVacio } from "../components/molecules/AvisoVacio/AvisoVacio";
 
 export default function DetalleBlogPage() {
+  const navigate = useNavigate();
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -55,7 +57,10 @@ export default function DetalleBlogPage() {
         </div>
       </Card>
 
-      <SeccionComentarios comentarios={blog.comentarios} />
+      <SeccionComentarios
+        comentarios={blog.comentarios}
+        onNavegar={navigate}
+      />
     </PlantillaPublica>
   );
 }

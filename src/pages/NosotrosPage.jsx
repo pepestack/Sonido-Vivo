@@ -1,56 +1,31 @@
-import { Row, Col, Card } from "react-bootstrap";
-import { Imagen } from "../components/atoms/Imagen/Imagen";
 import { Texto } from "../components/atoms/Texto/Texto";
-import { Titulo } from "../components/atoms/Titulo/Titulo";
-import { nosotros } from "../data/nosotros";
+import { SeccionPresentacion } from "../components/organisms/SeccionPresentacion/SeccionPresentacion";
+import { GrillaDestacados } from "../components/organisms/GrillaDestacados/GrillaDestacados";
 import { PlantillaPublica } from "../components/templates/PlantillaPublica/PlantillaPublica";
+import { useTituloPagina } from "../hooks/useTituloPagina";
+import { nosotros } from "../data/nosotros";
 
 export default function NosotrosPage() {
+  useTituloPagina('Nosotros')
+
   return (
     <PlantillaPublica>
-      <>
-        <Row className="align-items-center mb-5">
-          <Col xs={12} lg={6} className="mb-4 mb-lg-0">
-            <Card className="h-100 border-0 shadow-sm bg-light">
-              <Card.Body className="p-4">
-                <Titulo nivel={1} className="display-5 fw-bold mb-3">
-                  {nosotros.titulo}
-                </Titulo>
+      <SeccionPresentacion
+        titulo={nosotros.titulo}
+        texto={nosotros.subtitulo}
+        imagen={nosotros.imagen}
+        alt={nosotros.alt}
+        className="p-4 p-md-5 my-4 rounded-3 custom-lb-container shadow-sm"
+        claseTitulo="display-5 fw-bold mb-3"
+        claseImagen="img-fluid rounded shadow-lg w-75 d-block mx-auto"
+        anchoImagen={6}
+      >
+        {nosotros.historia.map((parrafo) => (
+          <Texto key={parrafo.id}>{parrafo.texto}</Texto>
+        ))}
+      </SeccionPresentacion>
 
-                <Texto className="lead text-muted">{nosotros.subtitulo}</Texto>
-
-                {nosotros.historia.map((parrafo) => (
-                  <Texto key={parrafo.id}>{parrafo.texto}</Texto>
-                ))}
-              </Card.Body>
-            </Card>
-          </Col>
-
-          <Col xs={12} lg={6} className="text-center">
-            <Imagen
-              src={nosotros.imagen}
-              alt={nosotros.alt}
-              className="img-fluid rounded shadow-lg w-75"
-            />
-          </Col>
-        </Row>
-
-        <Row className="text-center g-4 mt-2">
-          {nosotros.destacados.map((destacado) => (
-            <Col xs={12} md={4} key={destacado.id}>
-              <Card className="h-100 border-0 shadow-sm bg-light">
-                <Card.Body className="p-4">
-                  <Titulo nivel={3} className="h4 text-primary">
-                    {destacado.titulo}
-                  </Titulo>
-
-                  <Texto className="mb-0">{destacado.descripcion}</Texto>
-                </Card.Body>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      </>
+      <GrillaDestacados destacados={nosotros.destacados} className="mt-2 mb-5" />
     </PlantillaPublica>
   );
 }
