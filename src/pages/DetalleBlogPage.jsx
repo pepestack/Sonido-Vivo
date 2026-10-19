@@ -9,12 +9,10 @@ import { SeccionComentarios } from "../components/organisms/SeccionComentarios/S
 import { PlantillaPublica } from "../components/templates/PlantillaPublica/PlantillaPublica";
 import { useTituloPagina } from "../hooks/useTituloPagina";
 import { blogs } from "../data/blogs";
-import { AvisoVacio } from "../components/molecules/AvisoVacio/AvisoVacio";
 
 export default function DetalleBlogPage() {
   const navigate = useNavigate();
   const { id } = useParams();
-  const navigate = useNavigate();
 
   const blog = blogs.find((articulo) => articulo.id === Number(id));
 
