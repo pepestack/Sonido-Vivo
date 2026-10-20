@@ -9,21 +9,24 @@ import { Precio } from "../../atoms/Precio/Precio";
 import { Selector } from "../../atoms/Selector/Selector";
 import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
-
-const MAXIMO_POR_COMPRA = 5;
+import { limiteDe } from "../../../services/carritoService";
 
 // Vista completa de un producto. Es dueña de la cantidad elegida y avisa al padre con onAgregar(producto, cantidad)
-export function FichaProducto({ producto, onAgregar }) {
+// enCarrito: unidades de este producto que ya están en el carrito
+export function FichaProducto(props) {
+  const producto = props.producto;
   const [cantidad, setCantidad] = useState(1);
   const [mensaje, setMensaje] = useState("");
 
   const sinStock = producto.stock < 1;
-  const tope = Math.min(MAXIMO_POR_COMPRA, producto.stock);
-  const opciones = Array.from({ length: tope }, (_, i) => ({ valor: i + 1, texto: i + 1 }));
+  const disponible = limiteDe(producto) - (props.enCarrito ?? 0);
+  const opciones = Array.from({ length: Math.max(disponible, 0) }, (_, i) => ({ valor: i + 1, texto: i + 1 }));
+  const cantidadElegida = Math.min(cantidad, disponible);
 
   function agregar() {
-    onAgregar(producto, cantidad);
-    setMensaje(`Se agregaron ${cantidad} unidad(es) al carrito.`);
+    props.onAgregar(producto, cantidadElegida);
+    setMensaje(`Se agregaron ${cantidadElegida} unidad(es) al carrito.`);
+    setCantidad(1);
   }
 
   return (
@@ -60,13 +63,15 @@ export function FichaProducto({ producto, onAgregar }) {
 
         {sinStock ? (
           <MensajeEstado tipo="error" className="mb-4">Producto sin stock</MensajeEstado>
+        ) : disponible < 1 ? (
+          <MensajeEstado tipo="neutro" className="mb-4">Ya tienes el máximo disponible de este producto en el carrito.</MensajeEstado>
         ) : (
           <>
             <div className="d-flex align-items-center mb-4">
               <Etiqueta htmlFor="cantidad" className="me-2 mb-0">Cantidad:</Etiqueta>
               <Selector
                 id="cantidad"
-                valor={cantidad}
+                valor={cantidadElegida}
                 opciones={opciones}
                 onChange={(evento) => setCantidad(Number(evento.target.value))}
                 className="w-auto"

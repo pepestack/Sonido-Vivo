@@ -1,6 +1,9 @@
 const patronCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const patronSku = /^[A-Z]{2}\d{3}$/
-export const dominiosPermitidos = ['duoc.cl', 'profesor.duoc.cl', 'gmail.com', 'sonidovivo.cl']
+export const dominiosPermitidos = ['duoc.cl', 'profesor.duoc.cl', 'gmail.com']
+export const LARGO_MAXIMO_CORREO = 100
+export const LARGO_MINIMO_CLAVE = 4
+export const LARGO_MAXIMO_CLAVE = 10
 
 function estaVacio(valor) {
   return String(valor ?? '').trim() === ''
@@ -23,15 +26,29 @@ export function validarEmail(valor) {
   return patronCorreo.test(String(valor ?? '').trim()) ? '' : 'Ingresa un correo válido'
 }
 
+// Requerida, entre 4 y 10 caracteres
 export function validarClave(valor) {
-  return validarObligatorio(valor, 'La contraseña es requerida')
+  const requerida = validarObligatorio(valor, 'La contraseña es requerida')
+  if (requerida !== '') return requerida
+  const largo = String(valor).length
+  if (largo < LARGO_MINIMO_CLAVE || largo > LARGO_MAXIMO_CLAVE) {
+    return `La contraseña debe tener entre ${LARGO_MINIMO_CLAVE} y ${LARGO_MAXIMO_CLAVE} caracteres`
+  }
+  return ''
 }
 
+// Máximo 100 caracteres y solo los dominios de dominiosPermitidos
 export function validarCorreoPermitido(valor) {
   const correo = String(valor ?? '').trim()
+  if (correo.length > LARGO_MAXIMO_CORREO) return `Máximo ${LARGO_MAXIMO_CORREO} caracteres`
   const dominio = correo.split('@')[1]
   const permitido = validarEmail(correo) === '' && dominiosPermitidos.includes(dominio)
   return permitido ? '' : `Solo se permiten correos @${dominiosPermitidos.join(', @')}`
+}
+
+// Para campos donde el correo es opcional: vacío es válido, si viene debe cumplir validarCorreoPermitido
+export function validarCorreoOpcional(valor) {
+  return estaVacio(valor) ? '' : validarCorreoPermitido(valor)
 }
 
 function rutEsValido(run) {
@@ -77,4 +94,21 @@ export function validarStockCritico(valor) {
   if (estaVacio(valor)) return ''
   const critico = Number(valor)
   return Number.isInteger(critico) && critico >= 0 ? '' : 'Ingresa un número entero (0 o más)'
+}
+
+// Reglas del formulario de usuario (crear/editar en el admin y registro público).
+// rutEnUso(rut): indica si el RUN ya pertenece a otro usuario; ocultarRol omite la validación del rol
+export function validarUsuario(valores, opciones = {}) {
+  const rutEnUso = opciones.rutEnUso ?? (() => false)
+  const rut = String(valores.rut ?? '').trim()
+  return {
+    rut: validarRut(rut) || (rutEnUso(rut) ? 'Ya existe un usuario con este RUN' : ''),
+    nombre: validarObligatorio(valores.nombre, 'El nombre es requerido') || validarLargoMaximo(valores.nombre, 50),
+    apellido: validarObligatorio(valores.apellido, 'El apellido es requerido') || validarLargoMaximo(valores.apellido, 100),
+    correo: validarCorreoPermitido(valores.correo),
+    region: validarObligatorio(valores.region, 'Selecciona una región'),
+    comuna: validarObligatorio(valores.comuna, 'Selecciona una comuna'),
+    direccion: validarObligatorio(valores.direccion, 'La dirección es requerida') || validarLargoMaximo(valores.direccion, 300),
+    rol: opciones.ocultarRol ? '' : validarObligatorio(valores.rol, 'Selecciona un rol'),
+  }
 }

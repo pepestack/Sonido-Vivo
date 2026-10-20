@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { NavbarAdmin } from '../../organisms/NavbarAdmin/NavbarAdmin'
 import { SidebarAdmin } from '../../organisms/SidebarAdmin/SidebarAdmin'
 import { Footer } from '../../organisms/Footer/Footer'
+import { sidebarPrincipal, sidebarSecundario } from '../../../data/navegacion'
 
 export function PlantillaPrivada(props) {
   const [menuAbierto, setMenuAbierto] = useState(false)
@@ -25,6 +26,8 @@ export function PlantillaPrivada(props) {
       <div className="d-flex flex-grow-1 position-relative">
         <SidebarAdmin
           abierto={menuAbierto}
+          itemsPrincipales={sidebarPrincipal}
+          itemsSecundarios={sidebarSecundario}
           rutaActual={location.pathname}
           onNavegar={navegar}
           onCerrar={() => setMenuAbierto(false)}

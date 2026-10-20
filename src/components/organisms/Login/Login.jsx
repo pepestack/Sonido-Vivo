@@ -1,7 +1,14 @@
 import { CampoFormulario } from '../../molecules/CampoFormulario/CampoFormulario'
 import { TarjetaAutenticacion } from '../../molecules/TarjetaAutenticacion/TarjetaAutenticacion'
 import { useFormulario } from '../../../hooks/useFormulario'
-import { sinErrores, validarClave, validarEmail } from '../../../utils/validaciones'
+import {
+  LARGO_MAXIMO_CLAVE,
+  LARGO_MAXIMO_CORREO,
+  sinErrores,
+  validarClave,
+  validarCorreoPermitido,
+  validarObligatorio,
+} from '../../../utils/validaciones'
 
 // Organismo: dueño del estado y de los errores. Solo avisa a la página (props.onEnviar) cuando todos los campos son válidos.
 export function Login(props) {
@@ -10,7 +17,7 @@ export function Login(props) {
   function manejarEnvio(evento) {
     evento.preventDefault()
     const nuevos = {
-      email: validarEmail(formulario.valores.email),
+      email: validarObligatorio(formulario.valores.email, 'El correo es requerido') || validarCorreoPermitido(formulario.valores.email),
       contrasena: validarClave(formulario.valores.contrasena),
     }
     formulario.setErrores(nuevos)
@@ -33,7 +40,8 @@ export function Login(props) {
         id="email"
         etiqueta="Correo Electrónico"
         tipo="email"
-        placeholder="Sebastian@ejemplo.com"
+        placeholder="usuario@duoc.cl"
+        maxLength={LARGO_MAXIMO_CORREO}
         valor={formulario.valores.email}
         onChange={formulario.manejarCambio}
         error={formulario.errores.email}
@@ -44,6 +52,7 @@ export function Login(props) {
         etiqueta="Contraseña"
         tipo="password"
         placeholder="*******"
+        maxLength={LARGO_MAXIMO_CLAVE}
         valor={formulario.valores.contrasena}
         onChange={formulario.manejarCambio}
         error={formulario.errores.contrasena}

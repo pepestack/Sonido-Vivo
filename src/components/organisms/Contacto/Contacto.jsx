@@ -5,9 +5,17 @@ import { MensajeEstado } from '../../atoms/MensajeEstado/MensajeEstado'
 import { Titulo } from '../../atoms/Titulo/Titulo'
 import { CampoFormulario } from '../../molecules/CampoFormulario/CampoFormulario'
 import { useFormulario } from '../../../hooks/useFormulario'
-import { sinErrores, validarEmail, validarObligatorio } from '../../../utils/validaciones'
+import {
+  LARGO_MAXIMO_CORREO,
+  sinErrores,
+  validarCorreoOpcional,
+  validarLargoMaximo,
+  validarObligatorio,
+} from '../../../utils/validaciones'
 
 const claseEtiqueta = 'small fw-bold text-muted'
+const LARGO_MAXIMO_NOMBRE = 100
+const LARGO_MAXIMO_COMENTARIO = 500
 
 export function Contacto(props) {
   const formulario = useFormulario({ nombre: '', correo: '', contenido: '' })
@@ -17,9 +25,13 @@ export function Contacto(props) {
     evento.preventDefault()
     const valores = formulario.valores
     const nuevos = {
-      nombre: validarObligatorio(valores.nombre, 'El nombre es requerido'),
-      correo: validarEmail(valores.correo),
-      contenido: validarObligatorio(valores.contenido, 'El mensaje es requerido'),
+      nombre:
+        validarObligatorio(valores.nombre, 'El nombre es requerido') ||
+        validarLargoMaximo(valores.nombre, LARGO_MAXIMO_NOMBRE),
+      correo: validarCorreoOpcional(valores.correo),
+      contenido:
+        validarObligatorio(valores.contenido, 'El comentario es requerido') ||
+        validarLargoMaximo(valores.contenido, LARGO_MAXIMO_COMENTARIO),
     }
     formulario.setErrores(nuevos)
     setEnviado(false)
@@ -42,6 +54,8 @@ export function Contacto(props) {
           <CampoFormulario
             id="nombre"
             etiqueta="Nombre Completo"
+            requerido
+            maxLength={LARGO_MAXIMO_NOMBRE}
             valor={formulario.valores.nombre}
             onChange={formulario.manejarCambio}
             error={formulario.errores.nombre}
@@ -51,6 +65,7 @@ export function Contacto(props) {
             id="correo"
             etiqueta="Correo"
             tipo="email"
+            maxLength={LARGO_MAXIMO_CORREO}
             valor={formulario.valores.correo}
             onChange={formulario.manejarCambio}
             error={formulario.errores.correo}
@@ -58,9 +73,11 @@ export function Contacto(props) {
           />
           <CampoFormulario
             id="contenido"
-            etiqueta="Contenido"
+            etiqueta="Comentario"
             tipo="textarea"
+            requerido
             filas={4}
+            maxLength={LARGO_MAXIMO_COMENTARIO}
             valor={formulario.valores.contenido}
             onChange={formulario.manejarCambio}
             error={formulario.errores.contenido}

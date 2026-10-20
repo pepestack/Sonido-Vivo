@@ -2,10 +2,10 @@ import { Etiqueta } from "../../atoms/Etiqueta/Etiqueta";
 import { Selector } from "../../atoms/Selector/Selector";
 
 // valor 'todos' = sin filtro
-export function FiltroCategoria({ valor, onCambiar, categorias }) {
+export function FiltroCategoria(props) {
   const opciones = [
     { valor: "todos", texto: "Todas las categorias" },
-    ...categorias,
+    ...props.categorias,
   ];
 
   return (
@@ -15,8 +15,8 @@ export function FiltroCategoria({ valor, onCambiar, categorias }) {
       </Etiqueta>
       <Selector
         id="filtro-categoria"
-        valor={valor}
-        onChange={(evento) => onCambiar(evento.target.value)}
+        valor={props.valor}
+        onChange={(evento) => props.onCambiar(evento.target.value)}
         opciones={opciones}
         className="w-auto"
       />

@@ -2,7 +2,9 @@ import { Card } from "react-bootstrap";
 import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
 
-export function CajaComentarios({ comentario }) {
+export function CajaComentarios(props) {
+  const comentario = props.comentario
+
   return (
     <Card
       as="article"
