@@ -4,6 +4,8 @@ import { PlantillaPrivada } from '../../components/templates/PlantillaPrivada/Pl
 import { FormularioUsuario } from '../../components/organisms/FormularioUsuario/FormularioUsuario'
 import { useTituloPagina } from '../../hooks/useTituloPagina'
 import { useUsuarios } from '../../context/UsuariosContext'
+import { comunasDe, regiones } from '../../data/ubicaciones'
+import { roles } from '../../utils/roles'
 
 export default function AdminNuevoUsuario() {
   const navigate = useNavigate()
@@ -21,6 +23,9 @@ export default function AdminNuevoUsuario() {
         <Col xs={12} lg={8}>
           <FormularioUsuario
             titulo="Registrar nuevo usuario"
+            regiones={regiones}
+            comunasDe={comunasDe}
+            roles={roles}
             rutEnUso={(rut) => usuariosCtx.usuarios.some((u) => u.rut === rut)}
             onEnviar={guardar}
             onCancelar={() => navigate('/admin/usuarios')}

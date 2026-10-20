@@ -34,6 +34,7 @@ export default function DetalleProducto() {
       <FichaProducto
         key={producto.id}
         producto={producto}
+        enCarrito={carrito.cantidadEnCarrito(producto.id)}
         onAgregar={carrito.agregarAlCarrito}
       />
     </PlantillaPublica>

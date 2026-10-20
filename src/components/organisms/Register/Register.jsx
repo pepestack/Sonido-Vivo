@@ -1,22 +1,29 @@
-import { CampoFormulario } from '../../molecules/CampoFormulario/CampoFormulario'
+import { CamposUsuario } from '../CamposUsuario/CamposUsuario'
 import { TarjetaAutenticacion } from '../../molecules/TarjetaAutenticacion/TarjetaAutenticacion'
 import { useFormulario } from '../../../hooks/useFormulario'
-import { sinErrores, validarClave, validarEmail, validarObligatorio } from '../../../utils/validaciones'
+import { usuarioVacio } from '../../../data/usuarios'
+import { sinErrores, validarUsuario } from '../../../utils/validaciones'
 
+// Organismo: registro público. Tiene los mismos campos y reglas que crear un usuario en el admin,
+// pero sin elegir rol (la página lo asigna). Avisa a la página con props.onEnviar cuando todo es válido.
+// regiones, comunasDe(region) y rutEnUso(rut) llegan por props
 export function Register(props) {
-  const formulario = useFormulario({ email: '', username: '', contrasena: '' })
+  const formulario = useFormulario(usuarioVacio)
 
   function manejarEnvio(evento) {
     evento.preventDefault()
     const valores = formulario.valores
-    const nuevos = {
-      email: validarEmail(valores.email),
-      username: validarObligatorio(valores.username, 'El nombre de usuario es requerido'),
-      contrasena: validarClave(valores.contrasena),
-    }
+    const nuevos = validarUsuario(valores, { rutEnUso: props.rutEnUso, ocultarRol: true })
     formulario.setErrores(nuevos)
     if (sinErrores(nuevos)) {
-      props.onEnviar({ email: valores.email.trim(), username: valores.username.trim() })
+      props.onEnviar({
+        ...valores,
+        rut: valores.rut.trim(),
+        nombre: valores.nombre.trim(),
+        apellido: valores.apellido.trim(),
+        correo: valores.correo.trim(),
+        direccion: valores.direccion.trim(),
+      })
     }
   }
 
@@ -30,35 +37,12 @@ export function Register(props) {
       onNavegar={props.onNavegar}
       onEnviar={manejarEnvio}
     >
-      <CampoFormulario
-        id="email"
-        etiqueta="Correo Electrónico"
-        tipo="email"
-        placeholder="Sebastian@ejemplo.com"
-        valor={formulario.valores.email}
-        onChange={formulario.manejarCambio}
-        error={formulario.errores.email}
-        claseEtiqueta="form-label"
-      />
-      <CampoFormulario
-        id="username"
-        etiqueta="Nombre de usuario"
-        placeholder="Ej: seba_music"
-        valor={formulario.valores.username}
-        onChange={formulario.manejarCambio}
-        error={formulario.errores.username}
-        claseEtiqueta="form-label"
-      />
-      <CampoFormulario
-        id="contrasena"
-        etiqueta="Contraseña"
-        tipo="password"
-        placeholder="*******"
-        valor={formulario.valores.contrasena}
-        onChange={formulario.manejarCambio}
-        error={formulario.errores.contrasena}
-        claseEtiqueta="form-label"
-        className=""
+      <CamposUsuario
+        formulario={formulario}
+        regiones={props.regiones}
+        comunasDe={props.comunasDe}
+        ocultarRol
+        compacto
       />
     </TarjetaAutenticacion>
   )

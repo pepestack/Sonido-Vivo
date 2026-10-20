@@ -2,12 +2,12 @@ import { Col, Row } from 'react-bootstrap'
 import { TarjetaAccion } from '../../molecules/TarjetaAccion/TarjetaAccion'
 
 // accesos a: [{ titulo, texto, textoBoton, ruta }]
-export function PanelAdmin({ accesos, onNavegar }) {
+export function PanelAdmin(props) {
   return (
     <Row as="section" className="g-4">
-      {accesos.map((acceso) => (
+      {props.accesos.map((acceso) => (
         <Col as="article" key={acceso.ruta} xs={12} md={6}>
-          <TarjetaAccion {...acceso} onNavegar={onNavegar} />
+          <TarjetaAccion {...acceso} onNavegar={props.onNavegar} />
         </Col>
       ))}
     </Row>

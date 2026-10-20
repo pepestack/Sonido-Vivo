@@ -12,11 +12,18 @@ export default function AdminProductos() {
   const productosCtx = useProductos();
   useTituloPagina("Gestión de Inventario");
 
+  // pendiente se conserva al cerrar el modal para que el mensaje no cambie durante la animación
   const [pendiente, setPendiente] = useState(null)
+  const [confirmando, setConfirmando] = useState(false)
+
+  function pedirConfirmacion(producto) {
+    setPendiente(producto)
+    setConfirmando(true)
+  }
 
   function eliminar() {
     productosCtx.eliminarProducto(pendiente.id)
-    setPendiente(null)
+    setConfirmando(false)
   }
 
   return (
@@ -31,16 +38,16 @@ export default function AdminProductos() {
         productos={productosCtx.productos}
         onVer={(producto) => navigate(`/admin/productos/${producto.id}`)}
         onEditar={(producto) => navigate(`/admin/productos/${producto.id}/editar`)}
-        onEliminar={setPendiente}
+        onEliminar={pedirConfirmacion}
       />
       <ModalConfirmacion
-        visible={pendiente !== null}
+        visible={confirmando}
         titulo="Confirmar eliminación"
         textoConfirmar="Eliminar"
         variante="danger"
-        mensaje={`¿Eliminar "${pendiente?.nombre}"?`}
+        mensaje={pendiente && `¿Eliminar "${pendiente.nombre}"?`}
         onConfirmar={eliminar}
-        onCancelar={() => setPendiente(null)}
+        onCancelar={() => setConfirmando(false)}
       />
     </PlantillaPrivada>
   )

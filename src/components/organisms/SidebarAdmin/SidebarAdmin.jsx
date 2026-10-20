@@ -1,6 +1,5 @@
 import { Nav, Offcanvas } from 'react-bootstrap'
 import { NavItem } from '../../molecules/NavItem/NavItem'
-import { sidebarPrincipal, sidebarSecundario } from '../../../data/navegacion'
 import { esRutaActiva } from '../../../utils/rutas'
 
 const claseItem = 'text-body d-flex align-items-center gap-2'
@@ -36,10 +35,10 @@ export function SidebarAdmin(props){
       <Offcanvas.Body className="p-3">
         <nav className="d-flex flex-column flex-grow-1 justify-content-between">
           <Nav as="ul" variant="pills" className="flex-column gap-1 mb-auto">
-            {renderizarItems(sidebarPrincipal)}
+            {renderizarItems(props.itemsPrincipales)}
           </Nav>
           <Nav as="ul" variant="pills" className="flex-column gap-1 my-3">
-            {renderizarItems(sidebarSecundario)}
+            {renderizarItems(props.itemsSecundarios)}
           </Nav>
         </nav>
       </Offcanvas.Body>

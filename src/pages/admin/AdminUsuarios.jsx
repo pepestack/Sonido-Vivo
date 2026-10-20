@@ -13,12 +13,18 @@ export default function AdminUsuarios() {
   const usuariosCtx = useUsuarios();
   useTituloPagina("Gestión de usuarios");
 
-  // usuario que espera confirmación para eliminarse; null = modal cerrado
+  // pendiente se conserva al cerrar el modal para que el mensaje no cambie durante la animación
   const [pendiente, setPendiente] = useState(null);
+  const [confirmando, setConfirmando] = useState(false);
+
+  function pedirConfirmacion(usuario) {
+    setPendiente(usuario);
+    setConfirmando(true);
+  }
 
   function eliminar() {
     usuariosCtx.eliminarUsuario(pendiente.id);
-    setPendiente(null);
+    setConfirmando(false);
   }
 
   return (
@@ -33,16 +39,16 @@ export default function AdminUsuarios() {
         usuarios={usuariosCtx.usuarios}
         onVer={(usuario) => navigate(`/admin/usuarios/${usuario.id}`)}
         onEditar={(usuario) => navigate(`/admin/usuarios/${usuario.id}/editar`)}
-        onEliminar={setPendiente}
+        onEliminar={pedirConfirmacion}
       />
       <ModalConfirmacion
-        visible={pendiente !== null}
+        visible={confirmando}
         titulo="Confirmar eliminación"
         textoConfirmar="Eliminar"
         variante="danger"
         mensaje={pendiente && `¿Eliminar a "${nombreCompleto(pendiente)}"?`}
         onConfirmar={eliminar}
-        onCancelar={() => setPendiente(null)}
+        onCancelar={() => setConfirmando(false)}
       />
     </PlantillaPrivada>
   );

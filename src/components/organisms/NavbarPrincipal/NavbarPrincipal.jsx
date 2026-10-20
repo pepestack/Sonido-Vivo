@@ -1,7 +1,6 @@
 import { Navbar, Container, Nav } from "react-bootstrap";
 import { NavItem } from "../../molecules/NavItem/NavItem";
 import { BotonCarrito } from "../../molecules/BotonCarrito/BotonCarrito";
-import { menuCuenta, navTienda } from "../../../data/navegacion";
 import { MarcaLogo } from "../../molecules/MarcaLogo/MarcaLogo";
 import { esRutaActiva } from "../../../utils/rutas";
 import { Buscador } from "../../molecules/Buscador/Buscador";
@@ -17,7 +16,7 @@ return (
 
           <Navbar.Collapse id="navbar-tienda">
             <Nav as="ul" className="me-auto mb-2 mb-lg-0 ms-lg-4 fw-bold fs-5 text-center text-lg-start">
-              {navTienda.map((enlace) => (
+              {props.enlaces.map((enlace) => (
                 <NavItem
                   key={enlace.ruta}
                   texto={enlace.texto}
@@ -35,7 +34,7 @@ return (
               className="my-2 my-lg-0 me-lg-2 mx-auto mx-lg-0 search-navbar"
             />
             <div className="d-flex justify-content-center align-items-center gap-2 ms-lg-2 mb-2 mb-lg-0">
-              <DropdownUsuario opciones={menuCuenta} onNavegar={props.onNavegar} />
+              <DropdownUsuario opciones={props.menuCuenta} onNavegar={props.onNavegar} />
               <BotonCarrito cantidad={props.totalItems} onClick={() => props.onNavegar('/carrito')} />
             </div>
           </Navbar.Collapse>

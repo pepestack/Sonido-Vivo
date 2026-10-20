@@ -4,19 +4,13 @@ import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
 
 // Título de página con subtítulo opcional y, a la derecha, un botón o contenido propio (children)
-export function Encabezado({
-  titulo,
-  subtitulo,
-  textoBoton,
-  onAccion,
-  claseTitulo = "h2 fw-bold mb-0",
-  children,
-}) {
+export function Encabezado(props) {
+  const claseTitulo = props.claseTitulo ?? "h2 fw-bold mb-0";
   const derecha =
-    children ??
-    (textoBoton && (
-      <Boton variante="success" onClick={onAccion}>
-        {textoBoton}
+    props.children ??
+    (props.textoBoton && (
+      <Boton variante="success" onClick={props.onAccion}>
+        {props.textoBoton}
       </Boton>
     ));
 
@@ -24,9 +18,9 @@ export function Encabezado({
     <Row as="header" className="mb-4 align-items-center">
       <Col xs={12} md={6}>
         <Titulo nivel={1} className={claseTitulo}>
-          {titulo}
+          {props.titulo}
         </Titulo>
-        {subtitulo && <Texto className="text-muted mb-0">{subtitulo}</Texto>}
+        {props.subtitulo && <Texto className="text-muted mb-0">{props.subtitulo}</Texto>}
       </Col>
       {derecha && (
         <Col xs={12} md={6} className="text-md-end mt-3 mt-md-0">

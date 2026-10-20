@@ -5,7 +5,8 @@ import { Titulo } from "../../atoms/Titulo/Titulo";
 import { BarraAcciones } from "../../molecules/BarraAcciones/BarraAcciones";
 import { iniciales, nombreCompleto } from "../../../utils/formato";
 
-export function PerfilUsuario({ usuario, onVolver, onEditar, onEliminar }) {
+export function PerfilUsuario(props) {
+  const usuario = props.usuario;
   const nombre = nombreCompleto(usuario);
   const esAdmin = usuario.rol === "Administrador";
 
@@ -53,9 +54,9 @@ export function PerfilUsuario({ usuario, onVolver, onEditar, onEliminar }) {
         {/* sin onEliminar la barra no muestra el botón: el administrador no se puede eliminar */}
         <BarraAcciones
           className=""
-          onVolver={onVolver}
-          onEditar={onEditar}
-          onEliminar={esAdmin ? undefined : onEliminar}
+          onVolver={props.onVolver}
+          onEditar={props.onEditar}
+          onEliminar={esAdmin ? undefined : props.onEliminar}
         />
       </Card.Body>
     </Card>

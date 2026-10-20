@@ -35,7 +35,9 @@ export default function AdminEditarProducto() {
     <PlantillaPrivada>
       <Row className="justify-content-center">
         <Col xs={12} md={8} lg={6}>
+          {/* key: si cambia el producto, el formulario se vuelve a montar con sus datos */}
           <FormularioProducto
+            key={producto.id}
             titulo="Editar producto"
             valoresIniciales={producto}
             categorias={categorias}

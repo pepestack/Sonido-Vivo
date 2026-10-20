@@ -5,6 +5,8 @@ import { AvisoVacio } from '../../components/molecules/AvisoVacio/AvisoVacio'
 import { FormularioUsuario } from '../../components/organisms/FormularioUsuario/FormularioUsuario'
 import { useTituloPagina } from '../../hooks/useTituloPagina'
 import { useUsuarios } from '../../context/UsuariosContext'
+import { comunasDe, regiones } from '../../data/ubicaciones'
+import { roles } from '../../utils/roles'
 
 export default function AdminEditarUsuario() {
   const navigate = useNavigate()
@@ -39,6 +41,9 @@ export default function AdminEditarUsuario() {
           <FormularioUsuario
             key={usuario.id}
             titulo="Editar usuario"
+            regiones={regiones}
+            comunasDe={comunasDe}
+            roles={roles}
             valoresIniciales={usuario}
             rutEnUso={(rut) => usuariosCtx.usuarios.some((u) => u.rut === rut && u.id !== usuario.id)}
             onEnviar={guardar}

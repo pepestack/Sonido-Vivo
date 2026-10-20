@@ -5,7 +5,7 @@ export const usuariosIniciales = [
     nombre: 'Dueño',
     apellido: 'Sonido Vivo',
     fechaNacimiento: '',
-    correo: 'admin@sonidovivo.cl',
+    correo: 'admin@duoc.cl',
     region: 'Región de Valparaíso',
     comuna: 'Viña del Mar',
     direccion: 'Viña del Mar',
@@ -18,7 +18,7 @@ export const usuariosIniciales = [
     nombre: 'Sebastian',
     apellido: 'Navarro',
     fechaNacimiento: '',
-    correo: 'seba@sonidovivo.cl',
+    correo: 'seba@duoc.cl',
     region: 'Región de Valparaíso',
     comuna: 'Viña del Mar',
     direccion: 'Viña del Mar',
@@ -31,7 +31,7 @@ export const usuariosIniciales = [
     nombre: 'Jose',
     apellido: 'Calderon',
     fechaNacimiento: '',
-    correo: 'jose.c@sonidovivo.cl',
+    correo: 'jose.c@duoc.cl',
     region: 'Región de Valparaíso',
     comuna: 'Valparaíso',
     direccion: 'Valparaíso',
@@ -44,7 +44,7 @@ export const usuariosIniciales = [
     nombre: 'Sebastian',
     apellido: 'Apablaza',
     fechaNacimiento: '',
-    correo: 'seba.a@sonidovivo.cl',
+    correo: 'seba.a@duoc.cl',
     region: 'Región de Valparaíso',
     comuna: 'Quilpué',
     direccion: 'Quilpué',
@@ -52,3 +52,16 @@ export const usuariosIniciales = [
     activo: true,
   },
 ]
+
+// Punto de partida de los formularios de usuario (crear en el admin y registro público)
+export const usuarioVacio = {
+  rut: '',
+  nombre: '',
+  apellido: '',
+  fechaNacimiento: '',
+  correo: '',
+  region: '',
+  comuna: '',
+  direccion: '',
+  rol: '',
+}

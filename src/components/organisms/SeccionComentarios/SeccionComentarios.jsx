@@ -3,7 +3,9 @@ import { FormularioComentario } from "../../molecules/FormularioComentario/Formu
 import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
 
-export function SeccionComentarios({ comentarios, onNavegar }) {
+export function SeccionComentarios(props) {
+  const comentarios = props.comentarios;
+
   return (
     <section className="card shadow-sm border-0 p-4 bg-white">
 
@@ -11,7 +13,7 @@ export function SeccionComentarios({ comentarios, onNavegar }) {
         Comentarios ({comentarios.length})
       </Titulo>
 
-      <FormularioComentario onNavegar={onNavegar} />
+      <FormularioComentario onNavegar={props.onNavegar} />
 
       {comentarios.map((comentario) => (
         <CajaComentarios

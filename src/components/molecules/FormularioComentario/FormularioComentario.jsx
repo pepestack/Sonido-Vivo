@@ -1,7 +1,7 @@
 import { Alert, Form } from "react-bootstrap";
 import { Boton } from "../../atoms/Boton/Boton";
 
-export function FormularioComentario({ onNavegar }) {
+export function FormularioComentario(props) {
   return (
     <>
       <Alert
@@ -18,7 +18,7 @@ export function FormularioComentario({ onNavegar }) {
             variante="outline-dark"
             tamano="sm"
             className="fw-bold"
-            onClick={() => onNavegar("/login")}
+            onClick={() => props.onNavegar("/login")}
           >
             Iniciar sesión
           </Boton>
@@ -27,7 +27,7 @@ export function FormularioComentario({ onNavegar }) {
             variante="naranja"
             tamano="sm"
             className="text-white fw-bold"
-            onClick={() => onNavegar("/registro")}
+            onClick={() => props.onNavegar("/registro")}
           >
             Registrarse
           </Boton>

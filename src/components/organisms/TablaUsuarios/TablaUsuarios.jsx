@@ -2,7 +2,7 @@ import { Card, Table } from "react-bootstrap";
 import { FilaUsuarioAdmin } from "../../molecules/FilaUsuarioAdmin/FilaUsuarioAdmin";
 
 // onVer, onEditar y onEliminar reciben el usuario completo
-export function TablaUsuarios({ usuarios, onVer, onEditar, onEliminar }) {
+export function TablaUsuarios(props) {
   return (
     <Card as="section" className="shadow-sm border-0">
       <Card.Body className="p-0">
@@ -18,14 +18,14 @@ export function TablaUsuarios({ usuarios, onVer, onEditar, onEliminar }) {
           </thead>
           <tbody>
             {/* el administrador no se puede eliminar (igual que en la versión HTML) */}
-            {usuarios.map((usuario) => (
+            {props.usuarios.map((usuario) => (
               <FilaUsuarioAdmin
                 key={usuario.id}
                 usuario={usuario}
                 puedeEliminar={usuario.rol !== "Administrador"}
-                onVer={onVer}
-                onEditar={onEditar}
-                onEliminar={onEliminar}
+                onVer={props.onVer}
+                onEditar={props.onEditar}
+                onEliminar={props.onEliminar}
               />
             ))}
           </tbody>

@@ -6,17 +6,15 @@ import { Precio } from "../../atoms/Precio/Precio";
 import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
 
-export function TarjetaProducto({
-  producto,
-  onAgregar,
-  onNavegar,
-  mostrarDescripcion = false,
-}) {
+export function TarjetaProducto(props) {
+  const producto = props.producto;
+  const mostrarDescripcion = props.mostrarDescripcion ?? false;
+  const sinStock = producto.stock < 1;
   const rutaDetalle = `/producto/${producto.id}`;
 
   return (
     <Card className="h-100 shadow-sm">
-      <Enlace ruta={rutaDetalle} onNavegar={onNavegar}>
+      <Enlace ruta={rutaDetalle} onNavegar={props.onNavegar}>
         <Imagen
           src={producto.imagen}
           alt={producto.nombre}
@@ -25,7 +23,7 @@ export function TarjetaProducto({
       </Enlace>
       <Card.Body className="d-flex flex-column">
         <Titulo nivel={2} className="card-title h5">
-          <Enlace ruta={rutaDetalle} onNavegar={onNavegar} className="text-reset text-decoration-none">
+          <Enlace ruta={rutaDetalle} onNavegar={props.onNavegar} className="text-reset text-decoration-none">
             {producto.nombre}
           </Enlace>
         </Titulo>
@@ -37,8 +35,8 @@ export function TarjetaProducto({
         <Texto className="card-text fs-4 fw-bold text-primary mt-auto">
           <Precio monto={producto.precio} />
         </Texto>
-        <Boton className="w-100 mt-2" onClick={() => onAgregar(producto)}>
-          Añadir al carrito
+        <Boton className="w-100 mt-2" disabled={sinStock} onClick={() => props.onAgregar(producto)}>
+          {sinStock ? "Sin stock" : "Añadir al carrito"}
         </Boton>
       </Card.Body>
     </Card>

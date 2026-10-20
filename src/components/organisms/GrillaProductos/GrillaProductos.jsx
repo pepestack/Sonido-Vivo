@@ -3,34 +3,27 @@ import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
 import { TarjetaProducto } from "../../molecules/TarjetaProducto/TarjetaProducto";
 
-export function GrillaProductos({
-  productos,
-  onAgregar,
-  onNavegar,
-  titulo,
-  mostrarDescripcion = false,
-  className = "",
-}) {
+export function GrillaProductos(props) {
   return (
-    <section className={className}>
-      {titulo && (
+    <section className={props.className ?? ""}>
+      {props.titulo && (
         <Titulo nivel={2} className="mb-3">
-          {titulo}
+          {props.titulo}
         </Titulo>
       )}
       <Row className="g-4">
-        {productos.map((producto) => (
+        {props.productos.map((producto) => (
           <Col as="article" key={producto.id} xs={12} md={6} lg={4}>
             <TarjetaProducto
               producto={producto}
-              onAgregar={onAgregar}
-              onNavegar={onNavegar}
-              mostrarDescripcion={mostrarDescripcion}
+              onAgregar={props.onAgregar}
+              onNavegar={props.onNavegar}
+              mostrarDescripcion={props.mostrarDescripcion ?? false}
             />
           </Col>
         ))}
       </Row>
-      {productos.length === 0 && (
+      {props.productos.length === 0 && (
         <Texto className="text-muted text-center py-5">
           No hay productos para mostrar.
         </Texto>
