@@ -22,6 +22,7 @@ import AdminNuevoProducto from "./pages/admin/AdminNuevoProducto";
 import AdminEditarProducto from "./pages/admin/AdminEditarProducto";
 import AdminNuevoUsuario from "./pages/admin/AdminNuevoUsuario";
 import AdminEditarUsuario from "./pages/admin/AdminEditarUsuario";
+import AdminCriticos from "./pages/admin/AdminCriticos";
 
 export default function App() {
   return (
@@ -50,6 +51,7 @@ export default function App() {
               <Route path="/admin/productos/:id" element={<AdminVerProducto />} />
               <Route path="/admin/productos/nuevo" element={<AdminNuevoProducto />} />
               <Route path="/admin/productos/:id/editar" element={<AdminEditarProducto />} />
+              <Route path="/admin/criticos" element={<AdminCriticos />} />
               <Route path="/admin/usuarios" element={<AdminUsuarios />} />
               <Route path="/admin/usuarios/:id" element={<VerUsuario />} />
               <Route path="/admin/usuarios/nuevo" element={<AdminNuevoUsuario />} />

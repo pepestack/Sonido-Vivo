@@ -22,3 +22,8 @@ export function actualizarProducto(productos, id, cambios) {
 export function eliminar(productos, id){
     return productos.filter((producto) => producto.id !== id)
 }
+
+// Productos que se están acabando: los que tienen el stock en su nivel crítico o por debajo
+export function productosCriticos(productos) {
+  return productos.filter((producto) => producto.stock <= producto.stockCritico)
+}
