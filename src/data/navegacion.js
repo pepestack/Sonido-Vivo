@@ -13,6 +13,7 @@ export const sidebarPrincipal = [
   { texto: 'Dashboard', ruta: '/admin', icono: 'bi bi-grid-fill', exacto: true },
   { texto: 'Pedidos', ruta: '#', icono: 'bi bi-receipt', deshabilitado: true },
   { texto: 'Inventario', ruta: '/admin/productos', icono: 'bi bi-box-seam' },
+  { texto: 'Stock crítico', ruta: '/admin/criticos', icono: 'bi bi-exclamation-triangle' },
   { texto: 'Reportes', ruta: '#', icono: 'bi bi-bar-chart', deshabilitado: true },
   { texto: 'Usuarios', ruta: '/admin/usuarios', icono: 'bi bi-people' },
 ]

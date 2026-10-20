@@ -106,6 +106,7 @@ export function validarUsuario(valores, opciones = {}) {
     nombre: validarObligatorio(valores.nombre, 'El nombre es requerido') || validarLargoMaximo(valores.nombre, 50),
     apellido: validarObligatorio(valores.apellido, 'El apellido es requerido') || validarLargoMaximo(valores.apellido, 100),
     correo: validarCorreoPermitido(valores.correo),
+    contrasena: validarClave(valores.contrasena),
     region: validarObligatorio(valores.region, 'Selecciona una región'),
     comuna: validarObligatorio(valores.comuna, 'Selecciona una comuna'),
     direccion: validarObligatorio(valores.direccion, 'La dirección es requerida') || validarLargoMaximo(valores.direccion, 300),

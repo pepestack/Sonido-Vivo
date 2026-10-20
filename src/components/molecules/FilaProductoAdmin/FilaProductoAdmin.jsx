@@ -21,9 +21,12 @@ export function FilaProductoAdmin(props) {
         <Boton variante="outline-primary" tamano="sm" onClick={() => props.onEditar(producto)}>
           Editar
         </Boton>
-        <Boton variante="outline-danger" tamano="sm" className="ms-1" onClick={() => props.onEliminar(producto)}>
-          Eliminar
-        </Boton>
+        {/* sin onEliminar no se muestra el botón (ej: la vista de productos críticos) */}
+        {props.onEliminar && (
+          <Boton variante="outline-danger" tamano="sm" className="ms-1" onClick={() => props.onEliminar(producto)}>
+            Eliminar
+          </Boton>
+        )}
       </td>
     </tr>
   )

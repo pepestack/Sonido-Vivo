@@ -1,6 +1,6 @@
 import { Col, Row } from 'react-bootstrap'
 import { CampoFormulario } from '../../molecules/CampoFormulario/CampoFormulario'
-import { LARGO_MAXIMO_CORREO } from '../../../utils/validaciones'
+import { LARGO_MAXIMO_CLAVE, LARGO_MAXIMO_CORREO } from '../../../utils/validaciones'
 
 // Campos del usuario compartidos por el formulario del admin y el registro público.
 // formulario: el resultado de useFormulario (valores, errores, manejarCambio...)
@@ -76,6 +76,17 @@ export function CamposUsuario(props) {
         valor={valores.correo}
         onChange={formulario.manejarCambio}
         error={errores.correo}
+      />
+      <CampoFormulario
+        id="contrasena"
+        etiqueta="Contraseña"
+        tipo="password"
+        placeholder="Entre 4 y 10 caracteres"
+        maxLength={LARGO_MAXIMO_CLAVE}
+        requerido
+        valor={valores.contrasena}
+        onChange={formulario.manejarCambio}
+        error={errores.contrasena}
       />
       <Row>
         <Col xs={12} md={ancho}>
