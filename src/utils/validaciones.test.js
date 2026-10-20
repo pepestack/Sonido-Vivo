@@ -14,6 +14,7 @@ describe('validarUsuario', () => {
     nombre: 'Ana',
     apellido: 'Pérez',
     correo: 'ana@duoc.cl',
+    contrasena: '1234',
     region: 'Región de Valparaíso',
     comuna: 'Viña del Mar',
     direccion: 'Calle 1',
