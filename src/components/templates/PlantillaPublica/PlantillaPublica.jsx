@@ -17,7 +17,7 @@ export function PlantillaPublica(props) {
         onBuscar={(texto) => navigate(`/buscar/${encodeURIComponent(texto)}`)}
         />
         <main className="main-custom-margin container py-4 mb-5 flex-grow-1">{props.children}</main>
-        <Footer onNavegar={navigate}/>
+        <Footer rutaActual={location.pathname} onNavegar={navigate}/>
     </div>
   )
 }

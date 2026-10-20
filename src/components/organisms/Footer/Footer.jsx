@@ -5,6 +5,7 @@ import { ListaEnlaces } from "../../molecules/ListaEnlaces/ListaEnlaces";
 import { Texto } from "../../atoms/Texto/Texto";
 import { FormularioNewsletter } from "../../molecules/FormularioNewsletter/FormularioNewsletter";
 import { footerCuenta, footerInfo } from "../../../data/navegacion";
+import { esRutaActiva } from "../../../utils/rutas";
 
 export function Footer(props) {
   const barraInferior = (
@@ -26,6 +27,14 @@ export function Footer(props) {
     return <footer>{barraInferior}</footer>
   }
 
+  function marcarRutaActual(enlaces) {
+    return enlaces.map((enlace) => ({
+      ...enlace,
+      deshabilitado: enlace.deshabilitado
+        || (props.rutaActual && esRutaActiva(props.rutaActual, enlace.ruta, true)),
+    }))
+  }
+
   return (
     <footer className="footer pt-5">
       <Container>
@@ -39,11 +48,11 @@ export function Footer(props) {
           </Col>
 
           <Col xs={12} md={6} lg={2}>
-            <ListaEnlaces titulo="Información" enlaces={footerInfo} onNavegar={props.onNavegar} />
+            <ListaEnlaces titulo="Información" enlaces={marcarRutaActual(footerInfo)} onNavegar={props.onNavegar} />
           </Col>
 
           <Col xs={12} md={6} lg={3}>
-            <ListaEnlaces titulo="Mi Cuenta" enlaces={footerCuenta} onNavegar={props.onNavegar} />
+            <ListaEnlaces titulo="Mi Cuenta" enlaces={marcarRutaActual(footerCuenta)} onNavegar={props.onNavegar} />
           </Col>
 
           <Col xs={12} md={6} lg={4}>

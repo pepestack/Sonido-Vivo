@@ -1,7 +1,7 @@
 export const footerInfo = [
-    {texto: 'Términos y Condiciones', ruta: "#", disabled: true},
-    {texto: 'Política de Privacidad', ruta: "#", disabled: true},
-    {texto: 'Políticas de Garantía', ruta: "#", disabled: true}
+    {texto: 'Términos y Condiciones', ruta: "#", deshabilitado: true},
+    {texto: 'Política de Privacidad', ruta: "#", deshabilitado: true},
+    {texto: 'Políticas de Garantía', ruta: "#", deshabilitado: true}
 ]
 
 export const footerCuenta=[
