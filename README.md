@@ -77,6 +77,11 @@ Para detener el servidor de desarrollo, presione:
 ## Bitácora
 
 <!-- SUMMARY:START -->
+### 2026-10-19
+
+- **Sebastian Navarro**: Implementó nuevas funcionalidades en el panel administrativo, integró herramientas de testing y realizó ajustes de refactorización y corrección de errores en la interfaz.
+- **José Calderón**: Optimizó la lógica del carrito de compras, fortaleció las validaciones de registro y actualizó dependencias para mejorar la seguridad y estructura del proyecto.
+
 ### 2026-10-18
 
 Sin actividad en las últimas 24 horas.
