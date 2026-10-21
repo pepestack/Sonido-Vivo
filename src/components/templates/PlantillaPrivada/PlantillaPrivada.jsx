@@ -3,11 +3,14 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { NavbarAdmin } from '../../organisms/NavbarAdmin/NavbarAdmin'
 import { SidebarAdmin } from '../../organisms/SidebarAdmin/SidebarAdmin'
 import { Footer } from '../../organisms/Footer/Footer'
+import { ModalConfirmacion } from '../../molecules/ModalConfirmacion/ModalConfirmacion'
 import { sidebarPrincipal, sidebarSecundario } from '../../../data/navegacion'
 import { useSesion } from '../../../context/SesionContext'
 
 export function PlantillaPrivada(props) {
   const [menuAbierto, setMenuAbierto] = useState(false)
+  // el botón "Cerrar Sesión" solo abre el modal; la sesión se cierra al confirmar
+  const [confirmandoSalida, setConfirmandoSalida] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
   const sesion = useSesion()
@@ -19,6 +22,7 @@ export function PlantillaPrivada(props) {
   }
 
   function cerrarSesion() {
+    setConfirmandoSalida(false)
     sesion.cerrarSesion()
     navigate('/')
   }
@@ -31,7 +35,7 @@ export function PlantillaPrivada(props) {
           menuAbierto={menuAbierto}
           onAlternarMenu={() => setMenuAbierto((abierto) => !abierto)}
           onNavegar={navegar}
-          onCerrarSesion={cerrarSesion}
+          onCerrarSesion={() => setConfirmandoSalida(true)}
         />
       </div>
       <div className="d-flex flex-grow-1 position-relative">
@@ -48,6 +52,15 @@ export function PlantillaPrivada(props) {
       <div className="d-print-none">
         <Footer compacto />
       </div>
+      <ModalConfirmacion
+        visible={confirmandoSalida}
+        titulo="Cerrar sesión"
+        mensaje="¿Seguro que quieres cerrar tu sesión?"
+        textoConfirmar="Cerrar sesión"
+        variante="danger"
+        onConfirmar={cerrarSesion}
+        onCancelar={() => setConfirmandoSalida(false)}
+      />
     </div>
   )
 }
