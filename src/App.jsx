@@ -5,6 +5,11 @@ import ContactoPage from "./pages/ContactoPage";
 import Catalogo from "./pages/Catalogo";
 import DetalleProducto from "./pages/DetalleProducto";
 import CarritoPage from "./pages/CarritoPage";
+import CheckoutPage from "./pages/CheckoutPage";
+import CompraExitosaPage from "./pages/CompraExitosaPage";
+import CompraErrorPage from "./pages/CompraErrorPage";
+import MisPedidosPage from "./pages/MisPedidosPage";
+import MiPedidoPage from "./pages/MiPedidoPage";
 import AdminHome from "./pages/admin/AdminHome";
 import AdminProductos from "./pages/admin/AdminProductos";
 import AdminUsuarios from "./pages/admin/AdminUsuarios";
@@ -42,6 +47,11 @@ export default function App() {
                   <Route path="/buscar/:texto" element={<Catalogo />} />
                   <Route path="/producto/:id" element={<DetalleProducto />} />
                   <Route path="/carrito" element={<CarritoPage />} />
+                  <Route path="/checkout" element={<CheckoutPage />} />
+                  <Route path="/compra/exito/:id" element={<CompraExitosaPage />} />
+                  <Route path="/compra/error" element={<CompraErrorPage />} />
+                  <Route path="/mis-pedidos" element={<MisPedidosPage />} />
+                  <Route path="/mis-pedidos/:id" element={<MiPedidoPage />} />
                   <Route path="/contacto" element={<ContactoPage />} />
                   <Route path="/nosotros" element={<NosotrosPage />} />
                   <Route path="/blog" element={<BlogPage />} />

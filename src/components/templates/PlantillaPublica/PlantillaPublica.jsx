@@ -17,10 +17,11 @@ export function PlantillaPublica(props) {
     navigate('/')
   }
 
-  // con sesión: saludo, acceso al panel solo para el personal y cerrar sesión
+  // con sesión: saludo, sus pedidos, acceso al panel solo para el personal y cerrar sesión
   const opcionesCuenta = sesion.usuario
     ? [
         { encabezado: true, texto: `Hola, ${sesion.usuario.nombre}` },
+        { texto: 'Mis pedidos', ruta: '/mis-pedidos' },
         ...(esCliente(sesion.usuario) ? [] : [{ texto: 'Panel de administración', ruta: '/admin' }]),
         { separador: true },
         { texto: 'Cerrar sesión', accion: cerrarSesion },

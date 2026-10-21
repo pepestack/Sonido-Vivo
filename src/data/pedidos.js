@@ -8,10 +8,10 @@
 export const ESTADOS_PEDIDO = ['En preparación', 'Despachado', 'Entregado']
 export const ESTADO_INICIAL = ESTADOS_PEDIDO[0]
 
-// Color de la insignia de cada estado
+// Color de la insignia de cada estado (colores con buen contraste para el texto blanco)
 export const colorEstado = {
-  'En preparación': 'warning',
-  Despachado: 'info',
+  'En preparación': 'secondary',
+  Despachado: 'primary',
   Entregado: 'success',
 }
 
@@ -19,6 +19,20 @@ export const tiposEntrega = [
   { valor: 'despacho', texto: 'Despacho a domicilio' },
   { valor: 'retiro', texto: 'Retiro en tienda (Viña del Mar)' },
 ]
+
+// Punto de partida del formulario de checkout; con sesión se completa con los datos del usuario
+export const checkoutVacio = {
+  nombre: '',
+  apellido: '',
+  correo: '',
+  tipoEntrega: 'despacho',
+  region: '',
+  comuna: '',
+  direccion: '',
+  numeroTarjeta: '',
+  vencimiento: '',
+  cvv: '',
+}
 
 // Pago simulado: esta tarjeta de prueba siempre es rechazada, para mostrar la pantalla de error
 export const TARJETA_RECHAZADA = '4000000000000002'
