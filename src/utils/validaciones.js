@@ -1,5 +1,8 @@
 const patronCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const patronSku = /^[A-Z]{2}\d{3}$/
+const patronTarjeta = /^\d{16}$/
+const patronVencimiento = /^(0[1-9]|1[0-2])\/(\d{2})$/
+const patronCvv = /^\d{3}$/
 export const dominiosPermitidos = ['duoc.cl', 'profesor.duoc.cl', 'gmail.com']
 export const LARGO_MAXIMO_CORREO = 100
 export const LARGO_MINIMO_CLAVE = 4
@@ -111,5 +114,51 @@ export function validarUsuario(valores, opciones = {}) {
     comuna: validarObligatorio(valores.comuna, 'Selecciona una comuna'),
     direccion: validarObligatorio(valores.direccion, 'La dirección es requerida') || validarLargoMaximo(valores.direccion, 300),
     rol: opciones.ocultarRol ? '' : validarObligatorio(valores.rol, 'Selecciona un rol'),
+  }
+}
+
+// El número de tarjeta se puede escribir con espacios ("4111 1111 1111 1111")
+export function sinEspacios(valor) {
+  return String(valor ?? '').replace(/\s/g, '')
+}
+
+export function validarTarjeta(valor) {
+  return patronTarjeta.test(sinEspacios(valor)) ? '' : 'Ingresa los 16 dígitos de la tarjeta'
+}
+
+// Formato MM/AA; la tarjeta vale hasta el último día de su mes. hoy se recibe para poder probarla
+export function validarVencimiento(valor, hoy = new Date()) {
+  const partes = patronVencimiento.exec(String(valor ?? '').trim())
+  if (!partes) return 'Usa el formato MM/AA'
+  const mes = Number(partes[1])
+  const anio = 2000 + Number(partes[2])
+  const vencida = anio < hoy.getFullYear() || (anio === hoy.getFullYear() && mes < hoy.getMonth() + 1)
+  return vencida ? 'La tarjeta está vencida' : ''
+}
+
+export function validarCvv(valor) {
+  return patronCvv.test(String(valor ?? '').trim()) ? '' : 'El CVV tiene 3 dígitos'
+}
+
+// Reglas del checkout. Con retiro en tienda no se pide dirección.
+// El correo puede ser de cualquier dominio: quien compra no necesita cuenta
+export function validarCheckout(valores) {
+  const conDespacho = valores.tipoEntrega !== 'retiro'
+  return {
+    nombre: validarObligatorio(valores.nombre, 'El nombre es requerido') || validarLargoMaximo(valores.nombre, 50),
+    apellido: validarObligatorio(valores.apellido, 'El apellido es requerido') || validarLargoMaximo(valores.apellido, 100),
+    correo:
+      validarObligatorio(valores.correo, 'El correo es requerido') ||
+      validarLargoMaximo(valores.correo, LARGO_MAXIMO_CORREO) ||
+      validarEmail(valores.correo),
+    tipoEntrega: validarObligatorio(valores.tipoEntrega, 'Elige cómo recibir tu compra'),
+    region: conDespacho ? validarObligatorio(valores.region, 'Selecciona una región') : '',
+    comuna: conDespacho ? validarObligatorio(valores.comuna, 'Selecciona una comuna') : '',
+    direccion: conDespacho
+      ? validarObligatorio(valores.direccion, 'La dirección es requerida') || validarLargoMaximo(valores.direccion, 300)
+      : '',
+    numeroTarjeta: validarTarjeta(valores.numeroTarjeta),
+    vencimiento: validarVencimiento(valores.vencimiento),
+    cvv: validarCvv(valores.cvv),
   }
 }

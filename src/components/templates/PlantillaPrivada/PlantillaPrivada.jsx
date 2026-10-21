@@ -4,11 +4,13 @@ import { NavbarAdmin } from '../../organisms/NavbarAdmin/NavbarAdmin'
 import { SidebarAdmin } from '../../organisms/SidebarAdmin/SidebarAdmin'
 import { Footer } from '../../organisms/Footer/Footer'
 import { sidebarPrincipal, sidebarSecundario } from '../../../data/navegacion'
+import { useSesion } from '../../../context/SesionContext'
 
 export function PlantillaPrivada(props) {
   const [menuAbierto, setMenuAbierto] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
+  const sesion = useSesion()
 
   // cierra el sidebar en móvil al elegir una opción
   function navegar(ruta) {
@@ -16,13 +18,22 @@ export function PlantillaPrivada(props) {
     navigate(ruta)
   }
 
+  function cerrarSesion() {
+    sesion.cerrarSesion()
+    navigate('/')
+  }
+
   return (
     <div className="d-flex flex-column min-vh-100">
-      <NavbarAdmin
-        menuAbierto={menuAbierto}
-        onAlternarMenu={() => setMenuAbierto((abierto) => !abierto)}
-        onNavegar={navegar}
-      />
+      {/* d-print-none: al imprimir (ej. una boleta) solo sale el contenido principal */}
+      <div className="d-print-none">
+        <NavbarAdmin
+          menuAbierto={menuAbierto}
+          onAlternarMenu={() => setMenuAbierto((abierto) => !abierto)}
+          onNavegar={navegar}
+          onCerrarSesion={cerrarSesion}
+        />
+      </div>
       <div className="d-flex flex-grow-1 position-relative">
         <SidebarAdmin
           abierto={menuAbierto}
@@ -34,7 +45,9 @@ export function PlantillaPrivada(props) {
         />
         <main className="container my-5 pt-2 pt-lg-4 overflow-hidden">{props.children}</main>
       </div>
-      <Footer compacto />
+      <div className="d-print-none">
+        <Footer compacto />
+      </div>
     </div>
   )
 }

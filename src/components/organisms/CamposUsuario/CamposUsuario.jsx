@@ -1,5 +1,6 @@
 import { Col, Row } from 'react-bootstrap'
 import { CampoFormulario } from '../../molecules/CampoFormulario/CampoFormulario'
+import { CamposDireccion } from '../CamposDireccion/CamposDireccion'
 import { LARGO_MAXIMO_CLAVE, LARGO_MAXIMO_CORREO } from '../../../utils/validaciones'
 
 // Campos del usuario compartidos por el formulario del admin y el registro público.
@@ -11,13 +12,6 @@ export function CamposUsuario(props) {
   const valores = formulario.valores
   const errores = formulario.errores
   const ancho = props.compacto ? 12 : 6
-
-  // la comuna depende de la región: al cambiar de región se borra la comuna elegida
-  function manejarRegion(evento) {
-    const region = evento.target.value
-    formulario.setValores((actuales) => ({ ...actuales, region, comuna: '' }))
-    formulario.setErrores((actuales) => ({ ...actuales, region: '', comuna: '' }))
-  }
 
   return (
     <>
@@ -88,45 +82,11 @@ export function CamposUsuario(props) {
         onChange={formulario.manejarCambio}
         error={errores.contrasena}
       />
-      <Row>
-        <Col xs={12} md={ancho}>
-          <CampoFormulario
-            id="region"
-            etiqueta="Región"
-            tipo="select"
-            placeholder="Selecciona la región"
-            requerido
-            opciones={props.regiones}
-            valor={valores.region}
-            onChange={manejarRegion}
-            error={errores.region}
-          />
-        </Col>
-        <Col xs={12} md={ancho}>
-          <CampoFormulario
-            id="comuna"
-            etiqueta="Comuna"
-            tipo="select"
-            placeholder={valores.region ? 'Selecciona la comuna' : 'Primero elige una región'}
-            requerido
-            deshabilitado={!valores.region}
-            opciones={props.comunasDe(valores.region)}
-            valor={valores.comuna}
-            onChange={formulario.manejarCambio}
-            error={errores.comuna}
-          />
-        </Col>
-      </Row>
-      <CampoFormulario
-        id="direccion"
-        etiqueta="Dirección"
-        tipo="textarea"
-        filas={2}
-        maxLength={300}
-        requerido
-        valor={valores.direccion}
-        onChange={formulario.manejarCambio}
-        error={errores.direccion}
+      <CamposDireccion
+        formulario={formulario}
+        regiones={props.regiones}
+        comunasDe={props.comunasDe}
+        compacto={props.compacto}
       />
       {!props.ocultarRol && (
         <CampoFormulario

@@ -2,6 +2,8 @@ export const CLAVES = {
   productos: 'productosSonidoVivo',
   usuarios: 'usuariosSonidoVivo',
   carrito: 'carritoSonidoVivo',
+  sesion: 'sesionSonidoVivo',
+  pedidos: 'pedidosSonidoVivo',
 }
 
 // Si no hay nada guardado (o el JSON está corrupto) se usa una copia de los datos iniciales,

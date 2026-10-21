@@ -27,7 +27,7 @@ export function SidebarAdmin(props){
       show={props.abierto}
       onHide={props.onCerrar}
       id="sidebar"
-      className="sidebar border-end"
+      className="sidebar border-end d-print-none"
     >
       <Offcanvas.Header closeButton className="d-lg-none">
         <Offcanvas.Title>Menú</Offcanvas.Title>

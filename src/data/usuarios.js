@@ -55,6 +55,20 @@ export const usuariosIniciales = [
     rol: 'Vendedor',
     activo: true,
   },
+  {
+    id: 5,
+    rut: '555555555',
+    nombre: 'Camila',
+    apellido: 'Rojas',
+    fechaNacimiento: '',
+    correo: 'cliente@gmail.com',
+    contrasena: '1234',
+    region: 'Región de Valparaíso',
+    comuna: 'Concón',
+    direccion: 'Av. Borgoño 1234',
+    rol: 'Cliente',
+    activo: true,
+  },
 ]
 
 // Punto de partida de los formularios de usuario (crear en el admin y registro público)

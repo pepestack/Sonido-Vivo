@@ -54,9 +54,10 @@ export function quitar(items, id) {
   return items.filter((item) => item.id !== id)
 }
 
-export function calcularTotales(items) {
+// tipoEntrega: 'despacho' (se cobra COSTO_DESPACHO) o 'retiro' en tienda (sin costo)
+export function calcularTotales(items, tipoEntrega = 'despacho') {
   const totalItems = items.reduce((total, item) => total + item.cantidad, 0)
   const subtotal = items.reduce((total, item) => total + item.precio * item.cantidad, 0)
-  const despacho = items.length > 0 ? COSTO_DESPACHO : 0
+  const despacho = items.length > 0 && tipoEntrega !== 'retiro' ? COSTO_DESPACHO : 0
   return { totalItems, subtotal, despacho, total: subtotal + despacho }
 }
