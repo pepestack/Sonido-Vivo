@@ -1,10 +1,23 @@
 import { Dropdown } from "react-bootstrap"
 import { Icono } from "../../atoms/Icono/Icono"
 
+// opciones: [{ texto, ruta } | { texto, accion } | { encabezado: true, texto } | { separador: true }]
+// accion: función que se ejecuta en vez de navegar (ej. cerrar sesión)
 export function DropdownUsuario(props){
-    function ir(evento,ruta){
+    function elegir(evento, opcion){
         evento.preventDefault()
-        props.onNavegar(ruta)
+        if (opcion.accion) opcion.accion()
+        else props.onNavegar(opcion.ruta)
+    }
+
+    function renderizarOpcion(opcion, indice){
+        if (opcion.separador) return <Dropdown.Divider key={`separador-${indice}`} />
+        if (opcion.encabezado) return <Dropdown.Header key={`encabezado-${indice}`}>{opcion.texto}</Dropdown.Header>
+        return (
+            <Dropdown.Item key={opcion.texto} href={opcion.ruta ?? '#'} onClick={(evento) => elegir(evento, opcion)}>
+              {opcion.texto}
+            </Dropdown.Item>
+        )
     }
 
     return (
@@ -14,15 +27,7 @@ export function DropdownUsuario(props){
       </Dropdown.Toggle>
 
       <Dropdown.Menu align="end" className="menu-usuario">
-        {props.opciones.map((opcion, indice) =>
-          opcion.separador ? (
-            <Dropdown.Divider key={`separador-${indice}`} />
-          ) : (
-            <Dropdown.Item key={opcion.ruta} href={opcion.ruta} onClick={(evento) => ir(evento, opcion.ruta)}>
-              {opcion.texto}
-            </Dropdown.Item>
-          ),
-        )}
+        {props.opciones.map(renderizarOpcion)}
       </Dropdown.Menu>
     </Dropdown>
   )

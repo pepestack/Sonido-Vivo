@@ -34,9 +34,8 @@ export const navTienda = [
   { texto: 'Contacto', ruta: '/contacto' },
 ]
 
+// Menú de cuenta sin sesión; con sesión PlantillaPublica arma uno con el nombre del usuario
 export const menuCuenta = [
-  { texto: 'Mi Cuenta', ruta: '/admin' },
-  { separador: true },
   { texto: 'Iniciar sesión', ruta: '/login' },
   { texto: 'Registrarse', ruta: '/registro' },
 ]

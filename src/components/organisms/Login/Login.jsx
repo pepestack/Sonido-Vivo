@@ -1,3 +1,4 @@
+import { MensajeEstado } from '../../atoms/MensajeEstado/MensajeEstado'
 import { CampoFormulario } from '../../molecules/CampoFormulario/CampoFormulario'
 import { TarjetaAutenticacion } from '../../molecules/TarjetaAutenticacion/TarjetaAutenticacion'
 import { useFormulario } from '../../../hooks/useFormulario'
@@ -11,6 +12,7 @@ import {
 } from '../../../utils/validaciones'
 
 // Organismo: dueño del estado y de los errores. Solo avisa a la página (props.onEnviar) cuando todos los campos son válidos.
+// props.error: mensaje de la página cuando las credenciales no corresponden a ningún usuario
 export function Login(props) {
   const formulario = useFormulario({ email: '', contrasena: '' })
 
@@ -22,7 +24,7 @@ export function Login(props) {
     }
     formulario.setErrores(nuevos)
     if (sinErrores(nuevos)) {
-      props.onEnviar({ email: formulario.valores.email.trim() })
+      props.onEnviar({ email: formulario.valores.email.trim(), contrasena: formulario.valores.contrasena })
     }
   }
 
@@ -59,6 +61,7 @@ export function Login(props) {
         claseEtiqueta="form-label"
         className=""
       />
+      <MensajeEstado tipo="error">{props.error}</MensajeEstado>
     </TarjetaAutenticacion>
   )
 }

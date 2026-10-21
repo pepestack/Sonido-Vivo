@@ -3,7 +3,7 @@ import { Boton } from "../../atoms/Boton/Boton";
 import { Texto } from "../../atoms/Texto/Texto";
 import { MarcaLogo } from "../../molecules/MarcaLogo/MarcaLogo";
 
-// onAlternarMenu: abre/cierra el sidebar en pantallas chicas
+// onAlternarMenu: abre/cierra el sidebar en pantallas chicas; onCerrarSesion: termina la sesión
 export function NavbarAdmin(props) {
   return(
     <header>
@@ -24,7 +24,7 @@ export function NavbarAdmin(props) {
             <MarcaLogo variante="admin" ruta="/admin" onNavegar={props.onNavegar}/>
 
             <div className="d-flex ms-auto">
-              <Boton variante="outline-light" tamano="sm" onClick={() => props.onNavegar('/')}>
+              <Boton variante="outline-light" tamano="sm" onClick={props.onCerrarSesion}>
                 Cerrar Sesión
               </Boton>
             </div>

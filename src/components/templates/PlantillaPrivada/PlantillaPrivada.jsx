@@ -4,16 +4,23 @@ import { NavbarAdmin } from '../../organisms/NavbarAdmin/NavbarAdmin'
 import { SidebarAdmin } from '../../organisms/SidebarAdmin/SidebarAdmin'
 import { Footer } from '../../organisms/Footer/Footer'
 import { sidebarPrincipal, sidebarSecundario } from '../../../data/navegacion'
+import { useSesion } from '../../../context/SesionContext'
 
 export function PlantillaPrivada(props) {
   const [menuAbierto, setMenuAbierto] = useState(false)
   const navigate = useNavigate()
   const location = useLocation()
+  const sesion = useSesion()
 
   // cierra el sidebar en móvil al elegir una opción
   function navegar(ruta) {
     setMenuAbierto(false)
     navigate(ruta)
+  }
+
+  function cerrarSesion() {
+    sesion.cerrarSesion()
+    navigate('/')
   }
 
   return (
@@ -22,6 +29,7 @@ export function PlantillaPrivada(props) {
         menuAbierto={menuAbierto}
         onAlternarMenu={() => setMenuAbierto((abierto) => !abierto)}
         onNavegar={navegar}
+        onCerrarSesion={cerrarSesion}
       />
       <div className="d-flex flex-grow-1 position-relative">
         <SidebarAdmin
