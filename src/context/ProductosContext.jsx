@@ -27,7 +27,11 @@ export function ProductosProvider(props) {
         setProductos((actuales) => productoService.eliminar(actuales, id))
     }
 
-    const valor = { productos, obtenerProducto, agregarProducto, actualizarProducto, eliminarProducto }
+    function descontarStock(items) {
+        setProductos((actuales) => productoService.descontarStock(actuales, items))
+    }
+
+    const valor = { productos, obtenerProducto, agregarProducto, actualizarProducto, eliminarProducto, descontarStock }
 
     return <ProductosContext.Provider value={valor}>{props.children}</ProductosContext.Provider>
 }

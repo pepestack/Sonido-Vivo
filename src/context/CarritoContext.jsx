@@ -33,6 +33,11 @@ export function CarritoProvider(props){
     setGuardados((actuales)=> carritoService.quitar(alinear(actuales),id))
   }
 
+  // se usa al confirmar una compra y en el botón "Limpiar carrito"
+  function vaciarCarrito(){
+    setGuardados([])
+  }
+
   function cantidadEnCarrito(id){
     const item = items.find((actual) => actual.id === id)
     return item ? item.cantidad : 0
@@ -43,6 +48,7 @@ export function CarritoProvider(props){
     agregarAlCarrito,
     cambiarCantidad,
     quitarDelCarrito,
+    vaciarCarrito,
     cantidadEnCarrito,
     ...carritoService.calcularTotales(items)
   }

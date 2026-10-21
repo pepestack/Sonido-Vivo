@@ -23,6 +23,14 @@ export function eliminar(productos, id){
     return productos.filter((producto) => producto.id !== id)
 }
 
+// Resta del stock lo vendido en un pedido. items: [{ id, cantidad }]
+export function descontarStock(productos, items) {
+  return productos.map((producto) => {
+    const vendido = items.find((item) => item.id === producto.id)
+    return vendido ? { ...producto, stock: Math.max(0, producto.stock - vendido.cantidad) } : producto
+  })
+}
+
 // Productos que se están acabando: los que tienen el stock en su nivel crítico o por debajo
 export function productosCriticos(productos) {
   return productos.filter((producto) => producto.stock <= producto.stockCritico)
