@@ -77,6 +77,11 @@ Para detener el servidor de desarrollo, presione:
 ## Bitácora
 
 <!-- SUMMARY:START -->
+### 2026-10-20
+
+- **José Calderón**: Implementó la gestión de sesiones, el flujo de pedidos y diversas funcionalidades administrativas, además de fortalecer la cobertura de pruebas unitarias.
+- **Sebastiana-pablaza**: Desarrolló y ejecutó las pruebas unitarias correspondientes a los componentes de las secciones de blog y nosotros.
+
 ### 2026-10-19
 
 - **Sebastian Navarro**: Implementó nuevas funcionalidades en el panel administrativo, integró herramientas de testing y realizó ajustes de refactorización y corrección de errores en la interfaz.
