@@ -30,6 +30,10 @@ import AdminEditarProducto from "./pages/admin/AdminEditarProducto";
 import AdminNuevoUsuario from "./pages/admin/AdminNuevoUsuario";
 import AdminEditarUsuario from "./pages/admin/AdminEditarUsuario";
 import AdminCriticos from "./pages/admin/AdminCriticos";
+import AdminPedidos from "./pages/admin/AdminPedidos";
+import AdminVerPedido from "./pages/admin/AdminVerPedido";
+import AdminReportes from "./pages/admin/AdminReportes";
+import AdminPerfil from "./pages/admin/AdminPerfil";
 
 export default function App() {
   return (
@@ -66,6 +70,10 @@ export default function App() {
                   <Route path="/admin/productos/nuevo" element={<AdminNuevoProducto />} />
                   <Route path="/admin/productos/:id/editar" element={<AdminEditarProducto />} />
                   <Route path="/admin/criticos" element={<AdminCriticos />} />
+                  <Route path="/admin/pedidos" element={<AdminPedidos />} />
+                  <Route path="/admin/pedidos/:id" element={<AdminVerPedido />} />
+                  <Route path="/admin/reportes" element={<AdminReportes />} />
+                  <Route path="/admin/perfil" element={<AdminPerfil />} />
                   <Route path="/admin/usuarios" element={<AdminUsuarios />} />
                   <Route path="/admin/usuarios/:id" element={<VerUsuario />} />
                   <Route path="/admin/usuarios/nuevo" element={<AdminNuevoUsuario />} />

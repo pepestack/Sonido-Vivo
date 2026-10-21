@@ -25,12 +25,15 @@ export function PlantillaPrivada(props) {
 
   return (
     <div className="d-flex flex-column min-vh-100">
-      <NavbarAdmin
-        menuAbierto={menuAbierto}
-        onAlternarMenu={() => setMenuAbierto((abierto) => !abierto)}
-        onNavegar={navegar}
-        onCerrarSesion={cerrarSesion}
-      />
+      {/* d-print-none: al imprimir (ej. una boleta) solo sale el contenido principal */}
+      <div className="d-print-none">
+        <NavbarAdmin
+          menuAbierto={menuAbierto}
+          onAlternarMenu={() => setMenuAbierto((abierto) => !abierto)}
+          onNavegar={navegar}
+          onCerrarSesion={cerrarSesion}
+        />
+      </div>
       <div className="d-flex flex-grow-1 position-relative">
         <SidebarAdmin
           abierto={menuAbierto}
@@ -42,7 +45,9 @@ export function PlantillaPrivada(props) {
         />
         <main className="container my-5 pt-2 pt-lg-4 overflow-hidden">{props.children}</main>
       </div>
-      <Footer compacto />
+      <div className="d-print-none">
+        <Footer compacto />
+      </div>
     </div>
   )
 }
