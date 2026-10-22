@@ -2,9 +2,9 @@ import { Card } from "react-bootstrap";
 import { Boton } from "../../atoms/Boton/Boton";
 import { Enlace } from "../../atoms/Enlace/Enlace";
 import { Imagen } from "../../atoms/Imagen/Imagen";
-import { Precio } from "../../atoms/Precio/Precio";
 import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
+import { PrecioProducto } from "../PrecioProducto/PrecioProducto";
 
 export function TarjetaProducto(props) {
   const producto = props.producto;
@@ -33,7 +33,7 @@ export function TarjetaProducto(props) {
           </Texto>
         )}
         <Texto className="card-text fs-4 fw-bold text-primary mt-auto">
-          <Precio monto={producto.precio} />
+          <PrecioProducto producto={producto} />
         </Texto>
         <Boton className="w-100 mt-2" disabled={sinStock} onClick={() => props.onAgregar(producto)}>
           {sinStock ? "Sin stock" : "Añadir al carrito"}

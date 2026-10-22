@@ -35,3 +35,13 @@ export function descontarStock(productos, items) {
 export function productosCriticos(productos) {
   return productos.filter((producto) => producto.stock <= producto.stockCritico)
 }
+
+// Precio que se cobra: el de oferta si existe, si no el normal
+export function precioFinal(producto) {
+  return producto.precioOferta ?? producto.precio
+}
+
+// Productos en promoción: los que tienen precioOferta
+export function productosEnOferta(productos) {
+  return productos.filter((producto) => producto.precioOferta !== undefined)
+}

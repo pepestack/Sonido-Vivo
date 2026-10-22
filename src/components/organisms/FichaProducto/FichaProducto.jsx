@@ -5,11 +5,11 @@ import { Etiqueta } from "../../atoms/Etiqueta/Etiqueta";
 import { Icono } from "../../atoms/Icono/Icono";
 import { Imagen } from "../../atoms/Imagen/Imagen";
 import { MensajeEstado } from "../../atoms/MensajeEstado/MensajeEstado";
-import { Precio } from "../../atoms/Precio/Precio";
 import { Selector } from "../../atoms/Selector/Selector";
 import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
 import { limiteDe } from "../../../services/carritoService";
+import { PrecioProducto } from "../../molecules/PrecioProducto/PrecioProducto";
 
 // Vista completa de un producto. Es dueña de la cantidad elegida y avisa al padre con onAgregar(producto, cantidad)
 // enCarrito: unidades de este producto que ya están en el carrito
@@ -57,7 +57,7 @@ export function FichaProducto(props) {
       <Col md={6}>
         <Titulo nivel={1} className="h2 mb-3">{producto.nombre}</Titulo>
         <Texto className="h4 mb-3">
-          <Precio monto={producto.precio} />
+          <PrecioProducto producto={producto} />
         </Texto>
         <Texto className="mb-4">{producto.descripcion}</Texto>
 
