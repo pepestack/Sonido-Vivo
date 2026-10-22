@@ -88,7 +88,7 @@ Sin actividad en las últimas 24 horas.
 
 ### 2026-10-19
 
-- **Sebastian Navarro**: Implementó nuevas funcionalidades en el panel administrativo, integró herramientas de testing y realizó ajustes de refactorización y corrección de errores en la interfaz.
+- **Sebastian Navarro (previamente sebi-nm)**: Implementó nuevas funcionalidades en el panel administrativo, integró herramientas de testing y realizó ajustes de refactorización y corrección de errores en la interfaz.
 - **José Calderón**: Optimizó la lógica del carrito de compras, fortaleció las validaciones de registro y actualizó dependencias para mejorar la seguridad y estructura del proyecto.
 
 ### 2026-10-18
