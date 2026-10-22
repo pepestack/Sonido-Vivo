@@ -76,7 +76,7 @@ Para detener el servidor de desarrollo, presione:
 
 ## Bitácora
 
-> **Nota (2026-10-22):** Sebastian Navarro cambió de cuenta de GitHub. Desde hace una semana trabaja solo con **seba-nvrro**; los commits anteriores firmados como **sebi-nm** también son suyos.
+> **Nota (2026-10-22):** Sebastian Navarro cambió de cuenta de GitHub. Desde hace una semana trabaja solo con **sebi-nvrro**; los commits anteriores firmados como **sebi-nm** también son suyos.
 
 <!-- SUMMARY:START -->
 ### 2026-10-21
