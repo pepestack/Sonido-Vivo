@@ -14,8 +14,20 @@ export function iniciales(nombre) {
     .join('')
 }
 
-export function nombreCategoria(valor) {
-  return categorias.find((categoria) => categoria.valor === valor)?.texto ?? valor
+// lista: las categorías actuales (del contexto); si no llega, se usan las iniciales
+export function nombreCategoria(valor, lista = categorias) {
+  return lista.find((categoria) => categoria.valor === valor)?.texto ?? valor
+}
+
+// "Guitarras Acústicas" -> "guitarras-acusticas" (el valor que va en la URL /categoria/...)
+export function generarValor(texto) {
+  return String(texto ?? '')
+    .trim()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '') // quita tildes: "á" se separa en "a" + tilde y la tilde se borra
+    .replace(/[^a-z0-9]+/g, '-')     // espacios y símbolos pasan a un guion
+    .replace(/^-+|-+$/g, '')         // sin guiones al inicio ni al final
 }
 
 // 12 -> "#000012"

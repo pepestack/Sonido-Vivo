@@ -1,3 +1,5 @@
+import { generarValor } from './formato'
+
 const patronCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const patronSku = /^[A-Z]{2}\d{3}$/
 const patronTarjeta = /^\d{16}$/
@@ -161,4 +163,17 @@ export function validarCheckout(valores) {
     vencimiento: validarVencimiento(valores.vencimiento),
     cvv: validarCvv(valores.cvv),
   }
+}
+
+export const LARGO_MAXIMO_CATEGORIA = 50
+
+// Nombre de una categoría: requerido, máximo 50 caracteres, con al menos una letra o número
+// (para poder armar su URL) y que su valor no lo use otra categoría.
+// valorEnUso(valor): indica si ese valor ya pertenece a otra categoría
+export function validarCategoria(texto, valorEnUso = () => false) {
+  const requerido = validarObligatorio(texto, 'El nombre es requerido') || validarLargoMaximo(texto, LARGO_MAXIMO_CATEGORIA)
+  if (requerido !== '') return requerido
+  const valor = generarValor(texto)
+  if (valor === '') return 'Usa al menos una letra o un número'
+  return valorEnUso(valor) ? 'Ya existe una categoría con ese nombre' : ''
 }

@@ -3,10 +3,9 @@ import { BarraCatalogo } from "../components/organisms/BarraCatalogo/BarraCatalo
 import { GrillaProductos } from "../components/organisms/GrillaProductos/GrillaProductos";
 import { useCarrito } from "../context/CarritoContext"
 import { useProductos } from "../context/ProductosContext"
-import { categorias } from "../data/categorias";
+import { useCategorias } from "../context/CategoriasContext";
 import { useTituloPagina } from "../hooks/useTituloPagina";
 import { filtrarProductos } from "../utils/filtrarProductos";
-import { nombreCategoria } from "../utils/formato";
 import { PlantillaPublica } from "../components/templates/PlantillaPublica/PlantillaPublica";
 
 export default function Catalogo() {
@@ -15,12 +14,13 @@ export default function Catalogo() {
   const nombre = params.nombre ?? ''
   const texto = params.texto ?? ''
   const productosCtx = useProductos()
+  const categoriasCtx = useCategorias()
   const carrito = useCarrito()
 
   const visibles = filtrarProductos(productosCtx.productos, { texto, categoria: nombre })
 
   let titulo = 'Catálogo de Sonido Vivo'
-  if (nombre) titulo = nombreCategoria(nombre)
+  if (nombre) titulo = categoriasCtx.nombreCategoria(nombre)
   if (texto) titulo = `Resultados para "${texto}"`
   useTituloPagina(titulo)
 
@@ -33,7 +33,7 @@ export default function Catalogo() {
       <BarraCatalogo
         titulo={titulo}
         categoria={nombre || 'todos'}
-        categorias={categorias}
+        categorias={categoriasCtx.categorias}
         onCambiarCategoria={cambiarCategoria}
       />
       <GrillaProductos

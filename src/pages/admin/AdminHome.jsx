@@ -32,6 +32,12 @@ const accesos = [
     ruta: "/admin/productos",
   },
   {
+    titulo: "Gestión de categorías",
+    texto: "Crea nuevas categorías para el catálogo o cambia el nombre de las existentes.",
+    textoBoton: "Administrar Categorías",
+    ruta: "/admin/categorias",
+  },
+  {
     titulo: "Gestión de usuarios",
     texto:
       "Administra las cuentas de tus vendedores, crea nuevos accesos o edita permisos del sistema.",

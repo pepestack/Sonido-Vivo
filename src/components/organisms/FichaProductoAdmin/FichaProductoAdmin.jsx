@@ -27,7 +27,7 @@ export function FichaProductoAdmin(props) {
           <FilaDetalle etiqueta="Producto">
             <span className="fw-semibold">{producto.nombre}</span>
           </FilaDetalle>
-          <FilaDetalle etiqueta="Categoría">{nombreCategoria(producto.categoria)}</FilaDetalle>
+          <FilaDetalle etiqueta="Categoría">{nombreCategoria(producto.categoria, props.categorias)}</FilaDetalle>
           <FilaDetalle etiqueta="Marca">{producto.marca || '—'}</FilaDetalle>
           <FilaDetalle etiqueta="Modelo">{producto.modelo || '—'}</FilaDetalle>
           <FilaDetalle etiqueta="SKU">{producto.id}</FilaDetalle>

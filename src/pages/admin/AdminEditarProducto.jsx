@@ -4,13 +4,14 @@ import { PlantillaPrivada } from '../../components/templates/PlantillaPrivada/Pl
 import { AvisoVacio } from '../../components/molecules/AvisoVacio/AvisoVacio'
 import { FormularioProducto } from '../../components/organisms/FormularioProducto/FormularioProducto'
 import { useTituloPagina } from '../../hooks/useTituloPagina'
-import { categorias } from '../../data/categorias'
+import { useCategorias } from '../../context/CategoriasContext'
 import { useProductos } from '../../context/ProductosContext'
 
 export default function AdminEditarProducto() {
   const navigate = useNavigate()
   const params = useParams()
   const productosCtx = useProductos()
+  const categoriasCtx = useCategorias()
   const producto = productosCtx.obtenerProducto(params.id)
   useTituloPagina('Editar producto')
 
@@ -40,7 +41,7 @@ export default function AdminEditarProducto() {
             key={producto.id}
             titulo="Editar producto"
             valoresIniciales={producto}
-            categorias={categorias}
+            categorias={categoriasCtx.categorias}
             skuEnUso={(sku) => sku !== params.id && Boolean(productosCtx.obtenerProducto(sku))}
             onEnviar={guardar}
             onCancelar={() => navigate('/admin/productos')}

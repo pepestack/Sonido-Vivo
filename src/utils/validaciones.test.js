@@ -5,6 +5,7 @@ import {
   validarCorreoOpcional,
   validarCorreoPermitido,
   validarObligatorio,
+  validarCategoria,
   validarUsuario,
 } from './validaciones'
 
@@ -105,5 +106,21 @@ describe('validarObligatorio', () => {
 
   it('usa el mensaje propio si se le pasa uno', () => {
     expect(validarObligatorio('', 'Falta el RUT')).toBe('Falta el RUT')
+  })
+})
+
+describe('validarCategoria', () => {
+  it('acepta un nombre nuevo', () => {
+    expect(validarCategoria('Instrumentos de viento')).toBe('')
+  })
+
+  it('exige el nombre y al menos una letra o número', () => {
+    expect(validarCategoria('   ')).toBe('El nombre es requerido')
+    expect(validarCategoria('!!!')).toBe('Usa al menos una letra o un número')
+  })
+
+  it('rechaza un nombre cuyo valor ya usa otra categoría', () => {
+    const enUso = (valor) => valor === 'baterias'
+    expect(validarCategoria('Baterías', enUso)).toBe('Ya existe una categoría con ese nombre')
   })
 })
