@@ -14,6 +14,7 @@ export const sidebarPrincipal = [
   { texto: 'Pedidos', ruta: '/admin/pedidos', icono: 'bi bi-receipt' },
   { texto: 'Inventario', ruta: '/admin/productos', icono: 'bi bi-box-seam' },
   { texto: 'Stock crítico', ruta: '/admin/criticos', icono: 'bi bi-exclamation-triangle' },
+  { texto: 'Categorías', ruta: '/admin/categorias', icono: 'bi bi-tags' },
   { texto: 'Reportes', ruta: '/admin/reportes', icono: 'bi bi-bar-chart' },
   { texto: 'Usuarios', ruta: '/admin/usuarios', icono: 'bi bi-people' },
 ]

@@ -8,12 +8,14 @@ import { ModalConfirmacion } from '../../components/molecules/ModalConfirmacion/
 import { FichaProductoAdmin } from '../../components/organisms/FichaProductoAdmin/FichaProductoAdmin'
 import { VistaImagenProducto } from '../../components/organisms/VistaImagenProducto/VistaImagenProducto'
 import { useTituloPagina } from '../../hooks/useTituloPagina'
+import { useCategorias } from '../../context/CategoriasContext'
 import { useProductos } from '../../context/ProductosContext'
 
 export default function AdminVerProducto() {
   const navigate = useNavigate()
   const params = useParams()
   const productosCtx = useProductos()
+  const categoriasCtx = useCategorias()
   const producto = productosCtx.obtenerProducto(params.id)
   useTituloPagina(producto ? producto.nombre : 'Producto no encontrado')
   const [confirmando, setConfirmando] = useState(false)
@@ -40,7 +42,7 @@ export default function AdminVerProducto() {
       <Encabezado titulo="Detalle Producto" />
       <Row className="g-4">
         <Col xs={12} lg={8}>
-          <FichaProductoAdmin producto={producto} onEliminar={() => setConfirmando(true)} onNavegar={navigate} />
+          <FichaProductoAdmin producto={producto} categorias={categoriasCtx.categorias} onEliminar={() => setConfirmando(true)} onNavegar={navigate} />
         </Col>
         <Col xs={12} lg={4}>
           <VistaImagenProducto imagen={producto.imagen} nombre={producto.nombre} />

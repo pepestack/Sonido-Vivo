@@ -13,7 +13,7 @@ export function FilaProductoAdmin(props) {
         <Precio monto={producto.precio} />
       </td>
       <td>{producto.stock}</td>
-      <td>{nombreCategoria(producto.categoria)}</td>
+      <td>{nombreCategoria(producto.categoria, props.categorias)}</td>
       <td className="text-end pe-4">
         <Boton variante="outline-primary" tamano="sm" className="me-1" onClick={() => props.onVer(producto)}>
           Ver detalle

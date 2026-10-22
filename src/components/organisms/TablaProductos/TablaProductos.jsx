@@ -1,6 +1,7 @@
 import { Card, Table } from 'react-bootstrap'
 import { FilaProductoAdmin } from '../../molecules/FilaProductoAdmin/FilaProductoAdmin'
 
+// categorias: las actuales, para mostrar el nombre de la categoría de cada producto
 export function TablaProductos(props) {
   return (
     <Card as="section" className="shadow-sm border-0">
@@ -25,6 +26,7 @@ export function TablaProductos(props) {
               <FilaProductoAdmin
                 key={producto.id}
                 producto={producto}
+                categorias={props.categorias}
                 onVer={props.onVer}
                 onEditar={props.onEditar}
                 onEliminar={props.onEliminar}
