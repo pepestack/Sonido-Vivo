@@ -5,6 +5,7 @@ import ContactoPage from "./pages/ContactoPage";
 import Catalogo from "./pages/Catalogo";
 import DetalleProducto from "./pages/DetalleProducto";
 import CarritoPage from "./pages/CarritoPage";
+import OfertasPage from "./pages/OfertasPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import CompraExitosaPage from "./pages/CompraExitosaPage";
 import CompraErrorPage from "./pages/CompraErrorPage";
@@ -50,6 +51,7 @@ export default function App() {
                   <Route path="/categoria/:nombre" element={<Catalogo />} />
                   <Route path="/buscar/:texto" element={<Catalogo />} />
                   <Route path="/producto/:id" element={<DetalleProducto />} />
+                  <Route path="/ofertas" element={<OfertasPage />} />
                   <Route path="/carrito" element={<CarritoPage />} />
                   <Route path="/checkout" element={<CheckoutPage />} />
                   <Route path="/compra/exito/:id" element={<CompraExitosaPage />} />

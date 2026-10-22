@@ -29,6 +29,7 @@ export const sidebarSecundario = [
 export const navTienda = [
   { texto: 'Home', ruta: '/' },
   { texto: 'Productos', ruta: '/catalogo' },
+  { texto: 'Ofertas', ruta: '/ofertas' },
   { texto: 'Nosotros', ruta: '/nosotros' },
   { texto: 'Blogs', ruta: '/blog' },
   { texto: 'Contacto', ruta: '/contacto' },
