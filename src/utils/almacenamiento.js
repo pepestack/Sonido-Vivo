@@ -4,6 +4,7 @@ export const CLAVES = {
   carrito: 'carritoSonidoVivo',
   sesion: 'sesionSonidoVivo',
   pedidos: 'pedidosSonidoVivo',
+  categorias: 'categoriasSonidoVivo',
 }
 
 // Si no hay nada guardado (o el JSON está corrupto) se usa una copia de los datos iniciales,
