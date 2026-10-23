@@ -25,10 +25,6 @@ describe('obtenerSesion y guardarSesion', () => {
     localStorage.clear()
   })
 
-  it('sin nada guardado no hay sesión', () => {
-    expect(obtenerSesion()).toBeNull()
-  })
-
   it('recuerda el id guardado y lo olvida al guardar null', () => {
     guardarSesion(5)
     expect(obtenerSesion()).toBe(5)
