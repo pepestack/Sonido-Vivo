@@ -43,6 +43,7 @@ export default function Home(){
       <GrillaProductos
         titulo="Productos destacados"
         productos={destacados}
+        animado
         onAgregar={carrito.agregarAlCarrito}
         onNavegar={navigate}
         className="my-5 py-5"
