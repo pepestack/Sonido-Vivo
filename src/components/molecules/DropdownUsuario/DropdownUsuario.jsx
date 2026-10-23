@@ -26,7 +26,7 @@ export function DropdownUsuario(props){
         <Icono icono="fa-solid fa-user" />
       </Dropdown.Toggle>
 
-      <Dropdown.Menu align="end" className="menu-usuario">
+      <Dropdown.Menu align="end" className="menu-usuario shadow">
         {props.opciones.map(renderizarOpcion)}
       </Dropdown.Menu>
     </Dropdown>
