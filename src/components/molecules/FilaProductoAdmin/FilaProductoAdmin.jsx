@@ -1,5 +1,5 @@
-import { Boton } from '../../atoms/Boton/Boton'
 import { Precio } from '../../atoms/Precio/Precio'
+import { AccionesFila } from '../AccionesFila/AccionesFila'
 import { nombreCategoria } from '../../../utils/formato'
 
 export function FilaProductoAdmin(props) {
@@ -14,20 +14,12 @@ export function FilaProductoAdmin(props) {
       </td>
       <td>{producto.stock}</td>
       <td>{nombreCategoria(producto.categoria, props.categorias)}</td>
-      <td className="text-end pe-4">
-        <Boton variante="outline-primary" tamano="sm" className="me-1" onClick={() => props.onVer(producto)}>
-          Ver detalle
-        </Boton>
-        <Boton variante="outline-primary" tamano="sm" onClick={() => props.onEditar(producto)}>
-          Editar
-        </Boton>
-        {/* sin onEliminar no se muestra el botón (ej: la vista de productos críticos) */}
-        {props.onEliminar && (
-          <Boton variante="outline-danger" tamano="sm" className="ms-1" onClick={() => props.onEliminar(producto)}>
-            Eliminar
-          </Boton>
-        )}
-      </td>
+      {/* sin onEliminar no se muestra el botón (ej: la vista de productos críticos) */}
+      <AccionesFila
+        onVer={() => props.onVer(producto)}
+        onEditar={() => props.onEditar(producto)}
+        onEliminar={props.onEliminar && (() => props.onEliminar(producto))}
+      />
     </tr>
   )
 }

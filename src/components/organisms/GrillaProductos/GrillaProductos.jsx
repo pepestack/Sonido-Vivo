@@ -1,7 +1,7 @@
 import { Col, Row } from "react-bootstrap";
 import { Effect } from "@animate-ui/react/primitives/effects/effect";
-import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
+import { AvisoVacio } from "../../molecules/AvisoVacio/AvisoVacio";
 import { TarjetaProducto } from "../../molecules/TarjetaProducto/TarjetaProducto";
 
 // animado: las tarjetas aparecen una tras otra al entrar en pantalla (solo se usa en el Home)
@@ -37,11 +37,7 @@ export function GrillaProductos(props) {
           );
         })}
       </Row>
-      {props.productos.length === 0 && (
-        <Texto className="text-muted text-center py-5">
-          No hay productos para mostrar.
-        </Texto>
-      )}
+      {props.productos.length === 0 && <AvisoVacio texto="No hay productos para mostrar." />}
     </section>
   );
 }

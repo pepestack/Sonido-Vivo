@@ -1,4 +1,4 @@
-import { Card, Table } from 'react-bootstrap'
+import { Card, ListGroup } from 'react-bootstrap'
 import { Imagen } from '../../atoms/Imagen/Imagen'
 import { Precio } from '../../atoms/Precio/Precio'
 import { Texto } from '../../atoms/Texto/Texto'
@@ -22,28 +22,26 @@ export function FichaProductoAdmin(props) {
       <div className="d-inline-flex border rounded p-2 mb-4 col-6 col-md-4">
         <Imagen src={codigoBarras} alt="UPC de prueba" className="img-thumbnail w-auto" />
       </div>
-      <Table responsive bordered className="align-middle mb-0">
-        <tbody>
-          <FilaDetalle etiqueta="Producto">
-            <span className="fw-semibold">{producto.nombre}</span>
-          </FilaDetalle>
-          <FilaDetalle etiqueta="Categoría">{nombreCategoria(producto.categoria, props.categorias)}</FilaDetalle>
-          <FilaDetalle etiqueta="Marca">{producto.marca || '—'}</FilaDetalle>
-          <FilaDetalle etiqueta="Modelo">{producto.modelo || '—'}</FilaDetalle>
-          <FilaDetalle etiqueta="SKU">{producto.id}</FilaDetalle>
-          <FilaDetalle etiqueta="Stock Crítico">{producto.stockCritico}</FilaDetalle>
-          <FilaDetalle etiqueta="Stock">{producto.stock}</FilaDetalle>
-          <FilaDetalle etiqueta="Precio">
-            <Precio monto={producto.precio} />
-          </FilaDetalle>
-          <FilaDetalle etiqueta="Estado">
-            <Texto como="span" className={estado.clase}>
-              {estado.texto}
-            </Texto>
-          </FilaDetalle>
-          <FilaDetalle etiqueta="Descripción">{producto.descripcion || '—'}</FilaDetalle>
-        </tbody>
-      </Table>
+      <ListGroup variant="flush">
+        <FilaDetalle etiqueta="Producto">
+          <span className="fw-semibold">{producto.nombre}</span>
+        </FilaDetalle>
+        <FilaDetalle etiqueta="Categoría">{nombreCategoria(producto.categoria, props.categorias)}</FilaDetalle>
+        <FilaDetalle etiqueta="Marca">{producto.marca || '—'}</FilaDetalle>
+        <FilaDetalle etiqueta="Modelo">{producto.modelo || '—'}</FilaDetalle>
+        <FilaDetalle etiqueta="SKU">{producto.id}</FilaDetalle>
+        <FilaDetalle etiqueta="Stock Crítico">{producto.stockCritico}</FilaDetalle>
+        <FilaDetalle etiqueta="Stock">{producto.stock}</FilaDetalle>
+        <FilaDetalle etiqueta="Precio">
+          <Precio monto={producto.precio} />
+        </FilaDetalle>
+        <FilaDetalle etiqueta="Estado">
+          <Texto como="span" className={estado.clase}>
+            {estado.texto}
+          </Texto>
+        </FilaDetalle>
+        <FilaDetalle etiqueta="Descripción">{producto.descripcion || '—'}</FilaDetalle>
+      </ListGroup>
       <BarraAcciones
         onVolver={() => props.onNavegar('/admin/productos')}
         onEditar={() => props.onNavegar(`/admin/productos/${producto.id}/editar`)}

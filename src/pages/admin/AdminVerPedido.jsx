@@ -1,10 +1,8 @@
-import { Card, Col, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
-import { Boton } from "../../components/atoms/Boton/Boton";
-import { Titulo } from "../../components/atoms/Titulo/Titulo";
 import { AvisoVacio } from "../../components/molecules/AvisoVacio/AvisoVacio";
-import { CampoFormulario } from "../../components/molecules/CampoFormulario/CampoFormulario";
 import { DetallePedido } from "../../components/organisms/DetallePedido/DetallePedido";
+import { GestionPedido } from "../../components/organisms/GestionPedido/GestionPedido";
 import { PlantillaPrivada } from "../../components/templates/PlantillaPrivada/PlantillaPrivada";
 import { usePedidos } from "../../context/PedidosContext";
 import { ESTADOS_PEDIDO } from "../../data/pedidos";
@@ -42,30 +40,14 @@ export default function AdminVerPedido() {
         </Col>
         {/* d-print-none: al imprimir la boleta solo sale el comprobante */}
         <Col xs={12} xl={4} className="d-print-none">
-          <Card className="shadow-sm border-0 p-4">
-            <Titulo nivel={2} className="h5 fw-bold mb-3">Gestión del pedido</Titulo>
-            <CampoFormulario
-              id="estado"
-              etiqueta="Estado"
-              tipo="select"
-              opciones={opcionesEstado}
-              valor={pedido.estado}
-              onChange={(evento) => pedidosCtx.cambiarEstado(pedido.id, evento.target.value)}
-            />
-            <div className="d-grid gap-2">
-              {pedido.usuarioId && (
-                <Boton variante="outline-primary" onClick={() => navigate(`/admin/usuarios/${pedido.usuarioId}`)}>
-                  Ver cliente
-                </Boton>
-              )}
-              <Boton variante="outline-dark" onClick={() => window.print()}>
-                Imprimir boleta
-              </Boton>
-              <Boton variante="outline-secondary" onClick={() => navigate("/admin/pedidos")}>
-                Volver a pedidos
-              </Boton>
-            </div>
-          </Card>
+          <GestionPedido
+            estado={pedido.estado}
+            opcionesEstado={opcionesEstado}
+            onCambiarEstado={(estado) => pedidosCtx.cambiarEstado(pedido.id, estado)}
+            onVerCliente={pedido.usuarioId ? () => navigate(`/admin/usuarios/${pedido.usuarioId}`) : undefined}
+            onImprimir={() => window.print()}
+            onVolver={() => navigate("/admin/pedidos")}
+          />
         </Col>
       </Row>
     </PlantillaPrivada>

@@ -1,15 +1,14 @@
 import { useState } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { Boton } from "../../atoms/Boton/Boton";
-import { Etiqueta } from "../../atoms/Etiqueta/Etiqueta";
 import { Icono } from "../../atoms/Icono/Icono";
 import { Imagen } from "../../atoms/Imagen/Imagen";
 import { MensajeEstado } from "../../atoms/MensajeEstado/MensajeEstado";
-import { Selector } from "../../atoms/Selector/Selector";
 import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
-import { limiteDe } from "../../../services/carritoService";
+import { limiteDe, opcionesCantidad } from "../../../services/carritoService";
 import { PrecioProducto } from "../../molecules/PrecioProducto/PrecioProducto";
+import { SelectorEnLinea } from "../../molecules/SelectorEnLinea/SelectorEnLinea";
 
 // Vista completa de un producto. Es dueña de la cantidad elegida y avisa al padre con onAgregar(producto, cantidad)
 // enCarrito: unidades de este producto que ya están en el carrito
@@ -20,7 +19,7 @@ export function FichaProducto(props) {
 
   const sinStock = producto.stock < 1;
   const disponible = limiteDe(producto) - (props.enCarrito ?? 0);
-  const opciones = Array.from({ length: Math.max(disponible, 0) }, (_, i) => ({ valor: i + 1, texto: i + 1 }));
+  const opciones = opcionesCantidad(disponible);
   const cantidadElegida = Math.min(cantidad, disponible);
 
   function agregar() {
@@ -67,16 +66,14 @@ export function FichaProducto(props) {
           <MensajeEstado tipo="neutro" className="mb-4">Ya tienes el máximo disponible de este producto en el carrito.</MensajeEstado>
         ) : (
           <>
-            <div className="d-flex align-items-center mb-4">
-              <Etiqueta htmlFor="cantidad" className="me-2 mb-0">Cantidad:</Etiqueta>
-              <Selector
-                id="cantidad"
-                valor={cantidadElegida}
-                opciones={opciones}
-                onChange={(evento) => setCantidad(Number(evento.target.value))}
-                className="w-auto"
-              />
-            </div>
+            <SelectorEnLinea
+              id="cantidad"
+              etiqueta="Cantidad:"
+              valor={cantidadElegida}
+              opciones={opciones}
+              onCambiar={(valor) => setCantidad(Number(valor))}
+              className="mb-4"
+            />
             <Boton className="w-100 py-3" onClick={agregar}>
               Añadir a carrito
             </Boton>

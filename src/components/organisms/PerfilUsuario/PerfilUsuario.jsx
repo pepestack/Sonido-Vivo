@@ -1,8 +1,10 @@
 import { Card, ListGroup } from "react-bootstrap";
-import { Insignia } from "../../atoms/Insignia/Insignia";
+import { Avatar } from "../../atoms/Avatar/Avatar";
+import { FilaDetalle } from "../../atoms/FilaDetalle/FilaDetalle";
 import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
 import { BarraAcciones } from "../../molecules/BarraAcciones/BarraAcciones";
+import { InsigniaRol } from "../../molecules/InsigniaRol/InsigniaRol";
 import { iniciales, nombreCompleto } from "../../../utils/formato";
 
 export function PerfilUsuario(props) {
@@ -17,9 +19,7 @@ export function PerfilUsuario(props) {
       </Card.Header>
       <Card.Body className="p-4 p-md-5">
         <figure className="text-center mb-4">
-          <span className="bg-secondary text-white rounded-circle d-inline-flex align-items-center justify-content-center fw-bold perfil">
-            {iniciales(nombre)}
-          </span>
+          <Avatar tamano="lg">{iniciales(nombre)}</Avatar>
           <figcaption>
             <Titulo nivel={3} className="h5 mt-3 mb-0">{nombre}</Titulo>
             <Texto className="text-muted">{usuario.rol}</Texto>
@@ -27,28 +27,17 @@ export function PerfilUsuario(props) {
         </figure>
 
         <ListGroup variant="flush" className="mb-5">
-          <ListGroup.Item className="d-flex justify-content-between px-0 py-3">
-            <b className="text-muted">ID de empleado</b>
-            <span>{usuario.id}</span>
-          </ListGroup.Item>
-          <ListGroup.Item className="d-flex justify-content-between px-0 py-3">
-            <b className="text-muted">Correo electrónico</b>
-            <span>{usuario.correo}</span>
-          </ListGroup.Item>
-          <ListGroup.Item className="d-flex justify-content-between px-0 py-3">
-            <b className="text-muted">Comuna</b>
-            <span>{usuario.comuna}</span>
-          </ListGroup.Item>
-          <ListGroup.Item className="d-flex justify-content-between align-items-center px-0 py-3">
-            <b className="text-muted">Rol</b>
-            <Insignia color={esAdmin ? "danger" : "dark"} className="px-3 py-2">{usuario.rol}</Insignia>
-          </ListGroup.Item>
-          <ListGroup.Item className="d-flex justify-content-between px-0 py-3">
-            <b className="text-muted">Estado de la cuenta</b>
+          <FilaDetalle etiqueta="ID de empleado">{usuario.id}</FilaDetalle>
+          <FilaDetalle etiqueta="Correo electrónico">{usuario.correo}</FilaDetalle>
+          <FilaDetalle etiqueta="Comuna">{usuario.comuna}</FilaDetalle>
+          <FilaDetalle etiqueta="Rol">
+            <InsigniaRol rol={usuario.rol} className="px-3 py-2" />
+          </FilaDetalle>
+          <FilaDetalle etiqueta="Estado de la cuenta">
             <span className={`fw-bold ${usuario.activo ? "text-success" : "text-danger"}`}>
               {usuario.activo ? "Activo" : "Inactivo"}
             </span>
-          </ListGroup.Item>
+          </FilaDetalle>
         </ListGroup>
 
         {/* sin onEliminar la barra no muestra el botón: el administrador no se puede eliminar */}

@@ -1,5 +1,5 @@
 import { Col, Row } from 'react-bootstrap'
-import { TarjetaAccion } from '../../molecules/TarjetaAccion/TarjetaAccion'
+import { TarjetaDestacado } from '../../molecules/TarjetaDestacado/TarjetaDestacado'
 
 // accesos a: [{ titulo, texto, textoBoton, ruta }]
 export function PanelAdmin(props) {
@@ -7,7 +7,12 @@ export function PanelAdmin(props) {
     <Row as="section" className="g-4">
       {props.accesos.map((acceso) => (
         <Col as="article" key={acceso.ruta} xs={12} md={6}>
-          <TarjetaAccion {...acceso} onNavegar={props.onNavegar} />
+          <TarjetaDestacado
+            titulo={acceso.titulo}
+            descripcion={acceso.texto}
+            textoBoton={acceso.textoBoton}
+            onAccion={() => props.onNavegar(acceso.ruta)}
+          />
         </Col>
       ))}
     </Row>

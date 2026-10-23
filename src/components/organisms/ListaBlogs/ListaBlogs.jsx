@@ -1,4 +1,4 @@
-import { Texto } from "../../atoms/Texto/Texto";
+import { AvisoVacio } from "../../molecules/AvisoVacio/AvisoVacio";
 import { TarjetaBlog } from "../../molecules/TarjetaBlog/TarjetaBlog";
 
 export function ListaBlogs(props) {
@@ -12,11 +12,7 @@ export function ListaBlogs(props) {
         />
       ))}
 
-      {props.blogs.length === 0 && (
-        <Texto className="text-muted text-center py-5">
-          No hay publicaciones para mostrar.
-        </Texto>
-      )}
+      {props.blogs.length === 0 && <AvisoVacio texto="No hay publicaciones para mostrar." />}
     </section>
   );
 }
