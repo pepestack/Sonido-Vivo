@@ -2,7 +2,7 @@ import { Card, Table } from "react-bootstrap";
 import { Boton } from "../../atoms/Boton/Boton";
 import { Precio } from "../../atoms/Precio/Precio";
 import { Selector } from "../../atoms/Selector/Selector";
-import { limiteDe } from "../../../services/carritoService";
+import { limiteDe, opcionesCantidad } from "../../../services/carritoService";
 
 // items: [{ id, nombre, precio, stock, cantidad }]
 export function TablaCarrito(props) {
@@ -27,7 +27,7 @@ export function TablaCarrito(props) {
                 <Selector
                   id={`cantidad-${item.id}`}
                   valor={item.cantidad}
-                  opciones={Array.from({ length: limiteDe(item) }, (_, i) => ({ valor: i + 1, texto: i + 1 }))}
+                  opciones={opcionesCantidad(limiteDe(item))}
                   onChange={(evento) => props.onCambiarCantidad(item.id, Number(evento.target.value))}
                   className="cantidad-carrito"
                 />

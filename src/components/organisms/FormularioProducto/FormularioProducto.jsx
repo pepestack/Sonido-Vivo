@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
-import { Card, Form } from 'react-bootstrap'
-import { Boton } from '../../atoms/Boton/Boton'
+import { Form } from 'react-bootstrap'
 import { Imagen } from '../../atoms/Imagen/Imagen'
-import { Titulo } from '../../atoms/Titulo/Titulo'
 import { CampoFormulario } from '../../molecules/CampoFormulario/CampoFormulario'
+import { TarjetaFormulario } from '../../molecules/TarjetaFormulario/TarjetaFormulario'
 import { useFormulario } from '../../../hooks/useFormulario'
 import {
   sinErrores,
@@ -80,121 +79,111 @@ export function FormularioProducto(props) {
   }
 
   return (
-    <Card className="shadow-sm border-0">
-      <Card.Body className="p-4 p-md-5">
-        <Titulo nivel={2} className="h3 fw-bold mb-4 text-primary">
-          {props.titulo}
-        </Titulo>
-        <Form noValidate onSubmit={manejarEnvio}>
-          <CampoFormulario
-            id="id"
-            etiqueta="Código de producto (SKU)"
-            placeholder="Formato: AB000"
-            requerido
-            valor={valores.id}
-            onChange={formulario.manejarCambio}
-            error={errores.id}
-          />
-          <CampoFormulario
-            id="nombre"
-            etiqueta="Nombre de Producto"
-            placeholder="Ej: Micrófono tipo"
-            requerido
-            valor={valores.nombre}
-            onChange={formulario.manejarCambio}
-            error={errores.nombre}
-          />
-          <CampoFormulario
-            id="marca"
-            etiqueta="Marca"
-            placeholder="Ej: Squier"
-            valor={valores.marca}
-            onChange={formulario.manejarCambio}
-          />
-          <CampoFormulario
-            id="modelo"
-            etiqueta="Modelo"
-            placeholder="Ej: Affinity PJ"
-            valor={valores.modelo}
-            onChange={formulario.manejarCambio}
-          />
-          <CampoFormulario
-            id="descripcion"
-            etiqueta="Descripción de Producto"
-            tipo="textarea"
-            filas={2}
-            placeholder="Escriba la descripción aquí"
-            valor={valores.descripcion}
-            onChange={formulario.manejarCambio}
-            error={errores.descripcion}
-          />
-          <CampoFormulario
-            id="precio"
-            etiqueta="Precio (Cifra)"
-            tipo="number"
-            placeholder="Escriba cifra sin puntos ni signo $"
-            requerido
-            valor={valores.precio}
-            onChange={formulario.manejarCambio}
-            error={errores.precio}
-          />
-          <CampoFormulario
-            id="stock"
-            etiqueta="Stock"
-            tipo="number"
-            placeholder="Mínimo 0, sin máximo"
-            requerido
-            valor={valores.stock}
-            onChange={formulario.manejarCambio}
-            error={errores.stock}
-          />
-          <CampoFormulario
-            id="stockCritico"
-            etiqueta="Stock Crítico"
-            tipo="number"
-            placeholder="Mínimo 0, sin máximo"
-            valor={valores.stockCritico}
-            onChange={formulario.manejarCambio}
-            error={errores.stockCritico}
-          />
-          <CampoFormulario
-            id="categoria"
-            etiqueta="Categoría"
-            tipo="select"
-            placeholder="Selecciona la categoría"
-            requerido
-            opciones={props.categorias}
-            valor={valores.categoria}
-            onChange={formulario.manejarCambio}
-            error={errores.categoria}
-          />
-          <CampoFormulario
-            id="imagen"
-            etiqueta="Subir Imagen del Producto"
-            tipo="file"
-            accept="image/*"
-            onChange={manejarImagen}
-            className="mb-1"
-          />
-          <Form.Text className="d-block mb-3 text-muted">
-            La imagen debe estar en public/images/productos
-          </Form.Text>
-          {(vistaPrevia || valores.imagen) && (
-            <div className="mb-3 text-center">
-              <Imagen src={vistaPrevia ?? valores.imagen} alt="Vista previa" className="img-thumbnail producto-img" />
-            </div>
-          )}
-
-          <div className="d-flex justify-content-between align-items-center">
-            <Boton variante="outline-secondary" onClick={props.onCancelar}>
-              {props.textoCancelar ?? 'Cancelar'}
-            </Boton>
-            <Boton variante="success" tipo="submit" className="px-4">
-              Guardar Producto
-            </Boton>
-          </div>
-        </Form>
-      </Card.Body>
-    </Card>
+    <TarjetaFormulario
+      titulo={props.titulo}
+      textoGuardar="Guardar Producto"
+      textoCancelar={props.textoCancelar}
+      onEnviar={manejarEnvio}
+      onCancelar={props.onCancelar}
+    >
+      <CampoFormulario
+        id="id"
+        etiqueta="Código de producto (SKU)"
+        placeholder="Formato: AB000"
+        requerido
+        valor={valores.id}
+        onChange={formulario.manejarCambio}
+        error={errores.id}
+      />
+      <CampoFormulario
+        id="nombre"
+        etiqueta="Nombre de Producto"
+        placeholder="Ej: Micrófono tipo"
+        requerido
+        valor={valores.nombre}
+        onChange={formulario.manejarCambio}
+        error={errores.nombre}
+      />
+      <CampoFormulario
+        id="marca"
+        etiqueta="Marca"
+        placeholder="Ej: Squier"
+        valor={valores.marca}
+        onChange={formulario.manejarCambio}
+      />
+      <CampoFormulario
+        id="modelo"
+        etiqueta="Modelo"
+        placeholder="Ej: Affinity PJ"
+        valor={valores.modelo}
+        onChange={formulario.manejarCambio}
+      />
+      <CampoFormulario
+        id="descripcion"
+        etiqueta="Descripción de Producto"
+        tipo="textarea"
+        filas={2}
+        placeholder="Escriba la descripción aquí"
+        valor={valores.descripcion}
+        onChange={formulario.manejarCambio}
+        error={errores.descripcion}
+      />
+      <CampoFormulario
+        id="precio"
+        etiqueta="Precio (Cifra)"
+        tipo="number"
+        placeholder="Escriba cifra sin puntos ni signo $"
+        requerido
+        valor={valores.precio}
+        onChange={formulario.manejarCambio}
+        error={errores.precio}
+      />
+      <CampoFormulario
+        id="stock"
+        etiqueta="Stock"
+        tipo="number"
+        placeholder="Mínimo 0, sin máximo"
+        requerido
+        valor={valores.stock}
+        onChange={formulario.manejarCambio}
+        error={errores.stock}
+      />
+      <CampoFormulario
+        id="stockCritico"
+        etiqueta="Stock Crítico"
+        tipo="number"
+        placeholder="Mínimo 0, sin máximo"
+        valor={valores.stockCritico}
+        onChange={formulario.manejarCambio}
+        error={errores.stockCritico}
+      />
+      <CampoFormulario
+        id="categoria"
+        etiqueta="Categoría"
+        tipo="select"
+        placeholder="Selecciona la categoría"
+        requerido
+        opciones={props.categorias}
+        valor={valores.categoria}
+        onChange={formulario.manejarCambio}
+        error={errores.categoria}
+      />
+      <CampoFormulario
+        id="imagen"
+        etiqueta="Subir Imagen del Producto"
+        tipo="file"
+        accept="image/*"
+        onChange={manejarImagen}
+        className="mb-1"
+      />
+      <Form.Text className="d-block text-muted">
+        La imagen debe estar en public/images/productos
+      </Form.Text>
+      {(vistaPrevia || valores.imagen) && (
+        <div className="mt-3 text-center">
+          <Imagen src={vistaPrevia ?? valores.imagen} alt="Vista previa" className="img-thumbnail producto-img" />
+        </div>
+      )}
+    </TarjetaFormulario>
   )
 }

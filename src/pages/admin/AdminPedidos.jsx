@@ -1,14 +1,19 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Texto } from "../../components/atoms/Texto/Texto";
 import { Encabezado } from "../../components/molecules/Encabezado/Encabezado";
-import { FiltroEstado } from "../../components/molecules/FiltroEstado/FiltroEstado";
+import { SelectorEnLinea } from "../../components/molecules/SelectorEnLinea/SelectorEnLinea";
 import { TablaPedidos } from "../../components/organisms/TablaPedidos/TablaPedidos";
 import { PlantillaPrivada } from "../../components/templates/PlantillaPrivada/PlantillaPrivada";
 import { usePedidos } from "../../context/PedidosContext";
 import { ESTADOS_PEDIDO } from "../../data/pedidos";
 import { useTituloPagina } from "../../hooks/useTituloPagina";
 import { ordenarRecientes } from "../../services/pedidoService";
+
+// valor 'todos' = sin filtro
+const opcionesEstado = [
+  { valor: "todos", texto: "Todos los estados" },
+  ...ESTADOS_PEDIDO.map((estado) => ({ valor: estado, texto: estado })),
+];
 
 export default function AdminPedidos() {
   const navigate = useNavigate();
@@ -24,17 +29,21 @@ export default function AdminPedidos() {
   return (
     <PlantillaPrivada>
       <Encabezado titulo="Pedidos" subtitulo={`${filtrados.length} pedido(s), del más reciente al más antiguo`}>
-        <FiltroEstado valor={estado} estados={ESTADOS_PEDIDO} onCambiar={setEstado} />
-      </Encabezado>
-      {filtrados.length > 0 ? (
-        <TablaPedidos
-          pedidos={filtrados}
-          mostrarCliente
-          onVer={(pedido) => navigate(`/admin/pedidos/${pedido.id}`)}
+        <SelectorEnLinea
+          id="filtro-estado"
+          etiqueta="Estado:"
+          valor={estado}
+          opciones={opcionesEstado}
+          onCambiar={setEstado}
+          className="justify-content-md-end"
         />
-      ) : (
-        <Texto className="text-muted text-center py-5">No hay pedidos con este estado.</Texto>
-      )}
+      </Encabezado>
+      <TablaPedidos
+        pedidos={filtrados}
+        mostrarCliente
+        mensajeVacio="No hay pedidos con este estado."
+        onVer={(pedido) => navigate(`/admin/pedidos/${pedido.id}`)}
+      />
     </PlantillaPrivada>
   );
 }

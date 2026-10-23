@@ -1,8 +1,8 @@
 import { Card, ListGroup } from 'react-bootstrap'
-import { Insignia } from '../../atoms/Insignia/Insignia'
 import { Titulo } from '../../atoms/Titulo/Titulo'
+import { InsigniaEstado } from '../../molecules/InsigniaEstado/InsigniaEstado'
 
-// porEstado: { 'En preparación': 2, Despachado: 0, ... }; colores: color de la insignia de cada estado
+// porEstado: { 'En preparación': 2, Despachado: 0, ... }
 export function PedidosPorEstado(props) {
   return (
     <Card as="section" className="shadow-sm border-0 h-100">
@@ -11,7 +11,7 @@ export function PedidosPorEstado(props) {
         <ListGroup variant="flush">
           {Object.entries(props.porEstado).map(([estado, cantidad]) => (
             <ListGroup.Item key={estado} className="d-flex justify-content-between align-items-center px-0">
-              <Insignia color={props.colores[estado] ?? 'secondary'} className="px-3 py-2">{estado}</Insignia>
+              <InsigniaEstado estado={estado} className="px-3 py-2" />
               <span className="fw-bold fs-5">{cantidad}</span>
             </ListGroup.Item>
           ))}

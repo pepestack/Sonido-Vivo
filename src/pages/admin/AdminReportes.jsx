@@ -5,7 +5,6 @@ import { PedidosPorEstado } from "../../components/organisms/PedidosPorEstado/Pe
 import { TablaMasVendidos } from "../../components/organisms/TablaMasVendidos/TablaMasVendidos";
 import { PlantillaPrivada } from "../../components/templates/PlantillaPrivada/PlantillaPrivada";
 import { usePedidos } from "../../context/PedidosContext";
-import { colorEstado } from "../../data/pedidos";
 import { useTituloPagina } from "../../hooks/useTituloPagina";
 import { resumenVentas } from "../../services/pedidoService";
 import { formatoDinero } from "../../utils/formato";
@@ -30,7 +29,7 @@ export default function AdminReportes() {
       <GrillaEstadisticas estadisticas={estadisticas} />
       <Row className="g-4">
         <Col xs={12} lg={4}>
-          <PedidosPorEstado porEstado={resumen.porEstado} colores={colorEstado} />
+          <PedidosPorEstado porEstado={resumen.porEstado} />
         </Col>
         <Col xs={12} lg={8}>
           <TablaMasVendidos productos={resumen.masVendidos.slice(0, 5)} />

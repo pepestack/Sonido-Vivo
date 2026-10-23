@@ -2,6 +2,7 @@ import { CamposUsuario } from '../CamposUsuario/CamposUsuario'
 import { TarjetaAutenticacion } from '../../molecules/TarjetaAutenticacion/TarjetaAutenticacion'
 import { useFormulario } from '../../../hooks/useFormulario'
 import { usuarioVacio } from '../../../data/usuarios'
+import { normalizarUsuario } from '../../../services/usuarioService'
 import { sinErrores, validarUsuario } from '../../../utils/validaciones'
 
 // Organismo: registro público. Tiene los mismos campos y reglas que crear un usuario en el admin,
@@ -16,14 +17,7 @@ export function Register(props) {
     const nuevos = validarUsuario(valores, { rutEnUso: props.rutEnUso, ocultarRol: true })
     formulario.setErrores(nuevos)
     if (sinErrores(nuevos)) {
-      props.onEnviar({
-        ...valores,
-        rut: valores.rut.trim(),
-        nombre: valores.nombre.trim(),
-        apellido: valores.apellido.trim(),
-        correo: valores.correo.trim(),
-        direccion: valores.direccion.trim(),
-      })
+      props.onEnviar(normalizarUsuario(valores))
     }
   }
 

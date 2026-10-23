@@ -1,6 +1,5 @@
-import { Boton } from '../../atoms/Boton/Boton'
-import { Insignia } from '../../atoms/Insignia/Insignia'
-import { colorRol } from '../../../utils/roles'
+import { AccionesFila } from '../AccionesFila/AccionesFila'
+import { InsigniaRol } from '../InsigniaRol/InsigniaRol'
 import { nombreCompleto } from '../../../utils/formato'
 
 export function FilaUsuarioAdmin(props) {
@@ -12,21 +11,14 @@ export function FilaUsuarioAdmin(props) {
       <td>{nombreCompleto(usuario)}</td>
       <td>{usuario.correo}</td>
       <td>
-        <Insignia color={colorRol[usuario.rol] ?? 'dark'}>{usuario.rol}</Insignia>
+        <InsigniaRol rol={usuario.rol} />
       </td>
-      <td className="text-end pe-4">
-        <Boton variante="outline-primary" tamano="sm" className="me-1" onClick={() => props.onVer(usuario)}>
-          Ver usuario
-        </Boton>
-        <Boton variante="outline-primary" tamano="sm" onClick={() => props.onEditar(usuario)}>
-          Editar
-        </Boton>
-        {props.puedeEliminar && (
-          <Boton variante="outline-danger" tamano="sm" className="ms-1" onClick={() => props.onEliminar(usuario)}>
-            Eliminar
-          </Boton>
-        )}
-      </td>
+      <AccionesFila
+        onVer={() => props.onVer(usuario)}
+        textoVer="Ver usuario"
+        onEditar={() => props.onEditar(usuario)}
+        onEliminar={props.puedeEliminar ? () => props.onEliminar(usuario) : undefined}
+      />
     </tr>
   )
 }

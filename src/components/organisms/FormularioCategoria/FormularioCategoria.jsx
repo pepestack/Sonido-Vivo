@@ -1,7 +1,6 @@
-import { Card, Form } from 'react-bootstrap'
-import { Boton } from '../../atoms/Boton/Boton'
-import { Titulo } from '../../atoms/Titulo/Titulo'
+import { Form } from 'react-bootstrap'
 import { CampoFormulario } from '../../molecules/CampoFormulario/CampoFormulario'
+import { TarjetaFormulario } from '../../molecules/TarjetaFormulario/TarjetaFormulario'
 import { useFormulario } from '../../../hooks/useFormulario'
 import { generarValor } from '../../../utils/formato'
 import { LARGO_MAXIMO_CATEGORIA, validarCategoria } from '../../../utils/validaciones'
@@ -26,38 +25,27 @@ export function FormularioCategoria(props) {
   }
 
   return (
-    <Card className="shadow-sm border-0">
-      <Card.Body className="p-4 p-md-5">
-        <Titulo nivel={2} className="h3 fw-bold mb-4 text-primary">
-          {props.titulo}
-        </Titulo>
-        <Form noValidate onSubmit={manejarEnvio}>
-          <CampoFormulario
-            id="texto"
-            etiqueta="Nombre de la categoría"
-            placeholder="Ej: Instrumentos de viento"
-            maxLength={LARGO_MAXIMO_CATEGORIA}
-            requerido
-            valor={texto}
-            onChange={formulario.manejarCambio}
-            error={formulario.errores.texto}
-            className="mb-1"
-          />
-          <Form.Text className="d-block mb-4 text-muted">
-            Dirección en la tienda: /categoria/{valor || '...'}
-            {props.valorFijo && ' (no cambia al editar, para no romper los productos ni los enlaces)'}
-          </Form.Text>
-
-          <div className="d-flex justify-content-between align-items-center">
-            <Boton variante="outline-secondary" onClick={props.onCancelar}>
-              Cancelar
-            </Boton>
-            <Boton variante="success" tipo="submit" className="px-4">
-              Guardar Categoría
-            </Boton>
-          </div>
-        </Form>
-      </Card.Body>
-    </Card>
+    <TarjetaFormulario
+      titulo={props.titulo}
+      textoGuardar="Guardar Categoría"
+      onEnviar={manejarEnvio}
+      onCancelar={props.onCancelar}
+    >
+      <CampoFormulario
+        id="texto"
+        etiqueta="Nombre de la categoría"
+        placeholder="Ej: Instrumentos de viento"
+        maxLength={LARGO_MAXIMO_CATEGORIA}
+        requerido
+        valor={texto}
+        onChange={formulario.manejarCambio}
+        error={formulario.errores.texto}
+        className="mb-1"
+      />
+      <Form.Text className="d-block text-muted">
+        Dirección en la tienda: /categoria/{valor || '...'}
+        {props.valorFijo && ' (no cambia al editar, para no romper los productos ni los enlaces)'}
+      </Form.Text>
+    </TarjetaFormulario>
   )
 }

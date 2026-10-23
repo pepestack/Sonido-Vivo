@@ -1,11 +1,11 @@
-// Fila "etiqueta | valor" de una tabla de detalle
+import { ListGroup } from 'react-bootstrap'
+
+// Fila "etiqueta | valor" de una vista de detalle (va dentro de un ListGroup variant="flush")
 export function FilaDetalle(props) {
   return (
-    <tr>
-      <th scope="row" className="w-25 text-secondary fw-normal">
-        {props.etiqueta}
-      </th>
-      <td>{props.children}</td>
-    </tr>
+    <ListGroup.Item className="d-flex justify-content-between align-items-center gap-3 px-0 py-3">
+      <b className="text-muted">{props.etiqueta}</b>
+      <span className="text-end">{props.children}</span>
+    </ListGroup.Item>
   )
 }

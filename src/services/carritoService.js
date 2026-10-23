@@ -9,6 +9,11 @@ export function limiteDe(producto) {
   return Math.max(0, Math.min(MAXIMO_POR_COMPRA, producto.stock))
 }
 
+// opciones 1..maximo para los selectores de cantidad
+export function opcionesCantidad(maximo) {
+  return Array.from({ length: Math.max(maximo, 0) }, (_, i) => ({ valor: i + 1, texto: i + 1 }))
+}
+
 export function obtenerCarrito() {
   return leer(CLAVES.carrito, [])
 }

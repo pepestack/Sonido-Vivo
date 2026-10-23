@@ -1,9 +1,9 @@
 import { Card, Col, Row, Table } from 'react-bootstrap'
-import { Insignia } from '../../atoms/Insignia/Insignia'
 import { Precio } from '../../atoms/Precio/Precio'
 import { Texto } from '../../atoms/Texto/Texto'
 import { Titulo } from '../../atoms/Titulo/Titulo'
-import { colorEstado } from '../../../data/pedidos'
+import { InsigniaEstado } from '../../molecules/InsigniaEstado/InsigniaEstado'
+import { ResumenTotales } from '../../molecules/ResumenTotales/ResumenTotales'
 import { formatoFecha, nombreCompleto, numeroPedido } from '../../../utils/formato'
 
 // Comprobante (boleta) de un pedido: lo usan la compra exitosa, "Mis pedidos" y el panel de administración
@@ -15,9 +15,7 @@ export function DetallePedido(props) {
     <Card as="article" className="shadow-sm border-0">
       <Card.Header as="header" className="bg-dark text-white d-flex flex-wrap justify-content-between align-items-center gap-2 py-3 px-4">
         <Titulo nivel={2} className="h5 mb-0">Pedido {numeroPedido(pedido.id)}</Titulo>
-        <Insignia color={colorEstado[pedido.estado] ?? 'secondary'} className="px-3 py-2">
-          {pedido.estado}
-        </Insignia>
+        <InsigniaEstado estado={pedido.estado} className="px-3 py-2" />
       </Card.Header>
       <Card.Body className="p-4">
         <Row className="g-4 mb-4">
@@ -41,7 +39,7 @@ export function DetallePedido(props) {
           </Col>
         </Row>
 
-        <Table responsive className="align-middle mb-0">
+        <Table responsive className="align-middle mb-4">
           <thead>
             <tr>
               <th>Producto</th>
@@ -60,21 +58,12 @@ export function DetallePedido(props) {
               </tr>
             ))}
           </tbody>
-          <tfoot>
-            <tr>
-              <td colSpan={3} className="text-end">Subtotal</td>
-              <td className="text-end"><Precio monto={pedido.subtotal} /></td>
-            </tr>
-            <tr>
-              <td colSpan={3} className="text-end">Despacho</td>
-              <td className="text-end">{pedido.despacho > 0 ? <Precio monto={pedido.despacho} /> : 'Sin costo'}</td>
-            </tr>
-            <tr className="fw-bold fs-5">
-              <td colSpan={3} className="text-end border-0">Total</td>
-              <td className="text-end border-0"><Precio monto={pedido.total} className="text-success" /></td>
-            </tr>
-          </tfoot>
         </Table>
+        <Row>
+          <Col xs={12} md={6} className="ms-auto">
+            <ResumenTotales subtotal={pedido.subtotal} despacho={pedido.despacho} total={pedido.total} />
+          </Col>
+        </Row>
       </Card.Body>
     </Card>
   )

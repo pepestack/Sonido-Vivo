@@ -1,4 +1,4 @@
-import { Badge } from "react-bootstrap";
+import { Insignia } from "../../atoms/Insignia/Insignia";
 import { Precio } from "../../atoms/Precio/Precio";
 import { precioFinal } from "../../../services/productoService";
 
@@ -13,7 +13,7 @@ export function PrecioProducto(props) {
       {enOferta && (
         <>
           <Precio monto={producto.precio} className="fs-6 fw-normal text-muted text-decoration-line-through ms-2" />
-          <Badge bg="danger" className="fs-6 ms-2 align-middle">Oferta</Badge>
+          <Insignia color="danger" className="fs-6 ms-2 align-middle">Oferta</Insignia>
         </>
       )}
     </span>

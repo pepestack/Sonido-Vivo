@@ -1,4 +1,5 @@
 import { Card } from "react-bootstrap";
+import { Avatar } from "../../atoms/Avatar/Avatar";
 import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
 
@@ -13,9 +14,7 @@ export function CajaComentarios(props) {
       <Card.Body className="d-flex gap-3">
 
         <div className="flex-shrink-0">
-          <div className="perfil-comentario bg-secondary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold">
-            {comentario.iniciales}
-          </div>
+          <Avatar>{comentario.iniciales}</Avatar>
         </div>
 
         <div className="flex-grow-1 overflow-hidden">

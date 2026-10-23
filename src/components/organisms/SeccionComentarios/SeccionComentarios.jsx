@@ -1,6 +1,6 @@
 import { CajaComentarios } from "../../molecules/CajaComentarios/CajaComentarios";
 import { FormularioComentario } from "../../molecules/FormularioComentario/FormularioComentario";
-import { Texto } from "../../atoms/Texto/Texto";
+import { AvisoVacio } from "../../molecules/AvisoVacio/AvisoVacio";
 import { Titulo } from "../../atoms/Titulo/Titulo";
 
 export function SeccionComentarios(props) {
@@ -22,11 +22,7 @@ export function SeccionComentarios(props) {
         />
       ))}
 
-      {comentarios.length === 0 && (
-        <Texto className="text-muted text-center py-4">
-          No hay comentarios para mostrar.
-        </Texto>
-      )}
+      {comentarios.length === 0 && <AvisoVacio texto="No hay comentarios para mostrar." />}
 
     </section>
   );
