@@ -28,6 +28,7 @@ export default function Home(){
       <CarruselHero imagenes={imagenesCarrusel}/>
       <SeccionPresentacion
         titulo="Sonido Vivo"
+        tituloAnimado
         texto="Visítanos en nuestra tienda en Viña del Mar o explora nuestro catálogo con más de 300 productos. Hacemos envíos y entregas a todo el país para que tu sonido no se detenga."
         imagen={imgTienda}
         alt="Interior de tienda física Sonido Vivo"
@@ -43,6 +44,7 @@ export default function Home(){
       <GrillaProductos
         titulo="Productos destacados"
         productos={destacados}
+        animado
         onAgregar={carrito.agregarAlCarrito}
         onNavegar={navigate}
         className="my-5 py-5"
