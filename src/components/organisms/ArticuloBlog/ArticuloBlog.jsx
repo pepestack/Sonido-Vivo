@@ -13,7 +13,7 @@ export function ArticuloBlog(props) {
         <Imagen
           src={blog.imagen}
           alt={blog.alt}
-          className={`img-fluid rounded border w-100 shadow-sm blog-img-articulo ${blog.claseImagen ?? ''}`.trim()}
+          className={`img-fluid rounded border w-100 shadow-sm object-fit-cover blog-img-articulo ${blog.claseImagen ?? ''}`.trim()}
         />
       </div>
 

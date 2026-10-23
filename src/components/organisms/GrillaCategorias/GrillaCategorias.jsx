@@ -1,9 +1,12 @@
 import { Col, Row } from "react-bootstrap";
-import { Boton } from "../../atoms/Boton/Boton";
+import { Effect } from "@animate-ui/react/primitives/effects/effect";
 import { Titulo } from "../../atoms/Titulo/Titulo";
+import { TarjetaCategoria } from "../../molecules/TarjetaCategoria/TarjetaCategoria";
+import { iconoCategoria } from "../../../data/categorias";
 
 // Accesos rápidos del Home a cada categoría del catálogo
 // categorias: [{ valor, texto, cantidad }]; onNavegar(ruta) lleva a /categoria/:valor
+// animado: las tarjetas aparecen una tras otra al entrar en pantalla
 export function GrillaCategorias(props) {
   return (
     <section className={props.className ?? ""}>
@@ -12,19 +15,30 @@ export function GrillaCategorias(props) {
           {props.titulo}
         </Titulo>
       )}
-      <Row className="g-3">
-        {props.categorias.map((categoria) => (
-          <Col key={categoria.valor} xs={6} md={4} lg={3}>
-            <Boton
-              variante="outline-dark"
-              className="w-100 h-100 py-3"
-              onClick={() => props.onNavegar(`/categoria/${categoria.valor}`)}
-            >
-              <span className="d-block fw-bold">{categoria.texto}</span>
-              <small>{categoria.cantidad} productos</small>
-            </Boton>
-          </Col>
-        ))}
+      {/* 5 por fila en escritorio: las 10 categorías quedan en 2 filas parejas */}
+      <Row xs={2} md={3} lg={5} className="g-3">
+        {props.categorias.map((categoria, indice) => {
+          const tarjeta = (
+            <TarjetaCategoria
+              texto={categoria.texto}
+              cantidad={categoria.cantidad}
+              icono={iconoCategoria(categoria.valor)}
+              onElegir={() => props.onNavegar(`/categoria/${categoria.valor}`)}
+            />
+          );
+          // el Effect va dentro del Col para no romper la grilla de Bootstrap (Row > Col)
+          return (
+            <Col key={categoria.valor}>
+              {props.animado ? (
+                <Effect fade slide blur inView delay={indice * 80} className="h-100">
+                  {tarjeta}
+                </Effect>
+              ) : (
+                tarjeta
+              )}
+            </Col>
+          );
+        })}
       </Row>
     </section>
   );

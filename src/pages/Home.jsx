@@ -38,6 +38,7 @@ export default function Home(){
       <GrillaCategorias
         titulo="Explora por categoría"
         categorias={categorias}
+        animado
         onNavegar={navigate}
         className="mt-5"
       />

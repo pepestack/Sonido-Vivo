@@ -18,7 +18,7 @@ export function TarjetaProducto(props) {
         <Imagen
           src={producto.imagen}
           alt={producto.nombre}
-          className="card-img-top producto-img"
+          className="card-img-top producto-img object-fit-cover"
         />
       </Enlace>
       <Card.Body className="d-flex flex-column">

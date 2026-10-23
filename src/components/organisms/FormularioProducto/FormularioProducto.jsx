@@ -181,7 +181,7 @@ export function FormularioProducto(props) {
       </Form.Text>
       {(vistaPrevia || valores.imagen) && (
         <div className="mt-3 text-center">
-          <Imagen src={vistaPrevia ?? valores.imagen} alt="Vista previa" className="img-thumbnail producto-img" />
+          <Imagen src={vistaPrevia ?? valores.imagen} alt="Vista previa" className="img-thumbnail producto-img object-fit-cover" />
         </div>
       )}
     </TarjetaFormulario>
