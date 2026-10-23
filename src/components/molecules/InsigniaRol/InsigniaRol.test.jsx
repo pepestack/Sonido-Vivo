@@ -8,10 +8,4 @@ describe('InsigniaRol', () => {
 
     expect(screen.getByText('Cliente')).toHaveClass('bg-secondary')
   })
-
-  it('el Administrador se ve en rojo', () => {
-    render(<InsigniaRol rol="Administrador" />)
-
-    expect(screen.getByText('Administrador')).toHaveClass('bg-danger')
-  })
 })

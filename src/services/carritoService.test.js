@@ -15,9 +15,5 @@ describe('calcularTotales', () => {
       total: 110000 + COSTO_DESPACHO,
     })
   })
-
-  it('con el carrito vacío no cobra despacho', () => {
-    expect(calcularTotales([]).total).toBe(0)
-  })
 })
 

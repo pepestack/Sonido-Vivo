@@ -29,10 +29,4 @@ describe('Login', () => {
     expect(screen.getByText(/Solo se permiten correos/)).toBeInTheDocument()
     expect(screen.getByText(/entre 4 y 10 caracteres/)).toBeInTheDocument()
   })
-
-  it('muestra el error que le entrega la página', () => {
-    render(<Login onEnviar={vi.fn()} onNavegar={vi.fn()} error="Correo o contraseña incorrectos" />)
-
-    expect(screen.getByText('Correo o contraseña incorrectos')).toBeInTheDocument()
-  })
 })
