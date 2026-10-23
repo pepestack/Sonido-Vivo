@@ -33,7 +33,7 @@ export function FichaProducto(props) {
     <Row as="section">
       <Col md={6} className="mb-4">
         <Card>
-          <Imagen src={producto.imagen} alt={producto.nombre} className="card-img-top" />
+          <Imagen src={producto.imagen} alt={producto.nombre} className="card-img-top" zoom />
           {producto.galeria.length > 0 && (
             <Card.Body className="custom-lb-container">
               <Row className="g-2">
