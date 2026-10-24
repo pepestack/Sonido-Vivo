@@ -79,6 +79,11 @@ Para detener el servidor de desarrollo, presione:
 > **Nota (2026-10-22):** Sebastian Navarro cambió de cuenta de GitHub. Desde hace una semana trabaja solo con **sebi-nvrro**; los commits anteriores firmados como **sebi-nm** también son suyos.
 
 <!-- SUMMARY:START -->
+### 2026-10-23
+
+- **Sebastiana-pablaza**: Implementó la integración de dos nuevos banners en el carrusel principal del sitio.
+- **José Calderón**: Optimizó la arquitectura de componentes y el estilo visual del proyecto, consolidando elementos de interfaz y ajustando la estrategia de pruebas unitarias.
+
 ### 2026-10-22
 
 - **José Calderón**: Implementó mejoras visuales y animaciones interactivas en la interfaz de usuario, además de actualizar la documentación del proyecto.
