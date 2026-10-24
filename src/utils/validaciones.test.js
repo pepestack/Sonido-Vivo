@@ -23,6 +23,12 @@ describe('validarUsuario', () => {
     expect(validarUsuario(sinRol).rol).toBe('Selecciona un rol')
     expect(validarUsuario(sinRol, { ocultarRol: true }).rol).toBe('')
   })
+
+  it('rechaza un correo que ya usa otro usuario', () => {
+    const correoEnUso = (correo) => correo === 'ana@duoc.cl'
+    expect(validarUsuario(valido, { correoEnUso }).correo).toBe('Ya existe una cuenta con este correo')
+    expect(validarUsuario({ ...valido, correo: 'otra@duoc.cl' }, { correoEnUso }).correo).toBe('')
+  })
 })
 
 describe('validarCategoria', () => {

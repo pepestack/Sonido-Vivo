@@ -7,14 +7,14 @@ import { sinErrores, validarUsuario } from '../../../utils/validaciones'
 
 // Organismo: registro público. Tiene los mismos campos y reglas que crear un usuario en el admin,
 // pero sin elegir rol (la página lo asigna). Avisa a la página con props.onEnviar cuando todo es válido.
-// regiones, comunasDe(region) y rutEnUso(rut) llegan por props
+// regiones, comunasDe(region), rutEnUso(rut) y correoEnUso(correo) llegan por props
 export function Register(props) {
   const formulario = useFormulario(usuarioVacio)
 
   function manejarEnvio(evento) {
     evento.preventDefault()
     const valores = formulario.valores
-    const nuevos = validarUsuario(valores, { rutEnUso: props.rutEnUso, ocultarRol: true })
+    const nuevos = validarUsuario(valores, { rutEnUso: props.rutEnUso, correoEnUso: props.correoEnUso, ocultarRol: true })
     formulario.setErrores(nuevos)
     if (sinErrores(nuevos)) {
       props.onEnviar(normalizarUsuario(valores))
