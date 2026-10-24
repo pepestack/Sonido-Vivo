@@ -2,7 +2,7 @@ import { Card, Table } from "react-bootstrap";
 import { Boton } from "../../atoms/Boton/Boton";
 import { Precio } from "../../atoms/Precio/Precio";
 import { Selector } from "../../atoms/Selector/Selector";
-import { limiteDe, opcionesCantidad } from "../../../services/carritoService";
+import { limiteDe, opcionesCantidad } from "../../../utils/carrito";
 
 // items: [{ id, nombre, precio, stock, cantidad }]
 export function TablaCarrito(props) {

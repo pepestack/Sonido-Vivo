@@ -1,5 +1,6 @@
 import { FilaUsuarioAdmin } from "../../molecules/FilaUsuarioAdmin/FilaUsuarioAdmin";
 import { TablaAdmin } from "../TablaAdmin/TablaAdmin";
+import { esAdministrador } from "../../../utils/roles";
 
 const columnas = [
   { texto: "ID", className: "ps-4" },
@@ -18,7 +19,7 @@ export function TablaUsuarios(props) {
         <FilaUsuarioAdmin
           key={usuario.id}
           usuario={usuario}
-          puedeEliminar={usuario.rol !== "Administrador"}
+          puedeEliminar={!esAdministrador(usuario)}
           onVer={props.onVer}
           onEditar={props.onEditar}
           onEliminar={props.onEliminar}

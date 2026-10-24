@@ -12,3 +12,12 @@ export const colorRol = {
   Cajero: 'dark',
   Cliente: 'secondary',
 }
+
+export function esCliente(usuario) {
+  return usuario?.rol === 'Cliente'
+}
+
+// el administrador no se puede eliminar
+export function esAdministrador(usuario) {
+  return usuario?.rol === 'Administrador'
+}

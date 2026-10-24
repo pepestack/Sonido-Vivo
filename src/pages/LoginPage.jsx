@@ -5,7 +5,7 @@ import { PlantillaPublica } from '../components/templates/PlantillaPublica/Plant
 import { Login } from '../components/organisms/Login/Login'
 import { useSesion } from '../context/SesionContext'
 import { useTituloPagina } from '../hooks/useTituloPagina'
-import { esCliente } from '../services/sesionService'
+import { esCliente } from '../utils/roles'
 
 
 function LoginPage() {

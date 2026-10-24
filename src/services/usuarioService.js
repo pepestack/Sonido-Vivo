@@ -31,15 +31,3 @@ export function existeCorreo(usuarios, correo, idExcluido) {
   const buscado = String(correo ?? '').trim().toLowerCase()
   return usuarios.some((usuario) => usuario.id !== idExcluido && usuario.correo.toLowerCase() === buscado)
 }
-
-// quita los espacios sobrantes de los campos de texto antes de guardar (registro y admin)
-export function normalizarUsuario(valores) {
-  return {
-    ...valores,
-    rut: valores.rut.trim(),
-    nombre: valores.nombre.trim(),
-    apellido: valores.apellido.trim(),
-    correo: valores.correo.trim(),
-    direccion: valores.direccion.trim(),
-  }
-}

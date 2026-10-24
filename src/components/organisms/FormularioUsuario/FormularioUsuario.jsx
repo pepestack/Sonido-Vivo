@@ -2,7 +2,7 @@ import { TarjetaFormulario } from '../../molecules/TarjetaFormulario/TarjetaForm
 import { CamposUsuario } from '../CamposUsuario/CamposUsuario'
 import { useFormulario } from '../../../hooks/useFormulario'
 import { usuarioVacio } from '../../../data/usuarios'
-import { normalizarUsuario } from '../../../services/usuarioService'
+import { normalizarUsuario } from '../../../utils/formato'
 import { sinErrores, validarUsuario } from '../../../utils/validaciones'
 
 // Formulario compartido para crear y editar usuarios en el admin.

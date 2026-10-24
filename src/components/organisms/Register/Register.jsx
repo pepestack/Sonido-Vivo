@@ -2,7 +2,7 @@ import { CamposUsuario } from '../CamposUsuario/CamposUsuario'
 import { TarjetaAutenticacion } from '../../molecules/TarjetaAutenticacion/TarjetaAutenticacion'
 import { useFormulario } from '../../../hooks/useFormulario'
 import { usuarioVacio } from '../../../data/usuarios'
-import { normalizarUsuario } from '../../../services/usuarioService'
+import { normalizarUsuario } from '../../../utils/formato'
 import { sinErrores, validarUsuario } from '../../../utils/validaciones'
 
 // Organismo: registro público. Tiene los mismos campos y reglas que crear un usuario en el admin,

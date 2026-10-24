@@ -6,11 +6,12 @@ import { Titulo } from "../../atoms/Titulo/Titulo";
 import { BarraAcciones } from "../../molecules/BarraAcciones/BarraAcciones";
 import { InsigniaRol } from "../../molecules/InsigniaRol/InsigniaRol";
 import { iniciales, nombreCompleto } from "../../../utils/formato";
+import { esAdministrador } from "../../../utils/roles";
 
 export function PerfilUsuario(props) {
   const usuario = props.usuario;
   const nombre = nombreCompleto(usuario);
-  const esAdmin = usuario.rol === "Administrador";
+  const esAdmin = esAdministrador(usuario);
 
   return (
     <Card as="article" className="shadow-sm border-0">
