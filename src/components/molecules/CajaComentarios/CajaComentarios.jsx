@@ -18,7 +18,7 @@ export function CajaComentarios(props) {
         </div>
 
         <div className="flex-grow-1 overflow-hidden">
-          <Titulo nivel={5} className="fw-bold mb-1 fs-6">
+          <Titulo nivel={3} className="fw-bold mb-1 fs-6">
             {comentario.usuario}
           </Titulo>
 

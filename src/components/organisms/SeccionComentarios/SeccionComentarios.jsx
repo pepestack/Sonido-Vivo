@@ -10,7 +10,7 @@ export function SeccionComentarios(props) {
   return (
     <Card as="section" className="shadow-sm border-0 p-4 bg-white">
 
-      <Titulo nivel={3} className="fw-bold mb-4 fs-4 border-bottom pb-2">
+      <Titulo nivel={2} className="fw-bold mb-4 fs-4 border-bottom pb-2">
         Comentarios ({comentarios.length})
       </Titulo>
 

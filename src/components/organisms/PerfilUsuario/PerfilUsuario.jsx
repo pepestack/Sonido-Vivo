@@ -16,13 +16,13 @@ export function PerfilUsuario(props) {
   return (
     <Card as="article" className="shadow-sm border-0">
       <Card.Header as="header" className="bg-dark text-white text-center py-4">
-        <Titulo nivel={2} className="h4 mb-0">Perfil de usuario</Titulo>
+        <Titulo nivel={1} className="h4 mb-0">Perfil de usuario</Titulo>
       </Card.Header>
       <Card.Body className="p-4 p-md-5">
         <figure className="text-center mb-4">
           <Avatar tamano="lg">{iniciales(nombre)}</Avatar>
           <figcaption>
-            <Titulo nivel={3} className="h5 mt-3 mb-0">{nombre}</Titulo>
+            <Titulo nivel={2} className="h5 mt-3 mb-0">{nombre}</Titulo>
             <Texto className="text-muted">{usuario.rol}</Texto>
           </figcaption>
         </figure>

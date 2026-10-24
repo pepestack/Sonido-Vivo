@@ -45,7 +45,7 @@ export function Contacto(props) {
   return (
     <Card as="article" className="shadow border-0 my-4">
       <Card.Header as="header" className="text-center custom-lb-container text-dark py-3 border-bottom">
-        <Titulo nivel={2} className="mb-0 h5 fw-bold text-dark">
+        <Titulo nivel={1} className="mb-0 h5 fw-bold text-dark">
           Contáctanos
         </Titulo>
       </Card.Header>

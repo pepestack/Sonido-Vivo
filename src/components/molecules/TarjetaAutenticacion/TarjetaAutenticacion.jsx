@@ -10,7 +10,7 @@ export function TarjetaAutenticacion(props) {
   return (
     <Card className="shadow-sm mt-4">
       <Card.Body className="p-4 custom-lb-container">
-        <Titulo nivel={2} className="text-center">
+        <Titulo nivel={1} className="h2 text-center">
           {props.titulo}
         </Titulo>
         <Form noValidate onSubmit={props.onEnviar}>

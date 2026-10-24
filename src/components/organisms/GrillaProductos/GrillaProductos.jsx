@@ -5,11 +5,12 @@ import { AvisoVacio } from "../../molecules/AvisoVacio/AvisoVacio";
 import { TarjetaProducto } from "../../molecules/TarjetaProducto/TarjetaProducto";
 
 // animado: las tarjetas aparecen una tras otra al entrar en pantalla (solo se usa en el Home)
+// nivelTitulo: 1 cuando la grilla es lo principal de la página (ej. Ofertas); se ve igual en ambos casos
 export function GrillaProductos(props) {
   return (
     <section className={props.className ?? ""}>
       {props.titulo && (
-        <Titulo nivel={2} className="mb-3">
+        <Titulo nivel={props.nivelTitulo ?? 2} className="h2 mb-3">
           {props.titulo}
         </Titulo>
       )}

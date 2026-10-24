@@ -15,7 +15,7 @@ export function TarjetaBlog(props) {
     >
       <Row className="g-0 align-items-center p-3">
         <Col md={6} className="p-3">
-          <Titulo nivel={3} className="fw-bold mb-3">
+          <Titulo nivel={2} className="h3 fw-bold mb-3">
             {blog.titulo}
           </Titulo>
 

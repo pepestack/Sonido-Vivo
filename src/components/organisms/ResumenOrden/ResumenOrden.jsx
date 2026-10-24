@@ -10,7 +10,7 @@ import { ResumenTotales } from "../../molecules/ResumenTotales/ResumenTotales";
 export function ResumenOrden(props) {
   return (
     <Card className="shadow p-4">
-      <Titulo nivel={3} className="mb-3">Orden</Titulo>
+      <Titulo nivel={2} className="h3 mb-3">Orden</Titulo>
       {props.items && (
         <>
           <ul className="list-unstyled small mb-0">

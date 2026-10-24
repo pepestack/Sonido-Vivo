@@ -19,6 +19,7 @@ export default function OfertasPage() {
     <PlantillaPublica>
       <GrillaProductos
         titulo="Ofertas"
+        nivelTitulo={1}
         productos={ofertas}
         onAgregar={carrito.agregarAlCarrito}
         onNavegar={navigate}

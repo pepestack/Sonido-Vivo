@@ -8,7 +8,7 @@ export function TarjetaFormulario(props) {
   return (
     <Card className="shadow-sm border-0">
       <Card.Body className="p-4 p-md-5">
-        <Titulo nivel={2} className="h3 fw-bold mb-4 text-primary">
+        <Titulo nivel={1} className="h3 fw-bold mb-4 text-primary">
           {props.titulo}
         </Titulo>
         <Form noValidate onSubmit={props.onEnviar}>
