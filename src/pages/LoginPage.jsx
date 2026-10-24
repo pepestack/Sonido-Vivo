@@ -21,9 +21,12 @@ function LoginPage() {
       setError('Correo o contraseña incorrectos')
       return
     }
-    // si llegó desde otra página (ej. el checkout) vuelve ahí; si no, el personal va al panel y el cliente al inicio
-    const destino = location.state?.desde ?? (esCliente(usuario) ? '/' : '/admin')
-    navigate(destino, { replace: true })
+    // si llegó desde otra página (ej. el checkout) vuelve ahí; si no, el personal va al panel y el cliente al inicio.
+    // un cliente no vuelve a una página del panel, porque no tiene acceso
+    const inicio = esCliente(usuario) ? '/' : '/admin'
+    const desde = location.state?.desde
+    const puedeVolver = desde && !(esCliente(usuario) && desde.startsWith('/admin'))
+    navigate(puedeVolver ? desde : inicio, { replace: true })
   }
 
   return (
