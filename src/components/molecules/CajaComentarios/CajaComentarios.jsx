@@ -27,9 +27,9 @@ export function CajaComentarios(props) {
           </Texto>
 
           {comentario.tipo === "ascii" ? (
-            <pre className="mb-0 text-dark overflow-auto">
+            <Texto como="pre" className="mb-0 text-dark overflow-auto">
               {comentario.texto}
-            </pre>
+            </Texto>
           ) : (
             <Texto className="mb-0 text-dark">
               {comentario.texto}

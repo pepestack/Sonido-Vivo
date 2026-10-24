@@ -35,9 +35,9 @@ export function PerfilUsuario(props) {
             <InsigniaRol rol={usuario.rol} className="px-3 py-2" />
           </FilaDetalle>
           <FilaDetalle etiqueta="Estado de la cuenta">
-            <span className={`fw-bold ${usuario.activo ? "text-success" : "text-danger"}`}>
+            <Texto como="span" className={`fw-bold ${usuario.activo ? "text-success" : "text-danger"}`}>
               {usuario.activo ? "Activo" : "Inactivo"}
-            </span>
+            </Texto>
           </FilaDetalle>
         </ListGroup>
 

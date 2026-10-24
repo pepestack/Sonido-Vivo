@@ -1,6 +1,7 @@
 import { Card } from "react-bootstrap";
 import { Boton } from "../../atoms/Boton/Boton";
 import { Precio } from "../../atoms/Precio/Precio";
+import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
 import { ResumenTotales } from "../../molecules/ResumenTotales/ResumenTotales";
 
@@ -15,7 +16,7 @@ export function ResumenOrden(props) {
           <ul className="list-unstyled small mb-0">
             {props.items.map((item) => (
               <li key={item.id} className="d-flex justify-content-between gap-3 mb-2">
-                <span>{item.cantidad} × {item.nombre}</span>
+                <Texto como="span">{item.cantidad} × {item.nombre}</Texto>
                 <Precio monto={item.precio * item.cantidad} className="text-nowrap" />
               </li>
             ))}
