@@ -30,6 +30,7 @@ export function TablaCarrito(props) {
                   opciones={opcionesCantidad(limiteDe(item))}
                   onChange={(evento) => props.onCambiarCantidad(item.id, Number(evento.target.value))}
                   className="cantidad-carrito"
+                  etiquetaAccesible={`Cantidad de ${item.nombre}`}
                 />
               </td>
               <td><Precio monto={item.precio * item.cantidad} /></td>

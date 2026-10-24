@@ -12,6 +12,7 @@ export function Selector(props){
       isInvalid={props.invalido ?? false}
       disabled={props.deshabilitado ?? false}
       className={props.className ?? ''}
+      aria-label={props.etiquetaAccesible}
     >
       {props.placeholder && (
         <option value="" disabled>
