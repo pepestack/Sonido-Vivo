@@ -37,7 +37,7 @@ export function TarjetaBlog(props) {
             <Imagen
               src={blog.imagen}
               alt={blog.alt}
-              className={`img-fluid rounded border w-100 object-fit-cover blog-img-resumen ${blog.claseImagen}`.trim()}
+              className={`img-fluid rounded border w-100 object-fit-cover blog-img-resumen ${blog.claseImagen ?? ''}`.trim()}
             />
           </Enlace>
         </Col>

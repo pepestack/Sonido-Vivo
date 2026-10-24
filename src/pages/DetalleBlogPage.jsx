@@ -9,9 +9,9 @@ import { blogs } from "../data/blogs";
 
 export default function DetalleBlogPage() {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const params = useParams();
 
-  const blog = blogs.find((articulo) => articulo.id === Number(id));
+  const blog = blogs.find((articulo) => articulo.id === Number(params.id));
 
   useTituloPagina(blog?.titulo ?? "Artículo no encontrado");
 
@@ -20,7 +20,7 @@ export default function DetalleBlogPage() {
       <PlantillaPublica>
         <AvisoVacio
           titulo="Artículo no encontrado"
-          texto={`No existe un artículo con el ID "${id}".`}
+          texto={`No existe un artículo con el ID "${params.id}".`}
           textoBoton="Volver al blog"
           onAccion={() => navigate("/blog")}
         />
