@@ -1,5 +1,6 @@
 import { Nav } from 'react-bootstrap'
 import { Icono } from '../../atoms/Icono/Icono'
+import { Texto } from '../../atoms/Texto/Texto'
 
 // Enlace de navegación con ícono opcional. No conoce el router: es un <a href> real que
 // cancela la recarga y avisa a props.onNavegar. activo lo calcula quien lo usa.
@@ -8,7 +9,7 @@ export function NavItem(props) {
   const contenido = (
     <>
       {props.icono && <Icono icono={props.icono} />}
-      <span>{props.texto}</span>
+      <Texto como="span">{props.texto}</Texto>
     </>
   )
 

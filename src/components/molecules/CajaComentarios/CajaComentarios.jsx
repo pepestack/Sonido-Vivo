@@ -18,7 +18,7 @@ export function CajaComentarios(props) {
         </div>
 
         <div className="flex-grow-1 overflow-hidden">
-          <Titulo nivel={5} className="fw-bold mb-1 fs-6">
+          <Titulo nivel={3} className="fw-bold mb-1 fs-6">
             {comentario.usuario}
           </Titulo>
 
@@ -27,9 +27,9 @@ export function CajaComentarios(props) {
           </Texto>
 
           {comentario.tipo === "ascii" ? (
-            <pre className="mb-0 text-dark overflow-auto">
+            <Texto como="pre" className="mb-0 text-dark overflow-auto">
               {comentario.texto}
-            </pre>
+            </Texto>
           ) : (
             <Texto className="mb-0 text-dark">
               {comentario.texto}

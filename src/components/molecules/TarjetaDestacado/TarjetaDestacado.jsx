@@ -10,7 +10,7 @@ export function TarjetaDestacado(props) {
   return (
     <Card className={className}>
       <Card.Body className="p-4 text-center">
-        <Titulo nivel={3} className="h4 text-primary">
+        <Titulo nivel={2} className="h4 text-primary">
           {props.titulo}
         </Titulo>
         <Texto className="mb-0">{props.descripcion}</Texto>

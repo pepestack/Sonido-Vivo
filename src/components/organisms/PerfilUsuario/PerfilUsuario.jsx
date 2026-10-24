@@ -6,22 +6,23 @@ import { Titulo } from "../../atoms/Titulo/Titulo";
 import { BarraAcciones } from "../../molecules/BarraAcciones/BarraAcciones";
 import { InsigniaRol } from "../../molecules/InsigniaRol/InsigniaRol";
 import { iniciales, nombreCompleto } from "../../../utils/formato";
+import { esAdministrador } from "../../../utils/roles";
 
 export function PerfilUsuario(props) {
   const usuario = props.usuario;
   const nombre = nombreCompleto(usuario);
-  const esAdmin = usuario.rol === "Administrador";
+  const esAdmin = esAdministrador(usuario);
 
   return (
     <Card as="article" className="shadow-sm border-0">
       <Card.Header as="header" className="bg-dark text-white text-center py-4">
-        <Titulo nivel={2} className="h4 mb-0">Perfil de usuario</Titulo>
+        <Titulo nivel={1} className="h4 mb-0">Perfil de usuario</Titulo>
       </Card.Header>
       <Card.Body className="p-4 p-md-5">
         <figure className="text-center mb-4">
           <Avatar tamano="lg">{iniciales(nombre)}</Avatar>
           <figcaption>
-            <Titulo nivel={3} className="h5 mt-3 mb-0">{nombre}</Titulo>
+            <Titulo nivel={2} className="h5 mt-3 mb-0">{nombre}</Titulo>
             <Texto className="text-muted">{usuario.rol}</Texto>
           </figcaption>
         </figure>
@@ -34,9 +35,9 @@ export function PerfilUsuario(props) {
             <InsigniaRol rol={usuario.rol} className="px-3 py-2" />
           </FilaDetalle>
           <FilaDetalle etiqueta="Estado de la cuenta">
-            <span className={`fw-bold ${usuario.activo ? "text-success" : "text-danger"}`}>
+            <Texto como="span" className={`fw-bold ${usuario.activo ? "text-success" : "text-danger"}`}>
               {usuario.activo ? "Activo" : "Inactivo"}
-            </span>
+            </Texto>
           </FilaDetalle>
         </ListGroup>
 

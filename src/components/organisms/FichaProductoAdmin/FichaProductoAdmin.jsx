@@ -24,7 +24,7 @@ export function FichaProductoAdmin(props) {
       </div>
       <ListGroup variant="flush">
         <FilaDetalle etiqueta="Producto">
-          <span className="fw-semibold">{producto.nombre}</span>
+          <Texto como="span" className="fw-semibold">{producto.nombre}</Texto>
         </FilaDetalle>
         <FilaDetalle etiqueta="Categoría">{nombreCategoria(producto.categoria, props.categorias)}</FilaDetalle>
         <FilaDetalle etiqueta="Marca">{producto.marca || '—'}</FilaDetalle>

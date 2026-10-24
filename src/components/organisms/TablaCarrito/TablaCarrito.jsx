@@ -2,7 +2,7 @@ import { Card, Table } from "react-bootstrap";
 import { Boton } from "../../atoms/Boton/Boton";
 import { Precio } from "../../atoms/Precio/Precio";
 import { Selector } from "../../atoms/Selector/Selector";
-import { limiteDe, opcionesCantidad } from "../../../services/carritoService";
+import { limiteDe, opcionesCantidad } from "../../../utils/carrito";
 
 // items: [{ id, nombre, precio, stock, cantidad }]
 export function TablaCarrito(props) {
@@ -30,6 +30,7 @@ export function TablaCarrito(props) {
                   opciones={opcionesCantidad(limiteDe(item))}
                   onChange={(evento) => props.onCambiarCantidad(item.id, Number(evento.target.value))}
                   className="cantidad-carrito"
+                  etiquetaAccesible={`Cantidad de ${item.nombre}`}
                 />
               </td>
               <td><Precio monto={item.precio * item.cantidad} /></td>

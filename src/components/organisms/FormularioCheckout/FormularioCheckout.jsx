@@ -46,7 +46,7 @@ export function FormularioCheckout(props) {
   return (
     <Card className="shadow p-4">
       <Form noValidate onSubmit={manejarEnvio}>
-        <Titulo nivel={3} className="h5 fw-bold mb-3">Datos personales</Titulo>
+        <Titulo nivel={2} className="h5 fw-bold mb-3">Datos personales</Titulo>
         <Row>
           <Col xs={12} md={6}>
             <CampoFormulario
@@ -83,7 +83,7 @@ export function FormularioCheckout(props) {
           error={errores.correo}
         />
 
-        <Titulo nivel={3} className="h5 fw-bold mt-4 mb-3">Entrega</Titulo>
+        <Titulo nivel={2} className="h5 fw-bold mt-4 mb-3">Entrega</Titulo>
         <CampoFormulario
           id="tipoEntrega"
           etiqueta="¿Cómo quieres recibir tu compra?"
@@ -102,7 +102,7 @@ export function FormularioCheckout(props) {
           </Texto>
         )}
 
-        <Titulo nivel={3} className="h5 fw-bold mt-4 mb-3">Pago</Titulo>
+        <Titulo nivel={2} className="h5 fw-bold mt-4 mb-3">Pago</Titulo>
         <Row>
           <Col xs={12} md={6}>
             <CampoFormulario

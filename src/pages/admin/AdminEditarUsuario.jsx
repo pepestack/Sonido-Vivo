@@ -7,6 +7,7 @@ import { useTituloPagina } from '../../hooks/useTituloPagina'
 import { useUsuarios } from '../../context/UsuariosContext'
 import { comunasDe, regiones } from '../../data/ubicaciones'
 import { roles } from '../../utils/roles'
+import { existeCorreo } from '../../services/usuarioService'
 
 export default function AdminEditarUsuario() {
   const navigate = useNavigate()
@@ -46,6 +47,7 @@ export default function AdminEditarUsuario() {
             roles={roles}
             valoresIniciales={usuario}
             rutEnUso={(rut) => usuariosCtx.usuarios.some((u) => u.rut === rut && u.id !== usuario.id)}
+            correoEnUso={(correo) => existeCorreo(usuariosCtx.usuarios, correo, usuario.id)}
             onEnviar={guardar}
             onCancelar={() => navigate(`/admin/usuarios/${usuario.id}`)}
           />

@@ -17,7 +17,7 @@ export function ArticuloBlog(props) {
         />
       </div>
 
-      <Titulo nivel={2} className="fw-bold mb-3">
+      <Titulo nivel={1} className="h2 fw-bold mb-3">
         {blog.titulo}
       </Titulo>
 

@@ -5,6 +5,7 @@ import { Register } from '../components/organisms/Register/Register'
 import { useUsuarios } from '../context/UsuariosContext'
 import { comunasDe, regiones } from '../data/ubicaciones'
 import { useTituloPagina } from '../hooks/useTituloPagina'
+import { existeCorreo } from '../services/usuarioService'
 
 export default function RegisterPage() {
   const navigate = useNavigate()
@@ -26,6 +27,7 @@ export default function RegisterPage() {
             regiones={regiones}
             comunasDe={comunasDe}
             rutEnUso={(rut) => usuariosCtx.usuarios.some((u) => u.rut === rut)}
+            correoEnUso={(correo) => existeCorreo(usuariosCtx.usuarios, correo)}
             onEnviar={registrar}
             onNavegar={navigate}
           />

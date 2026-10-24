@@ -102,15 +102,18 @@ export function validarStockCritico(valor) {
 }
 
 // Reglas del formulario de usuario (crear/editar en el admin y registro público).
-// rutEnUso(rut): indica si el RUN ya pertenece a otro usuario; ocultarRol omite la validación del rol
+// rutEnUso(rut) y correoEnUso(correo): indican si el RUN o el correo ya pertenecen a otro usuario;
+// ocultarRol omite la validación del rol
 export function validarUsuario(valores, opciones = {}) {
   const rutEnUso = opciones.rutEnUso ?? (() => false)
+  const correoEnUso = opciones.correoEnUso ?? (() => false)
   const rut = String(valores.rut ?? '').trim()
+  const correo = String(valores.correo ?? '').trim()
   return {
     rut: validarRut(rut) || (rutEnUso(rut) ? 'Ya existe un usuario con este RUN' : ''),
     nombre: validarObligatorio(valores.nombre, 'El nombre es requerido') || validarLargoMaximo(valores.nombre, 50),
     apellido: validarObligatorio(valores.apellido, 'El apellido es requerido') || validarLargoMaximo(valores.apellido, 100),
-    correo: validarCorreoPermitido(valores.correo),
+    correo: validarCorreoPermitido(correo) || (correoEnUso(correo) ? 'Ya existe una cuenta con este correo' : ''),
     contrasena: validarClave(valores.contrasena),
     region: validarObligatorio(valores.region, 'Selecciona una región'),
     comuna: validarObligatorio(valores.comuna, 'Selecciona una comuna'),

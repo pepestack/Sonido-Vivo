@@ -6,7 +6,7 @@ import { Imagen } from "../../atoms/Imagen/Imagen";
 import { MensajeEstado } from "../../atoms/MensajeEstado/MensajeEstado";
 import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
-import { limiteDe, opcionesCantidad } from "../../../services/carritoService";
+import { limiteDe, opcionesCantidad } from "../../../utils/carrito";
 import { PrecioProducto } from "../../molecules/PrecioProducto/PrecioProducto";
 import { SelectorEnLinea } from "../../molecules/SelectorEnLinea/SelectorEnLinea";
 

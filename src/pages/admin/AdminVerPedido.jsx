@@ -36,7 +36,7 @@ export default function AdminVerPedido() {
     <PlantillaPrivada>
       <Row className="g-4">
         <Col xs={12} xl={8}>
-          <DetallePedido pedido={pedido} />
+          <DetallePedido pedido={pedido} nivelTitulo={1} />
         </Col>
         {/* d-print-none: al imprimir la boleta solo sale el comprobante */}
         <Col xs={12} xl={4} className="d-print-none">

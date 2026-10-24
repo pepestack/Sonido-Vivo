@@ -46,7 +46,7 @@ const accesos = [
   },
 ];
 
-export default function Admin() {
+export default function AdminHome() {
   const navigate = useNavigate();
   const pedidosCtx = usePedidos();
   const productosCtx = useProductos();

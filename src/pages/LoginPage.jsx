@@ -5,7 +5,7 @@ import { PlantillaPublica } from '../components/templates/PlantillaPublica/Plant
 import { Login } from '../components/organisms/Login/Login'
 import { useSesion } from '../context/SesionContext'
 import { useTituloPagina } from '../hooks/useTituloPagina'
-import { esCliente } from '../services/sesionService'
+import { esCliente } from '../utils/roles'
 
 
 function LoginPage() {
@@ -21,9 +21,12 @@ function LoginPage() {
       setError('Correo o contraseña incorrectos')
       return
     }
-    // si llegó desde otra página (ej. el checkout) vuelve ahí; si no, el personal va al panel y el cliente al inicio
-    const destino = location.state?.desde ?? (esCliente(usuario) ? '/' : '/admin')
-    navigate(destino, { replace: true })
+    // si llegó desde otra página (ej. el checkout) vuelve ahí; si no, el personal va al panel y el cliente al inicio.
+    // un cliente no vuelve a una página del panel, porque no tiene acceso
+    const inicio = esCliente(usuario) ? '/' : '/admin'
+    const desde = location.state?.desde
+    const puedeVolver = desde && !(esCliente(usuario) && desde.startsWith('/admin'))
+    navigate(puedeVolver ? desde : inicio, { replace: true })
   }
 
   return (

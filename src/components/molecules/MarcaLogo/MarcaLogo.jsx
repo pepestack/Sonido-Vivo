@@ -16,9 +16,9 @@ export function MarcaLogo(props){
         <Imagen src={logoBlanco} alt="Sonido Vivo" className="logo-sm"/>
         <Texto como="span" className="ms-2 fw-bold text-white">
           Sonido Vivo{' '}
-          <span className="d-none d-md-inline">
-            <span className="text-warning">Panel Administrador</span>
-          </span>
+          <Texto como="span" className="d-none d-md-inline text-warning">
+            Panel Administrador
+          </Texto>
         </Texto>
       </Enlace>
     )
@@ -28,8 +28,8 @@ export function MarcaLogo(props){
     <Enlace ruta={ruta} onNavegar={props.onNavegar} className={claseEnlace}>
       <Imagen src={logo} alt="Sonido Vivo" className="logo"/>
       <Texto como="span" className="sv-logo-title">
-        <span className="sonido">Sonido </span>
-        <span className="vivo">Vivo</span>
+        <Texto como="span" className="sonido">Sonido </Texto>
+        <Texto como="span" className="vivo">Vivo</Texto>
       </Texto>
     </Enlace>
   )

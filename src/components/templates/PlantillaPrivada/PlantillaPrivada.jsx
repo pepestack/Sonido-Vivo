@@ -1,11 +1,12 @@
 import { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { NavbarAdmin } from '../../organisms/NavbarAdmin/NavbarAdmin'
 import { SidebarAdmin } from '../../organisms/SidebarAdmin/SidebarAdmin'
 import { Footer } from '../../organisms/Footer/Footer'
 import { ModalConfirmacion } from '../../molecules/ModalConfirmacion/ModalConfirmacion'
 import { sidebarPrincipal, sidebarSecundario } from '../../../data/navegacion'
 import { useSesion } from '../../../context/SesionContext'
+import { esCliente } from '../../../utils/roles'
 
 export function PlantillaPrivada(props) {
   const [menuAbierto, setMenuAbierto] = useState(false)
@@ -21,10 +22,19 @@ export function PlantillaPrivada(props) {
     navigate(ruta)
   }
 
+  // no se navega aquí: al quedar sin sesión, el control de acceso de abajo lleva a /login
   function cerrarSesion() {
     setConfirmandoSalida(false)
     sesion.cerrarSesion()
-    navigate('/')
+  }
+
+  // Control de acceso: todas las páginas del panel usan esta plantilla.
+  // Sin sesión se va al login (y vuelve aquí al ingresar); un cliente no tiene acceso al panel
+  if (!sesion.usuario) {
+    return <Navigate to="/login" replace state={{ desde: location.pathname }} />
+  }
+  if (esCliente(sesion.usuario)) {
+    return <Navigate to="/" replace />
   }
 
   return (

@@ -3,7 +3,7 @@ import { NavbarPrincipal } from "../../organisms/NavbarPrincipal/NavbarPrincipal
 import { Footer } from "../../organisms/Footer/Footer";
 import { useCarrito } from "../../../context/CarritoContext"
 import { useSesion } from "../../../context/SesionContext"
-import { esCliente } from "../../../services/sesionService"
+import { esCliente } from "../../../utils/roles"
 import { footerCuenta, footerInfo, menuCuenta, navTienda } from "../../../data/navegacion"
 
 export function PlantillaPublica(props) {

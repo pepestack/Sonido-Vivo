@@ -11,7 +11,7 @@ export default function BlogPage() {
 
   return (
     <PlantillaPublica>
-      <Titulo nivel={2} className="text-center fw-bold mb-5 text-uppercase">
+      <Titulo nivel={1} className="h2 text-center fw-bold mb-5 text-uppercase">
         Noticias Importantes
       </Titulo>
 

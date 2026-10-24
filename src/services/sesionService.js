@@ -18,7 +18,3 @@ export function autenticar(usuarios, correo, contrasena) {
   if (!usuario || usuario.contrasena !== contrasena || !usuario.activo) return null
   return usuario
 }
-
-export function esCliente(usuario) {
-  return usuario?.rol === 'Cliente'
-}

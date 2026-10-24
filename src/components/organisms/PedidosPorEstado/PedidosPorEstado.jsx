@@ -1,4 +1,5 @@
 import { Card, ListGroup } from 'react-bootstrap'
+import { Texto } from '../../atoms/Texto/Texto'
 import { Titulo } from '../../atoms/Titulo/Titulo'
 import { InsigniaEstado } from '../../molecules/InsigniaEstado/InsigniaEstado'
 
@@ -12,7 +13,7 @@ export function PedidosPorEstado(props) {
           {Object.entries(props.porEstado).map(([estado, cantidad]) => (
             <ListGroup.Item key={estado} className="d-flex justify-content-between align-items-center px-0">
               <InsigniaEstado estado={estado} className="px-3 py-2" />
-              <span className="fw-bold fs-5">{cantidad}</span>
+              <Texto como="span" className="fw-bold fs-5">{cantidad}</Texto>
             </ListGroup.Item>
           ))}
         </ListGroup>

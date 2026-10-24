@@ -43,3 +43,15 @@ export function formatoFecha(iso) {
 export function nombreCompleto(usuario) {
   return `${usuario.nombre} ${usuario.apellido}`.trim()
 }
+
+// quita los espacios sobrantes de los campos de texto antes de guardar (registro y admin)
+export function normalizarUsuario(valores) {
+  return {
+    ...valores,
+    rut: valores.rut.trim(),
+    nombre: valores.nombre.trim(),
+    apellido: valores.apellido.trim(),
+    correo: valores.correo.trim(),
+    direccion: valores.direccion.trim(),
+  }
+}

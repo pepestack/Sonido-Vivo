@@ -2,7 +2,7 @@ import { Col, Row } from "react-bootstrap";
 import { Effect } from "@animate-ui/react/primitives/effects/effect";
 import { Titulo } from "../../atoms/Titulo/Titulo";
 import { TarjetaCategoria } from "../../molecules/TarjetaCategoria/TarjetaCategoria";
-import { iconoCategoria } from "../../../data/categorias";
+import { iconoCategoria } from "../../../utils/categorias";
 
 // Accesos rápidos del Home a cada categoría del catálogo
 // categorias: [{ valor, texto, cantidad }]; onNavegar(ruta) lleva a /categoria/:valor

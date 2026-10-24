@@ -37,7 +37,7 @@ export default function CarritoPage() {
 
   return (
     <PlantillaPublica>
-      <Titulo nivel={2} className="mb-4">Carrito de compras</Titulo>
+      <Titulo nivel={1} className="h2 mb-4">Carrito de compras</Titulo>
       <Row>
         <Col xs={12} lg={8} className="mb-4">
           <TablaCarrito

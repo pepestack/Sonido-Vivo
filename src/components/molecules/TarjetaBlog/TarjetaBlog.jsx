@@ -15,7 +15,7 @@ export function TarjetaBlog(props) {
     >
       <Row className="g-0 align-items-center p-3">
         <Col md={6} className="p-3">
-          <Titulo nivel={3} className="fw-bold mb-3">
+          <Titulo nivel={2} className="h3 fw-bold mb-3">
             {blog.titulo}
           </Titulo>
 
@@ -37,7 +37,7 @@ export function TarjetaBlog(props) {
             <Imagen
               src={blog.imagen}
               alt={blog.alt}
-              className={`img-fluid rounded border w-100 object-fit-cover blog-img-resumen ${blog.claseImagen}`.trim()}
+              className={`img-fluid rounded border w-100 object-fit-cover blog-img-resumen ${blog.claseImagen ?? ''}`.trim()}
             />
           </Enlace>
         </Col>

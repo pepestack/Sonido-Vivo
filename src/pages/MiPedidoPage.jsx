@@ -36,7 +36,7 @@ export default function MiPedidoPage() {
       {esPropio ? (
         <Row className="justify-content-center">
           <Col xs={12} lg={9}>
-            <DetallePedido pedido={pedido} />
+            <DetallePedido pedido={pedido} nivelTitulo={1} />
             <Boton variante="outline-secondary" className="mt-4" onClick={() => navigate("/mis-pedidos")}>
               Volver a mis pedidos
             </Boton>
