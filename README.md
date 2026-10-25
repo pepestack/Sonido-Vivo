@@ -79,6 +79,9 @@ Para detener el servidor de desarrollo, presione:
 > **Nota (2026-10-22):** Sebastian Navarro cambió de cuenta de GitHub. Desde hace una semana trabaja solo con **sebi-nvrro**; los commits anteriores firmados como **sebi-nm** también son suyos.
 
 <!-- SUMMARY:START -->
+### 2026-10-24
+- **José Calderón**: Corrigió componentes que no seguían Atomic Design, proteger vistas de Admin, entre otros bugfixes.
+
 ### 2026-10-23
 
 - **Sebastiana-pablaza**: Implementó la integración de dos nuevos banners en el carrusel principal del sitio.
