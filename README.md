@@ -64,6 +64,24 @@ Para detener el servidor de desarrollo, presione:
 
 `Ctrl + C`
 
+## Pruebas unitarias
+
+El proyecto usa **Vitest** y **React Testing Library**. Las pruebas están junto al código que prueban (archivos `*.test.js` y `*.test.jsx` dentro de `src/`).
+
+Con las dependencias instaladas (`npm install`), puede ejecutar:
+
+| Comando | Qué hace |
+|---|---|
+| `npm test` | Ejecuta las pruebas en modo observador (se repiten al guardar cambios) |
+| `npm run test:run` | Ejecuta todas las pruebas una sola vez y muestra el resultado |
+| `npm run test:cov` | Ejecuta las pruebas y genera el reporte de cobertura |
+
+El reporte de cobertura se muestra en la terminal y además se genera en `coverage/index.html`, que puede abrir en el navegador.
+
+> **Nota:** la prueba `FormularioProducto.test.jsx` falla a propósito, para analizarla en la presentación. Como hay una prueba en rojo, Vitest no genera el reporte de cobertura por defecto. Para obtenerlo de todas formas, ejecute:
+>
+> `npm run test:cov -- --coverage.reportOnFailure`
+
 ### Requisitos
 - Node.js 24.x o superior
 - npm 11.x o superior
