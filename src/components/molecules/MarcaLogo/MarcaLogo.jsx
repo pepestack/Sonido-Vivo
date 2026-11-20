@@ -14,7 +14,7 @@ export function MarcaLogo(props){
     return(
       <Enlace ruta={ruta} onNavegar={props.onNavegar} className={claseEnlace}>
         <Imagen src={logoBlanco} alt="Sonido Vivo" className="logo-sm"/>
-        <Texto como="span" className="ms-2 fw-bold text-white">
+        <Texto como="span" className="ms-2 fw-bold text-white text-nowrap">
           Sonido Vivo{' '}
           <Texto como="span" className="d-none d-md-inline text-warning">
             Panel Administrador
@@ -25,9 +25,9 @@ export function MarcaLogo(props){
   }
 
   return(
-    <Enlace ruta={ruta} onNavegar={props.onNavegar} className={claseEnlace}>
+    <Enlace ruta={ruta} onNavegar={props.onNavegar} className={`${claseEnlace} ${props.className ?? ''}`.trim()}>
       <Imagen src={logo} alt="Sonido Vivo" className="logo"/>
-      <Texto como="span" className="sv-logo-title">
+      <Texto como="span" className="sv-logo-title fs-3 text-nowrap">
         <Texto como="span" className="sonido">Sonido </Texto>
         <Texto como="span" className="vivo">Vivo</Texto>
       </Texto>

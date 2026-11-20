@@ -17,6 +17,7 @@ export function Boton(props){
             onClick={props.onClick}
             aria-controls={props.controla}
             aria-expanded={props.expandido}
+            aria-label={props.etiquetaAccesible}
         >
             {props.children}
         </Button>
