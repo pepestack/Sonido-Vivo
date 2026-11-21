@@ -27,3 +27,6 @@ dist-ssr
 coverage
 coverage-single/
 inline-coverage.cjs
+
+# Variables de entorno (la URL real de la API va en .env)
+.env

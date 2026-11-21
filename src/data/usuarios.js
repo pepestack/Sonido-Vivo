@@ -38,7 +38,7 @@ export const usuariosIniciales = [
     region: 'Región de Valparaíso',
     comuna: 'Valparaíso',
     direccion: 'Valparaíso',
-    rol: 'Cajero',
+    rol: 'Vendedor',
     activo: true,
   },
   {
