@@ -7,6 +7,7 @@ import { LARGO_MAXIMO_CLAVE, LARGO_MAXIMO_CORREO } from '../../../utils/validaci
 // formulario: el resultado de useFormulario (valores, errores, manejarCambio...)
 // regiones, comunasDe(region) y roles llegan por props
 // ocultarRol: esconde el selector de rol; compacto: un campo por fila, para tarjetas angostas
+// edicion: esconde el RUN y la contraseña, que no se pueden cambiar después de crear la cuenta
 export function CamposUsuario(props) {
   const formulario = props.formulario
   const valores = formulario.valores
@@ -16,18 +17,20 @@ export function CamposUsuario(props) {
   return (
     <>
       <Row>
-        <Col xs={12} md={ancho}>
-          <CampoFormulario
-            id="rut"
-            etiqueta="RUN"
-            placeholder="Ej: 19011022K"
-            maxLength={9}
-            requerido
-            valor={valores.rut}
-            onChange={formulario.manejarCambio}
-            error={errores.rut}
-          />
-        </Col>
+        {!props.edicion && (
+          <Col xs={12} md={ancho}>
+            <CampoFormulario
+              id="rut"
+              etiqueta="RUN"
+              placeholder="Ej: 19011022K"
+              maxLength={9}
+              requerido
+              valor={valores.rut}
+              onChange={formulario.manejarCambio}
+              error={errores.rut}
+            />
+          </Col>
+        )}
         <Col xs={12} md={ancho}>
           <CampoFormulario
             id="fechaNacimiento"
@@ -71,17 +74,19 @@ export function CamposUsuario(props) {
         onChange={formulario.manejarCambio}
         error={errores.correo}
       />
-      <CampoFormulario
-        id="contrasena"
-        etiqueta="Contraseña"
-        tipo="password"
-        placeholder="Entre 4 y 10 caracteres"
-        maxLength={LARGO_MAXIMO_CLAVE}
-        requerido
-        valor={valores.contrasena}
-        onChange={formulario.manejarCambio}
-        error={errores.contrasena}
-      />
+      {!props.edicion && (
+        <CampoFormulario
+          id="contrasena"
+          etiqueta="Contraseña"
+          tipo="password"
+          placeholder="Entre 4 y 10 caracteres"
+          maxLength={LARGO_MAXIMO_CLAVE}
+          requerido
+          valor={valores.contrasena}
+          onChange={formulario.manejarCambio}
+          error={errores.contrasena}
+        />
+      )}
       <CamposDireccion
         formulario={formulario}
         regiones={props.regiones}

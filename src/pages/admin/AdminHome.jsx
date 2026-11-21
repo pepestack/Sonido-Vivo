@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Encabezado } from "../../components/molecules/Encabezado/Encabezado";
 import { GrillaEstadisticas } from "../../components/organisms/GrillaEstadisticas/GrillaEstadisticas";
@@ -5,10 +6,10 @@ import { PanelAdmin } from "../../components/organisms/PanelAdmin/PanelAdmin";
 import { PlantillaPrivada } from "../../components/templates/PlantillaPrivada/PlantillaPrivada";
 import { usePedidos } from "../../context/PedidosContext";
 import { useProductos } from "../../context/ProductosContext";
-import { useUsuarios } from "../../context/UsuariosContext";
 import { useTituloPagina } from "../../hooks/useTituloPagina";
 import { resumenVentas } from "../../services/pedidoService";
 import { productosCriticos } from "../../services/productoService";
+import { listarUsuarios } from "../../services/usuarioService";
 import { formatoDinero } from "../../utils/formato";
 
 const accesos = [
@@ -50,17 +51,32 @@ export default function AdminHome() {
   const navigate = useNavigate();
   const pedidosCtx = usePedidos();
   const productosCtx = useProductos();
-  const usuariosCtx = useUsuarios();
+  const [cantidadUsuarios, setCantidadUsuarios] = useState("…");
   useTituloPagina("Panel de administración");
 
-  // resumen de pedidos, catálogo y usuarios, calculado desde los contextos en cada render
+  // solo el administrador puede listar usuarios: si la API lo rechaza, la tarjeta muestra un guion
+  useEffect(() => {
+    let vigente = true;
+    listarUsuarios()
+      .then((usuarios) => {
+        if (vigente) setCantidadUsuarios(usuarios.filter((usuario) => usuario.activo).length);
+      })
+      .catch(() => {
+        if (vigente) setCantidadUsuarios("—");
+      });
+    return () => {
+      vigente = false;
+    };
+  }, []);
+
+  // resumen de pedidos y catálogo, calculado desde los contextos en cada render
   const resumen = resumenVentas(pedidosCtx.pedidos);
   const estadisticas = [
     { titulo: "Pedidos", valor: resumen.cantidad, icono: "bi bi-receipt" },
     { titulo: "Ventas", valor: formatoDinero(resumen.totalVendido), icono: "bi bi-cash-stack", color: "text-success" },
     { titulo: "Productos", valor: productosCtx.productos.length, icono: "bi bi-box-seam" },
     { titulo: "Stock crítico", valor: productosCriticos(productosCtx.productos).length, icono: "bi bi-exclamation-triangle", color: "text-danger" },
-    { titulo: "Usuarios", valor: usuariosCtx.usuarios.length, icono: "bi bi-people" },
+    { titulo: "Usuarios", valor: cantidadUsuarios, icono: "bi bi-people" },
   ];
 
   return (

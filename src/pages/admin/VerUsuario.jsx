@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import { MensajeEstado } from "../../components/atoms/MensajeEstado/MensajeEstado";
 import { Texto } from "../../components/atoms/Texto/Texto";
 import { Titulo } from "../../components/atoms/Titulo/Titulo";
 import { AvisoVacio } from "../../components/molecules/AvisoVacio/AvisoVacio";
@@ -9,68 +10,90 @@ import { PerfilUsuario } from "../../components/organisms/PerfilUsuario/PerfilUs
 import { TablaPedidos } from "../../components/organisms/TablaPedidos/TablaPedidos";
 import { PlantillaPrivada } from "../../components/templates/PlantillaPrivada/PlantillaPrivada";
 import { usePedidos } from "../../context/PedidosContext";
-import { useUsuarios } from "../../context/UsuariosContext";
 import { useTituloPagina } from "../../hooks/useTituloPagina";
+import { useUsuario } from "../../hooks/useUsuario";
+import { obtenerMensajeError } from "../../services/errores";
 import { pedidosDeUsuario } from "../../services/pedidoService";
+import { eliminarUsuario } from "../../services/usuarioService";
 import { nombreCompleto } from "../../utils/formato";
 
 export default function VerUsuario() {
   const navigate = useNavigate();
   const params = useParams();
-  const usuariosCtx = useUsuarios();
   const pedidosCtx = usePedidos();
+  const consulta = useUsuario(params.id);
   const [confirmando, setConfirmando] = useState(false);
+  const [errorEliminar, setErrorEliminar] = useState("");
 
-  // params.id llega como string; obtenerUsuario lo convierte con Number()
-  const usuario = usuariosCtx.obtenerUsuario(params.id);
+  const usuario = consulta.usuario;
   const historial = usuario ? pedidosDeUsuario(pedidosCtx.pedidos, usuario.id) : [];
-  useTituloPagina(usuario ? "Perfil de usuario" : "Usuario no encontrado");
+  useTituloPagina(consulta.noEncontrado ? "Usuario no encontrado" : "Perfil de usuario");
 
-  function eliminar() {
-    usuariosCtx.eliminarUsuario(usuario.id);
-    navigate("/admin/usuarios");
+  async function eliminar() {
+    setConfirmando(false);
+    try {
+      await eliminarUsuario(usuario.id);
+      navigate("/admin/usuarios");
+    } catch (error) {
+      setErrorEliminar(obtenerMensajeError(error));
+    }
+  }
+
+  if (consulta.cargando) {
+    return (
+      <PlantillaPrivada>
+        <MensajeEstado tipo="neutro">Cargando usuario...</MensajeEstado>
+      </PlantillaPrivada>
+    );
+  }
+
+  if (!usuario) {
+    return (
+      <PlantillaPrivada>
+        {consulta.noEncontrado ? (
+          <AvisoVacio
+            titulo="Usuario no encontrado"
+            texto={`No existe un usuario con el ID "${params.id}".`}
+            textoBoton="Volver a usuarios"
+            onAccion={() => navigate("/admin/usuarios")}
+          />
+        ) : (
+          <MensajeEstado tipo="error">{consulta.error}</MensajeEstado>
+        )}
+      </PlantillaPrivada>
+    );
   }
 
   return (
     <PlantillaPrivada>
-      {usuario ? (
-        <>
-          <Row className="justify-content-center">
-            <Col xs={12} md={8} lg={6}>
-              <PerfilUsuario
-                usuario={usuario}
-                onVolver={() => navigate("/admin/usuarios")}
-                onEditar={() => navigate(`/admin/usuarios/${usuario.id}/editar`)}
-                onEliminar={() => setConfirmando(true)}
-              />
-            </Col>
-          </Row>
-          <section className="mt-5">
-            <Titulo nivel={2} className="h4 fw-bold mb-3">Historial de pedidos</Titulo>
-            {historial.length > 0 ? (
-              <TablaPedidos pedidos={historial} onVer={(pedido) => navigate(`/admin/pedidos/${pedido.id}`)} />
-            ) : (
-              <Texto className="text-muted">Este usuario aún no tiene pedidos.</Texto>
-            )}
-          </section>
-          <ModalConfirmacion
-            visible={confirmando}
-            titulo="Confirmar eliminación"
-            textoConfirmar="Eliminar"
-            variante="danger"
-            mensaje={`¿Eliminar a "${nombreCompleto(usuario)}"?`}
-            onConfirmar={eliminar}
-            onCancelar={() => setConfirmando(false)}
+      <Row className="justify-content-center">
+        <Col xs={12} md={8} lg={6}>
+          <PerfilUsuario
+            usuario={usuario}
+            onVolver={() => navigate("/admin/usuarios")}
+            onEditar={() => navigate(`/admin/usuarios/${usuario.id}/editar`)}
+            onEliminar={usuario.activo ? () => setConfirmando(true) : undefined}
           />
-        </>
-      ) : (
-        <AvisoVacio
-          titulo="Usuario no encontrado"
-          texto={`No existe un usuario con el ID "${params.id}".`}
-          textoBoton="Volver a usuarios"
-          onAccion={() => navigate("/admin/usuarios")}
-        />
-      )}
+          <MensajeEstado tipo="error">{errorEliminar}</MensajeEstado>
+        </Col>
+      </Row>
+      <section className="mt-5">
+        <Titulo nivel={2} className="h4 fw-bold mb-3">Historial de pedidos</Titulo>
+        {historial.length > 0 ? (
+          <TablaPedidos pedidos={historial} onVer={(pedido) => navigate(`/admin/pedidos/${pedido.id}`)} />
+        ) : (
+          <Texto className="text-muted">Este usuario aún no tiene pedidos.</Texto>
+        )}
+      </section>
+      <ModalConfirmacion
+        visible={confirmando}
+        titulo="Confirmar eliminación"
+        textoConfirmar="Eliminar"
+        variante="danger"
+        mensaje={`¿Eliminar a "${nombreCompleto(usuario)}"?`}
+        onConfirmar={eliminar}
+        onCancelar={() => setConfirmando(false)}
+      />
     </PlantillaPrivada>
   );
 }
