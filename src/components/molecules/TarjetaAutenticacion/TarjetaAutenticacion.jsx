@@ -16,7 +16,7 @@ export function TarjetaAutenticacion(props) {
         <Form noValidate onSubmit={props.onEnviar}>
           {props.children}
           <div className="text-center mt-1">
-            <Boton tipo="submit" className="w-100 mt-3">
+            <Boton tipo="submit" className="w-100 mt-3" disabled={props.cargando}>
               {props.textoBoton}
             </Boton>
           </div>

@@ -23,9 +23,9 @@ function datosDeUsuario(usuario) {
     nombre: usuario.nombre,
     apellido: usuario.apellido,
     correo: usuario.correo,
-    region: usuario.region,
-    comuna: usuario.comuna,
-    direccion: usuario.direccion,
+    region: usuario.region ?? "",
+    comuna: usuario.comuna ?? "",
+    direccion: usuario.direccion ?? "",
   };
 }
 

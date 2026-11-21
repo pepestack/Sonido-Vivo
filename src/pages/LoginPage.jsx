@@ -5,6 +5,7 @@ import { PlantillaPublica } from '../components/templates/PlantillaPublica/Plant
 import { Login } from '../components/organisms/Login/Login'
 import { useSesion } from '../context/SesionContext'
 import { useTituloPagina } from '../hooks/useTituloPagina'
+import { obtenerMensajeError } from '../services/errores'
 import { esCliente } from '../utils/roles'
 
 
@@ -13,12 +14,18 @@ function LoginPage() {
   const location = useLocation()
   const sesion = useSesion()
   const [error, setError] = useState('')
+  const [cargando, setCargando] = useState(false)
   useTituloPagina('Iniciar sesión')
 
-  function ingresar(credenciales) {
-    const usuario = sesion.iniciarSesion(credenciales.email, credenciales.contrasena)
-    if (!usuario) {
-      setError('Correo o contraseña incorrectos')
+  async function ingresar(credenciales) {
+    setCargando(true)
+    setError('')
+    let usuario
+    try {
+      usuario = await sesion.iniciarSesion(credenciales.email, credenciales.contrasena)
+    } catch (error) {
+      setError(obtenerMensajeError(error))
+      setCargando(false)
       return
     }
     // si llegó desde otra página (ej. el checkout) vuelve ahí; si no, el personal va al panel y el cliente al inicio.
@@ -33,7 +40,7 @@ function LoginPage() {
     <PlantillaPublica>
       <Row as="section" className="justify-content-center">
         <Col as="article" xs={12} md={6} lg={4}>
-          <Login onEnviar={ingresar} onNavegar={navigate} error={error} />
+          <Login onEnviar={ingresar} onNavegar={navigate} error={error} cargando={cargando} />
         </Col>
       </Row>
     </PlantillaPublica>

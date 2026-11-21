@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { MensajeEstado } from '../../atoms/MensajeEstado/MensajeEstado'
 import { CamposUsuario } from '../CamposUsuario/CamposUsuario'
 import { TarjetaAutenticacion } from '../../molecules/TarjetaAutenticacion/TarjetaAutenticacion'
 import { useFormulario } from '../../../hooks/useFormulario'
@@ -7,14 +9,20 @@ import { sinErrores, validarUsuario } from '../../../utils/validaciones'
 
 // Organismo: registro público. Tiene los mismos campos y reglas que crear un usuario en el admin,
 // pero sin elegir rol (la página lo asigna). Avisa a la página con props.onEnviar cuando todo es válido.
-// regiones, comunasDe(region), rutEnUso(rut) y correoEnUso(correo) llegan por props
+// regiones y comunasDe(region) llegan por props. La respuesta de la API llega en props.error (mensaje general)
+// y props.erroresServidor ({ campo: mensaje }); props.cargando desactiva el botón mientras responde
 export function Register(props) {
   const formulario = useFormulario(usuarioVacio)
+  const setErrores = formulario.setErrores
+
+  useEffect(() => {
+    if (props.erroresServidor) setErrores((actuales) => ({ ...actuales, ...props.erroresServidor }))
+  }, [props.erroresServidor, setErrores])
 
   function manejarEnvio(evento) {
     evento.preventDefault()
     const valores = formulario.valores
-    const nuevos = validarUsuario(valores, { rutEnUso: props.rutEnUso, correoEnUso: props.correoEnUso, ocultarRol: true })
+    const nuevos = validarUsuario(valores, { ocultarRol: true })
     formulario.setErrores(nuevos)
     if (sinErrores(nuevos)) {
       props.onEnviar(normalizarUsuario(valores))
@@ -30,6 +38,7 @@ export function Register(props) {
       ruta="/login"
       onNavegar={props.onNavegar}
       onEnviar={manejarEnvio}
+      cargando={props.cargando}
     >
       <CamposUsuario
         formulario={formulario}
@@ -38,6 +47,7 @@ export function Register(props) {
         ocultarRol
         compacto
       />
+      <MensajeEstado tipo="error">{props.error}</MensajeEstado>
     </TarjetaAutenticacion>
   )
 }
