@@ -28,6 +28,8 @@
 ## Tabla de Contenidos
 - [Estructura del proyecto](#estructura-del-proyecto)
 - [Ejecución](#ejecución)
+- [Conexión con la API](#conexión-con-la-api)
+- [Pruebas unitarias](#pruebas-unitarias)
 - [Material Complementario](#material-complementario)
 
 ## Estructura del proyecto
@@ -43,8 +45,10 @@ src/
 │   └── templates/
 ├── pages/
 ├── data/
+├── dto/
 ├── services/
 ├── context/
+├── hooks/
 └── utils/
 ```
 
@@ -63,6 +67,40 @@ Ya iniciado, Vite mostrará en la terminal la dirección local donde se encuentr
 Para detener el servidor de desarrollo, presione:
 
 `Ctrl + C`
+
+## Conexión con la API
+
+El inicio de sesión, el registro y la gestión de usuarios del panel usan la API de [Sonido-Vivo-Backend](https://github.com/pepestack/Sonido-Vivo-Backend) (Express y PostgreSQL, desplegada en AWS Lambda y RDS). Las solicitudes se hacen con **Axios**.
+
+### Configuración
+
+1. Copie `.env.example` a `.env` en la raíz del proyecto.
+2. En `VITE_API_URL` escriba la dirección de la API, terminada en `/api/v1` y sin `/` al final:
+
+   ```
+   VITE_API_URL=https://<url-id>.lambda-url.<region>.on.aws/api/v1
+   ```
+
+3. Reinicie `npm run dev`. Vite solo lee `.env` al iniciar.
+
+Si `.env` no existe, la aplicación usa una API local en `http://localhost:3000/api/v1`, como la que levanta `npm start` en el repositorio del backend. El archivo `.env` no se sube al estar en .gitignore.
+
+### CORS
+
+La API solo responde a los orígenes de su variable `CORS_ORIGIN`. Debe incluir la dirección exacta de la página, con protocolo y puerto, por ejemplo `http://localhost:5173`. Para varios orígenes, sepárelos con comas. Configure CORS solo en la API (Express) y no en la Function URL de Lambda: si ambos lo agregan, el navegador rechaza la respuesta al duplicarse.
+
+### Organización del código
+
+| Pieza | Dónde | Qué hace |
+|---|---|---|
+| Instancia de Axios | `src/services/api.js` | Dirección base, tiempo máximo y token `Bearer` de la sesión |
+| Services | `src/services/sesionService.js`, `src/services/usuarioService.js` | Una función por operación de la API |
+| DTO | `src/dto/usuario.dto.js` | Arma el cuerpo que exige la API y adapta sus respuestas |
+| Errores | `src/services/errores.js` | Convierte los errores de Axios en mensajes para la pantalla |
+
+### Qué sigue siendo local
+
+El backend todavía no tiene productos, categorías ni pedidos. Esas partes, junto con el carrito, se siguen guardando en `localStorage` del navegador.
 
 ## Pruebas unitarias
 

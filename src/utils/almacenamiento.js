@@ -1,10 +1,16 @@
 export const CLAVES = {
   productos: 'productosSonidoVivo',
-  usuarios: 'usuariosSonidoVivo',
   carrito: 'carritoSonidoVivo',
   sesion: 'sesionSonidoVivo',
   pedidos: 'pedidosSonidoVivo',
   categorias: 'categoriasSonidoVivo',
+}
+
+// los usuarios ahora vienen de la API: se borra la copia local que guardaban las versiones anteriores
+try {
+  localStorage.removeItem('usuariosSonidoVivo')
+} catch {
+  // localStorage bloqueado: no hay nada que limpiar
 }
 
 // Si no hay nada guardado (o el JSON está corrupto) se usa una copia de los datos iniciales,
