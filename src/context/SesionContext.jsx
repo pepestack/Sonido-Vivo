@@ -1,29 +1,36 @@
 import { createContext, useContext, useEffect, useState } from 'react'
+import { alExpirarSesion } from '../services/api'
 import * as sesionService from '../services/sesionService'
-import { useUsuarios } from './UsuariosContext'
 
 const SesionContext = createContext(null)
 
 export function SesionProvider(props) {
-  const usuariosCtx = useUsuarios()
-  const [usuarioId, setUsuarioId] = useState(() => sesionService.obtenerSesion())
+  const [sesion, setSesion] = useState(() => sesionService.obtenerSesion())
 
+  // se guarda antes de actualizar el estado: así la primera petición de la página siguiente ya lleva el token
+  function cambiarSesion(nueva) {
+    sesionService.guardarSesion(nueva)
+    setSesion(nueva)
+  }
+
+  // si la API rechaza el token (expiró o la cuenta se desactivó), la sesión se cierra
   useEffect(() => {
-    sesionService.guardarSesion(usuarioId)
-  }, [usuarioId])
+    alExpirarSesion(() => cambiarSesion(null))
+    return () => alExpirarSesion(null)
+  }, [])
 
-  // si el admin elimina o desactiva la cuenta, la sesión deja de valer
-  const usuario = usuariosCtx.usuarios.find((actual) => actual.id === usuarioId && actual.activo) ?? null
+  const usuario = sesion?.usuario ?? null
 
-  // devuelve el usuario si el correo y la contraseña corresponden a una cuenta activa; si no, null
-  function iniciarSesion(correo, contrasena) {
-    const encontrado = sesionService.autenticar(usuariosCtx.usuarios, correo, contrasena)
-    if (encontrado) setUsuarioId(encontrado.id)
-    return encontrado
+  // devuelve el usuario si la API acepta las credenciales; si no, lanza el error de Axios
+  async function iniciarSesion(correo, contrasena) {
+    const datos = await sesionService.iniciarSesion(correo, contrasena)
+    const nuevoUsuario = { ...datos.usuario, activo: true }
+    cambiarSesion({ token: datos.accessToken, usuario: nuevoUsuario })
+    return nuevoUsuario
   }
 
   function cerrarSesion() {
-    setUsuarioId(null)
+    cambiarSesion(null)
   }
 
   const valor = { usuario, iniciarSesion, cerrarSesion }

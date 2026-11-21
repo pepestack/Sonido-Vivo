@@ -17,7 +17,7 @@ export function TarjetaFormulario(props) {
             <Boton variante="outline-secondary" onClick={props.onCancelar}>
               {props.textoCancelar ?? 'Cancelar'}
             </Boton>
-            <Boton variante="success" tipo="submit" className="px-4">
+            <Boton variante="success" tipo="submit" className="px-4" disabled={props.cargando}>
               {props.textoGuardar ?? 'Guardar'}
             </Boton>
           </div>

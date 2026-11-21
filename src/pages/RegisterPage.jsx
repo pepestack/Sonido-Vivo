@@ -1,22 +1,34 @@
+import { useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { PlantillaPublica } from '../components/templates/PlantillaPublica/PlantillaPublica'
 import { Register } from '../components/organisms/Register/Register'
-import { useUsuarios } from '../context/UsuariosContext'
 import { comunasDe, regiones } from '../data/ubicaciones'
+import { crearRegistroRequestDto } from '../dto/usuario.dto'
 import { useTituloPagina } from '../hooks/useTituloPagina'
-import { existeCorreo } from '../services/usuarioService'
+import { obtenerErroresCampos, obtenerMensajeError } from '../services/errores'
+import { registrar } from '../services/sesionService'
 
 export default function RegisterPage() {
   const navigate = useNavigate()
-  const usuariosCtx = useUsuarios()
+  const [error, setError] = useState('')
+  const [erroresServidor, setErroresServidor] = useState(null)
+  const [cargando, setCargando] = useState(false)
   useTituloPagina('Registrarse')
 
-  // el registro tiene los mismos campos que crear un usuario en el panel de administración,
-  // pero sin elegir rol: quien se registra siempre queda como Cliente
-  function registrar(usuario) {
-    usuariosCtx.agregarUsuario({ ...usuario, rol: 'Cliente' })
-    navigate('/login')
+  // la API asigna siempre el rol Cliente y revisa que el RUN y el correo no estén en uso
+  async function registrarUsuario(usuario) {
+    setCargando(true)
+    setError('')
+    setErroresServidor(null)
+    try {
+      await registrar(crearRegistroRequestDto(usuario))
+      navigate('/login')
+    } catch (error) {
+      setError(obtenerMensajeError(error))
+      setErroresServidor(obtenerErroresCampos(error))
+      setCargando(false)
+    }
   }
 
   return (
@@ -26,10 +38,11 @@ export default function RegisterPage() {
           <Register
             regiones={regiones}
             comunasDe={comunasDe}
-            rutEnUso={(rut) => usuariosCtx.usuarios.some((u) => u.rut === rut)}
-            correoEnUso={(correo) => existeCorreo(usuariosCtx.usuarios, correo)}
-            onEnviar={registrar}
+            onEnviar={registrarUsuario}
             onNavegar={navigate}
+            error={error}
+            erroresServidor={erroresServidor}
+            cargando={cargando}
           />
         </Col>
       </Row>

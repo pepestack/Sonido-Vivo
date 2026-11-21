@@ -12,7 +12,7 @@ import {
 } from '../../../utils/validaciones'
 
 // Organismo: dueño del estado y de los errores. Solo avisa a la página (props.onEnviar) cuando todos los campos son válidos.
-// props.error: mensaje de la página cuando las credenciales no corresponden a ningún usuario
+// props.error: mensaje de la API cuando no se pudo iniciar sesión; props.cargando: desactiva el botón mientras responde
 export function Login(props) {
   const formulario = useFormulario({ email: '', contrasena: '' })
 
@@ -37,6 +37,7 @@ export function Login(props) {
       ruta="/registro"
       onNavegar={props.onNavegar}
       onEnviar={manejarEnvio}
+      cargando={props.cargando}
     >
       <CampoFormulario
         id="email"

@@ -1,33 +1,27 @@
-import { usuariosIniciales } from '../data/usuarios'
-import { CLAVES, guardar, leer } from '../utils/almacenamiento'
+import { api } from './api'
+import { usuarioDesdeRespuesta } from '../dto/usuario.dto'
 
-export function obtenerUsuarios() {
-  return leer(CLAVES.usuarios, usuariosIniciales)
+export async function listarUsuarios() {
+  const respuesta = await api.get('/usuarios')
+  return respuesta.data.map(usuarioDesdeRespuesta)
 }
 
-export function guardarUsuarios(usuarios) {
-  guardar(CLAVES.usuarios, usuarios)
+export async function obtenerUsuario(id) {
+  const respuesta = await api.get(`/usuarios/${id}`)
+  return usuarioDesdeRespuesta(respuesta.data)
 }
 
-function siguienteId(usuarios) {
-  return usuarios.reduce((max, usuario) => Math.max(max, usuario.id), 0) + 1
+export async function crearUsuario(dto) {
+  const respuesta = await api.post('/usuarios', dto)
+  return usuarioDesdeRespuesta(respuesta.data.usuario)
 }
 
-export function agregar(usuarios, nuevo) {
-  return [...usuarios, { ...nuevo, id: siguienteId(usuarios), activo: true }]
+export async function actualizarUsuario(id, dto) {
+  const respuesta = await api.put(`/usuarios/${id}`, dto)
+  return usuarioDesdeRespuesta(respuesta.data)
 }
 
-export function actualizar(usuarios, id, cambios) {
-  return usuarios.map((usuario) => (usuario.id === id ? { ...usuario, ...cambios, id } : usuario))
-}
-
-export function eliminar(usuarios, id) {
-  return usuarios.filter((usuario) => usuario.id !== id)
-}
-
-// Indica si el correo ya pertenece a otro usuario. Se compara igual que al iniciar sesión
-// (sin espacios ni mayúsculas). idExcluido: el usuario que se está editando, para no chocar consigo mismo
-export function existeCorreo(usuarios, correo, idExcluido) {
-  const buscado = String(correo ?? '').trim().toLowerCase()
-  return usuarios.some((usuario) => usuario.id !== idExcluido && usuario.correo.toLowerCase() === buscado)
+// la API no borra la fila: deja la cuenta inactiva y responde 204 sin cuerpo
+export async function eliminarUsuario(id) {
+  await api.delete(`/usuarios/${id}`)
 }
