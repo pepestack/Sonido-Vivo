@@ -29,7 +29,7 @@ export default function Home(){
       <SeccionPresentacion
         titulo="Sonido Vivo"
         tituloAnimado
-        texto="Visítanos en nuestra tienda en Viña del Mar o explora nuestro catálogo con más de 300 productos. Hacemos envíos y entregas a todo el país para que tu sonido no se detenga."
+        texto={`Visítanos en nuestra tienda en Viña del Mar o explora nuestro catálogo con ${productosCtx.productos.length} productos. Hacemos envíos y entregas a todo el país para que tu sonido no se detenga.`}
         imagen={imgTienda}
         alt="Interior de tienda física Sonido Vivo"
         textoBoton="Ver más"

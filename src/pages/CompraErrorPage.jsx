@@ -1,8 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Boton } from "../components/atoms/Boton/Boton";
-import { Icono } from "../components/atoms/Icono/Icono";
-import { Texto } from "../components/atoms/Texto/Texto";
-import { Titulo } from "../components/atoms/Titulo/Titulo";
+import { AvisoResultado } from "../components/organisms/AvisoResultado/AvisoResultado";
 import { PlantillaPublica } from "../components/templates/PlantillaPublica/PlantillaPublica";
 import { useTituloPagina } from "../hooks/useTituloPagina";
 
@@ -16,18 +13,17 @@ export default function CompraErrorPage() {
 
   return (
     <PlantillaPublica>
-      <section className="text-center py-5">
-        <Icono icono="bi bi-x-circle-fill" className="text-danger display-4" />
-        <Titulo nivel={1} className="h3 fw-bold mt-3">No pudimos completar tu compra</Titulo>
-        <Texto className="fs-5 mb-2">{motivo}</Texto>
-        <Texto className="text-muted mb-4">No se realizó ningún cargo y tu carrito sigue guardado.</Texto>
-        <div className="d-flex flex-wrap justify-content-center gap-2">
-          <Boton variante="outline-secondary" onClick={() => navigate("/carrito")}>
-            Volver al carrito
-          </Boton>
-          <Boton onClick={() => navigate("/checkout")}>Reintentar</Boton>
-        </div>
-      </section>
+      <AvisoResultado
+        icono="bi bi-x-circle-fill"
+        colorIcono="text-danger"
+        titulo="No pudimos completar tu compra"
+        texto={motivo}
+        detalle="No se realizó ningún cargo y tu carrito sigue guardado."
+        textoSecundario="Volver al carrito"
+        onSecundario={() => navigate("/carrito")}
+        textoBoton="Reintentar"
+        onAccion={() => navigate("/checkout")}
+      />
     </PlantillaPublica>
   );
 }

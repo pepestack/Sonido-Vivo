@@ -18,7 +18,6 @@ export const checkoutVacio = {
   nombre: '',
   apellido: '',
   correo: '',
-  tipoEntrega: 'despacho',
   region: '',
   comuna: '',
   direccion: '',

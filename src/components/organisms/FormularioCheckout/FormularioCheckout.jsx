@@ -12,22 +12,23 @@ import { LARGO_MAXIMO_CORREO, sinEspacios, sinErrores, validarCheckout } from '.
 // Organismo: datos de la persona, entrega y pago simulado.
 // valoresIniciales: datos para autocompletar (el usuario con sesión); se mezclan sobre checkoutVacio
 // regiones, comunasDe(region) y tiposEntrega llegan por props; total: monto que muestra el botón
-// onCambiarEntrega(tipo): avisa a la página para recalcular el despacho
+// tipoEntrega lo guarda la página (cambia el total del resumen); el formulario solo lo muestra
+// onCambiarEntrega(tipo): avisa a la página cuando la persona elige otra entrega
 // onEnviar(datos, numeroTarjeta): solo se llama cuando todo es válido
 export function FormularioCheckout(props) {
   const formulario = useFormulario({ ...checkoutVacio, ...props.valoresIniciales })
   const valores = formulario.valores
   const errores = formulario.errores
-  const conDespacho = valores.tipoEntrega !== 'retiro'
+  const conDespacho = props.tipoEntrega !== 'retiro'
 
   function manejarEntrega(evento) {
-    formulario.manejarCambio(evento)
+    formulario.setErrores((actuales) => ({ ...actuales, tipoEntrega: '' }))
     props.onCambiarEntrega(evento.target.value)
   }
 
   function manejarEnvio(evento) {
     evento.preventDefault()
-    const nuevos = validarCheckout(valores)
+    const nuevos = validarCheckout({ ...valores, tipoEntrega: props.tipoEntrega })
     formulario.setErrores(nuevos)
     if (!sinErrores(nuevos)) return
 
@@ -90,7 +91,7 @@ export function FormularioCheckout(props) {
           tipo="select"
           requerido
           opciones={props.tiposEntrega}
-          valor={valores.tipoEntrega}
+          valor={props.tipoEntrega}
           onChange={manejarEntrega}
           error={errores.tipoEntrega}
         />

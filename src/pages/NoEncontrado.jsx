@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import { AvisoVacio } from '../components/molecules/AvisoVacio/AvisoVacio'
+import { AvisoResultado } from '../components/organisms/AvisoResultado/AvisoResultado'
 import { useTituloPagina } from '../hooks/useTituloPagina'
 import { PlantillaPublica } from '../components/templates/PlantillaPublica/PlantillaPublica'
 
@@ -10,7 +10,9 @@ export default function NoEncontrado() {
 
   return (
     <PlantillaPublica>
-      <AvisoVacio
+      <AvisoResultado
+        icono="bi bi-question-circle"
+        colorIcono="text-muted"
         titulo="Página no encontrada"
         texto="La página que buscas no existe."
         textoBoton="Volver al inicio"
