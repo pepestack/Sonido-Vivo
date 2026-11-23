@@ -37,7 +37,8 @@ export function Contacto(props) {
     setEnviado(false)
     if (!sinErrores(nuevos)) return
 
-    props.onEnviar?.(valores)
+    // la confirmación solo aparece después de que la página guardó el mensaje
+    props.onEnviar(valores)
     setEnviado(true)
     formulario.reiniciar()
   }

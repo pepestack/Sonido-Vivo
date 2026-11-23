@@ -95,6 +95,7 @@ export default function CheckoutPage() {
             comunasDe={comunasDe}
             tiposEntrega={tiposEntrega}
             total={totales.total}
+            tipoEntrega={tipoEntrega}
             onCambiarEntrega={setTipoEntrega}
             onEnviar={pagar}
           />

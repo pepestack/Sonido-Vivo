@@ -114,7 +114,7 @@ Con las dependencias instaladas (`npm install`), puede ejecutar:
 | `npm run test:run` | Ejecuta todas las pruebas una sola vez y muestra el resultado |
 | `npm run test:cov` | Ejecuta las pruebas y genera el reporte de cobertura |
 
-El reporte de cobertura se muestra en la terminal y además se genera en `coverage/index.html`, que puede abrir en el navegador.
+El reporte de cobertura se muestra en la terminal y además se genera en `coverage/index.html`, que puede abrir en el navegador. El resumen de la última medición está en [docs/reporte-de-cobertura.html](docs/reporte-de-cobertura.html).
 
 > **Nota:** la prueba `FormularioProducto.test.jsx` falla a propósito, para analizarla en la presentación. Como hay una prueba en rojo, Vitest no genera el reporte de cobertura por defecto. Para obtenerlo de todas formas, ejecute:
 >

@@ -4,6 +4,7 @@ export const CLAVES = {
   sesion: 'sesionSonidoVivo',
   pedidos: 'pedidosSonidoVivo',
   categorias: 'categoriasSonidoVivo',
+  mensajes: 'mensajesSonidoVivo',
 }
 
 // los usuarios ahora vienen de la API: se borra la copia local que guardaban las versiones anteriores
