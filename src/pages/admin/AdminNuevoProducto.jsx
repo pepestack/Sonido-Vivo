@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { Col, Row } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import { PlantillaPrivada } from '../../components/templates/PlantillaPrivada/PlantillaPrivada'
@@ -5,16 +6,30 @@ import { FormularioProducto } from '../../components/organisms/FormularioProduct
 import { useTituloPagina } from '../../hooks/useTituloPagina'
 import { useCategorias } from '../../context/CategoriasContext'
 import { useProductos } from '../../context/ProductosContext'
+import { erroresProductoDesdeApi } from '../../dto/producto.dto'
+import { obtenerErroresCampos, obtenerMensajeError } from '../../services/errores'
 
 export default function AdminNuevoProducto() {
   const navigate = useNavigate()
   const productosCtx = useProductos()
   const categoriasCtx = useCategorias()
+  const [error, setError] = useState('')
+  const [erroresServidor, setErroresServidor] = useState(null)
+  const [cargando, setCargando] = useState(false)
   useTituloPagina('Nuevo producto')
 
-  function guardar(producto) {
-    productosCtx.agregarProducto(producto)
-    navigate('/admin/productos')
+  async function guardar(producto) {
+    setCargando(true)
+    setError('')
+    setErroresServidor(null)
+    try {
+      await productosCtx.agregarProducto(producto)
+      navigate('/admin/productos')
+    } catch (error) {
+      setError(obtenerMensajeError(error))
+      setErroresServidor(erroresProductoDesdeApi(obtenerErroresCampos(error)))
+      setCargando(false)
+    }
   }
 
   return (
@@ -28,6 +43,9 @@ export default function AdminNuevoProducto() {
             onEnviar={guardar}
             onCancelar={() => navigate('/admin/productos')}
             textoCancelar="Cancelar registro"
+            error={error}
+            erroresServidor={erroresServidor}
+            cargando={cargando}
           />
         </Col>
       </Row>
