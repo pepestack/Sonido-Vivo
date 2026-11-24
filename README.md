@@ -29,6 +29,7 @@
 - [Estructura del proyecto](#estructura-del-proyecto)
 - [Ejecución](#ejecución)
 - [Conexión con la API](#conexión-con-la-api)
+- [Despliegue con nginx](#despliegue-con-nginx)
 - [Pruebas unitarias](#pruebas-unitarias)
 - [Material Complementario](#material-complementario)
 
@@ -89,6 +90,8 @@ Si `.env` no existe, la aplicación usa una API local en `http://localhost:3000/
 
 La API solo responde a los orígenes de su variable `CORS_ORIGIN`. Debe incluir la dirección exacta de la página, con protocolo y puerto, por ejemplo `http://localhost:5173`. Para varios orígenes, sepárelos con comas. Configure CORS solo en la API (Express) y no en la Function URL de Lambda: si ambos lo agregan, el navegador rechaza la respuesta al duplicarse.
 
+Esto aplica al desarrollo local. En el servidor la página llama a la API a través de nginx, en el mismo origen, por lo que no hace falta agregar su IP (ver [Despliegue con nginx](#despliegue-con-nginx)).
+
 ### Organización del código
 
 | Pieza | Dónde | Qué hace |
@@ -101,6 +104,86 @@ La API solo responde a los orígenes de su variable `CORS_ORIGIN`. Debe incluir 
 ### Qué sigue siendo local
 
 El backend todavía no tiene productos, categorías ni pedidos. Esas partes, junto con el carrito, se siguen guardando en `localStorage` del navegador.
+
+## Despliegue con nginx
+
+En el servidor (o cualquier máquina virtual Linux; nosotros probamos en una instancia EC2 con Ubuntu), nginx entrega los archivos de `npm run build` y además reenvía las solicitudes `/api/` a la API en Lambda. Así el navegador llama a la misma dirección de la página y no hay CORS que configurar, aunque cambie la IP pública del servidor.
+
+Los pasos usan la estructura de Debian y Ubuntu (`sites-available/`, usuario `www-data`). En Amazon Linux, Fedora o RHEL la configuración va en `/etc/nginx/conf.d/sonidovivo.conf` y el usuario es `nginx`.
+
+### 1. Compilar
+
+Vite escribe `VITE_API_URL` dentro de los archivos al compilar: el `.env` solo se necesita en la máquina donde se ejecuta `npm run build`. En el servidor use una ruta relativa, que nginx reenvía:
+
+```
+VITE_API_URL=/api/v1
+```
+
+```bash
+git pull
+npm install
+npm run build
+sudo mkdir -p /var/www/sonidovivo
+sudo rm -rf /var/www/sonidovivo/*
+sudo cp -r dist/* /var/www/sonidovivo/
+```
+
+Se copia a `/var/www` porque nginx (usuario `www-data`) no puede leer `/home/ubuntu`. Repita la copia después de cada compilación.
+
+### 2. Configurar nginx
+
+El sitio activo es `/etc/nginx/sites-available/sonidovivo`, enlazado desde `sites-enabled/`. Edite ese archivo, no `default`, que no está habilitado:
+
+```nginx
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+    server_name _;
+
+    root /var/www/sonidovivo;
+    index index.html;
+
+    # React Router: cualquier ruta (/admin/usuarios, /catalogo...) carga index.html
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    # /api/... se reenvía a la API en Lambda: para el navegador es el mismo origen, sin CORS
+    location /api/ {
+        proxy_pass https://<url-id>.lambda-url.<region>.on.aws/api/;
+        proxy_ssl_server_name on;
+        proxy_set_header Host <url-id>.lambda-url.<region>.on.aws;
+        proxy_set_header Origin "";
+    }
+
+    # los archivos con hash pueden guardarse en caché mucho tiempo
+    location /assets/ {
+        expires 1y;
+        add_header Cache-Control "public, immutable";
+    }
+}
+```
+
+El host de Lambda debe ser el mismo en `proxy_pass` y en `Host`, este último sin `https://` ni `/` final. Para habilitar el sitio la primera vez:
+
+```bash
+sudo ln -sf /etc/nginx/sites-available/sonidovivo /etc/nginx/sites-enabled/sonidovivo
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+### 3. Comprobar
+
+```bash
+curl -i -X POST http://localhost/api/v1/auth/login -H "Content-Type: application/json" -d '{"correo":"x@x.cl","contrasena":"x"}'
+```
+
+| Respuesta | Significado |
+|---|---|
+| `401` o `400` con JSON | Identifica que las credenciales son inválidas, o sea el reenvío funciona |
+| `405 Not Allowed` de nginx | nginx no está usando el bloque `/api/`: revise con `sudo nginx -T` qué archivo carga |
+| `502` o `504` | nginx no llega a Lambda: revise el host y `sudo tail /var/log/nginx/error.log` |
+
+En el navegador, la pestaña Red (XHR) debe mostrar `http://<ip-del-servidor>/api/v1/auth/login`. Si la página se ve antigua, recargue con `Ctrl + F5`.
 
 ## Pruebas unitarias
 
