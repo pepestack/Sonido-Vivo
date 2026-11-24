@@ -12,7 +12,7 @@ export function TarjetaCategoria(props) {
       as="button"
       type="button"
       onClick={props.onElegir}
-      className="tarjeta-categoria h-100 w-100 border-0 shadow-sm custom-lb-container text-center p-3"
+      className="tarjeta-categoria h-100 w-100 align-items-center border-0 shadow-sm custom-lb-container text-center p-3"
     >
       <Icono icono={props.icono} className="fs-1 vivo mb-2" />
       <Texto como="span" className="d-block h6 fw-bold mb-1">
