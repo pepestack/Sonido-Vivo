@@ -21,7 +21,8 @@ export default function Home(){
     useTituloPagina('Inicio')
 
     const destacados = idsDestacados.map((id) => productosCtx.obtenerProducto(id)).filter(Boolean)
-    const categorias = conCantidades(categoriasCtx.categorias, productosCtx.productos)
+    // solo categorías con al menos un producto
+    const categorias = conCantidades(categoriasCtx.categorias, productosCtx.productos).filter((c) => c.cantidad > 0)
 
     return (
     <PlantillaPublica>

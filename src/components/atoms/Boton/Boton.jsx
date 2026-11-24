@@ -18,6 +18,8 @@ export function Boton(props){
             aria-controls={props.controla}
             aria-expanded={props.expandido}
             aria-label={props.etiquetaAccesible}
+            role={props.rol}
+            aria-selected={props.seleccionado}
         >
             {props.children}
         </Button>

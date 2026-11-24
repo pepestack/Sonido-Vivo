@@ -16,7 +16,7 @@ export function GrillaCategorias(props) {
         </Titulo>
       )}
       {/* 5 por fila en escritorio: las 10 categorías quedan en 2 filas parejas */}
-      <Row xs={2} md={3} lg={5} className="g-3">
+      <Row xs={2} md={3} lg={5} className="g-3 justify-content-center">
         {props.categorias.map((categoria, indice) => {
           const tarjeta = (
             <TarjetaCategoria
