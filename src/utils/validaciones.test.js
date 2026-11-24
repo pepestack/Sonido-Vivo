@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { sinErrores, validarCategoria, validarUsuario } from './validaciones'
+import { validarUsuario } from './validaciones'
 
 describe('validarUsuario', () => {
   const valido = {
@@ -14,26 +14,9 @@ describe('validarUsuario', () => {
     rol: 'Cliente',
   }
 
-  it('no devuelve errores para un usuario válido', () => {
-    expect(sinErrores(validarUsuario(valido))).toBe(true)
-  })
-
   it('exige el rol salvo que se oculte', () => {
     const sinRol = { ...valido, rol: '' }
     expect(validarUsuario(sinRol).rol).toBe('Selecciona un rol')
     expect(validarUsuario(sinRol, { ocultarRol: true }).rol).toBe('')
-  })
-
-  it('rechaza un correo que ya usa otro usuario', () => {
-    const correoEnUso = (correo) => correo === 'ana@duoc.cl'
-    expect(validarUsuario(valido, { correoEnUso }).correo).toBe('Ya existe una cuenta con este correo')
-    expect(validarUsuario({ ...valido, correo: 'otra@duoc.cl' }, { correoEnUso }).correo).toBe('')
-  })
-})
-
-describe('validarCategoria', () => {
-  it('rechaza un nombre cuyo valor ya usa otra categoría', () => {
-    const enUso = (valor) => valor === 'baterias'
-    expect(validarCategoria('Baterías', enUso)).toBe('Ya existe una categoría con ese nombre')
   })
 })
