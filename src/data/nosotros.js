@@ -29,7 +29,9 @@ export const nosotros = {
     },
     {
       id: 2,
-      titulo: "+300 Productos",
+      // NosotrosPage reemplaza el título con la cantidad real de productos del catálogo
+      titulo: "Productos",
+      cuentaProductos: true,
       descripcion: "El catálogo más completo de cuerdas, teclas, accesorios y más."
     },
     {
