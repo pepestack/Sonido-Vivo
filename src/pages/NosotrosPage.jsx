@@ -4,9 +4,17 @@ import { GrillaDestacados } from "../components/organisms/GrillaDestacados/Grill
 import { PlantillaPublica } from "../components/templates/PlantillaPublica/PlantillaPublica";
 import { useTituloPagina } from "../hooks/useTituloPagina";
 import { nosotros } from "../data/nosotros";
+import { useProductos } from "../context/ProductosContext";
 
 export default function NosotrosPage() {
   useTituloPagina('Nosotros')
+  const productosCtx = useProductos()
+
+  const destacados = nosotros.destacados.map((destacado) =>
+    destacado.cuentaProductos
+      ? { ...destacado, titulo: `${productosCtx.productos.length} Productos` }
+      : destacado
+  )
 
   return (
     <PlantillaPublica>
@@ -25,7 +33,7 @@ export default function NosotrosPage() {
         ))}
       </SeccionPresentacion>
 
-      <GrillaDestacados destacados={nosotros.destacados} className="mt-2 mb-5" />
+      <GrillaDestacados destacados={destacados} className="mt-2 mb-5" />
     </PlantillaPublica>
   );
 }
