@@ -4,6 +4,7 @@ import { Imagen } from "../../atoms/Imagen/Imagen";
 import { Titulo } from "../../atoms/Titulo/Titulo";
 import { Texto } from "../../atoms/Texto/Texto";
 import { Boton } from "../../atoms/Boton/Boton";
+import SpotlightCard from "../../atoms/SpotlightCard/SpotlightCard";
 
 // children: contenido extra bajo el texto principal (ej. más párrafos)
 // El botón solo se muestra si viene textoBoton
@@ -15,7 +16,19 @@ export function SeccionPresentacion(props){
     const anchoImagen = props.anchoImagen ?? 4
 
     return(
-        <section className={className}>
+        // SpotlightCard: luz naranja que sigue al puntero; role="region" reemplaza al <section>
+        <SpotlightCard
+            className={className}
+            theme="light"
+            spotlightColor="rgb(241, 219, 118)"
+            intensity={0.5}
+            spotlightSize={320}
+            borderGlow={0.8}
+            flare={false}
+            role="region"
+            aria-label={props.titulo}
+            style={{ '--spotlight-card-surface': 'rgb(242, 242, 255)' }}
+        >
             <Row className="flex-lg-row-reverse align-items-center g-5">
                 <Col xs={10} sm={8} lg={anchoImagen}>
                     <Imagen src={props.imagen} alt={props.alt} className={claseImagen}/>
@@ -37,6 +50,6 @@ export function SeccionPresentacion(props){
                     )}
                 </Col>
             </Row>
-        </section>
+        </SpotlightCard>
     )
 }
