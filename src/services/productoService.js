@@ -1,26 +1,35 @@
-import { productosIniciales } from "../data/listaProductos";
-import { CLAVES, guardar, leer } from "../utils/almacenamiento";
+import { api } from './api'
+import { productoDesdeRespuesta, productoRequestDto } from '../dto/producto.dto'
 
-export function obtenerProductos() {
-  return leer(CLAVES.productos, productosIniciales);
+export async function listarProductos() {
+  const respuesta = await api.get('/productos')
+  return respuesta.data.map(productoDesdeRespuesta)
 }
 
-export function guardarProductos(productos) {
-  guardar(CLAVES.productos, productos);
+export async function crearProducto(producto) {
+  const respuesta = await api.post('/productos', productoRequestDto(producto))
+  return productoDesdeRespuesta(respuesta.data)
+}
+
+export async function modificarProducto(idApi, producto) {
+  const respuesta = await api.put(`/productos/${idApi}`, productoRequestDto(producto))
+  return productoDesdeRespuesta(respuesta.data)
+}
+
+export async function eliminarProducto(idApi) {
+  await api.delete(`/productos/${idApi}`)
 }
 
 export function agregar(productos, nuevo) {
   return [...productos, nuevo]
 }
 
-export function actualizarProducto(productos, id, cambios) {
-  return productos.map((producto) =>
-    producto.id === id ? { ...producto, ...cambios } : producto,
-  );
+export function reemplazar(productos, id, actualizado) {
+  return productos.map((producto) => (producto.id === id ? actualizado : producto))
 }
 
-export function eliminar(productos, id){
-    return productos.filter((producto) => producto.id !== id)
+export function eliminar(productos, id) {
+  return productos.filter((producto) => producto.id !== id)
 }
 
 // Resta del stock lo vendido en un pedido. items: [{ id, cantidad }]

@@ -1,29 +1,50 @@
-import { createContext, useEffect, useState, useContext } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import * as productoService from '../services/productoService'
+import { obtenerMensajeError } from '../services/errores'
 
 const ProductosContext = createContext(null)
 
-
 export function ProductosProvider(props) {
-    const [productos, setProductos] = useState(() => productoService.obtenerProductos())
+    const [productos, setProductos] = useState([])
+    const [cargando, setCargando] = useState(true)
+    const [error, setError] = useState('')
+
+    const recargar = useCallback(async () => {
+        setCargando(true)
+        setError('')
+        try {
+            setProductos(await productoService.listarProductos())
+        } catch (error) {
+            setError(obtenerMensajeError(error))
+        } finally {
+            setCargando(false)
+        }
+    }, [])
 
     useEffect(() => {
-        productoService.guardarProductos(productos)
-    }, [productos])
+        recargar()
+    }, [recargar])
 
     function obtenerProducto(id) {
         return productos.find((producto) => producto.id === id)
     }
 
-    function agregarProducto(nuevo) {
-        setProductos((actuales) => productoService.agregar(actuales, nuevo))
+    async function agregarProducto(nuevo) {
+        const creado = await productoService.crearProducto(nuevo)
+        setProductos((actuales) => productoService.agregar(actuales, creado))
+        return creado
     }
 
-    function actualizarProducto(idOriginal, cambios) {
-        setProductos((actuales) => productoService.actualizarProducto(actuales, idOriginal, cambios))
+    async function actualizarProducto(idOriginal, cambios) {
+        const original = obtenerProducto(idOriginal)
+        const actualizado = await productoService.modificarProducto(original.idApi, cambios)
+        setProductos((actuales) => productoService.reemplazar(actuales, idOriginal, actualizado))
+        return actualizado
     }
 
-    function eliminarProducto(id) {
+    async function eliminarProducto(id) {
+        const producto = obtenerProducto(id)
+        await productoService.eliminarProducto(producto.idApi)
         setProductos((actuales) => productoService.eliminar(actuales, id))
     }
 
@@ -31,7 +52,17 @@ export function ProductosProvider(props) {
         setProductos((actuales) => productoService.descontarStock(actuales, items))
     }
 
-    const valor = { productos, obtenerProducto, agregarProducto, actualizarProducto, eliminarProducto, descontarStock }
+    const valor = {
+        productos,
+        cargando,
+        error,
+        recargar,
+        obtenerProducto,
+        agregarProducto,
+        actualizarProducto,
+        eliminarProducto,
+        descontarStock,
+    }
 
     return <ProductosContext.Provider value={valor}>{props.children}</ProductosContext.Provider>
 }
