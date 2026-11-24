@@ -71,7 +71,7 @@ Para detener el servidor de desarrollo, presione:
 
 ## Conexión con la API
 
-El inicio de sesión, el registro y la gestión de usuarios del panel usan la API de [Sonido-Vivo-Backend](https://github.com/pepestack/Sonido-Vivo-Backend) (Express y PostgreSQL, desplegada en AWS Lambda y RDS). Las solicitudes se hacen con **Axios**.
+El inicio de sesión, el registro, la gestión de usuarios y el catálogo de productos (tienda y panel) usan la API de [Sonido-Vivo-Backend](https://github.com/pepestack/Sonido-Vivo-Backend) (Express y PostgreSQL, desplegada en AWS Lambda y RDS). Las solicitudes se hacen con **Axios**.
 
 ### Configuración
 
@@ -97,13 +97,18 @@ Esto aplica al desarrollo local. En el servidor la página llama a la API a trav
 | Pieza | Dónde | Qué hace |
 |---|---|---|
 | Instancia de Axios | `src/services/api.js` | Dirección base, tiempo máximo y token `Bearer` de la sesión |
-| Services | `src/services/sesionService.js`, `src/services/usuarioService.js` | Una función por operación de la API |
-| DTO | `src/dto/usuario.dto.js` | Arma el cuerpo que exige la API y adapta sus respuestas |
+| Services | `src/services/sesionService.js`, `src/services/usuarioService.js`, `src/services/productoService.js` | Una función por operación de la API |
+| DTO | `src/dto/usuario.dto.js`, `src/dto/producto.dto.js` | Arma el cuerpo que exige la API y adapta sus respuestas |
+| Estado del catálogo | `src/context/ProductosContext.jsx` | Carga los productos al iniciar y expone `cargando`, `error` y las operaciones del CRUD |
 | Errores | `src/services/errores.js` | Convierte los errores de Axios en mensajes para la pantalla |
 
 ### Qué sigue siendo local
 
-El backend todavía no tiene productos, categorías ni pedidos. Esas partes, junto con el carrito, se siguen guardando en `localStorage` del navegador.
+- **Pedidos y carrito**: se siguen guardando en `localStorage` hasta que se conecten los endpoints de pedidos. Por eso el stock descontado al comprar solo cambia en la pantalla.
+- **Categorías**: la lista sigue siendo local. Un producto solo se puede guardar en una categoría que también exista en el backend; si no, la API responde `400`.
+- **Stock crítico, precio de oferta y galería**: la API no los guarda (corresponden al examen final). `src/dto/producto.dto.js` los completa con los datos locales del mismo código (`src/data/listaProductos.js`), junto con la imagen cuando la API no trae una.
+
+En la tienda y en el panel, los productos se identifican por su código (`/producto/GA001`), igual que antes. El id numérico que usa la API se guarda en `idApi` y solo se usa para modificar y eliminar.
 
 ## Despliegue con nginx
 

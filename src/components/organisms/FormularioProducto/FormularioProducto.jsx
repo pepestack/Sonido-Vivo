@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Form } from 'react-bootstrap'
 import { Imagen } from '../../atoms/Imagen/Imagen'
+import { MensajeEstado } from '../../atoms/MensajeEstado/MensajeEstado'
 import { CampoFormulario } from '../../molecules/CampoFormulario/CampoFormulario'
 import { TarjetaFormulario } from '../../molecules/TarjetaFormulario/TarjetaFormulario'
 import { useFormulario } from '../../../hooks/useFormulario'
@@ -35,6 +36,11 @@ export function FormularioProducto(props) {
   const formulario = useFormulario(props.valoresIniciales ?? productoVacio)
   const valores = formulario.valores
   const errores = formulario.errores
+  const setErrores = formulario.setErrores
+
+  useEffect(() => {
+    if (props.erroresServidor) setErrores((actuales) => ({ ...actuales, ...props.erroresServidor }))
+  }, [props.erroresServidor, setErrores])
 
   // vista previa del archivo elegido; solo vive mientras se edita, no se guarda
   const [vistaPrevia, setVistaPrevia] = useState(null)
@@ -59,6 +65,8 @@ export function FormularioProducto(props) {
     const nuevos = {
       id: validarSku(valores.id, props.skuEnUso),
       nombre: validarObligatorio(valores.nombre, 'El nombre es requerido') || validarLargoMaximo(valores.nombre, 100),
+      marca: validarObligatorio(valores.marca, 'La marca es requerida') || validarLargoMaximo(valores.marca, 50),
+      modelo: validarObligatorio(valores.modelo, 'El modelo es requerido') || validarLargoMaximo(valores.modelo, 50),
       descripcion: validarLargoMaximo(valores.descripcion, 500),
       precio: validarPrecio(valores.precio),
       stock: validarStock(valores.stock),
@@ -85,6 +93,7 @@ export function FormularioProducto(props) {
       textoCancelar={props.textoCancelar}
       onEnviar={manejarEnvio}
       onCancelar={props.onCancelar}
+      cargando={props.cargando}
     >
       <CampoFormulario
         id="id"
@@ -108,15 +117,19 @@ export function FormularioProducto(props) {
         id="marca"
         etiqueta="Marca"
         placeholder="Ej: Squier"
+        requerido
         valor={valores.marca}
         onChange={formulario.manejarCambio}
+        error={errores.marca}
       />
       <CampoFormulario
         id="modelo"
         etiqueta="Modelo"
         placeholder="Ej: Affinity PJ"
+        requerido
         valor={valores.modelo}
         onChange={formulario.manejarCambio}
+        error={errores.modelo}
       />
       <CampoFormulario
         id="descripcion"
@@ -184,6 +197,7 @@ export function FormularioProducto(props) {
           <Imagen src={vistaPrevia ?? valores.imagen} alt="Vista previa" className="img-thumbnail producto-img object-fit-cover" />
         </div>
       )}
+      <MensajeEstado tipo="error">{props.error}</MensajeEstado>
     </TarjetaFormulario>
   )
 }
