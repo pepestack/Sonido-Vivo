@@ -1,4 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
+import { MensajeEstado } from "../components/atoms/MensajeEstado/MensajeEstado";
 import { AvisoVacio } from "../components/molecules/AvisoVacio/AvisoVacio";
 import { FichaProducto } from "../components/organisms/FichaProducto/FichaProducto";
 import { PlantillaPublica } from "../components/templates/PlantillaPublica/PlantillaPublica";
@@ -15,6 +16,14 @@ export default function DetalleProducto() {
   // Los ids de producto ya son strings ("GA001"), igual que useParams, así que no hace falta Number()
   const producto = productosCtx.obtenerProducto(params.id);
   useTituloPagina(producto ? producto.nombre : "Producto no encontrado");
+
+  if (productosCtx.cargando) {
+    return (
+      <PlantillaPublica>
+        <MensajeEstado tipo="neutro" className="my-5 text-center">Cargando producto...</MensajeEstado>
+      </PlantillaPublica>
+    );
+  }
 
   if (!producto) {
     return (

@@ -7,6 +7,7 @@ import { useCategorias } from "../context/CategoriasContext";
 import { useTituloPagina } from "../hooks/useTituloPagina";
 import { filtrarProductos } from "../utils/filtrarProductos";
 import { PlantillaPublica } from "../components/templates/PlantillaPublica/PlantillaPublica";
+import { MensajeEstado } from "../components/atoms/MensajeEstado/MensajeEstado";
 
 export default function Catalogo() {
   const navigate = useNavigate()
@@ -36,12 +37,17 @@ export default function Catalogo() {
         categorias={categoriasCtx.categorias}
         onCambiarCategoria={cambiarCategoria}
       />
-      <GrillaProductos
-        productos={visibles}
-        onAgregar={carrito.agregarAlCarrito}
-        onNavegar={navigate}
-        mostrarDescripcion
-      />
+      <MensajeEstado tipo="error" className="my-4 text-center">{productosCtx.error}</MensajeEstado>
+      {productosCtx.cargando ? (
+        <MensajeEstado tipo="neutro" className="my-5 text-center">Cargando productos...</MensajeEstado>
+      ) : (
+        <GrillaProductos
+          productos={visibles}
+          onAgregar={carrito.agregarAlCarrito}
+          onNavegar={navigate}
+          mostrarDescripcion
+        />
+      )}
     </PlantillaPublica>
   )
 }
