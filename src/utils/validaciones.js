@@ -1,4 +1,4 @@
-import { generarValor } from './formato'
+import { generarValor, limpiarRut } from './formato'
 
 const patronCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 const patronSku = /^[A-Z]{2}\d{3}$/
@@ -72,7 +72,7 @@ function rutEsValido(run) {
 }
 
 export function validarRut(valor) {
-  return rutEsValido(String(valor ?? '').trim()) ? '' : 'RUN inválido, ingrese sin puntos ni guion'
+  return rutEsValido(limpiarRut(valor)) ? '' : 'RUN inválido'
 }
 
 // skuEnUso: función que indica si el SKU ya pertenece a otro producto
@@ -107,7 +107,7 @@ export function validarStockCritico(valor) {
 export function validarUsuario(valores, opciones = {}) {
   const rutEnUso = opciones.rutEnUso ?? (() => false)
   const correoEnUso = opciones.correoEnUso ?? (() => false)
-  const rut = String(valores.rut ?? '').trim()
+  const rut = limpiarRut(valores.rut)
   const correo = String(valores.correo ?? '').trim()
   return {
     rut: opciones.edicion ? '' : validarRut(rut) || (rutEnUso(rut) ? 'Ya existe un usuario con este RUN' : ''),
