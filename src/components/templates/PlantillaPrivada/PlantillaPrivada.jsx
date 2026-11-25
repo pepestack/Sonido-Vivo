@@ -6,7 +6,7 @@ import { Footer } from '../../organisms/Footer/Footer'
 import { ModalConfirmacion } from '../../molecules/ModalConfirmacion/ModalConfirmacion'
 import { sidebarPrincipal, sidebarSecundario } from '../../../data/navegacion'
 import { useSesion } from '../../../context/SesionContext'
-import { esCliente } from '../../../utils/roles'
+import { esCliente, puedeGestionarPedidos } from '../../../utils/roles'
 
 export function PlantillaPrivada(props) {
   const [menuAbierto, setMenuAbierto] = useState(false)
@@ -51,7 +51,9 @@ export function PlantillaPrivada(props) {
       <div className="d-flex flex-grow-1 position-relative">
         <SidebarAdmin
           abierto={menuAbierto}
-          itemsPrincipales={sidebarPrincipal}
+          itemsPrincipales={puedeGestionarPedidos(sesion.usuario)
+            ? sidebarPrincipal
+            : sidebarPrincipal.filter(({ ruta }) => !['/admin/pedidos', '/admin/reportes'].includes(ruta))}
           itemsSecundarios={sidebarSecundario}
           rutaActual={location.pathname}
           onNavegar={navegar}

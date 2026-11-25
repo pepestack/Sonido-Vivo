@@ -1,56 +1,78 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useContext, useEffect, useRef, useState } from 'react'
 import * as pedidoService from '../services/pedidoService'
+import { puedeGestionarPedidos } from '../utils/roles'
 import { useCarrito } from './CarritoContext'
 import { useProductos } from './ProductosContext'
+import { useSesion } from './SesionContext'
 
 const PedidosContext = createContext(null)
 
 export function PedidosProvider(props) {
-  const productosCtx = useProductos()
-  const carrito = useCarrito()
-  const [pedidos, setPedidos] = useState(() => pedidoService.obtenerPedidos())
+  const { usuario } = useSesion()
+  const { items, vaciarCarrito } = useCarrito()
+  const { recargar } = useProductos()
+  const [consulta, setConsulta] = useState(null)
+  const [revision, setRevision] = useState(0)
+  const [comprobante, setComprobante] = useState(null)
+  const [comprando, setComprando] = useState(false)
+  const compraEnCurso = useRef(false)
+  const puedeConsultar = usuario?.rol === 'Cliente' || puedeGestionarPedidos(usuario)
 
   useEffect(() => {
-    pedidoService.guardarPedidos(pedidos)
-  }, [pedidos])
+    if (!puedeConsultar) return
+    const peticion = new AbortController()
+    pedidoService.listarPedidos(peticion.signal)
+      .then((pedidos) => {
+        if (!peticion.signal.aborted) setConsulta({ usuario, revision, pedidos })
+      })
+      .catch((error) => {
+        if (!peticion.signal.aborted) {
+          setConsulta({ usuario, revision, error: pedidoService.mensajeErrorPedido(error) })
+        }
+      })
+    return () => peticion.abort()
+  }, [usuario, puedeConsultar, revision])
 
-  function obtenerPedido(id) {
-    return pedidos.find((pedido) => pedido.id === Number(id))
+  function actualizarListado() {
+    setRevision((actual) => actual + 1)
   }
 
-  // Cierra la compra con lo que hay en el carrito. Si sale bien guarda el pedido,
-  // descuenta el stock y vacía el carrito; si falla no cambia nada (el carrito se conserva).
-  // Usa `pedidos` directo (no la forma funcional) porque la página necesita el resultado de inmediato
-  function confirmarCompra(datos, numeroTarjeta) {
-    const resultado = pedidoService.procesarCompra({
-      pedidos,
-      items: carrito.items,
-      productos: productosCtx.productos,
-      datos,
-      numeroTarjeta,
-    })
-    if (resultado.ok) {
-      setPedidos(resultado.pedidos)
-      productosCtx.descontarStock(resultado.pedido.items)
-      carrito.vaciarCarrito()
+  async function confirmarCompra(datos) {
+    if (compraEnCurso.current) return null
+    compraEnCurso.current = true
+    setComprando(true)
+    try {
+      const pedido = await pedidoService.crearPedido(items, datos)
+      setComprobante({ usuario, pedido })
+      vaciarCarrito()
+      void recargar()
+      if (usuario) actualizarListado()
+      return pedido
+    } finally {
+      compraEnCurso.current = false
+      setComprando(false)
     }
-    return resultado
   }
 
-  function cambiarEstado(id, estado) {
-    setPedidos((actuales) => pedidoService.cambiarEstado(actuales, Number(id), estado))
-  }
+  const consultaActual = consulta && consulta.usuario === usuario && consulta.revision === revision ? consulta : null
 
-  const valor = { pedidos, obtenerPedido, confirmarCompra, cambiarEstado }
-
-  return <PedidosContext.Provider value={valor}>{props.children}</PedidosContext.Provider>
+  return (
+    <PedidosContext.Provider value={{
+      pedidos: consultaActual?.pedidos ?? [],
+      cargandoPedidos: puedeConsultar && !consultaActual,
+      errorPedidos: consultaActual?.error,
+      comprobante: comprobante && comprobante.usuario === usuario ? comprobante.pedido : null,
+      confirmarCompra,
+      comprando,
+      actualizarListado,
+    }}>
+      {props.children}
+    </PedidosContext.Provider>
+  )
 }
 
-// Hook propio: pedidos y acciones sobre ellos. Uso: const pedidosCtx = usePedidos()
 export function usePedidos() {
   const contexto = useContext(PedidosContext)
-  if (!contexto) {
-    throw new Error('usePedidos debe usarse dentro de un PedidosProvider')
-  }
+  if (!contexto) throw new Error('usePedidos debe usarse dentro de un PedidosProvider')
   return contexto
 }

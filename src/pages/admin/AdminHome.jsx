@@ -1,3 +1,6 @@
+import { useSesion } from "../../context/SesionContext";
+import { puedeGestionarPedidos } from "../../utils/roles";
+import { MensajeEstado } from "../../components/atoms/MensajeEstado/MensajeEstado";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Encabezado } from "../../components/molecules/Encabezado/Encabezado";
@@ -50,6 +53,8 @@ const accesos = [
 export default function AdminHome() {
   const navigate = useNavigate();
   const pedidosCtx = usePedidos();
+  const { usuario } = useSesion();
+  const mostrarPedidos = puedeGestionarPedidos(usuario);
   const productosCtx = useProductos();
   const [cantidadUsuarios, setCantidadUsuarios] = useState("…");
   useTituloPagina("Panel de administración");
@@ -72,8 +77,8 @@ export default function AdminHome() {
   // resumen de pedidos y catálogo, calculado desde los contextos en cada render
   const resumen = resumenVentas(pedidosCtx.pedidos);
   const estadisticas = [
-    { titulo: "Pedidos", valor: resumen.cantidad, icono: "bi bi-receipt" },
-    { titulo: "Ventas", valor: formatoDinero(resumen.totalVendido), icono: "bi bi-cash-stack", color: "text-success" },
+    { titulo: "Pedidos", valor: pedidosCtx.cargandoPedidos || pedidosCtx.errorPedidos ? "—" : resumen.cantidad, icono: "bi bi-receipt" },
+    { titulo: "Ventas", valor: pedidosCtx.cargandoPedidos || pedidosCtx.errorPedidos ? "—" : formatoDinero(resumen.totalVendido), icono: "bi bi-cash-stack", color: "text-success" },
     { titulo: "Productos", valor: productosCtx.productos.length, icono: "bi bi-box-seam" },
     { titulo: "Stock crítico", valor: productosCriticos(productosCtx.productos).length, icono: "bi bi-exclamation-triangle", color: "text-danger" },
     { titulo: "Usuarios", valor: cantidadUsuarios, icono: "bi bi-people" },
@@ -81,13 +86,16 @@ export default function AdminHome() {
 
   return (
     <PlantillaPrivada>
+      <MensajeEstado tipo={pedidosCtx.errorPedidos ? "error" : "neutro"}>
+        {pedidosCtx.cargandoPedidos ? "Cargando pedidos…" : pedidosCtx.errorPedidos}
+      </MensajeEstado>
       <Encabezado
         titulo="Bienvenido"
         subtitulo="¿Qué deseas gestionar hoy?"
         claseTitulo="display-6 fw-bold"
       />
-      <GrillaEstadisticas estadisticas={estadisticas} />
-      <PanelAdmin accesos={accesos} onNavegar={navigate} />
+      <GrillaEstadisticas estadisticas={mostrarPedidos ? estadisticas : estadisticas.slice(2)} />
+      <PanelAdmin accesos={mostrarPedidos ? accesos : accesos.slice(2)} onNavegar={navigate} />
     </PlantillaPrivada>
   );
 }

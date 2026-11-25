@@ -1,5 +1,8 @@
+import { useSesion } from "../../context/SesionContext";
+import { puedeGestionarPedidos } from "../../utils/roles";
+import { MensajeEstado } from "../../components/atoms/MensajeEstado/MensajeEstado";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { Encabezado } from "../../components/molecules/Encabezado/Encabezado";
 import { SelectorEnLinea } from "../../components/molecules/SelectorEnLinea/SelectorEnLinea";
 import { TablaPedidos } from "../../components/organisms/TablaPedidos/TablaPedidos";
@@ -18,6 +21,7 @@ const opcionesEstado = [
 export default function AdminPedidos() {
   const navigate = useNavigate();
   const pedidosCtx = usePedidos();
+  const { usuario } = useSesion();
   const [estado, setEstado] = useState("todos");
   useTituloPagina("Pedidos");
 
@@ -26,8 +30,13 @@ export default function AdminPedidos() {
     estado === "todos" ? pedidosCtx.pedidos : pedidosCtx.pedidos.filter((pedido) => pedido.estado === estado),
   );
 
+  if (usuario && !puedeGestionarPedidos(usuario)) return <Navigate to="/" replace />;
+
   return (
     <PlantillaPrivada>
+      <MensajeEstado tipo={pedidosCtx.errorPedidos ? "error" : "neutro"}>
+        {pedidosCtx.cargandoPedidos ? "Cargando pedidos…" : pedidosCtx.errorPedidos}
+      </MensajeEstado>
       <Encabezado titulo="Pedidos" subtitulo={`${filtrados.length} pedido(s), del más reciente al más antiguo`}>
         <SelectorEnLinea
           id="filtro-estado"
@@ -38,12 +47,14 @@ export default function AdminPedidos() {
           className="justify-content-md-end"
         />
       </Encabezado>
-      <TablaPedidos
-        pedidos={filtrados}
-        mostrarCliente
-        mensajeVacio="No hay pedidos con este estado."
-        onVer={(pedido) => navigate(`/admin/pedidos/${pedido.id}`)}
-      />
+      {!pedidosCtx.cargandoPedidos && !pedidosCtx.errorPedidos && (
+        <TablaPedidos
+          pedidos={filtrados}
+          mostrarCliente
+          mensajeVacio="No hay pedidos con este estado."
+          onVer={(pedido) => navigate(`/admin/pedidos/${pedido.id}`)}
+        />
+      )}
     </PlantillaPrivada>
   );
 }

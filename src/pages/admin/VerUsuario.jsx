@@ -79,7 +79,11 @@ export default function VerUsuario() {
       </Row>
       <section className="mt-5">
         <Titulo nivel={2} className="h4 fw-bold mb-3">Historial de pedidos</Titulo>
-        {historial.length > 0 ? (
+        {pedidosCtx.cargandoPedidos ? (
+          <MensajeEstado tipo="neutro">Cargando pedidos…</MensajeEstado>
+        ) : pedidosCtx.errorPedidos ? (
+          <MensajeEstado tipo="error">{pedidosCtx.errorPedidos}</MensajeEstado>
+        ) : historial.length > 0 ? (
           <TablaPedidos pedidos={historial} onVer={(pedido) => navigate(`/admin/pedidos/${pedido.id}`)} />
         ) : (
           <Texto className="text-muted">Este usuario aún no tiene pedidos.</Texto>

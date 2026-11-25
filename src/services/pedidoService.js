@@ -1,74 +1,50 @@
-import { ESTADOS_PEDIDO, ESTADO_INICIAL, pedidosIniciales, TARJETA_RECHAZADA } from '../data/pedidos'
-import { CLAVES, guardar, leer } from '../utils/almacenamiento'
-import { calcularTotales } from './carritoService'
+import { ESTADOS_PEDIDO } from '../data/pedidos'
+import { api } from './api'
+import { obtenerMensajeError } from './errores'
 
-export function obtenerPedidos() {
-  return leer(CLAVES.pedidos, pedidosIniciales)
-}
-
-export function guardarPedidos(pedidos) {
-  guardar(CLAVES.pedidos, pedidos)
-}
-
-function siguienteId(pedidos) {
-  return pedidos.reduce((max, pedido) => Math.max(max, pedido.id), 0) + 1
-}
-
-// Ítems del carrito que ya no existen o cuya cantidad supera el stock actual
-export function verificarStock(items, productos) {
-  return items.filter((item) => {
-    const producto = productos.find((actual) => actual.id === item.id)
-    return !producto || producto.stock < item.cantidad
+export async function crearPedido(items, { cliente, entrega }) {
+  const respuesta = await api.post('/pedidos', {
+    items: items.map(({ id, cantidad }) => ({ codigo: id, cantidad })),
+    cliente,
+    entrega,
+    pagoSimulado: 'aprobado',
   })
+  if (respuesta.status !== 201) {
+    throw new Error('La API no confirmó el registro del pedido.')
+  }
+  return respuesta.data
 }
 
-// "4111111111111111" -> "•••• 1111"
-export function enmascararTarjeta(numero) {
-  return `•••• ${String(numero).slice(-4)}`
+export async function listarPedidos(signal) {
+  const respuesta = await api.get('/pedidos', { signal })
+  return respuesta.data
 }
 
-// Simula el cierre de la compra. No modifica nada: devuelve el resultado y quien lo llama decide qué guardar.
-// datos: { usuarioId, cliente: { nombre, apellido, correo }, entrega: { tipo, region, comuna, direccion } }
-// Devuelve { ok: true, pedido, pedidos } o { ok: false, motivo }
-export function procesarCompra({ pedidos, items, productos, datos, numeroTarjeta, fecha = new Date() }) {
-  if (items.length === 0) {
-    return { ok: false, motivo: 'Tu carrito está vacío.' }
-  }
-
-  const sinStock = verificarStock(items, productos)
-  if (sinStock.length > 0) {
-    const nombres = sinStock.map((item) => item.nombre).join(', ')
-    return { ok: false, motivo: `No hay stock suficiente de: ${nombres}.` }
-  }
-
-  const tarjeta = String(numeroTarjeta ?? '').replace(/\s/g, '')
-  if (tarjeta === TARJETA_RECHAZADA) {
-    return { ok: false, motivo: 'El pago fue rechazado por el banco. Intenta con otra tarjeta.' }
-  }
-
-  const tipo = datos.entrega.tipo
-  const totales = calcularTotales(items, tipo)
-  const pedido = {
-    id: siguienteId(pedidos),
-    fecha: fecha.toISOString(),
-    usuarioId: datos.usuarioId ?? null,
-    cliente: { ...datos.cliente },
-    entrega: tipo === 'retiro' ? { tipo } : { ...datos.entrega },
-    // se copia nombre y precio: el comprobante no debe cambiar si después se edita el producto
-    items: items.map((item) => ({ id: item.id, nombre: item.nombre, precio: item.precio, cantidad: item.cantidad })),
-    subtotal: totales.subtotal,
-    despacho: totales.despacho,
-    total: totales.total,
-    estado: ESTADO_INICIAL,
-    tarjeta: enmascararTarjeta(tarjeta),
-  }
-  return { ok: true, pedido, pedidos: [...pedidos, pedido] }
+export async function obtenerPedido(id, signal) {
+  const respuesta = await api.get(`/pedidos/${encodeURIComponent(id)}`, { signal })
+  return respuesta.data
 }
 
-// Un estado que no está en ESTADOS_PEDIDO no se aplica
-export function cambiarEstado(pedidos, id, estado) {
-  if (!ESTADOS_PEDIDO.includes(estado)) return pedidos
-  return pedidos.map((pedido) => (pedido.id === id ? { ...pedido, estado } : pedido))
+export async function actualizarEstado(id, estado) {
+  const respuesta = await api.put(`/pedidos/${encodeURIComponent(id)}`, { estado })
+  return respuesta.data
+}
+
+export async function cancelarPedido(id) {
+  await api.delete(`/pedidos/${encodeURIComponent(id)}`)
+}
+
+export function mensajeErrorPedido(error) {
+  const estado = error.response?.status
+  const mensaje = error.response?.data?.error
+  if (estado === 401) return 'Tu sesión venció o fue rechazada. Vuelve a iniciar sesión.'
+  if (estado === 404) return 'No se encontró el pedido.'
+  if (estado === 403) return 'No tienes permiso para realizar esta acción.'
+  if (estado >= 500) return 'El servidor no pudo completar la solicitud.'
+  if (typeof mensaje === 'string' && mensaje) return mensaje
+  if (estado === 400) return 'Revisa los datos ingresados e inténtalo nuevamente.'
+  if (estado === 409) return 'La solicitud entró en conflicto con el stock o el estado actual del pedido.'
+  return obtenerMensajeError(error)
 }
 
 // Del más nuevo al más antiguo, sin modificar el arreglo original
@@ -83,8 +59,9 @@ export function pedidosDeUsuario(pedidos, usuarioId) {
 // Cifras para el dashboard y los reportes
 export function resumenVentas(pedidos) {
   const cantidad = pedidos.length
-  const totalVendido = pedidos.reduce((total, pedido) => total + pedido.total, 0)
-  const ticketPromedio = cantidad > 0 ? Math.round(totalVendido / cantidad) : 0
+  const vigentes = pedidos.filter((pedido) => pedido.estado !== 'Cancelado')
+  const totalVendido = vigentes.reduce((total, pedido) => total + pedido.total, 0)
+  const ticketPromedio = vigentes.length > 0 ? Math.round(totalVendido / vigentes.length) : 0
 
   const porEstado = Object.fromEntries(
     ESTADOS_PEDIDO.map((estado) => [estado, pedidos.filter((pedido) => pedido.estado === estado).length]),
@@ -92,7 +69,7 @@ export function resumenVentas(pedidos) {
 
   // unidades y monto vendido de cada producto, de mayor a menor cantidad de unidades
   const vendidos = {}
-  pedidos.forEach((pedido) => {
+  vigentes.forEach((pedido) => {
     pedido.items.forEach((item) => {
       const actual = vendidos[item.id] ?? { id: item.id, nombre: item.nombre, unidades: 0, monto: 0 }
       actual.unidades += item.cantidad

@@ -19,3 +19,8 @@ export function esCliente(usuario) {
 export function esAdministrador(usuario) {
   return usuario?.rol === 'Administrador'
 }
+
+
+export function puedeGestionarPedidos(usuario) {
+  return esAdministrador(usuario) || usuario?.rol === 'Vendedor'
+}
