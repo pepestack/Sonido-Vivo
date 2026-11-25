@@ -1,10 +1,11 @@
 import { Col, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
 import { Boton } from "../components/atoms/Boton/Boton";
+import { MensajeEstado } from "../components/atoms/MensajeEstado/MensajeEstado";
 import { AvisoVacio } from "../components/molecules/AvisoVacio/AvisoVacio";
 import { DetallePedido } from "../components/organisms/DetallePedido/DetallePedido";
 import { PlantillaPublica } from "../components/templates/PlantillaPublica/PlantillaPublica";
-import { usePedidos } from "../context/PedidosContext";
+import { useDetallePedido } from "../hooks/useDetallePedido";
 import { useSesion } from "../context/SesionContext";
 import { useTituloPagina } from "../hooks/useTituloPagina";
 
@@ -12,12 +13,9 @@ export default function MiPedidoPage() {
   const navigate = useNavigate();
   const params = useParams();
   const sesion = useSesion();
-  const pedidosCtx = usePedidos();
-
-  // solo se muestra si el pedido es del usuario con sesión
-  const pedido = pedidosCtx.obtenerPedido(params.id);
+  const { pedido, error, cargando } = useDetallePedido(params.id);
   const esPropio = Boolean(sesion.usuario && pedido && pedido.usuarioId === sesion.usuario.id);
-  useTituloPagina(esPropio ? "Detalle del pedido" : "Pedido no encontrado");
+  useTituloPagina("Detalle del pedido");
 
   if (!sesion.usuario) {
     return (
@@ -33,7 +31,11 @@ export default function MiPedidoPage() {
 
   return (
     <PlantillaPublica>
-      {esPropio ? (
+      {cargando ? (
+        <MensajeEstado tipo="neutro">Cargando pedido…</MensajeEstado>
+      ) : error ? (
+        <MensajeEstado tipo="error">{error}</MensajeEstado>
+      ) : esPropio ? (
         <Row className="justify-content-center">
           <Col xs={12} lg={9}>
             <DetallePedido pedido={pedido} nivelTitulo={1} />

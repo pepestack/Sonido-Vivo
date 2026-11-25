@@ -2,7 +2,6 @@ export const CLAVES = {
   productos: 'productosSonidoVivo',
   carrito: 'carritoSonidoVivo',
   sesion: 'sesionSonidoVivo',
-  pedidos: 'pedidosSonidoVivo',
   categorias: 'categoriasSonidoVivo',
   mensajes: 'mensajesSonidoVivo',
 }

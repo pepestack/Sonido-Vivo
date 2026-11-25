@@ -37,7 +37,7 @@ export function DetallePedido(props) {
                 <Texto className="mb-1">{entrega.direccion}, {entrega.comuna}, {entrega.region}</Texto>
               </>
             )}
-            <Texto className="small text-muted mb-0">Tarjeta {pedido.tarjeta}</Texto>
+            <Texto className="small text-muted mb-0">Pago simulado</Texto>
           </Col>
         </Row>
 

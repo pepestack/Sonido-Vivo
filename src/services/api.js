@@ -22,7 +22,8 @@ api.interceptors.response.use(
   (respuesta) => respuesta,
   (error) => {
     const tokenRechazado = error.response?.status === 401 && error.config?.headers?.Authorization
-    if (tokenRechazado && alExpirar) alExpirar()
+    const tokenActual = leer(CLAVES.sesion, null)?.token
+    if (tokenActual && tokenRechazado === `Bearer ${tokenActual}`) alExpirar?.()
     return Promise.reject(error)
   }
 )

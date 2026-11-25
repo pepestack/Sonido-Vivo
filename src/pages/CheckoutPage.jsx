@@ -14,6 +14,7 @@ import { useSesion } from "../context/SesionContext";
 import { tiposEntrega } from "../data/pedidos";
 import { comunasDe, regiones } from "../data/ubicaciones";
 import { useTituloPagina } from "../hooks/useTituloPagina";
+import { mensajeErrorPedido } from "../services/pedidoService";
 import { calcularTotales } from "../services/carritoService";
 
 // Con sesión iniciada el formulario parte con los datos del usuario
@@ -34,11 +35,12 @@ export default function CheckoutPage() {
   const carrito = useCarrito();
   const sesion = useSesion();
   const pedidosCtx = usePedidos();
+  const [usuarioInicial] = useState(sesion.usuario);
   // el tipo de entrega vive en la página porque cambia el total del resumen
   const [tipoEntrega, setTipoEntrega] = useState("despacho");
   useTituloPagina("Finalizar compra");
 
-  if (carrito.items.length === 0) {
+  if (carrito.items.length === 0 && !pedidosCtx.comprando) {
     return (
       <PlantillaPublica>
         <AvisoVacio
@@ -53,12 +55,22 @@ export default function CheckoutPage() {
 
   const totales = calcularTotales(carrito.items, tipoEntrega);
 
-  function pagar(datos, numeroTarjeta) {
-    const resultado = pedidosCtx.confirmarCompra({ ...datos, usuarioId: sesion.usuario?.id ?? null }, numeroTarjeta);
-    if (resultado.ok) {
-      navigate(`/compra/exito/${resultado.pedido.id}`, { replace: true });
-    } else {
-      navigate("/compra/error", { state: { motivo: resultado.motivo } });
+  async function pagar(datos) {
+    if (usuarioInicial && !sesion.usuario) {
+      navigate("/compra/error", { state: { requiereSesion: true } });
+      return;
+    }
+
+    try {
+      const pedido = await pedidosCtx.confirmarCompra(datos);
+      if (pedido) navigate(`/compra/exito/${pedido.id}`, { replace: true });
+    } catch (error) {
+      const estado = error.response?.status;
+      const requiereSesion = estado === 401;
+      const confirmacionIncierta = !error.response || estado >= 500;
+      navigate("/compra/error", {
+        state: { motivo: mensajeErrorPedido(error), requiereSesion, confirmacionIncierta },
+      });
     }
   }
 
@@ -97,7 +109,11 @@ export default function CheckoutPage() {
             total={totales.total}
             tipoEntrega={tipoEntrega}
             onCambiarEntrega={setTipoEntrega}
+            comprando={pedidosCtx.comprando}
             onEnviar={pagar}
+            onPagoRechazado={() => navigate("/compra/error", {
+              state: { motivo: "El pago simulado fue rechazado. Intenta con otra tarjeta de prueba." },
+            })}
           />
         </Col>
       </Row>

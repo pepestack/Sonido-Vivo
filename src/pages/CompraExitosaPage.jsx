@@ -18,7 +18,8 @@ export default function CompraExitosaPage() {
   const pedidosCtx = usePedidos();
   const sesion = useSesion();
 
-  const pedido = pedidosCtx.obtenerPedido(params.id);
+  const comprobante = pedidosCtx.comprobante;
+  const pedido = String(comprobante?.id) === params.id ? comprobante : null;
   useTituloPagina(pedido ? "Compra exitosa" : "Pedido no encontrado");
 
   if (!pedido) {
@@ -26,9 +27,9 @@ export default function CompraExitosaPage() {
       <PlantillaPublica>
         <AvisoVacio
           titulo="Pedido no encontrado"
-          texto={`No existe un pedido con el número "${params.id}".`}
-          textoBoton="Ir al inicio"
-          onAccion={() => navigate("/")}
+          texto="El comprobante está disponible al terminar la compra. Si compraste con tu cuenta, puedes consultarlo en Mis pedidos."
+          textoBoton={sesion.usuario ? "Ver mis pedidos" : "Ir al inicio"}
+          onAccion={() => navigate(sesion.usuario ? "/mis-pedidos" : "/")}
         />
       </PlantillaPublica>
     );

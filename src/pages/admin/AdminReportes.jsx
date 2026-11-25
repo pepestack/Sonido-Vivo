@@ -1,3 +1,7 @@
+import { Navigate } from "react-router-dom";
+import { useSesion } from "../../context/SesionContext";
+import { puedeGestionarPedidos } from "../../utils/roles";
+import { MensajeEstado } from "../../components/atoms/MensajeEstado/MensajeEstado";
 import { Col, Row } from "react-bootstrap";
 import { Encabezado } from "../../components/molecules/Encabezado/Encabezado";
 import { GrillaEstadisticas } from "../../components/organisms/GrillaEstadisticas/GrillaEstadisticas";
@@ -11,6 +15,7 @@ import { formatoDinero } from "../../utils/formato";
 
 export default function AdminReportes() {
   const pedidosCtx = usePedidos();
+  const { usuario } = useSesion();
   useTituloPagina("Reportes");
 
   const resumen = resumenVentas(pedidosCtx.pedidos);
@@ -23,18 +28,27 @@ export default function AdminReportes() {
     { titulo: "Unidades vendidas", valor: unidades, icono: "bi bi-box-seam" },
   ];
 
+  if (usuario && !puedeGestionarPedidos(usuario)) return <Navigate to="/" replace />;
+
   return (
     <PlantillaPrivada>
+      <MensajeEstado tipo={pedidosCtx.errorPedidos ? "error" : "neutro"}>
+        {pedidosCtx.cargandoPedidos ? "Cargando pedidos…" : pedidosCtx.errorPedidos}
+      </MensajeEstado>
       <Encabezado titulo="Reportes" subtitulo="Resumen de las ventas registradas en la tienda online" />
-      <GrillaEstadisticas estadisticas={estadisticas} />
-      <Row className="g-4">
-        <Col xs={12} lg={4}>
-          <PedidosPorEstado porEstado={resumen.porEstado} />
-        </Col>
-        <Col xs={12} lg={8}>
-          <TablaMasVendidos productos={resumen.masVendidos.slice(0, 5)} />
-        </Col>
-      </Row>
+      {!pedidosCtx.cargandoPedidos && !pedidosCtx.errorPedidos && (
+        <>
+          <GrillaEstadisticas estadisticas={estadisticas} />
+          <Row className="g-4">
+            <Col xs={12} lg={4}>
+              <PedidosPorEstado porEstado={resumen.porEstado} />
+            </Col>
+            <Col xs={12} lg={8}>
+              <TablaMasVendidos productos={resumen.masVendidos.slice(0, 5)} />
+            </Col>
+          </Row>
+        </>
+      )}
     </PlantillaPrivada>
   );
 }

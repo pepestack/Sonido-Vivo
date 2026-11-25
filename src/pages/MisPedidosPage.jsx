@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { MensajeEstado } from "../components/atoms/MensajeEstado/MensajeEstado";
 import { AvisoVacio } from "../components/molecules/AvisoVacio/AvisoVacio";
 import { Encabezado } from "../components/molecules/Encabezado/Encabezado";
 import { TablaPedidos } from "../components/organisms/TablaPedidos/TablaPedidos";
@@ -30,7 +31,11 @@ export default function MisPedidosPage() {
 
   return (
     <PlantillaPublica>
-      {pedidos.length === 0 ? (
+      {pedidosCtx.cargandoPedidos ? (
+        <MensajeEstado tipo="neutro">Cargando pedidos…</MensajeEstado>
+      ) : pedidosCtx.errorPedidos ? (
+        <MensajeEstado tipo="error">{pedidosCtx.errorPedidos}</MensajeEstado>
+      ) : pedidos.length === 0 ? (
         <AvisoVacio
           titulo="Aún no tienes pedidos"
           texto="Cuando compres algo lo verás aquí junto con su estado."

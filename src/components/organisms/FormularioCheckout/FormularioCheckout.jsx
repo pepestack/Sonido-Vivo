@@ -14,7 +14,7 @@ import { LARGO_MAXIMO_CORREO, sinEspacios, sinErrores, validarCheckout } from '.
 // regiones, comunasDe(region) y tiposEntrega llegan por props; total: monto que muestra el botón
 // tipoEntrega lo guarda la página (cambia el total del resumen); el formulario solo lo muestra
 // onCambiarEntrega(tipo): avisa a la página cuando la persona elige otra entrega
-// onEnviar(datos, numeroTarjeta): solo se llama cuando todo es válido
+// onEnviar(datos): solo se llama cuando el pago simulado se aprueba
 export function FormularioCheckout(props) {
   const formulario = useFormulario({ ...checkoutVacio, ...props.valoresIniciales })
   const valores = formulario.valores
@@ -28,6 +28,7 @@ export function FormularioCheckout(props) {
 
   function manejarEnvio(evento) {
     evento.preventDefault()
+    if (props.comprando) return
     const nuevos = validarCheckout({ ...valores, tipoEntrega: props.tipoEntrega })
     formulario.setErrores(nuevos)
     if (!sinErrores(nuevos)) return
@@ -35,13 +36,15 @@ export function FormularioCheckout(props) {
     const entrega = conDespacho
       ? { tipo: 'despacho', region: valores.region, comuna: valores.comuna, direccion: valores.direccion.trim() }
       : { tipo: 'retiro' }
-    props.onEnviar(
-      {
-        cliente: { nombre: valores.nombre.trim(), apellido: valores.apellido.trim(), correo: valores.correo.trim() },
-        entrega,
-      },
-      sinEspacios(valores.numeroTarjeta),
-    )
+    if (sinEspacios(valores.numeroTarjeta) === TARJETA_RECHAZADA) {
+      props.onPagoRechazado()
+      return
+    }
+
+    props.onEnviar({
+      cliente: { nombre: valores.nombre.trim(), apellido: valores.apellido.trim(), correo: valores.correo.trim() },
+      entrega,
+    })
   }
 
   return (
@@ -147,8 +150,8 @@ export function FormularioCheckout(props) {
           Pago simulado: cualquier tarjeta de 16 dígitos es aprobada, salvo la {TARJETA_RECHAZADA}, que siempre es rechazada.
         </Texto>
 
-        <Boton variante="success" tipo="submit" className="w-100 mt-2">
-          Pagar {formatoDinero(props.total)}
+        <Boton variante="success" tipo="submit" className="w-100 mt-2" disabled={props.comprando}>
+          {props.comprando ? 'Procesando compra…' : `Pagar ${formatoDinero(props.total)}` }
         </Boton>
       </Form>
     </Card>
