@@ -2,6 +2,7 @@ import { Col, Row } from 'react-bootstrap'
 import { CampoFormulario } from '../../molecules/CampoFormulario/CampoFormulario'
 import { CamposDireccion } from '../CamposDireccion/CamposDireccion'
 import { LARGO_MAXIMO_CLAVE, LARGO_MAXIMO_CORREO } from '../../../utils/validaciones'
+import { formatoRut } from '../../../utils/formato'
 
 // Campos del usuario compartidos por el formulario del admin y el registro público.
 // formulario: el resultado de useFormulario (valores, errores, manejarCambio...)
@@ -22,11 +23,13 @@ export function CamposUsuario(props) {
             <CampoFormulario
               id="rut"
               etiqueta="RUN"
-              placeholder="Ej: 19011022K"
-              maxLength={9}
+              placeholder="Ej: 19.011.022-K"
+              maxLength={12}
               requerido
               valor={valores.rut}
-              onChange={formulario.manejarCambio}
+              onChange={(evento) =>
+                formulario.manejarCambio({ target: { name: 'rut', value: formatoRut(evento.target.value) } })
+              }
               error={errores.rut}
             />
           </Col>

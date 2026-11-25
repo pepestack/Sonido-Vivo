@@ -44,6 +44,19 @@ export function nombreCompleto(usuario) {
   return `${usuario.nombre} ${usuario.apellido}`.trim()
 }
 
+// "12.345.678-k" -> "12345678K": solo dígitos y K, máximo 9 caracteres (lo que se envía al backend)
+export function limpiarRut(valor) {
+  return String(valor ?? '').replace(/[^0-9kK]/g, '').toUpperCase().slice(0, 9)
+}
+
+// "12345678K" -> "12.345.678-K": acepta el RUN con o sin puntos y guion
+export function formatoRut(valor) {
+  const limpio = limpiarRut(valor)
+  if (limpio.length <= 1) return limpio
+  const cuerpo = limpio.slice(0, -1).replace(/\B(?=(\d{3})+(?!\d))/g, '.')
+  return `${cuerpo}-${limpio.slice(-1)}`
+}
+
 // quita los espacios sobrantes de los campos de texto antes de guardar (registro y admin)
 export function normalizarUsuario(valores) {
   return {

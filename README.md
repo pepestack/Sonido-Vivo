@@ -29,7 +29,7 @@
 - [Estructura del proyecto](#estructura-del-proyecto)
 - [Ejecución](#ejecución)
 - [Conexión con la API](#conexión-con-la-api)
-- [Despliegue con nginx](#despliegue-con-nginx)
+- [Despliegue con Caddy](#despliegue-con-caddy)
 - [Pruebas unitarias](#pruebas-unitarias)
 - [Material Complementario](#material-complementario)
 
@@ -90,7 +90,7 @@ Si `.env` no existe, la aplicación usa una API local en `http://localhost:3000/
 
 La API solo responde a los orígenes de su variable `CORS_ORIGIN`. Debe incluir la dirección exacta de la página, con protocolo y puerto, por ejemplo `http://localhost:5173`. Para varios orígenes, sepárelos con comas. Configure CORS solo en la API (Express) y no en la Function URL de Lambda: si ambos lo agregan, el navegador rechaza la respuesta al duplicarse.
 
-Esto aplica al desarrollo local. En el servidor la página llama a la API a través de nginx, en el mismo origen, por lo que no hace falta agregar su IP (ver [Despliegue con nginx](#despliegue-con-nginx)).
+Esto aplica al desarrollo local. En el servidor la página llama a la API a través de Caddy, en el mismo origen, por lo que no hace falta agregar su IP (ver [Despliegue con Caddy](#despliegue-con-caddy)).
 
 ### Organización del código
 
@@ -110,15 +110,23 @@ Esto aplica al desarrollo local. En el servidor la página llama a la API a trav
 
 En la tienda y en el panel, los productos se identifican por su código (`/producto/GA001`), igual que antes. El id numérico que usa la API se guarda en `idApi` y solo se usa para modificar y eliminar.
 
-## Despliegue con nginx
+## Despliegue con Caddy
 
-En el servidor (o cualquier máquina virtual Linux; nosotros probamos en una instancia EC2 con Ubuntu), nginx entrega los archivos de `npm run build` y además reenvía las solicitudes `/api/` a la API en Lambda. Así el navegador llama a la misma dirección de la página y no hay CORS que configurar, aunque cambie la IP pública del servidor.
+En el servidor (o cualquier máquina virtual Linux; nosotros probamos en una instancia EC2 con Ubuntu), [Caddy](https://caddyserver.com) entrega los archivos de `npm run build` y además reenvía las solicitudes `/api/` a la API en Lambda. Así el navegador llama a la misma dirección de la página y no hay CORS que configurar, aunque cambie la IP pública del servidor.
 
-Los pasos usan la estructura de Debian y Ubuntu (`sites-available/`, usuario `www-data`). En Amazon Linux, Fedora o RHEL la configuración va en `/etc/nginx/conf.d/sonidovivo.conf` y el usuario es `nginx`.
+La configuración va en `/etc/caddy/Caddyfile` y el servicio corre con el usuario `caddy`. Para instalarlo en Debian o Ubuntu desde el repositorio oficial:
+
+```bash
+sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https curl
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
+sudo apt update
+sudo apt install caddy
+```
 
 ### 1. Compilar
 
-Vite escribe `VITE_API_URL` dentro de los archivos al compilar: el `.env` solo se necesita en la máquina donde se ejecuta `npm run build`. En el servidor use una ruta relativa, que nginx reenvía:
+Vite escribe `VITE_API_URL` dentro de los archivos al compilar: el `.env` solo se necesita en la máquina donde se ejecuta `npm run build`. En el servidor use una ruta relativa, que Caddy reenvía:
 
 ```
 VITE_API_URL=/api/v1
@@ -133,48 +141,45 @@ sudo rm -rf /var/www/sonidovivo/*
 sudo cp -r dist/* /var/www/sonidovivo/
 ```
 
-Se copia a `/var/www` porque nginx (usuario `www-data`) no puede leer `/home/ubuntu`. Repita la copia después de cada compilación.
+Se copia a `/var/www` porque Caddy (usuario `caddy`) no puede leer `/home/ubuntu`. Repita la copia después de cada compilación.
 
-### 2. Configurar nginx
+### 2. Configurar Caddy
 
-El sitio activo es `/etc/nginx/sites-available/sonidovivo`, enlazado desde `sites-enabled/`. Edite ese archivo, no `default`, que no está habilitado:
+Reemplace el contenido de `/etc/caddy/Caddyfile` por:
 
-```nginx
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    server_name _;
-
-    root /var/www/sonidovivo;
-    index index.html;
-
-    # React Router: cualquier ruta (/admin/usuarios, /catalogo...) carga index.html
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
+```caddy
+:80 {
+    root * /var/www/sonidovivo
+    encode gzip
 
     # /api/... se reenvía a la API en Lambda: para el navegador es el mismo origen, sin CORS
-    location /api/ {
-        proxy_pass https://<url-id>.lambda-url.<region>.on.aws/api/;
-        proxy_ssl_server_name on;
-        proxy_set_header Host <url-id>.lambda-url.<region>.on.aws;
-        proxy_set_header Origin "";
+    handle /api/* {
+        reverse_proxy https://<url-id>.lambda-url.<region>.on.aws {
+            header_up Host {upstream_hostport}
+            header_up -Origin
+        }
     }
 
-    # los archivos con hash pueden guardarse en caché mucho tiempo
-    location /assets/ {
-        expires 1y;
-        add_header Cache-Control "public, immutable";
+    # React Router: cualquier ruta (/admin/usuarios, /catalogo...) carga index.html
+    handle {
+        # los archivos con hash pueden guardarse en caché mucho tiempo
+        @assets path /assets/*
+        header @assets Cache-Control "public, max-age=31536000, immutable"
+
+        try_files {path} /index.html
+        file_server
     }
 }
 ```
 
-El host de Lambda debe ser el mismo en `proxy_pass` y en `Host`, este último sin `https://` ni `/` final. Para habilitar el sitio la primera vez:
+Escriba el host de Lambda sin `/` final ni ruta: Caddy reenvía la ruta completa (`/api/v1/...`) tal como llega. Para validar y aplicar los cambios:
 
 ```bash
-sudo ln -sf /etc/nginx/sites-available/sonidovivo /etc/nginx/sites-enabled/sonidovivo
-sudo nginx -t && sudo systemctl reload nginx
+sudo caddy validate --config /etc/caddy/Caddyfile
+sudo systemctl reload caddy
 ```
+
+Si el servidor tiene un dominio apuntando a su IP, puede escribirlo en lugar de `:80` (por ejemplo `sonidovivo.cl {`) y Caddy obtendrá y renovará el certificado HTTPS por sí solo.
 
 ### 3. Comprobar
 
@@ -185,10 +190,10 @@ curl -i -X POST http://localhost/api/v1/auth/login -H "Content-Type: application
 | Respuesta | Significado |
 |---|---|
 | `401` o `400` con JSON | Identifica que las credenciales son inválidas, o sea el reenvío funciona |
-| `405 Not Allowed` de nginx | nginx no está usando el bloque `/api/`: revise con `sudo nginx -T` qué archivo carga |
-| `502` o `504` | nginx no llega a Lambda: revise el host y `sudo tail /var/log/nginx/error.log` |
+| `405` sin JSON | Caddy no está usando el bloque `/api/*` y respondió con los archivos estáticos: revise `/etc/caddy/Caddyfile` y `sudo systemctl status caddy` |
+| `502` o `504` | Caddy no llega a Lambda: revise el host y `sudo journalctl -u caddy -n 50` |
 
-En el navegador, la pestaña Red (XHR) debe mostrar `http://<ip-del-servidor>/api/v1/auth/login`. Si la página se ve antigua, recargue con `Ctrl + F5`.
+En el navegador, la pestaña Red (XHR) debe mostrar `http://<ip-del-servidor>/api/v1/auth/login`.
 
 ## Pruebas unitarias
 
