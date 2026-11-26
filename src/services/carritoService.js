@@ -20,7 +20,7 @@ export function sincronizar(items, productos) {
       const producto = productos.find((p) => p.id === item.id)
       if (!producto) return null
       const cantidad = Math.min(item.cantidad, limiteDe(producto))
-      return { id: producto.id, nombre: producto.nombre, precio: precioFinal(producto), stock: producto.stock, cantidad }
+      return { id: producto.id, nombre: producto.nombre, precio: precioFinal(producto), precioNormal: producto.precio, stock: producto.stock, cantidad }
     })
     .filter((item) => item !== null && item.cantidad > 0)
 }
@@ -35,7 +35,7 @@ export function agregar(items, producto, cantidad = 1) {
   }
   return [
     ...items,
-    { id: producto.id, nombre: producto.nombre, precio: precioFinal(producto), stock: producto.stock, cantidad: total },
+    { id: producto.id, nombre: producto.nombre, precio: precioFinal(producto), precioNormal: producto.precio, stock: producto.stock, cantidad: total },
   ]
 }
 

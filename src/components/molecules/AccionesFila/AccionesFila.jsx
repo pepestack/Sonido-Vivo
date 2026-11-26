@@ -5,7 +5,8 @@ export function AccionesFila(props) {
   const botones = [
     props.onVer && { texto: props.textoVer ?? 'Ver detalle', variante: 'outline-primary', accion: props.onVer },
     props.onEditar && { texto: 'Editar', variante: 'outline-primary', accion: props.onEditar },
-    props.onEliminar && { texto: 'Eliminar', variante: 'outline-danger', accion: props.onEliminar },
+    props.onEliminar && { texto: props.textoEliminar ?? 'Eliminar', variante: 'outline-danger', accion: props.onEliminar },
+    props.onReactivar && { texto: 'Reactivar', variante: 'outline-success', accion: props.onReactivar },
   ].filter(Boolean)
 
   return (

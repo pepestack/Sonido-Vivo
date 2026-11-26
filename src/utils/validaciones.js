@@ -88,6 +88,14 @@ export function validarPrecio(valor) {
   return estaVacio(valor) || Number.isNaN(precio) || precio < 0 ? 'Ingresa un precio válido (0 o más)' : ''
 }
 
+// Opcional; si viene debe ser un entero (0 o más) menor que el precio normal
+export function validarPrecioPromocional(valor, precio) {
+  if (estaVacio(valor)) return ''
+  const promocional = Number(valor)
+  if (!Number.isInteger(promocional) || promocional < 0) return 'Ingresa un precio promocional entero (0 o más)'
+  return promocional >= Number(precio) ? 'El precio promocional debe ser menor que el precio' : ''
+}
+
 export function validarStock(valor) {
   const stock = Number(valor)
   return estaVacio(valor) || !Number.isInteger(stock) || stock < 0 ? 'Ingresa un stock entero (0 o más)' : ''

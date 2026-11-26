@@ -32,7 +32,12 @@ export function CategoriasProvider(props) {
     setCategorias((actuales) => categoriaService.eliminar(actuales, valorCategoria))
   }
 
-  const valor = { categorias, obtenerCategoria, nombreCategoria, agregarCategoria, actualizarCategoria, eliminarCategoria }
+  // vuelve a leer las categorías guardadas (viven en localStorage, no en la API)
+  function recargar() {
+    setCategorias(categoriaService.obtenerCategorias())
+  }
+
+  const valor = { categorias, recargar, obtenerCategoria, nombreCategoria, agregarCategoria, actualizarCategoria, eliminarCategoria }
 
   return <CategoriasContext.Provider value={valor}>{props.children}</CategoriasContext.Provider>
 }

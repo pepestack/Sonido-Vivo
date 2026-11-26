@@ -16,12 +16,19 @@ export function productoDesdeRespuesta(api) {
     descripcion: api.descripcion ?? '',
     categoria: generarValor(api.categoria),
     precio: api.precio,
+    precioPromocional: api.precioPromocional ?? null,
+    precioFinal: api.precioFinal ?? api.precioPromocional ?? api.precio,
     stock: api.stock,
     stockCritico: extras.stockCritico ?? 0,
     imagen: api.imagen ?? extras.imagen ?? null,
     galeria: extras.galeria ?? [],
-    ...(extras.precioOferta !== undefined && { precioOferta: extras.precioOferta }),
+    // versión del producto: el PUT la exige para no pisar otra edición o una venta
+    actualizadoEn: api.actualizadoEn ?? null,
   }
+}
+
+function numeroOpcional(valor) {
+  return valor === '' || valor === null || valor === undefined ? null : Number(valor)
 }
 
 export function productoRequestDto(producto) {
@@ -33,8 +40,11 @@ export function productoRequestDto(producto) {
     descripcion: producto.descripcion?.trim() || null,
     categoria: nombreCategoria(producto.categoria),
     precio: Number(producto.precio),
+    // el PUT reemplaza todo: si no se envía, la promoción existente se borra
+    precioPromocional: numeroOpcional(producto.precioPromocional),
     stock: Number(producto.stock),
     imagen: producto.imagen || null,
+    ...(producto.actualizadoEn && { actualizadoEn: producto.actualizadoEn }),
   }
 }
 

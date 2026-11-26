@@ -14,7 +14,7 @@ import { useTituloPagina } from "../../hooks/useTituloPagina";
 import { useUsuario } from "../../hooks/useUsuario";
 import { obtenerMensajeError } from "../../services/errores";
 import { pedidosDeUsuario } from "../../services/pedidoService";
-import { eliminarUsuario } from "../../services/usuarioService";
+import { eliminarUsuario, reactivarUsuario } from "../../services/usuarioService";
 import { nombreCompleto } from "../../utils/formato";
 
 export default function VerUsuario() {
@@ -34,6 +34,15 @@ export default function VerUsuario() {
     try {
       await eliminarUsuario(usuario.id);
       navigate("/admin/usuarios");
+    } catch (error) {
+      setErrorEliminar(obtenerMensajeError(error));
+    }
+  }
+
+  async function reactivar() {
+    setErrorEliminar("");
+    try {
+      consulta.setUsuario(await reactivarUsuario(usuario));
     } catch (error) {
       setErrorEliminar(obtenerMensajeError(error));
     }
@@ -72,7 +81,8 @@ export default function VerUsuario() {
             usuario={usuario}
             onVolver={() => navigate("/admin/usuarios")}
             onEditar={() => navigate(`/admin/usuarios/${usuario.id}/editar`)}
-            onEliminar={usuario.activo ? () => setConfirmando(true) : undefined}
+            onEliminar={() => setConfirmando(true)}
+            onReactivar={reactivar}
           />
           <MensajeEstado tipo="error">{errorEliminar}</MensajeEstado>
         </Col>
@@ -87,10 +97,10 @@ export default function VerUsuario() {
       </section>
       <ModalConfirmacion
         visible={confirmando}
-        titulo="Confirmar eliminación"
-        textoConfirmar="Eliminar"
+        titulo="Confirmar desactivación"
+        textoConfirmar="Desactivar"
         variante="danger"
-        mensaje={`¿Eliminar a "${nombreCompleto(usuario)}"?`}
+        mensaje={`¿Desactivar la cuenta de "${nombreCompleto(usuario)}"? Podrás reactivarla después.`}
         onConfirmar={eliminar}
         onCancelar={() => setConfirmando(false)}
       />

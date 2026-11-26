@@ -39,11 +39,19 @@ export default function AdminProductos() {
     }
   }
 
+  function refrescar() {
+    setError('')
+    sesion.verificarSesion()
+    productosCtx.recargar()
+  }
+
   return (
     <PlantillaPrivada>
       <Encabezado
         titulo="Gestión de Inventario"
         subtitulo="Listado de productos"
+        onRefrescar={refrescar}
+        refrescando={productosCtx.cargando}
         textoBoton="Añadir Producto"
         onAccion={() => navigate('/admin/productos/nuevo')}
       />

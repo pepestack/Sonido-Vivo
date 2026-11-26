@@ -24,7 +24,7 @@ describe('FormularioProducto', () => {
 
     await user.type(screen.getByLabelText(/SKU/), 'GA999')
     await user.type(screen.getByLabelText(/Nombre de Producto/), 'Guitarra de prueba')
-    await user.type(screen.getByLabelText(/Precio/), '100000')
+    await user.type(screen.getByLabelText(/^Precio \(Cifra\)/), '100000')
     await user.type(screen.getByLabelText(/^Stock\*?$/), '5')
     await user.selectOptions(screen.getByLabelText(/Categoría/), categorias[0].valor)
     await user.upload(screen.getByLabelText(/Subir Imagen/), new File([''], 'foto-que-no-existe.jpg', { type: 'image/jpeg' }))

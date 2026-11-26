@@ -1,4 +1,8 @@
-// Precio que se cobra: el de oferta si existe, si no el normal
+// Precio que se cobra: el que calcula la API; si falta, el promocional o el normal
 export function precioFinal(producto) {
-  return producto.precioOferta ?? producto.precio
+  return producto.precioFinal ?? producto.precioPromocional ?? producto.precio
+}
+
+export function tienePromocion(producto) {
+  return producto.precioPromocional !== null && producto.precioPromocional !== undefined
 }

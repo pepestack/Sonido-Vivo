@@ -33,5 +33,6 @@ export function useUsuario(id) {
     }
   }, [id])
 
-  return { usuario, cargando, error, noEncontrado }
+  // setUsuario: para reflejar un cambio hecho en la página (por ejemplo, reactivar la cuenta)
+  return { usuario, setUsuario, cargando, error, noEncontrado }
 }

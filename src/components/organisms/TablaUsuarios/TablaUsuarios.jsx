@@ -7,14 +7,15 @@ const columnas = [
   { texto: "Nombre completo" },
   { texto: "Correo electrónico" },
   { texto: "Rol/Cargo" },
+  { texto: "Estado" },
   { texto: "Acciones", className: "text-end pe-4" },
 ];
 
-// onVer, onEditar y onEliminar reciben el usuario completo
+// onVer, onEditar, onEliminar (desactivar) y onReactivar reciben el usuario completo
 export function TablaUsuarios(props) {
   return (
     <TablaAdmin columnas={columnas} vacia={props.usuarios.length === 0} mensajeVacio="No hay usuarios registrados.">
-      {/* el administrador no se puede eliminar (igual que en la versión HTML) */}
+      {/* el administrador no se puede desactivar (igual que en la versión HTML) */}
       {props.usuarios.map((usuario) => (
         <FilaUsuarioAdmin
           key={usuario.id}
@@ -23,6 +24,7 @@ export function TablaUsuarios(props) {
           onVer={props.onVer}
           onEditar={props.onEditar}
           onEliminar={props.onEliminar}
+          onReactivar={props.onReactivar}
         />
       ))}
     </TablaAdmin>

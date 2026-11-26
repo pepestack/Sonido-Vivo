@@ -50,9 +50,16 @@ export default function AdminEditarProducto() {
       const actualizado = await productosCtx.actualizarProducto(params.id, cambios)
       navigate(`/admin/productos/${actualizado.id}`)
     } catch (error) {
-      setError(obtenerMensajeError(error))
-      setErroresServidor(erroresProductoDesdeApi(obtenerErroresCampos(error)))
+      const detalles = obtenerErroresCampos(error)
       setCargando(false)
+      // 409 con actualizadoEn: otra edición o una venta cambió el producto mientras el formulario estaba abierto
+      if (error.response?.status === 409 && detalles.actualizadoEn) {
+        setError('Otro usuario o una venta modificó este producto. Se cargaron los datos actuales: revísalos y vuelve a guardar.')
+        await productosCtx.recargar()
+        return
+      }
+      setError(obtenerMensajeError(error))
+      setErroresServidor(erroresProductoDesdeApi(detalles))
     }
   }
 
@@ -60,9 +67,9 @@ export default function AdminEditarProducto() {
     <PlantillaPrivada>
       <Row className="justify-content-center">
         <Col xs={12} md={8} lg={6}>
-          {/* key: si cambia el producto, el formulario se vuelve a montar con sus datos */}
+          {/* key: si cambia el producto (o su versión tras recargar), el formulario se vuelve a montar con sus datos */}
           <FormularioProducto
-            key={producto.id}
+            key={`${producto.id}-${producto.actualizadoEn}`}
             titulo="Editar producto"
             valoresIniciales={producto}
             categorias={categoriasCtx.categorias}
