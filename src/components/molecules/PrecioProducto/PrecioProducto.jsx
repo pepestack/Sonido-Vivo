@@ -1,11 +1,11 @@
 import { Insignia } from "../../atoms/Insignia/Insignia";
 import { Precio } from "../../atoms/Precio/Precio";
-import { precioFinal } from "../../../utils/precios";
+import { precioFinal, tienePromocion } from "../../../utils/precios";
 
 // Precio que se cobra; si el producto está en oferta, muestra además el precio normal tachado
 export function PrecioProducto(props) {
   const producto = props.producto;
-  const enOferta = producto.precioOferta !== undefined;
+  const enOferta = tienePromocion(producto);
 
   return (
     <span className={props.className ?? ""}>

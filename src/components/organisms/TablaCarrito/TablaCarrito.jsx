@@ -4,7 +4,8 @@ import { Precio } from "../../atoms/Precio/Precio";
 import { Selector } from "../../atoms/Selector/Selector";
 import { limiteDe, opcionesCantidad } from "../../../utils/carrito";
 
-// items: [{ id, nombre, precio, stock, cantidad }]
+// items: [{ id, nombre, precio, precioNormal, stock, cantidad }]; precio es el que se cobra
+// y precioNormal se muestra tachado cuando hay promoción
 export function TablaCarrito(props) {
   return (
     <Card className="shadow p-4">
@@ -22,7 +23,12 @@ export function TablaCarrito(props) {
           {props.items.map((item) => (
             <tr key={item.id}>
               <td className="fw-bold">{item.nombre}</td>
-              <td><Precio monto={item.precio} /></td>
+              <td>
+                <Precio monto={item.precio} />
+                {item.precioNormal > item.precio && (
+                  <Precio monto={item.precioNormal} className="small text-muted text-decoration-line-through ms-2" />
+                )}
+              </td>
               <td>
                 <Selector
                   id={`cantidad-${item.id}`}

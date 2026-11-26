@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import { createContext, useCallback, useContext, useEffect, useState } from 'react'
 import { alExpirarSesion } from '../services/api'
 import * as sesionService from '../services/sesionService'
 
@@ -33,7 +33,23 @@ export function SesionProvider(props) {
     cambiarSesion(null)
   }
 
-  const valor = { usuario, iniciarSesion, cerrarSesion }
+  // La sesión guardada no se entera si la cuenta se desactivó o cambió de rol: se lo pregunta a la API.
+  // Un 401 ya cierra la sesión por alExpirarSesion; un error de red se ignora para no echar a nadie por un corte
+  const verificarSesion = useCallback(async () => {
+    try {
+      const actual = await sesionService.verificarSesion()
+      setSesion((previa) => {
+        if (!previa || previa.usuario.rol === actual.rol) return previa
+        const nueva = { ...previa, usuario: { ...previa.usuario, rol: actual.rol } }
+        sesionService.guardarSesion(nueva)
+        return nueva
+      })
+    } catch {
+      // sin acción: ver comentario de arriba
+    }
+  }, [])
+
+  const valor = { usuario, iniciarSesion, cerrarSesion, verificarSesion }
 
   return <SesionContext.Provider value={valor}>{props.children}</SesionContext.Provider>
 }

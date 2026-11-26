@@ -10,6 +10,7 @@ import {
   validarLargoMaximo,
   validarObligatorio,
   validarPrecio,
+  validarPrecioPromocional,
   validarSku,
   validarStock,
   validarStockCritico,
@@ -22,6 +23,7 @@ const productoVacio = {
   modelo: '',
   descripcion: '',
   precio: '',
+  precioPromocional: '',
   stock: '',
   stockCritico: '',
   categoria: '',
@@ -29,11 +31,17 @@ const productoVacio = {
   galeria: [],
 }
 
+// La API usa null para "sin promoción"; el input controlado necesita ''
+function valoresDelFormulario(producto) {
+  if (!producto) return productoVacio
+  return { ...producto, precioPromocional: producto.precioPromocional ?? '' }
+}
+
 // Formulario compartido para crear y editar productos.
 // skuEnUso(sku): indica si el SKU ya pertenece a otro producto
 // onEnviar(producto): recibe el producto validado y con los números convertidos
 export function FormularioProducto(props) {
-  const formulario = useFormulario(props.valoresIniciales ?? productoVacio)
+  const formulario = useFormulario(valoresDelFormulario(props.valoresIniciales))
   const valores = formulario.valores
   const errores = formulario.errores
   const setErrores = formulario.setErrores
@@ -69,6 +77,7 @@ export function FormularioProducto(props) {
       modelo: validarObligatorio(valores.modelo, 'El modelo es requerido') || validarLargoMaximo(valores.modelo, 50),
       descripcion: validarLargoMaximo(valores.descripcion, 500),
       precio: validarPrecio(valores.precio),
+      precioPromocional: validarPrecioPromocional(valores.precioPromocional, valores.precio),
       stock: validarStock(valores.stock),
       stockCritico: validarStockCritico(valores.stockCritico),
       categoria: validarObligatorio(valores.categoria, 'Selecciona una categoría'),
@@ -81,6 +90,7 @@ export function FormularioProducto(props) {
       id: valores.id.trim(),
       nombre: valores.nombre.trim(),
       precio: Number(valores.precio),
+      precioPromocional: valores.precioPromocional === '' ? null : Number(valores.precioPromocional),
       stock: Number(valores.stock),
       stockCritico: valores.stockCritico === '' ? 0 : Number(valores.stockCritico),
     })
@@ -150,6 +160,15 @@ export function FormularioProducto(props) {
         valor={valores.precio}
         onChange={formulario.manejarCambio}
         error={errores.precio}
+      />
+      <CampoFormulario
+        id="precioPromocional"
+        etiqueta="Precio promocional (opcional)"
+        tipo="number"
+        placeholder="Menor que el precio; vacío = sin promoción"
+        valor={valores.precioPromocional}
+        onChange={formulario.manejarCambio}
+        error={errores.precioPromocional}
       />
       <CampoFormulario
         id="stock"

@@ -1,18 +1,35 @@
 import { Col, Row } from "react-bootstrap";
 import { Boton } from "../../atoms/Boton/Boton";
+import { Icono } from "../../atoms/Icono/Icono";
 import { Texto } from "../../atoms/Texto/Texto";
 import { Titulo } from "../../atoms/Titulo/Titulo";
 
-// Título de página con subtítulo opcional y, a la derecha, un botón o contenido propio (children)
+// Título de página con subtítulo opcional y, a la derecha, un botón o contenido propio (children).
+// onRefrescar agrega antes del botón uno solo con ícono para volver a cargar los datos;
+// refrescando lo deshabilita mientras carga
 export function Encabezado(props) {
   const claseTitulo = props.claseTitulo ?? "h2 fw-bold mb-0";
-  const derecha =
-    props.children ??
-    (props.textoBoton && (
-      <Boton variante="success" onClick={props.onAccion}>
-        {props.textoBoton}
-      </Boton>
-    ));
+  const botones = (props.onRefrescar || props.textoBoton) && (
+    <>
+      {props.onRefrescar && (
+        <Boton
+          variante="success"
+          className={props.textoBoton ? "me-2" : ""}
+          onClick={props.onRefrescar}
+          disabled={props.refrescando}
+          etiquetaAccesible="Actualizar"
+        >
+          <Icono icono="bi bi-arrow-clockwise" />
+        </Boton>
+      )}
+      {props.textoBoton && (
+        <Boton variante="success" onClick={props.onAccion}>
+          {props.textoBoton}
+        </Boton>
+      )}
+    </>
+  );
+  const derecha = props.children ?? botones;
 
   return (
     <Row as="header" className="mb-4 align-items-center">

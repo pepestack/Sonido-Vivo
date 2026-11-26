@@ -1,5 +1,6 @@
 import { api } from './api'
 import { productoDesdeRespuesta, productoRequestDto } from '../dto/producto.dto'
+import { tienePromocion } from '../utils/precios'
 
 export async function listarProductos() {
   const respuesta = await api.get('/productos')
@@ -37,7 +38,7 @@ export function productosCriticos(productos) {
   return productos.filter((producto) => producto.stock <= producto.stockCritico)
 }
 
-// Productos en promoción: los que tienen precioOferta
+// Productos en promoción: los que tienen precioPromocional
 export function productosEnOferta(productos) {
-  return productos.filter((producto) => producto.precioOferta !== undefined)
+  return productos.filter(tienePromocion)
 }

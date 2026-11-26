@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Navigate, useLocation, useNavigate } from 'react-router-dom'
 import { NavbarAdmin } from '../../organisms/NavbarAdmin/NavbarAdmin'
 import { SidebarAdmin } from '../../organisms/SidebarAdmin/SidebarAdmin'
@@ -15,6 +15,14 @@ export function PlantillaPrivada(props) {
   const navigate = useNavigate()
   const location = useLocation()
   const sesion = useSesion()
+  const haySesion = Boolean(sesion.usuario)
+  const verificarSesion = sesion.verificarSesion
+
+  // al entrar al panel y en cada navegación se confirma con la API que la cuenta sigue activa y con su rol;
+  // si no, la sesión se cierra (o cambia de rol) y el control de acceso de abajo redirige
+  useEffect(() => {
+    if (haySesion) verificarSesion()
+  }, [location.pathname, haySesion, verificarSesion])
 
   // cierra el sidebar en móvil al elegir una opción
   function navegar(ruta) {

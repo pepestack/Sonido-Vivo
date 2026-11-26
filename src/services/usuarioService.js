@@ -1,5 +1,5 @@
 import { api } from './api'
-import { usuarioDesdeRespuesta } from '../dto/usuario.dto'
+import { actualizarUsuarioRequestDto, usuarioDesdeRespuesta } from '../dto/usuario.dto'
 
 export async function listarUsuarios() {
   const respuesta = await api.get('/usuarios')
@@ -19,6 +19,11 @@ export async function crearUsuario(dto) {
 export async function actualizarUsuario(id, dto) {
   const respuesta = await api.put(`/usuarios/${id}`, dto)
   return usuarioDesdeRespuesta(respuesta.data)
+}
+
+// el PUT necesita los datos completos; activo: true vuelve a habilitar la cuenta
+export function reactivarUsuario(usuario) {
+  return actualizarUsuario(usuario.id, { ...actualizarUsuarioRequestDto(usuario), activo: true })
 }
 
 // la API no borra la fila: deja la cuenta inactiva y responde 204 sin cuerpo

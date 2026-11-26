@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSesion } from "../../context/SesionContext";
 import { useNavigate } from "react-router-dom";
 import { Encabezado } from "../../components/molecules/Encabezado/Encabezado";
 import { ModalConfirmacion } from "../../components/molecules/ModalConfirmacion/ModalConfirmacion";
@@ -13,6 +14,7 @@ export default function AdminCategorias() {
   const navigate = useNavigate();
   const categoriasCtx = useCategorias();
   const productosCtx = useProductos();
+  const sesion = useSesion();
   useTituloPagina("Gestión de categorías");
 
   // pendiente se conserva al cerrar el modal para que el mensaje no cambie durante la animación
@@ -32,11 +34,20 @@ export default function AdminCategorias() {
     setConfirmando(false);
   }
 
+  // las cantidades salen de los productos de la API, así que también se recargan
+  function refrescar() {
+    sesion.verificarSesion();
+    categoriasCtx.recargar();
+    productosCtx.recargar();
+  }
+
   return (
     <PlantillaPrivada>
       <Encabezado
         titulo="Gestión de categorías"
         subtitulo="Solo se pueden eliminar las categorías sin productos"
+        onRefrescar={refrescar}
+        refrescando={productosCtx.cargando}
         textoBoton="Añadir Categoría"
         onAccion={() => navigate("/admin/categorias/nueva")}
       />

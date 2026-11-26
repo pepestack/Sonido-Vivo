@@ -14,7 +14,12 @@ export function BarraAcciones(props) {
         <Boton onClick={props.onEditar}>Editar</Boton>
         {props.onEliminar && (
           <Boton variante="danger" onClick={props.onEliminar}>
-            Eliminar
+            {props.textoEliminar ?? 'Eliminar'}
+          </Boton>
+        )}
+        {props.onReactivar && (
+          <Boton variante="success" onClick={props.onReactivar}>
+            Reactivar
           </Boton>
         )}
       </ButtonGroup>

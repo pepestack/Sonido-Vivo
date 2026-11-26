@@ -41,12 +41,14 @@ export function PerfilUsuario(props) {
           </FilaDetalle>
         </ListGroup>
 
-        {/* sin onEliminar la barra no muestra el botón: el administrador no se puede eliminar */}
+        {/* sin onEliminar la barra no muestra el botón: el administrador no se puede desactivar */}
         <BarraAcciones
           className=""
           onVolver={props.onVolver}
           onEditar={props.onEditar}
-          onEliminar={esAdmin ? undefined : props.onEliminar}
+          textoEliminar="Desactivar"
+          onEliminar={esAdmin || !usuario.activo ? undefined : props.onEliminar}
+          onReactivar={usuario.activo ? undefined : props.onReactivar}
         />
       </Card.Body>
     </Card>
